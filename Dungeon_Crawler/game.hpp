@@ -4,9 +4,10 @@
 #define GAME_HPP
 
 Player startGame();
-int getInput(const int minChoice, const int maxChoice);
+int getDecision(const int minChoice, const int maxChoice);
 void explore(Player& player, int& floor, int& room);
 void floor0(Player& player, int& roomNum);
+void dblEndl();
 
 class Room
 {
@@ -26,9 +27,10 @@ private:
 public:
 	std::string name;
 	bool lockStatus;
+	std::string lockMessage;
 
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputLockStatus) :
-		rooms(inputRooms), name(inputName), lockStatus(inputLockStatus) {};
+		rooms(inputRooms), name(inputName), lockStatus(inputLockStatus), lockMessage("") {};
 };
 
 #endif

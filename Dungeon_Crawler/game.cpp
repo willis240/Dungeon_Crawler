@@ -7,6 +7,10 @@ using std::endl;
 using std::cin;
 using std::string;
 
+void dblEndl()
+{
+	cout << endl << endl;
+}
 
 Player startGame()
 {
@@ -24,7 +28,7 @@ Player startGame()
 	return player;
 }
 
-int getInput(const int minChoice, const int maxChoice)
+int getDecision(const int minChoice, const int maxChoice)
 {
 	while (true)
 	{
