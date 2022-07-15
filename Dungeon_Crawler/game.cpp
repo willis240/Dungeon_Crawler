@@ -28,6 +28,31 @@ Player startGame()
 	return player;
 }
 
+void checkInput(int& roomNum)
+{
+	while (true)
+	{
+		string input;
+		getline(cin, input);
+		//SPLIT INPUT INTO TWO SEPERATE STRINGS, FIRST ONE ACTING AS THE COMMAND AND THE SECOND ACTING AS THE OBJECT THE COMMAND APPLIES TO
+		//EXAMPLES: CHECK VASE, ENTER WOODEN DOOR
+
+		//MAKE A VECTOR CONTAINING ALL POSSIBLE COMMANDS, PERHAPS AS A MEMBER VARIABLE OF THE PLAYER OBJECT CALLED exploreOptions
+		if (input == "help")
+		{
+			cout << endl;
+			showHelp();
+			break;
+		}
+	}
+}
+
+void showHelp()
+{
+	cout << "check (object) -- observe an object more closely" << endl;
+	cout << "enter (door)   -- proceed through the specified door" << endl;
+}
+
 int getDecision(const int minChoice, const int maxChoice)
 {
 	while (true)

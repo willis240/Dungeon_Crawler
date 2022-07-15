@@ -56,18 +56,16 @@ void floor0(Player& player, int& roomNum)
 			cout << "Well, now that you are the only living thing in the room, you feel a tinge" << endl;
 			cout << "of loneliness crawl down your back. You decide it would be best to leave.";
 			dblEndl();
-			Sleep(7500);
+			Sleep(5000);
 			cout << "You realize that you don't know how to open a door. This is most unfortunate," << endl;
 			cout << "as if you do not soon find out, you will likely die of loneliness, starvation," << endl;
 			cout << "ligma, etc.";
 			dblEndl();
-			Sleep(7500);
+			Sleep(5000);
 			cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
-			cout << "go through the door." << endl;
-			while (true)
-			{
-				//Check for input in order to proceed
-			}
+			cout << "go through the door.";
+			dblEndl();
+			checkInput(roomNum);
 		}
 
 		if (roomNum == 1)
