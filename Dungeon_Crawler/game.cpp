@@ -34,8 +34,7 @@ void checkInput(int& roomNum, Player & player)
 	{
 		string input;
 		getline(cin, input);
-		//SPLIT INPUT INTO TWO SEPERATE STRINGS, FIRST ONE ACTING AS THE COMMAND AND THE SECOND ACTING AS THE OBJECT THE COMMAND APPLIES TO
-		//EXAMPLES: CHECK VASE, ENTER WOODEN DOOR
+		//PASS ROOM TO checkInput, USE OBJECTS VECTOR TO CHECK AGAINST THE OBJECT INPUT BY THE PLAYER
 
 		string command = "";
 		string object = "";
@@ -57,9 +56,6 @@ void checkInput(int& roomNum, Player & player)
 				command = command + x;
 			}
 		}
-
-		cout << "command: " << command << endl;
-		cout << "object: " << object << endl;
 
 		if (player.exploreOptions.size() > 0)
 		{
@@ -103,14 +99,15 @@ int getDecision(const int minChoice, const int maxChoice)
 	{
 		int input;
 		cin >> input;
-		cout << endl << endl;
+		dblEndl();
 
 		if (!cin || input < minChoice || input > maxChoice)
 		{
 			cin.clear();
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			cout << "Sorry, I don't understand. Please input the number corresponding to your" << endl;
-			cout << "desired option." << endl << endl;
+			cout << "desired option.";
+			dblEndl();
 		}
 		else
 		{

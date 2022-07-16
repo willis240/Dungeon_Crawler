@@ -11,6 +11,19 @@ void explore(Player& player, int& floor, int& room);
 void floor0(Player& player, int& roomNum);
 void dblEndl();
 
+class Object
+{
+private: 
+	std::string name;
+public:
+	std::string description;
+	bool isVisible;
+	bool hasSecret;
+
+	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret) :
+		name(inputName), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret) {};
+};
+
 class Room
 {
 private:
@@ -18,8 +31,9 @@ private:
 public:
 	std::string name;
 	int getNumber() { return number; };
+	std::vector<Object> objects{};
 
-	Room(int inputNumber, std::string inputName) : number(inputNumber), name(inputName) {};
+	Room(int inputNumber, std::string inputName) : number(inputNumber), name(inputName), objects{} {};
 };
 
 class Door
