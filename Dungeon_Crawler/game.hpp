@@ -5,8 +5,8 @@
 
 Player startGame();
 int getDecision(const int minChoice, const int maxChoice);
-void checkInput(int & roomNum);
-void showHelp();
+void checkInput(int & roomNum, Player & player);
+void showHelp(Player & player);
 void explore(Player& player, int& floor, int& room);
 void floor0(Player& player, int& roomNum);
 void dblEndl();

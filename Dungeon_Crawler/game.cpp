@@ -28,7 +28,7 @@ Player startGame()
 	return player;
 }
 
-void checkInput(int& roomNum)
+void checkInput(int& roomNum, Player & player)
 {
 	while (true)
 	{
@@ -37,20 +37,40 @@ void checkInput(int& roomNum)
 		//SPLIT INPUT INTO TWO SEPERATE STRINGS, FIRST ONE ACTING AS THE COMMAND AND THE SECOND ACTING AS THE OBJECT THE COMMAND APPLIES TO
 		//EXAMPLES: CHECK VASE, ENTER WOODEN DOOR
 
-		//MAKE A VECTOR CONTAINING ALL POSSIBLE COMMANDS, PERHAPS AS A MEMBER VARIABLE OF THE PLAYER OBJECT CALLED exploreOptions
-		if (input == "help")
+		if (player.exploreOptions.size() > 0)
 		{
-			cout << endl;
-			showHelp();
-			break;
+			if (input == player.exploreOptions[0]) //help
+			{
+				cout << endl;
+				showHelp(player);
+				break;
+			}
+		}
+		if (player.exploreOptions.size() > 1)
+		{
+			if (input == player.exploreOptions[1]) //check
+			{
+				cout << "check code will go here I swear" << endl;
+				break;
+			}
+		}
+		if (player.exploreOptions.size() > 2)
+		{
+			if (input == player.exploreOptions[2]) //enter
+			{
+				cout << "enter code will go here I swear" << endl;
+				break;
+			}
 		}
 	}
 }
 
-void showHelp()
+void showHelp(Player & player)
 {
-	cout << "check (object) -- observe an object more closely" << endl;
-	cout << "enter (door)   -- proceed through the specified door" << endl;
+	if(player.exploreOptions.size() > 1)
+		cout << "check (object) -- observe an object more closely" << endl;
+	if (player.exploreOptions.size() > 2)
+		cout << "enter (door)   -- proceed through the specified door" << endl;
 }
 
 int getDecision(const int minChoice, const int maxChoice)

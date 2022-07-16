@@ -65,7 +65,11 @@ void floor0(Player& player, int& roomNum)
 			cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
 			cout << "go through the door.";
 			dblEndl();
-			checkInput(roomNum);
+			player.exploreOptions.push_back("help");
+			player.exploreOptions.push_back("check");
+			player.exploreOptions.push_back("enter");
+			checkInput(roomNum, player);
+			system("pause");
 		}
 
 		if (roomNum == 1)

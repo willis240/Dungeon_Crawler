@@ -18,6 +18,7 @@ public:
 	int currentHP;
 	int maxSP;
 	int currentSP;
+	std::vector<std::string> exploreOptions{};
 
 	//Constructors
 	Player(std::string inputName, int inputMaxHP, int inputMaxSP) : name(inputName),
