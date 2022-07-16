@@ -37,6 +37,30 @@ void checkInput(int& roomNum, Player & player)
 		//SPLIT INPUT INTO TWO SEPERATE STRINGS, FIRST ONE ACTING AS THE COMMAND AND THE SECOND ACTING AS THE OBJECT THE COMMAND APPLIES TO
 		//EXAMPLES: CHECK VASE, ENTER WOODEN DOOR
 
+		string command = "";
+		string object = "";
+		bool commandDone = false;
+
+		for (auto x : input)
+		{
+			if (commandDone)
+			{ 
+				object = object + x;
+			}
+
+			if (x == ' ')
+			{
+				commandDone = true;
+			}
+			else if (!commandDone)
+			{
+				command = command + x;
+			}
+		}
+
+		cout << "command: " << command << endl;
+		cout << "object: " << object << endl;
+
 		if (player.exploreOptions.size() > 0)
 		{
 			if (input == player.exploreOptions[0]) //help
