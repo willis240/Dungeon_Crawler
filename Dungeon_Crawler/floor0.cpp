@@ -11,6 +11,15 @@ using std::string;
 
 void floor0(Player& player, int& roomNum)
 {
+	Door plainDoor(std::make_pair(0, 1), "Plain Door", false,
+		"It is a simple wooden door, and it is slightly ajar. It's a good thing it's not locked.");
+	Object nightLight("Night Light",
+		"The night light is plugged into an outlet in the wall. The lightbulb itself is in the shape of a thumbs-up. \n"
+		"Considering the fact that the night light is what allowed you to see in this small dark room in the first place, \n"
+		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\"",
+		1, 0);
+	Room startRoom(0, "Starting Room", {nightLight}, {plainDoor});
+
 	while (true)
 	{
 		if (roomNum == 0)
