@@ -16,7 +16,7 @@ void floor0(Player& player, int& roomNum)
 	Object nightLight("Night Light",
 		"The night light is plugged into an outlet in the wall. The lightbulb itself is in the shape of a thumbs-up. \n"
 		"Considering the fact that the night light is what allowed you to see in this small dark room in the first place, \n"
-		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\"",
+		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\" \n",
 		1, 0);
 	Room startRoom(0, "Starting Room", {nightLight}, {plainDoor});
 
@@ -77,7 +77,7 @@ void floor0(Player& player, int& roomNum)
 			player.exploreOptions.push_back("help");
 			player.exploreOptions.push_back("check");
 			player.exploreOptions.push_back("enter");
-			checkInput(roomNum, player);
+			checkInput(roomNum, player, startRoom);
 			system("pause");
 		}
 

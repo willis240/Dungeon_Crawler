@@ -12,9 +12,9 @@ int main()
 {
 	Player player = startGame();
 
-	int floor = 0;
-	int room = 0;
+	int floorNum = 0;
+	int roomNum = 0;
 
-	explore(player, floor, room);
+	explore(player, floorNum, roomNum);
 
 }

@@ -3,22 +3,16 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-Player startGame();
-int getDecision(const int minChoice, const int maxChoice);
-void checkInput(int & roomNum, Player & player);
-void showHelp(Player & player);
-void explore(Player& player, int& floor, int& room);
-void floor0(Player& player, int& roomNum);
-void dblEndl();
-
 class Object
 {
-private: 
+private:
 	std::string name;
 public:
 	std::string description;
 	bool isVisible;
 	bool hasSecret;
+
+	std::string getName() { return name; };
 
 	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret) :
 		name(inputName), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret) {};
@@ -54,5 +48,14 @@ public:
 	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<Door> inputDoors) :
 		number(inputNumber), name(inputName), objects(inputObjects), doors(inputDoors) {};
 };
+
+Player startGame();
+int getDecision(const int minChoice, const int maxChoice);
+void checkInput(int & roomNum, Player& player, Room& room);
+void showHelp(Player& player);
+void checkArgument(int & i, const bool & isDoor, Room & room);
+void explore(Player& player, int& floor, int& roomNum);
+void floor0(Player& player, int& roomNum);
+void dblEndl();
 
 #endif

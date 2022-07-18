@@ -28,7 +28,7 @@ Player startGame()
 	return player;
 }
 
-void checkInput(int& roomNum, Player & player)
+void checkInput(int & roomNum, Player & player, Room & room)
 {
 	while (true)
 	{
@@ -37,14 +37,14 @@ void checkInput(int& roomNum, Player & player)
 		//PASS ROOM TO checkInput, USE OBJECTS VECTOR TO CHECK AGAINST THE OBJECT INPUT BY THE PLAYER
 
 		string command = "";
-		string object = "";
+		string argument = "";
 		bool commandDone = false;
 
 		for (auto x : input)
 		{
 			if (commandDone)
 			{ 
-				object = object + x;
+				argument = argument + x;
 			}
 
 			if (x == ' ')
@@ -59,7 +59,7 @@ void checkInput(int& roomNum, Player & player)
 
 		if (player.exploreOptions.size() > 0)
 		{
-			if (input == player.exploreOptions[0]) //help
+			if (command == player.exploreOptions[0]) //help
 			{
 				cout << endl;
 				showHelp(player);
@@ -68,15 +68,28 @@ void checkInput(int& roomNum, Player & player)
 		}
 		if (player.exploreOptions.size() > 1)
 		{
-			if (input == player.exploreOptions[1]) //check
+			if (command == player.exploreOptions[1]) //check
 			{
-				cout << "check code will go here I swear" << endl;
+				for (int i = 0; i < room.objects.size(); i++)
+				{
+					if (argument == room.objects[i].getName())
+					{
+						checkArgument(i, false, room);
+					}
+				}
+				for (int i = 0; i < room.doors.size(); i++)
+				{
+					if (argument == room.doors[i].name)
+					{
+						checkArgument(i, true, room);
+					}
+				}
 				break;
 			}
 		}
 		if (player.exploreOptions.size() > 2)
 		{
-			if (input == player.exploreOptions[2]) //enter
+			if (command == player.exploreOptions[2]) //enter
 			{
 				cout << "enter code will go here I swear" << endl;
 				break;
@@ -91,6 +104,22 @@ void showHelp(Player & player)
 		cout << "check (object) -- observe an object more closely" << endl;
 	if (player.exploreOptions.size() > 2)
 		cout << "enter (door)   -- proceed through the specified door" << endl;
+}
+
+void checkArgument(int & i, const bool & isDoor, Room & room)
+{
+	if (!isDoor)
+	{
+		if (room.objects[i].isVisible)
+			cout << endl << room.objects[i].description << endl;
+	}
+	else
+	{
+		if (room.doors[i].isLocked)
+			cout << endl << room.doors[i].lockedMessage << endl;
+		else
+			cout << endl << room.doors[i].unlockedMessage << endl;
+	}
 }
 
 int getDecision(const int minChoice, const int maxChoice)
@@ -116,13 +145,13 @@ int getDecision(const int minChoice, const int maxChoice)
 	}
 }
 
-void explore(Player& player, int& floor, int& room)
+void explore(Player& player, int& floor, int& roomNum)
 {
 	while (true)
 	{
 		if (floor == 0)
 		{
-			floor0(player, room);
+			floor0(player, roomNum);
 		}
 	}
 }
