@@ -91,7 +91,11 @@ void checkInput(int & roomNum, Player & player, Room & room)
 		{
 			if (command == player.exploreOptions[2]) //enter
 			{
-				cout << "enter code will go here I swear" << endl;
+				for (auto i : room.doors)
+				{
+					if (argument == i.name)
+						enterDoor(i, roomNum);
+				}
 				break;
 			}
 		}
@@ -104,6 +108,7 @@ void showHelp(Player & player)
 		cout << "check (object) -- observe an object more closely" << endl;
 	if (player.exploreOptions.size() > 2)
 		cout << "enter (door)   -- proceed through the specified door" << endl;
+	cout << endl;
 }
 
 void checkArgument(int & i, const bool & isDoor, Room & room)
@@ -111,14 +116,29 @@ void checkArgument(int & i, const bool & isDoor, Room & room)
 	if (!isDoor)
 	{
 		if (room.objects[i].isVisible)
-			cout << endl << room.objects[i].description << endl;
+			cout << endl << room.objects[i].description << endl << endl;
 	}
 	else
 	{
 		if (room.doors[i].isLocked)
-			cout << endl << room.doors[i].lockedMessage << endl;
+			cout << endl << room.doors[i].lockedMessage << endl << endl;
 		else
-			cout << endl << room.doors[i].unlockedMessage << endl;
+			cout << endl << room.doors[i].unlockedMessage << endl << endl;
+	}
+}
+
+void enterDoor(Door& door, int & roomNum)
+{
+	if (door.isLocked)
+		cout << endl << door.lockedMessage << endl << endl;
+	else
+	{
+		cout << endl << "You entered the " << door.name << ".";
+		dblEndl();
+		if (door.getRooms().first == roomNum)
+			roomNum = door.getRooms().second;
+		else
+			roomNum = door.getRooms().first;
 	}
 }
 

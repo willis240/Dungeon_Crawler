@@ -28,6 +28,8 @@ public:
 	std::string lockedMessage;
 	std::string unlockedMessage;
 
+	std::pair<int, int> getRooms() { return rooms; };
+
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, std::string inputUnlockedMessage) :
 		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
 
@@ -54,6 +56,7 @@ int getDecision(const int minChoice, const int maxChoice);
 void checkInput(int & roomNum, Player& player, Room& room);
 void showHelp(Player& player);
 void checkArgument(int & i, const bool & isDoor, Room & room);
+void enterDoor(Door& door, int & roomNum);
 void explore(Player& player, int& floor, int& roomNum);
 void floor0(Player& player, int& roomNum);
 void dblEndl();
