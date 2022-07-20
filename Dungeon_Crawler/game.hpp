@@ -3,6 +3,20 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+class Item
+{
+private:
+	std::string name;
+public:
+	std::string description;
+	int restoredHP;
+	int restoredSP;
+	std::string getName() { return name; };
+
+	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription) :
+		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription) {};
+};
+
 class Object
 {
 private:
