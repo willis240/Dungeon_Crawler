@@ -17,6 +17,18 @@ public:
 		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription) {};
 };
 
+class Key
+{
+private:
+	int keyNum;
+public:
+	std::string name;
+	std::string description;
+	
+	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
+		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
+};
+
 class Object
 {
 private:
@@ -39,6 +51,7 @@ private:
 public:
 	std::string name;
 	bool isLocked;
+	int lockNum;
 	std::string lockedMessage;
 	std::string unlockedMessage;
 
@@ -47,8 +60,8 @@ public:
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, std::string inputUnlockedMessage) :
 		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
 
-	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, std::string inputLockedMessage, std::string inputUnlockedMessage) :
-		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
+	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, int inputLockNum, std::string inputLockedMessage, std::string inputUnlockedMessage) :
+		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
 };
 
 class Room

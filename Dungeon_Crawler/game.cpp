@@ -34,7 +34,6 @@ void checkInput(int & roomNum, Player & player, Room & room)
 	{
 		string input;
 		getline(cin, input);
-		//PASS ROOM TO checkInput, USE OBJECTS VECTOR TO CHECK AGAINST THE OBJECT INPUT BY THE PLAYER
 
 		string command = "";
 		string argument = "";
