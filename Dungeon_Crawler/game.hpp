@@ -8,9 +8,9 @@ class Item
 private:
 	std::string name;
 public:
-	std::string description;
 	int restoredHP;
 	int restoredSP;
+	std::string description;
 	std::string getName() { return name; };
 
 	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription) :
@@ -80,12 +80,15 @@ public:
 
 Player startGame();
 int getDecision(const int minChoice, const int maxChoice);
-void checkInput(int & roomNum, Player& player, Room& room);
+void checkInput(int & roomNum, Player& player, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
 void showHelp(Player& player);
 void checkArgument(int & i, const bool & isDoor, Room & room);
 void enterDoor(Door& door, int & roomNum);
-void explore(Player& player, int& floor, int& roomNum);
-void floor0(Player& player, int& roomNum);
+void checkInventory(Player& player, std::vector<Item>& items, std::vector<Key>& keys);
+void displayItems(std::vector<Item>& items, const int& startValue);
+void displayKeys(std::vector<Key>& keys, const int& startValue);
+void explore(Player& player, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
+void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void dblEndl();
 
 #endif

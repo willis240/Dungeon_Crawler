@@ -20,12 +20,12 @@ public:
 	int currentSP;
 	std::vector<std::string> exploreOptions{};
 
+	//Member Functions
+	std::string getName() { return name; };
+
 	//Constructors
 	Player(std::string inputName, int inputMaxHP, int inputMaxSP) : name(inputName),
 		maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP) {};
-
-	//Member Functions
-	std::string getName() { return name; };
 
 };
 

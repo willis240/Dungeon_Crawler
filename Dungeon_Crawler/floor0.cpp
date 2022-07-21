@@ -9,9 +9,13 @@ using std::cin;
 using std::string;
 
 
-void floor0(Player& player, int& roomNum)
+void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys)
 {
 	bool seeOpening = true;
+	bool stoleFromRat = false;
+	Item nibbledCheese("Nibbled Cheese", 10, 0,
+		"Cheese that has already been nibbled by a rat. Hey, at least there's still a good chunk of cheese left. \n"
+		"Eating it would probably restore around 10HP, if you had to guess.");
 	Door plainDoor(std::make_pair(0, 1), "Plain Door", false,
 		"It is a simple wooden door, and it is slightly ajar. It's a good thing it's not locked.");
 	Object nightLight("Night Light",
@@ -28,8 +32,6 @@ void floor0(Player& player, int& roomNum)
 			if (seeOpening)
 			{
 				system("CLS");
-
-				//ADD A CHECK TO SEE IF PLAYER ALREADY HAS TAKEN THE CHEESE
 
 				cout << "You wake up in a room just large enough that you can lie down and not touch" << endl;
 				cout << "any walls. There is a door right in front of you, and a rat munching on some cheese" << endl;
@@ -60,8 +62,8 @@ void floor0(Player& player, int& roomNum)
 					dblEndl();
 					system("pause");
 
-					//ADD CHEESE TO INVENTORY
-
+					items.push_back(nibbledCheese);
+					stoleFromRat = true;
 				}
 
 				system("CLS");
@@ -80,7 +82,8 @@ void floor0(Player& player, int& roomNum)
 				player.exploreOptions.push_back("help");
 				player.exploreOptions.push_back("check");
 				player.exploreOptions.push_back("enter");
-				checkInput(roomNum, player, startRoom);
+				player.exploreOptions.push_back("inv");
+				checkInput(roomNum, player, items, keys, startRoom);
 				system("pause");
 				seeOpening = false;
 			}
@@ -90,7 +93,7 @@ void floor0(Player& player, int& roomNum)
 				cout << "Looking around, you see that the room is small and largely empty. However, there is" << endl;
 				cout << "a Night Light in the corner, as well as a Plain Door directly in front of you.";
 				dblEndl();
-				checkInput(roomNum, player, startRoom);
+				checkInput(roomNum, player, items, keys, startRoom);
 				system("pause");
 			}
 		}

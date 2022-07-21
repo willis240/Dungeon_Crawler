@@ -6,6 +6,7 @@ using std::cout;
 using std::endl;
 using std::cin;
 using std::string;
+using std::vector;
 
 void dblEndl()
 {
@@ -28,7 +29,7 @@ Player startGame()
 	return player;
 }
 
-void checkInput(int & roomNum, Player & player, Room & room)
+void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::vector<Key>& keys, Room & room)
 {
 	while (true)
 	{
@@ -98,6 +99,13 @@ void checkInput(int & roomNum, Player & player, Room & room)
 				break;
 			}
 		}
+		if (player.exploreOptions.size() > 3)
+		{
+			if (command == player.exploreOptions[3]) //inv
+			{
+				checkInventory(player, items, keys);
+			}
+		}
 	}
 }
 
@@ -107,6 +115,8 @@ void showHelp(Player & player)
 		cout << "check (object) -- observe an object more closely" << endl;
 	if (player.exploreOptions.size() > 2)
 		cout << "enter (door)   -- proceed through the specified door" << endl;
+	if (player.exploreOptions.size() > 3)
+		cout << "inv            -- view your inventory and use items" << endl;
 	cout << endl;
 }
 
@@ -141,6 +151,44 @@ void enterDoor(Door& door, int & roomNum)
 	}
 }
 
+void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys)
+{
+	int startValue;
+	displayItems(items, 0);
+	startValue = items.size();
+	displayKeys(keys, startValue);
+}
+
+void displayItems(vector<Item>& items, const int& startValue)
+{
+	cout << "	ITEMS" << endl;
+	if (items.size() > 0)
+	{
+		for (int i = 0; i < items.size(); i++)
+		{
+			cout << "	(" << i << ") " << items[i].getName() << endl;
+		}
+	}
+	else
+		cout << "	none";
+	dblEndl();
+}
+
+void displayKeys(vector<Key>& keys, const int& startValue)
+{
+	cout << "	KEYS" << endl;
+	if (keys.size() > 0)
+	{
+		for (int i = 0; i < keys.size(); i++)
+		{
+			cout << "	(" << (i + startValue) << ") " << keys[i].name << endl;
+		}
+	}
+	else
+		cout << "	none";
+	dblEndl();
+}
+
 int getDecision(const int minChoice, const int maxChoice)
 {
 	while (true)
@@ -164,13 +212,13 @@ int getDecision(const int minChoice, const int maxChoice)
 	}
 }
 
-void explore(Player& player, int& floor, int& roomNum)
+void explore(Player& player, int& floor, int& roomNum, vector<Item>& items, vector<Key>& keys)
 {
 	while (true)
 	{
 		if (floor == 0)
 		{
-			floor0(player, roomNum);
+			floor0(player, roomNum, items, keys);
 		}
 	}
 }
