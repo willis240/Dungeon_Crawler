@@ -20,3 +20,17 @@ int main()
 	explore(player, floorNum, roomNum, items, keys);
 
 }
+
+void Player::restoreHP(int& healedHP)
+{
+	currentHP += healedHP;
+	if (currentHP > maxHP)
+		currentHP = maxHP;
+}
+
+void Player::restoreSP(int& healedSP)
+{
+	currentSP += healedSP;
+	if (currentSP > maxSP)
+		currentSP = maxSP;
+}

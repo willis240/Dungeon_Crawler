@@ -103,8 +103,10 @@ void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::v
 		{
 			if (command == player.exploreOptions[3]) //inv
 			{
+				cout << endl;
 				checkInventory(player, items, keys);
 			}
+			break;
 		}
 	}
 }
@@ -153,40 +155,130 @@ void enterDoor(Door& door, int & roomNum)
 
 void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys)
 {
-	int startValue;
-	displayItems(items, 0);
-	startValue = items.size();
-	displayKeys(keys, startValue);
+	while (true)
+	{
+		cout << "    " << player.getName() << "    HP: " << player.currentHP << " / " << player.maxHP << "    SP: " << player.currentSP << " / " << player.maxSP;
+		dblEndl();
+		displayItems(items);
+		displayKeys(keys);
+
+		cout << "Call for \"help\" if you need to know how to work with your inventory";
+		dblEndl();
+
+		string input;
+		getline(cin, input);
+
+		string command = "";
+		string argument = "";
+		bool commandDone = false;
+
+		for (auto x : input)
+		{
+			if (commandDone)
+			{
+				argument = argument + x;
+			}
+
+			if (x == ' ')
+			{
+				commandDone = true;
+			}
+			else if (!commandDone)
+			{
+				command = command + x;
+			}
+		}
+
+		if (command == "back")
+			break;
+
+		if (command == "help")
+			showInvHelp();
+
+		if (command == "check")
+		{
+			checkItems(items, argument);
+			checkKeys(keys, argument);
+		}
+		else if (command == "use")
+			useItems(player, items, argument);
+	}
 }
 
-void displayItems(vector<Item>& items, const int& startValue)
+void displayItems(vector<Item>& items)
 {
-	cout << "	ITEMS" << endl;
+	cout << "    ITEMS" << endl;
 	if (items.size() > 0)
 	{
 		for (int i = 0; i < items.size(); i++)
 		{
-			cout << "	(" << i << ") " << items[i].getName() << endl;
+			cout << "    " << items[i].getName() << endl;
 		}
 	}
 	else
-		cout << "	none";
+		cout << "    none";
 	dblEndl();
 }
 
-void displayKeys(vector<Key>& keys, const int& startValue)
+void displayKeys(vector<Key>& keys)
 {
-	cout << "	KEYS" << endl;
+	cout << "    KEYS" << endl;
 	if (keys.size() > 0)
 	{
 		for (int i = 0; i < keys.size(); i++)
 		{
-			cout << "	(" << (i + startValue) << ") " << keys[i].name << endl;
+			cout << "    " << keys[i].name << endl;
 		}
 	}
 	else
-		cout << "	none";
+		cout << "    none";
 	dblEndl();
+}
+
+void showInvHelp()
+{
+	cout << endl;
+	cout << "check (item/key) -- observe the item or key more closely" << endl;
+	cout << "use (item)       -- use an item to restore your vitals to their former glory" << endl;
+	cout << "back             -- exit your inventory to continue your exploration" << endl;
+	cout << endl;
+}
+
+void checkItems(vector<Item>& items, string& argument)
+{
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (argument == items[i].getName())
+			cout << endl << items[i].getName() << " -- " << items[i].description << endl << endl;
+	}
+}
+
+void checkKeys(vector<Key>& keys, string& argument)
+{
+	for (int i = 0; i < keys.size(); i++)
+	{
+		if (argument == keys[i].name)
+			cout << endl << keys[i].name << " -- " << keys[i].description << endl << endl;
+	}
+}
+
+void useItems(Player& player, vector<Item>& items, string& argument)
+{
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (argument == items[i].getName())
+		{
+			int beforeHP = player.currentHP;
+			int beforeSP = player.currentSP;
+			player.restoreHP(items[i].restoredHP);
+			player.restoreSP(items[i].restoredSP);
+			cout << endl;
+			cout << player.getName() << " used " << items[i].getName() << "!" << endl;
+			cout << player.getName() << " restored " << (player.currentHP - beforeHP) << " HP and " << (player.currentSP - beforeSP) << " SP!" << endl;
+			items.erase(items.begin() + i);
+		}
+	}
+	cout << endl;
 }
 
 int getDecision(const int minChoice, const int maxChoice)

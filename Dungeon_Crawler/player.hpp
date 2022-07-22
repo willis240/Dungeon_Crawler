@@ -22,6 +22,8 @@ public:
 
 	//Member Functions
 	std::string getName() { return name; };
+	void restoreHP(int& healedHP);
+	void restoreSP(int& healedSP);
 
 	//Constructors
 	Player(std::string inputName, int inputMaxHP, int inputMaxSP) : name(inputName),
