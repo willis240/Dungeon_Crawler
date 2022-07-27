@@ -104,7 +104,7 @@ void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::v
 			if (command == player.exploreOptions[3]) //inv
 			{
 				cout << endl;
-				checkInventory(player, items, keys);
+				checkInventory(player, items, keys, room.doors);
 			}
 			break;
 		}
@@ -153,7 +153,7 @@ void enterDoor(Door& door, int & roomNum)
 	}
 }
 
-void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys)
+void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, vector<Door>& doors)
 {
 	while (true)
 	{
@@ -201,7 +201,11 @@ void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys)
 			checkKeys(keys, argument);
 		}
 		else if (command == "use")
+		{
 			useItems(player, items, argument);
+			useKeys(player, keys, doors, argument);
+			return;
+		}
 	}
 }
 
@@ -240,6 +244,7 @@ void showInvHelp()
 	cout << endl;
 	cout << "check (item/key) -- observe the item or key more closely" << endl;
 	cout << "use (item)       -- use an item to restore your vitals to their former glory" << endl;
+	cout << "use (key)        -- use a key item to open the path forward" << endl;
 	cout << "back             -- exit your inventory to continue your exploration" << endl;
 	cout << endl;
 }
@@ -276,9 +281,48 @@ void useItems(Player& player, vector<Item>& items, string& argument)
 			cout << player.getName() << " used " << items[i].getName() << "!" << endl;
 			cout << player.getName() << " restored " << (player.currentHP - beforeHP) << " HP and " << (player.currentSP - beforeSP) << " SP!" << endl;
 			items.erase(items.begin() + i);
+			return;
 		}
 	}
 	cout << endl;
+}
+
+void useKeys(Player& player, vector<Key>& keys, vector<Door>& doors, string& argument)
+{
+	for (int i = 0; i < keys.size(); i++)
+	{
+		if (argument == keys[i].name)
+		{
+			cout << "Use " << keys[i].name << " on what?";
+			dblEndl();
+			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+			dblEndl();
+
+			string input;
+			getline(cin, input);
+
+			if (input == "back")
+				return;
+
+			for (int ii = 0; ii < doors.size(); ii++)
+			{
+				if (input == doors[ii].name)
+				{
+					if (doors[ii].isLocked)
+					{
+						if (keys[i].getKeyNum() == doors[ii].lockNum)
+						{
+							doors[ii].isLocked = false;
+							cout << "You used the " << keys[i].name << " and unlocked the " << doors[ii].name << ".";
+							dblEndl();
+							keys.erase(keys.begin() + i);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 int getDecision(const int minChoice, const int maxChoice)

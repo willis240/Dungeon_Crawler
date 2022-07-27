@@ -24,6 +24,7 @@ private:
 public:
 	std::string name;
 	std::string description;
+	int getKeyNum() { return keyNum; };
 	
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
 		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
@@ -58,7 +59,7 @@ public:
 	std::pair<int, int> getRooms() { return rooms; };
 
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, std::string inputUnlockedMessage) :
-		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
+		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockNum(0), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
 
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, int inputLockNum, std::string inputLockedMessage, std::string inputUnlockedMessage) :
 		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
@@ -84,13 +85,14 @@ void checkInput(int & roomNum, Player& player, std::vector<Item>& items, std::ve
 void showHelp(Player& player);
 void checkArgument(int & i, const bool & isDoor, Room & room);
 void enterDoor(Door& door, int & roomNum);
-void checkInventory(Player& player, std::vector<Item>& items, std::vector<Key>& keys);
+void checkInventory(Player& player, std::vector<Item>& items, std::vector<Key>& keys, std::vector<Door>& doors);
 void displayItems(std::vector<Item>& items);
 void displayKeys(std::vector<Key>& keys);
 void showInvHelp();
 void checkItems(std::vector<Item>& items, std::string& argument);
 void checkKeys(std::vector<Key>& keys, std::string& argument);
 void useItems(Player& player, std::vector<Item>& items, std::string& argument);
+void useKeys(Player& player, std::vector<Key>& keys, std::vector<Door>& doors, std::string& argument);
 void explore(Player& player, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void dblEndl();

@@ -11,6 +11,7 @@ using std::string;
 
 void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys)
 {
+	//Room 0: The Starting Room
 	bool seeOpening = true;
 	bool stoleFromRat = false;
 	Item nibbledCheese("Nibbled Cheese", 10, 0,
@@ -24,6 +25,20 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\"",
 		1, 0);
 	Room startRoom(0, "Starting Room", {nightLight}, {plainDoor});
+
+	//Room 1: The Living Room
+	bool gotBrittleKey = false;
+	Key brittleKey(1, "Brittle Key",
+		"A key which feels like it has been used a million times. It has a crack stretching vertically down the middle. \n"
+		"...Hopefully it'll still unlock what it needs to.");
+	Door brittleDoor(std::make_pair(1, 2), "Brittle Door", true, 1, 
+		"It is undoubtedly an old and well-loved door--as long as \"well-loved\" means that it has been used many, many \n"
+		"times over several decades without any maintenance. Nevertheless, the door is locked, and stands between you \n"
+		"and the room that lies behind it. It may be close to retirement, but it still proudly stands and performs its duty.",
+		"After you unlocked the door and opened it, it never recovered. It seems to be stuck wide open. It must have put \n"
+		"everything it had into opening one final time. The Brittle Key you inserted, likewise, does not budge. It would \n"
+		"seem that both the door and its key have finally found their eternal rest, together.");
+	Room livingRoom(1, "Living Room", {}, { brittleDoor });
 
 	while (true)
 	{
@@ -101,8 +116,26 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		if (roomNum == 1)
 		{
 			system("CLS");
-			cout << "You step into a room which the creator of this game has not" << endl;
-			cout << "yet written anything for..." << endl << endl;
+			cout << "You step into a room which is much larger than the room you awoke in. It appears to be a" << endl;
+			cout << "living space. There is a Brittle Door in front of you and some other crap that the developer" << endl;
+			cout << "has yet to write about.";
+			dblEndl();
+
+			if (!gotBrittleKey)
+			{
+				keys.push_back(brittleKey);
+				gotBrittleKey = true;
+			}
+
+			checkInput(roomNum, player, items, keys, livingRoom);
+			system("pause");
+		}
+
+		if (roomNum == 2)
+		{
+			system("CLS");
+			cout << "Wowza! You made it to Room 2 before anything was written for it!" << endl;
+			dblEndl();
 			system("pause");
 		}
 	}
