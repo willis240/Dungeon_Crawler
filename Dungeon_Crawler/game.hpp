@@ -11,10 +11,14 @@ public:
 	int restoredHP;
 	int restoredSP;
 	std::string description;
+	short int num;
 	std::string getName() { return name; };
 
 	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription) :
-		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription) {};
+		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(0) {};
+
+	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription, short int inputNum) :
+		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum) {};
 };
 
 class Key
@@ -38,11 +42,13 @@ public:
 	std::string description;
 	bool isVisible;
 	bool hasSecret;
+	short int itemNum;
+	short int keyNum;
 
 	std::string getName() { return name; };
 
-	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret) :
-		name(inputName), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret) {};
+	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum) :
+		name(inputName), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum) {};
 };
 
 class Door
@@ -74,16 +80,18 @@ public:
 	int getNumber() { return number; };
 	std::vector<Object> objects{};
 	std::vector<Door> doors{};
+	std::vector<Item> items{};
+	std::vector<Key> keys{};
 
-	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<Door> inputDoors) :
-		number(inputNumber), name(inputName), objects(inputObjects), doors(inputDoors) {};
+	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<Door> inputDoors, std::vector<Item> inputItems, std::vector<Key> inputKeys) :
+		number(inputNumber), name(inputName), objects(inputObjects), doors(inputDoors), items(inputItems), keys(inputKeys) {};
 };
 
 Player startGame();
 int getDecision(const int minChoice, const int maxChoice);
 void checkInput(int & roomNum, Player& player, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
 void showHelp(Player& player);
-void checkArgument(int & i, const bool & isDoor, Room & room);
+void checkArgument(int & i, const bool & isDoor, Room & room, std::vector<Item> & items, std::vector<Key> & keys);
 void enterDoor(Door& door, int & roomNum);
 void checkInventory(Player& player, std::vector<Item>& items, std::vector<Key>& keys, std::vector<Door>& doors);
 void displayItems(std::vector<Item>& items);

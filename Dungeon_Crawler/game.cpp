@@ -74,14 +74,14 @@ void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::v
 				{
 					if (argument == room.objects[i].getName())
 					{
-						checkArgument(i, false, room);
+						checkArgument(i, false, room, items, keys);
 					}
 				}
 				for (int i = 0; i < room.doors.size(); i++)
 				{
 					if (argument == room.doors[i].name)
 					{
-						checkArgument(i, true, room);
+						checkArgument(i, true, room, items, keys);
 					}
 				}
 				break;
@@ -122,12 +122,38 @@ void showHelp(Player & player)
 	cout << endl;
 }
 
-void checkArgument(int & i, const bool & isDoor, Room & room)
+void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & items, vector<Key> & keys)
 {
 	if (!isDoor)
 	{
 		if (room.objects[i].isVisible)
+		{
 			cout << endl << room.objects[i].description << endl << endl;
+			if (room.objects[i].itemNum != 0)
+			{
+				for (int ii = 0; ii < room.items.size(); ii++)
+				{
+					if (room.items[ii].num == room.objects[i].itemNum)
+					{
+						cout << "You grabbed the " << room.items[ii].getName() << "." << endl << endl;
+						items.push_back(room.items[ii]);
+						room.items.erase(room.items.begin() + ii);
+					}
+				}
+			}
+			if (room.objects[i].keyNum != 0)
+			{
+				for (int ii = 0; ii < room.keys.size(); ii++)
+				{
+					if (room.keys[ii].getKeyNum() == room.objects[i].keyNum)
+					{
+						cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
+						keys.push_back(room.keys[ii]);
+						room.keys.erase(room.keys.begin() + ii);
+					}
+				}
+			}
+		}
 	}
 	else
 	{

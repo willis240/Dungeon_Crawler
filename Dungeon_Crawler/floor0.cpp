@@ -23,14 +23,20 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"The night light is plugged into an outlet in the wall. The lightbulb itself is in the shape of a thumbs-up. \n"
 		"Considering the fact that the night light is what allowed you to see in this small dark room in the first place, \n"
 		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\"",
-		1, 0);
-	Room startRoom(0, "Starting Room", {nightLight}, {plainDoor});
+		true, false, 0, 0);
+	Room startRoom(0, "Starting Room", { nightLight }, { plainDoor }, {}, {});
 
 	//Room 1: The Living Room
 	bool gotBrittleKey = false;
 	Key brittleKey(1, "Brittle Key",
 		"A key which feels like it has been used a million times. It has a crack stretching vertically down the middle. \n"
 		"...Hopefully it'll still unlock what it needs to.");
+	Object vase("Vase",
+		"The vase has a white color, and appears to be ceramic. It seems quite old, and has clearly not been dusted in \n"
+		"a long while. While it is rather dirty, you imagine it must've looked rather eye-catching when it was clean. \n"
+		"Clearly, it's purpose here was to add some flavor to the room, some style and grace, rather than to do something \n"
+		"menial like hide some--Oh, look, there's a key inside.",
+		true, false, 0, 1);
 	Door brittleDoor(std::make_pair(1, 2), "Brittle Door", true, 1, 
 		"It is undoubtedly an old and well-loved door--as long as \"well-loved\" means that it has been used many, many \n"
 		"times over several decades without any maintenance. Nevertheless, the door is locked, and stands between you \n"
@@ -38,7 +44,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"After you unlocked the door and opened it, it never recovered. It seems to be stuck wide open. It must have put \n"
 		"everything it had into opening one final time. The Brittle Key you inserted, likewise, does not budge. It would \n"
 		"seem that both the door and its key have finally found their eternal rest, together.");
-	Room livingRoom(1, "Living Room", {}, { brittleDoor });
+	Room livingRoom(1, "Living Room", {vase}, { brittleDoor }, {}, {brittleKey});
 
 	while (true)
 	{
@@ -85,12 +91,12 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "Well, now that you are the only living thing in the room, you feel a tinge" << endl;
 				cout << "of loneliness crawl down your back. You decide it would be best to leave.";
 				dblEndl();
-				Sleep(5000);
+				
 				cout << "You realize that you don't know how to open a door. This is most unfortunate," << endl;
 				cout << "as if you do not soon find out, you will likely die of loneliness, starvation," << endl;
 				cout << "ligma, etc.";
 				dblEndl();
-				Sleep(5000);
+				
 				cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
 				cout << "go through the door.";
 				dblEndl();
@@ -117,15 +123,9 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		{
 			system("CLS");
 			cout << "You step into a room which is much larger than the room you awoke in. It appears to be a" << endl;
-			cout << "living space. There is a Brittle Door in front of you and some other crap that the developer" << endl;
-			cout << "has yet to write about.";
+			cout << "living space. There is a Brittle Door in front of you, as well as a Vase sitting on a table" << endl;
+			cout << "off in the corner.";
 			dblEndl();
-
-			if (!gotBrittleKey)
-			{
-				keys.push_back(brittleKey);
-				gotBrittleKey = true;
-			}
 
 			checkInput(roomNum, player, items, keys, livingRoom);
 			system("pause");
