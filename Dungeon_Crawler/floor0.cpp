@@ -14,7 +14,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 	//Room 0: The Starting Room
 	bool seeOpening = true;
 	bool stoleFromRat = false;
-	Item nibbledCheese("Nibbled Cheese", 10, 0,
+	Item nibbledCheese("Nibbled Cheese", 5, 0,
 		"Cheese that has already been nibbled by a rat. Hey, at least there's still a good chunk of cheese left. \n"
 		"Eating it would probably restore around 10HP, if you had to guess.");
 	Door plainDoor(std::make_pair(0, 1), "Plain Door", false,
@@ -57,7 +57,20 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Whereas the door had looked rather intimidating with its sheer confidence when it was locked, it feels surprisingly \n"
 		"welcoming upon inserting the key. It feels like seeing a good friend for the first time in a while and having them \n"
 		"invite you into their home so you can pick up where you left off.");
-	Room livingRoom(1, "Living Room", {vase, sofa}, {brittleDoor, whiteDoor}, {}, {brittleKey});
+	Room livingRoom(1, "Living Room", {vase, sofa}, {plainDoor, brittleDoor, whiteDoor}, {}, {brittleKey});
+
+	//Room 2: The Kitchen
+	bool grabbedNugget = false;
+	bool encounteredRat = false;
+	bool helpedRat = false;
+	Item chickenNugget("Chicken Nugget", 5, 0,
+		"One singular chicken nugget. While it may not be much, it is like a drop from heaven and men have certainly \n"
+		"killed for less.", 1);
+	Object refrigerator("Refrigerator",
+		"Upon throwing open the refrigerator door, you find that there is no food left inside. Just crumbs. Great. \n"
+		"Oh, wait! There's a single chicken nugget in the very back of the second shelf down. Score!",
+		true, false, 1, 0);
+	Room kitchen(2, "Kitchen", {refrigerator}, {brittleDoor}, {chickenNugget}, {});
 
 	while (true)
 	{
@@ -69,10 +82,10 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 
 				cout << "You wake up in a room just large enough that you can lie down and not touch" << endl;
 				cout << "any walls. There is a door right in front of you, and a rat munching on some cheese" << endl;
-				cout << "in the corner. What do you do?" << endl;
+				cout << "in the corner. What do you do?" << endl << endl;
 
 				cout << "(1) Leave the rat alone" << endl;
-				cout << "(2) Swipe the rat's cheese" << endl;
+				cout << "(2) Swipe the rat's cheese" << endl << endl;
 
 				int input = getDecision(1, 2);
 
@@ -148,9 +161,73 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		if (roomNum == 2)
 		{
 			system("CLS");
-			cout << "Wowza! You made it to Room 2 before anything was written for it!";
-			dblEndl();
-			system("pause");
+			if (!encounteredRat)
+			{
+				cout << "Upon entering the room you immediately recognize it as a kitchen. As you feel your stomach" << endl;
+				cout << "rumble, your eyes immediately gravitate toward the Refrigerator directly in front of you.";
+				dblEndl();
+
+				checkInput(roomNum, player, items, keys, kitchen);
+				system("pause");
+				for (int i = 0; i < items.size(); i++)
+				{
+					if (items[i].getName() == "Chicken Nugget")
+						grabbedNugget = true;
+				}
+
+				if (grabbedNugget)
+				{
+					system("CLS");
+					cout << "Suddenly, you catch a glimpse of something out of the corner of your eye.";
+					dblEndl();
+					system("pause");
+					if (stoleFromRat)
+					{
+						system("CLS");
+						cout << "You instinctively duck behind the open refrigerator door and hear a loud \"clank!\"" << endl;
+						cout << "as something metal strikes the door and falls to the floor.";
+						dblEndl();
+						cout << "You close the fridge door to find that the object that was launched at you was a knife." << endl;
+						cout << "As you look up from the knife, you see there is a rat on the countertop. Not just any" << endl;
+						cout << "rat, though. You recognize that it is the rat that you stole that cheese from earlier." << endl;
+						cout << "And it looks furious. It hops to the floor and picks the knife back up. You notice the" << endl;
+						cout << "murderous glint in its eye and prepare yourself!";
+						dblEndl();
+						system("pause");
+
+						//ADD COMBAT
+						encounteredRat = true;
+					}
+					else
+					{
+						system("CLS");
+						cout << "You peek over the top of the refrigerator door to find a rat on the counter. Not just any" << endl;
+						cout << "rat, though. You recognize this rat as the one that was nibbling on cheese just earlier." << endl;
+						cout << "He is staring longingly at the pocket you put the chicken nugget away in. It would seem" << endl;
+						cout << "that he is still hungry." << endl << endl;
+
+						cout << "(1) Give the rat the chicken nugget" << endl;
+						cout << "(2) Bro, I found this nugget fair and square" << endl << endl;
+
+						int input = getDecision(1, 2);
+
+						if (input == 1) // Give the rat the chicken nugget
+						{
+							system("CLS");
+							helpedRat = true;
+							cout << "You gave the chicken nugget." << endl << endl;
+							system("pause");
+						}
+						else if (input == 2) // Keep the chicken nugget
+						{
+							system("CLS");
+							cout << "No! That chicken nuggie is MINE!" << endl << endl;
+							system("pause");
+						}
+						encounteredRat = true;
+					}
+				}
+			}
 		}
 	}
 
