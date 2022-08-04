@@ -37,6 +37,11 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Clearly, it's purpose here was to add some flavor to the room, some style and grace, rather than to do something \n"
 		"menial like hide some--Oh, look, there's a key inside.",
 		true, false, 0, 1);
+	Object sofa("Sofa",
+		"The sofa is a dark blue color, and it looks like the cushions are rather soft. However, there also appears to be \n"
+		"a lot of dust on them. You wouldn't dare sit on this dusty sofa--what if it made your butt look all dusty? You'd \n"
+		"be patting it off for the rest of your days.",
+		true, false, 0, 0);
 	Door brittleDoor(std::make_pair(1, 2), "Brittle Door", true, 1, 
 		"It is undoubtedly an old and well-loved door--as long as \"well-loved\" means that it has been used many, many \n"
 		"times over several decades without any maintenance. Nevertheless, the door is locked, and stands between you \n"
@@ -44,7 +49,15 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"After you unlocked the door and opened it, it never recovered. It seems to be stuck wide open. It must have put \n"
 		"everything it had into opening one final time. The Brittle Key you inserted, likewise, does not budge. It would \n"
 		"seem that both the door and its key have finally found their eternal rest, together.");
-	Room livingRoom(1, "Living Room", {vase}, { brittleDoor }, {}, {brittleKey});
+	Door whiteDoor(std::make_pair(1, 3), "White Door", true, 2,
+		"This door is painted white, and has a sheen to it that is impossible to miss. It certainly acts as a stark contrast \n"
+		"to the Brittle Door. It looks shiny and well-maintained--polished, even--and it looks like it would still last for \n"
+		"decades to come. You'd even say the only thing the doors have in common is that they both stand in your way quite well \n"
+		"when they are locked. And you can tell just by the sheer confidence on display by the White Door that it is indeed locked.",
+		"Whereas the door had looked rather intimidating with its sheer confidence when it was locked, it feels surprisingly \n"
+		"welcoming upon inserting the key. It feels like seeing a good friend for the first time in a while and having them \n"
+		"invite you into their home so you can pick up where you left off.");
+	Room livingRoom(1, "Living Room", {vase, sofa}, {brittleDoor, whiteDoor}, {}, {brittleKey});
 
 	while (true)
 	{
@@ -124,7 +137,8 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 			system("CLS");
 			cout << "You step into a room which is much larger than the room you awoke in. It appears to be a" << endl;
 			cout << "living space. There is a Brittle Door in front of you, as well as a Vase sitting on a table" << endl;
-			cout << "off in the corner.";
+			cout << "off in the corner. There is a Sofa against the wall, just to the right of the Plain Door from" << endl;
+			cout << "which you first entered this room. On top of that, there is a White Door to your right as well.";
 			dblEndl();
 
 			checkInput(roomNum, player, items, keys, livingRoom);
@@ -134,7 +148,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		if (roomNum == 2)
 		{
 			system("CLS");
-			cout << "Wowza! You made it to Room 2 before anything was written for it!" << endl;
+			cout << "Wowza! You made it to Room 2 before anything was written for it!";
 			dblEndl();
 			system("pause");
 		}

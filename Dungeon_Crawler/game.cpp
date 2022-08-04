@@ -344,6 +344,16 @@ void useKeys(Player& player, vector<Key>& keys, vector<Door>& doors, string& arg
 							keys.erase(keys.begin() + i);
 							return;
 						}
+						else
+						{
+							cout << "Unfortunately, the " << keys[i].name << " does not fit in the " << doors[ii].name << ".";
+							dblEndl();
+						}
+					}
+					else
+					{
+						cout << "Actually, the " << doors[ii].name << " is already unlocked.";
+						dblEndl();
 					}
 				}
 			}
