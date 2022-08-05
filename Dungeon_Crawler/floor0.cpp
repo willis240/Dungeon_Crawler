@@ -215,18 +215,32 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 						{
 							system("CLS");
 							helpedRat = true;
-							cout << "You gave the chicken nugget." << endl << endl;
+							cout << "You hold out the chicken nugget and the rat snatches it up faster than you could blink." << endl;
+							cout << "The next thing you know, the rat is back on the counter, nugget in hand. It looks at you" << endl;
+							cout << "and nods before heading off through a hole in the wall. It better enjoy that nugget." << endl << endl;
+							for (int i = 0; i < items.size(); i++)
+							{
+								if (items[i].getName() == "Chicken Nugget")
+									items.erase(items.begin() + i);
+							}
 							system("pause");
 						}
 						else if (input == 2) // Keep the chicken nugget
 						{
 							system("CLS");
-							cout << "No! That chicken nuggie is MINE!" << endl << endl;
+							cout << "You look the rat in the eye. \"I'm starving, man. Go find your own food.\" The rat," << endl;
+							cout << "with tears beginning to form in its eyes, seems to nod in understanding. It would likely" << endl;
+							cout << "do the same were it in your position. It leaves through the hole in the wall from whence" << endl;
+							cout << "it came." << endl << endl;
 							system("pause");
 						}
 						encounteredRat = true;
 					}
 				}
+			}
+			else
+			{
+				// NORMAL KITCHEN DESCRIPTION AND CODE
 			}
 		}
 	}
