@@ -29,13 +29,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="player.hpp">
+    <ClInclude Include="combat.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="combat.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

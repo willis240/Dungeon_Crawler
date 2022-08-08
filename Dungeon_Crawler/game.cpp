@@ -1,8 +1,7 @@
 //game.cpp
 
-#include "player.hpp"
-#include "game.hpp"
 #include "combat.hpp"
+#include "game.hpp"
 using std::cout;
 using std::endl;
 using std::cin;
