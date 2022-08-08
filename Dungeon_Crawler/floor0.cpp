@@ -2,6 +2,7 @@
 
 #include "player.hpp"
 #include "game.hpp"
+#include "combat.hpp"
 #include <Windows.h>
 using std::cout;
 using std::endl;
