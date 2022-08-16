@@ -1,4 +1,16 @@
 ﻿  combat.cpp
-  main.cpp
-  Generating Code...
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(64,60): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(72,53): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(109,26): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(110,75): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(113,32): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(114,71): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
   Dungeon_Crawler.vcxproj -> C:\Users\Wilhelm\source\repos\Dungeon_Crawler\x64\Debug\Dungeon_Crawler.exe

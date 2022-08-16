@@ -21,7 +21,8 @@ Player startGame()
 	string playerName;
 	getline(cin, playerName);
 
-	Player player(playerName, 10, 5);
+	Skill punch("Punch", 3, false, false, "You throw your clenched fist into your foe");
+	Player player(playerName, 10, 5, {punch});
 
 	cout << "Ah, " << player.getName() << "! I like it." << endl << endl;
 	system("pause");
@@ -367,15 +368,14 @@ int getDecision(const int minChoice, const int maxChoice)
 	{
 		int input;
 		cin >> input;
-		dblEndl();
+		cout << endl;
 
 		if (!cin || input < minChoice || input > maxChoice)
 		{
 			cin.clear();
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			cout << "Sorry, I don't understand. Please input the number corresponding to your" << endl;
-			cout << "desired option.";
-			dblEndl();
+			cout << "desired option." << endl;
 		}
 		else
 		{
