@@ -36,6 +36,7 @@ public:
 	int currentHP;
 	int maxSP;
 	int currentSP;
+	int str = 1;
 	std::vector<std::string> exploreOptions{};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};
 	std::vector<Skill> skills;
@@ -76,6 +77,7 @@ public:
 
 void displayCombatStats(std::vector<Player>& players, std::vector<Enemy>& enemies);
 void displayPlayerActions(Player& player);
+void displayPlayerSkills(Player& player);
 void displayAttackTargets(std::vector<Player>& players, std::vector<Enemy>& enemies);
 void fight(std::vector<Player>& players, std::vector<Enemy>& enemies);
 void victory(std::vector<Player>& players, std::vector<Enemy>& enemies);

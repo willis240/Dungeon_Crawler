@@ -61,12 +61,13 @@ void fight(vector<Player> & players, vector<Enemy> & enemies)
 				displayCombatStats(players, enemies);
 				displayPlayerActions(players[i]);
 
-				int input = getDecision(0, players[i].skills.size() - 1);
+				int input = getDecision(0, players[i].actions.size() - 1);
 
 				switch (input)
 				{
-					//Punch
+					//Attack
 					case 0:
+					{
 						system("CLS");
 						displayAttackTargets(players, enemies);
 						int target = getDecision(0, enemies.size() - 1);
@@ -75,12 +76,49 @@ void fight(vector<Player> & players, vector<Enemy> & enemies)
 						{
 							if (ii == target)
 							{
-								enemies[ii].reduceHP(players[i].skills[input].damage);
+								enemies[ii].reduceHP(players[i].str);
 							}
 						}
+					}
+					break;
 
-						break;
+					//Skills
+					case 1:
+					{
+						system("CLS");
+						displayCombatStats(players, enemies);
+						displayPlayerSkills(players[i]);
 
+						int pickSkill = getDecision(0, players[i].skills.size() - 1);
+
+						system("CLS");
+						displayAttackTargets(players, enemies);
+						int target = getDecision(0, enemies.size() - 1);
+
+						for (int ii = 0; ii < enemies.size(); ii++)
+						{
+							if (ii == target)
+							{
+								int damageDealt = players[i].str + players[i].skills[pickSkill].damage;
+								enemies[ii].reduceHP(damageDealt);
+							}
+						}
+					}
+					break;
+
+					//Items
+					case 2:
+					{
+
+					}
+					break;
+
+					//Defend
+					case 3:
+					{
+
+					}
+					break;
 
 				}
 
@@ -154,6 +192,17 @@ void displayPlayerActions(Player& player)
 	for (int i = 0; i < player.actions.size(); i++)
 	{
 		cout << "(" << i << ") " << player.actions[i] << endl;
+	}
+}
+
+void displayPlayerSkills(Player& player)
+{
+	cout << "It's " << player.getName() << "'s turn!";
+	dblEndl();
+	cout << "SKILLS" << endl;
+	for (int i = 0; i < player.skills.size(); i++)
+	{
+		cout << "(" << i << ") " << player.skills[i].getName() << endl;
 	}
 }
 
