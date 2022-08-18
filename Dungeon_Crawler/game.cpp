@@ -373,7 +373,7 @@ int getDecision(const int minChoice, const int maxChoice)
 		if (!cin || input < minChoice || input > maxChoice)
 		{
 			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin.ignore(10000, '\n');
 			cout << "Sorry, I don't understand. Please input the number corresponding to your" << endl;
 			cout << "desired option." << endl;
 		}

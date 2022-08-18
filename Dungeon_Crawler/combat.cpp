@@ -3,6 +3,7 @@
 #include "combat.hpp"
 #include "game.hpp"
 using std::cout;
+using std::cin;
 using std::endl;
 using std::string;
 using std::vector;
@@ -53,15 +54,16 @@ void fight(vector<Player> & players, vector<Enemy> & enemies)
 {
 	while (true)
 	{
-		for (int i = 0; i < players.size(); i++)
+		short playerNum = 0;
+		while (playerNum < players.size())
 		{
-			if (players[i].currentHP > 0)
+			if (players[playerNum].currentHP > 0)
 			{
 				system("CLS");
 				displayCombatStats(players, enemies);
-				displayPlayerActions(players[i]);
+				displayPlayerActions(players[playerNum]);
 
-				int input = getDecision(0, players[i].actions.size() - 1);
+				int input = getDecision(0, players[playerNum].actions.size() - 1);
 
 				switch (input)
 				{
@@ -70,13 +72,14 @@ void fight(vector<Player> & players, vector<Enemy> & enemies)
 					{
 						system("CLS");
 						displayAttackTargets(players, enemies);
-						int target = getDecision(0, enemies.size() - 1);
+						int target = getDecisionEscapable(0, enemies.size() - 1);
 
 						for (int ii = 0; ii < enemies.size(); ii++)
 						{
 							if (ii == target)
 							{
-								enemies[ii].reduceHP(players[i].str);
+								enemies[ii].reduceHP(players[playerNum].str);
+								playerNum++;
 							}
 						}
 					}
@@ -87,20 +90,24 @@ void fight(vector<Player> & players, vector<Enemy> & enemies)
 					{
 						system("CLS");
 						displayCombatStats(players, enemies);
-						displayPlayerSkills(players[i]);
+						displayPlayerSkills(players[playerNum]);
 
-						int pickSkill = getDecision(0, players[i].skills.size() - 1);
+						int pickSkill = getDecisionEscapable(0, players[playerNum].skills.size() - 1);
 
-						system("CLS");
-						displayAttackTargets(players, enemies);
-						int target = getDecision(0, enemies.size() - 1);
-
-						for (int ii = 0; ii < enemies.size(); ii++)
+						if (pickSkill != -1)
 						{
-							if (ii == target)
+							system("CLS");
+							displayAttackTargets(players, enemies);
+							int target = getDecisionEscapable(0, enemies.size() - 1);
+
+							for (int ii = 0; ii < enemies.size(); ii++)
 							{
-								int damageDealt = players[i].str + players[i].skills[pickSkill].damage;
-								enemies[ii].reduceHP(damageDealt);
+								if (ii == target)
+								{
+									int damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
+									enemies[ii].reduceHP(damageDealt);
+									playerNum++;
+								}
 							}
 						}
 					}
@@ -223,6 +230,27 @@ void displayAttackTargets(vector<Player>& players, vector<Enemy>& enemies)
 	dblEndl();
 
 	cout << "Enter the number of your target: ";
+}
+
+int getDecisionEscapable(const int minChoice, const int maxChoice)
+{
+	while (true)
+	{
+		int input;
+		cin >> input;
+		cout << endl;
+
+		if (!cin || input < minChoice || input > maxChoice)
+		{
+			cin.clear();
+			cin.ignore(10000, '\n');
+			return (-1);
+		}
+		else
+		{
+			return input;
+		}
+	}
 }
 
 void victory(vector<Player>& players, vector<Enemy>& enemies)
