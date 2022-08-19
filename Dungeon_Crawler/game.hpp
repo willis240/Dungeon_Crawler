@@ -105,4 +105,8 @@ void explore(Player& player, int& floor, int& roomNum, std::vector<Item>& items,
 void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void dblEndl();
 
+//Function Definitions found in combat.cpp
+void fight(std::vector<Player>& players, std::vector<Enemy>& enemies, std::vector<Item>& items);
+void displayItemsBattle(std::vector<Item>& items);
+
 #endif

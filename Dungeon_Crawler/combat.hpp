@@ -77,12 +77,13 @@ public:
 		name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP), stances(inputStances), skills(inputSkills) {};
 };
 
-void fight(std::vector<Player>& players, std::vector<Enemy>& enemies);
 void displayCombatStats(std::vector<Player>& players, std::vector<Enemy>& enemies);
 void displayPlayerActions(Player& player);
 void displayPlayerSkills(Player& player);
 void displayAttackTargets(std::vector<Player>& players, std::vector<Enemy>& enemies);
 int getDecisionEscapable(const int minChoice, const int maxChoice);
+void displaySpacing(int& spacing, const int spaceMax);
+int findDigits(int number);
 void victory(std::vector<Player>& players, std::vector<Enemy>& enemies);
 void gameOver();
 

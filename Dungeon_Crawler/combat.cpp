@@ -50,7 +50,7 @@ void Enemy::reduceSP(int& lostSP)
 		currentSP = 0;
 }
 
-void fight(vector<Player> & players, vector<Enemy> & enemies)
+void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & items)
 {
 	while (true)
 	{
@@ -116,7 +116,18 @@ void fight(vector<Player> & players, vector<Enemy> & enemies)
 					//Items
 					case 2:
 					{
+						system("CLS");
+						displayCombatStats(players, enemies);
+						displayItemsBattle(items);
 
+						int pickItem = getDecisionEscapable(0, items.size() - 1);
+
+						if (pickItem != -1)
+						{
+							system("CLS");
+							//displaySupportTargets(players, enemies);
+							int target = getDecisionEscapable(0, players.size() - 1);
+						}
 					}
 					break;
 
@@ -177,18 +188,64 @@ void fight(vector<Player> & players, vector<Enemy> & enemies)
 
 void displayCombatStats(vector<Player>& players, vector<Enemy>& enemies)
 {
+	int spacing = 0;
+
+	//Enemy Names
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		cout << enemies[i].getName() << ": " << enemies[i].currentHP << " / " << enemies[i].maxHP;
-		cout << "       ";
+		cout << enemies[i].getName();
+		spacing = enemies[i].getName().size();
+		displaySpacing(spacing, 19);
+		spacing = 0;
+	}
+	cout << endl;
+
+	//Enemy HP
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		cout << "HP " << enemies[i].currentHP << " / " << enemies[i].maxHP;
+		spacing = 6;
+		spacing += findDigits(enemies[i].currentHP);
+		spacing += findDigits(enemies[i].maxHP);
+		displaySpacing(spacing, 19);
+		spacing = 0;
 	}
 	dblEndl();
 
+	//Player Names
 	for (int i = 0; i < players.size(); i++)
 	{
-		cout << players[i].getName() << ": " << players[i].currentHP << " / " << players[i].maxHP;
-		cout << "       ";
+		cout << players[i].getName();
+		spacing = players[i].getName().size();
+		displaySpacing(spacing, 19);
+		spacing = 0;
 	}
+	cout << endl;
+
+	//Player HP
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << "HP " << players[i].currentHP << " / " << players[i].maxHP;
+		spacing = 6;
+		spacing += findDigits(players[i].currentHP);
+		spacing += findDigits(players[i].maxHP);
+		displaySpacing(spacing, 19);
+		spacing = 0;
+	}
+	cout << endl;
+
+	//Player SP
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << "SP " << players[i].currentSP << " / " << players[i].maxSP;
+		spacing = 6;
+		spacing += findDigits(players[i].currentSP);
+		spacing += findDigits(players[i].maxSP);
+		displaySpacing(spacing, 19);
+		spacing = 0;
+	}
+	cout << endl;
+
 	dblEndl();
 }
 
@@ -251,6 +308,43 @@ int getDecisionEscapable(const int minChoice, const int maxChoice)
 			return input;
 		}
 	}
+}
+
+void displayItemsBattle(vector<Item>& items)
+{
+	cout << "    ITEMS" << endl;
+	if (items.size() > 0)
+	{
+		for (int i = 0; i < items.size(); i++)
+		{
+			cout << "    (" << i << ") " << items[i].getName();
+			cout << " -- Restores " << items[i].restoredHP << " HP and " << items[i].restoredSP << " SP" << endl;
+		}
+	}
+	else
+		cout << "    none";
+	dblEndl();
+}
+
+void displaySpacing(int& spacing, const int spaceMax)
+{
+	while (spacing < spaceMax)
+	{
+		cout << " ";
+		spacing++;
+	}
+}
+
+int findDigits(int number)
+{
+	int spacing = 0;
+	while (number)
+	{
+		number /= 10;
+		spacing++;
+	}
+
+	return spacing;
 }
 
 void victory(vector<Player>& players, vector<Enemy>& enemies)

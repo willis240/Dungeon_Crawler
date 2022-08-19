@@ -24,7 +24,9 @@ int main()
 	Player player2("Player 2", 10, 10, { doubleSlash });
 	vector<Player> players = { player, player2 };
 	vector<Enemy> enemies = { rat, rat };
-	fight(players, enemies);
+	Item grapefruit("Grapefruit", 5, 5, "A juicy fruit, for sure");
+	items.push_back(grapefruit);
+	fight(players, enemies, items);
 
 	explore(player, floorNum, roomNum, items, keys);
 
