@@ -19,12 +19,13 @@ public:
 	int damage;
 	bool isHealing;
 	bool hasAOE;
+	int SPcost;
 	std::string description;
 
 	std::string getName() { return name; };
 
-	Skill(std::string inputName, int inputDamage, bool inputIsHealing, bool inputHasAOE, std::string inputDescription) :
-		name(inputName), damage(inputDamage), isHealing(inputIsHealing), hasAOE(inputHasAOE), description(inputDescription) {};
+	Skill(std::string inputName, int inputDamage, bool inputIsHealing, bool inputHasAOE, int inputSPcost, std::string inputDescription) :
+		name(inputName), damage(inputDamage), isHealing(inputIsHealing), hasAOE(inputHasAOE), SPcost(inputSPcost), description(inputDescription) {};
 };
 
 class Player

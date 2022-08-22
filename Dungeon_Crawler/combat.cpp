@@ -79,6 +79,11 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 							if (ii == target)
 							{
 								enemies[ii].reduceHP(players[playerNum].str);
+
+								cout << players[playerNum].getName() << " attacks " << enemies[ii].getName() << "!" << endl;
+								cout << enemies[ii].getName() << " receives " << players[playerNum].str << " points of damage!" << endl << endl;
+								system("pause");
+
 								playerNum++;
 							}
 						}
@@ -104,8 +109,21 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 							{
 								if (ii == target)
 								{
-									int damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
-									enemies[ii].reduceHP(damageDealt);
+									if (players[playerNum].currentSP >= players[playerNum].skills[pickSkill].SPcost)
+									{
+										int damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
+										players[playerNum].reduceSP(players[playerNum].skills[pickSkill].SPcost);
+										enemies[ii].reduceHP(damageDealt);
+
+										cout << players[playerNum].skills[pickSkill].description << endl;
+										cout << enemies[ii].getName() << " receives " << damageDealt << " points of damage!" << endl << endl;
+										system("pause");
+									}
+									else
+									{
+										cout << players[playerNum].getName() << " did not have enough SP to use " << players[playerNum].skills[pickSkill].getName() << "!" << endl;
+										system("pause");
+									}
 									playerNum++;
 								}
 							}
@@ -277,7 +295,7 @@ void displayPlayerSkills(Player& player)
 	cout << "SKILLS" << endl;
 	for (int i = 0; i < player.skills.size(); i++)
 	{
-		cout << "(" << i << ") " << player.skills[i].getName() << endl;
+		cout << "(" << i << ") " << player.skills[i].getName() << " - " << player.skills[i].SPcost << " SP" << endl;
 	}
 }
 
@@ -434,17 +452,17 @@ int getDecisionEscapable(const int minChoice, const int maxChoice)
 
 void displayItemsBattle(vector<Item>& items)
 {
-	cout << "    ITEMS" << endl;
+	cout << "ITEMS" << endl;
 	if (items.size() > 0)
 	{
 		for (int i = 0; i < items.size(); i++)
 		{
-			cout << "    (" << i << ") " << items[i].getName();
+			cout << "(" << i << ") " << items[i].getName();
 			cout << " -- Restores " << items[i].restoredHP << " HP and " << items[i].restoredSP << " SP" << endl;
 		}
 	}
 	else
-		cout << "    none";
+		cout << "none";
 	dblEndl();
 }
 
