@@ -127,6 +127,17 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 							system("CLS");
 							displaySupportTargets(players, enemies);
 							int target = getDecisionEscapable(0, players.size() - 1);
+
+							for (int ii = 0; ii < players.size(); ii++)
+							{
+								if (ii == target)
+								{
+									players[ii].restoreHP(items[pickItem].restoredHP);
+									players[ii].restoreSP(items[pickItem].restoredSP);
+									items.erase(items.begin() + pickItem);
+									playerNum++;
+								}
+							}
 						}
 					}
 					break;
