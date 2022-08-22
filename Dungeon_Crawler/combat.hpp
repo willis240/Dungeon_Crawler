@@ -81,6 +81,7 @@ void displayCombatStats(std::vector<Player>& players, std::vector<Enemy>& enemie
 void displayPlayerActions(Player& player);
 void displayPlayerSkills(Player& player);
 void displayAttackTargets(std::vector<Player>& players, std::vector<Enemy>& enemies);
+void displaySupportTargets(std::vector<Player>& players, std::vector<Enemy>& enemies);
 int getDecisionEscapable(const int minChoice, const int maxChoice);
 void displaySpacing(int& spacing, const int spaceMax);
 int findDigits(int number);
