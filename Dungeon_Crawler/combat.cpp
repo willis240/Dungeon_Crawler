@@ -78,10 +78,19 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 						{
 							if (ii == target)
 							{
-								enemies[ii].reduceHP(players[playerNum].str);
+								if (enemies[ii].currentHP > 0)
+								{
+									cout << players[playerNum].getName() << " attacks " << enemies[ii].getName() << "!" << endl;
+									cout << enemies[ii].getName() << " receives " << players[playerNum].str << " points of damage!" << endl << endl;
+								}
+								else
+								{
+									cout << players[playerNum].getName() << " wasted a perfectly good turn on attacking " << enemies[ii].getName() << "'s corpse." << endl;
+									cout << "Alright. That sure was a turn, I guess." << endl << endl;
+								}
 
-								cout << players[playerNum].getName() << " attacks " << enemies[ii].getName() << "!" << endl;
-								cout << enemies[ii].getName() << " receives " << players[playerNum].str << " points of damage!" << endl << endl;
+								enemies[ii].reduceHP(players[playerNum].str);
+								
 								system("pause");
 
 								playerNum++;
@@ -113,10 +122,20 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 									{
 										int damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
 										players[playerNum].reduceSP(players[playerNum].skills[pickSkill].SPcost);
+
+										if (enemies[ii].currentHP > 0)
+										{
+											cout << players[playerNum].skills[pickSkill].description << endl;
+											cout << enemies[ii].getName() << " receives " << damageDealt << " points of damage!" << endl << endl;
+										}
+										else
+										{
+											cout << players[playerNum].getName() << " wastes a perfectly good " << players[playerNum].skills[pickSkill].getName();
+											cout << " on " << enemies[ii].getName() << "'s corpse." << endl;
+											cout << "Huh. Well, I guess it is your turn. Who am I to tell you what to do?" << endl << endl;
+										}
 										enemies[ii].reduceHP(damageDealt);
 
-										cout << players[playerNum].skills[pickSkill].description << endl;
-										cout << enemies[ii].getName() << " receives " << damageDealt << " points of damage!" << endl << endl;
 										system("pause");
 									}
 									else
@@ -478,6 +497,10 @@ void displaySpacing(int& spacing, const int spaceMax)
 int findDigits(int number)
 {
 	int spacing = 0;
+
+	if (number == 0)
+		spacing++;
+
 	while (number)
 	{
 		number /= 10;
@@ -489,9 +512,39 @@ int findDigits(int number)
 
 void victory(vector<Player>& players, vector<Enemy>& enemies)
 {
-	//Give EXP to player characters, check for level ups, ask player what stats they want to increase
 	system("CLS");
+
+	int battleEXP = 0;
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		battleEXP += enemies[i].expWorth;
+	}
+
 	cout << "Victory!" << endl;
+	if (players.size() == 1)
+		cout << players[0].getName() << " gained " << battleEXP << " EXP!" << endl << endl;
+	else
+		cout << "The party gained " << battleEXP << " EXP!" << endl << endl;
+
+	for (int i = 0; i < players.size(); i++)
+	{
+		players[i].exp += battleEXP;
+		if (players[i].exp >= players[i].lvEXP)
+		{
+			int initialLv = players[i].lv;
+			while (players[i].exp >= players[i].lvEXP)
+			{
+				players[i].lv++;
+				players[i].exp -= players[i].lvEXP;
+				players[i].lvEXP *= 2;
+			}
+
+			cout << "LEVEL UP!!" << endl;
+			cout << players[i].getName() << "'s level increased from " << initialLv << " to " << players[i].lv << endl << endl;
+			//ADD CODE FOR SELECTING A STAT TO INCREASE
+		}
+	}
+
 	system("pause");
 }
 

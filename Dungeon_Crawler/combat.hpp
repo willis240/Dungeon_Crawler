@@ -40,6 +40,9 @@ public:
 	int maxSP;
 	int currentSP;
 	int str = 1;
+	int exp = 0;
+	int lv = 1;
+	int lvEXP = 20;
 	std::vector<std::string> exploreOptions{};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};
 	std::vector<Skill> skills;
@@ -67,6 +70,7 @@ public:
 	int currentHP;
 	int maxSP;
 	int currentSP;
+	int expWorth;
 	std::vector<std::string> stances;
 	std::vector<Skill> skills;
 
@@ -74,8 +78,8 @@ public:
 	void reduceHP(int& lostHP);
 	void reduceSP(int& lostSP);
 
-	Enemy(std::string inputName, int inputMaxHP, int inputMaxSP, std::vector<std::string> inputStances, std::vector<Skill> inputSkills) :
-		name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP), stances(inputStances), skills(inputSkills) {};
+	Enemy(std::string inputName, int inputMaxHP, int inputMaxSP, int inputExpWorth, std::vector<std::string> inputStances, std::vector<Skill> inputSkills) :
+		name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP), expWorth(inputExpWorth), stances(inputStances), skills(inputSkills) {};
 };
 
 void displayCombatStats(std::vector<Player>& players, std::vector<Enemy>& enemies);
