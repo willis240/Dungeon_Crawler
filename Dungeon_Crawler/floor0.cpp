@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 using std::cin;
 using std::string;
-
+using std::vector;
 
 void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys)
 {
@@ -194,7 +194,11 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 						dblEndl();
 						system("pause");
 
-						//ADD COMBAT
+						Skill ratPunch("Punch", 2, false, false, 0, "The rat jumps up and punches you in the neck");
+						Enemy rat("Rat", 10, 10, 10, { "" }, { ratPunch });
+						vector<Player> players = { player };
+						vector<Enemy> enemies = { rat };
+						fight(players, enemies, items);
 						encounteredRat = true;
 					}
 					else

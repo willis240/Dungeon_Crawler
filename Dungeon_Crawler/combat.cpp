@@ -541,7 +541,57 @@ void victory(vector<Player>& players, vector<Enemy>& enemies)
 
 			cout << "LEVEL UP!!" << endl;
 			cout << players[i].getName() << "'s level increased from " << initialLv << " to " << players[i].lv << endl << endl;
-			//ADD CODE FOR SELECTING A STAT TO INCREASE
+			
+			while (initialLv < players[i].lv)
+			{
+				cout << players[i].getName() << "'s current stats:" << endl;
+				cout << "Max HP: " << players[i].maxHP << endl;
+				cout << "Max SP: " << players[i].maxSP << endl;
+				cout << "STR:    " << players[i].str;
+				dblEndl();
+
+				cout << "Pick a stat to increase: " << endl << endl;
+				cout << "(0) Max HP +2" << endl;
+				cout << "(1) Max SP +2" << endl;
+				cout << "(2) Str    +1" << endl;
+				cout << endl;
+
+				int input = getDecision(0, 2);
+
+				switch (input)
+				{
+					//Max HP
+					case 0:
+					{
+						int tempMaxHP = players[i].maxHP;
+						players[i].maxHP += 2;
+						cout << players[i].getName() << "'s Max HP increased from " << tempMaxHP << " to " << players[i].maxHP << "!";
+						dblEndl();
+					}
+					break;
+
+					//Max SP
+					case 1:
+					{
+						int tempMaxSP = players[i].maxSP;
+						players[i].maxSP += 2;
+						cout << players[i].getName() << "'s Max HP increased from " << tempMaxSP << " to " << players[i].maxSP << "!";
+						dblEndl();
+					}
+					break;
+
+					//Str
+					case 2:
+					{
+						int tempSTR = players[i].str;
+						players[i].str += 1;
+						cout << players[i].getName() << "'s STR increased from " << tempSTR << " to " << players[i].str << "!";
+						dblEndl();
+					}
+					break;
+				}
+				initialLv++;
+			}
 		}
 	}
 
