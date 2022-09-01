@@ -7,6 +7,7 @@ using std::cin;
 using std::endl;
 using std::string;
 using std::vector;
+using std::map;
 
 void Player::restoreHP(int& healedHP)
 {
@@ -52,14 +53,33 @@ void Enemy::reduceSP(int& lostSP)
 
 void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & items)
 {
+	countEnemyNames(enemies);
+
 	while (true)
 	{
+		vector<short> enemyActionsTaken = {};
+		vector<short> enemiesTargets = {};
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			if (enemies[i].currentHP > 0)
+			{
+				std::mt19937 rng(time(NULL));
+				std::uniform_int_distribution<int> gen(0, enemies[i].skills.size() - 1);
+				enemyActionsTaken.push_back(gen(rng));
+
+				std::mt19937 targetRng(time(NULL));
+				std::uniform_int_distribution<int> targetGen(0, players.size() - 1);
+				enemiesTargets.push_back(targetGen(targetRng));
+			}
+		}
+
 		short playerNum = 0;
 		while (playerNum < players.size())
 		{
 			if (players[playerNum].currentHP > 0)
 			{
 				system("CLS");
+				displayEnemiesTargets(players, enemies, enemiesTargets);
 				displayCombatStats(players, enemies);
 				displayPlayerActions(players[playerNum]);
 
@@ -182,7 +202,15 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					//Defend
 					case 3:
 					{
-
+						//Pick which direction to focus defense on: up, down, left, or right
+						//If the attacker targets a different direction than what you're defending:
+							//Reduce damage taken from the attack by 50%
+							//Regain 10% of Max SP
+						//If the attacker targets the SAME direction that you're defending:
+							//Reduce damage taken from the attack by 80%
+							//Regain 20% of Max SP
+							//The attacker is thrown off-balance, meaning they are open to GUARANTEED critical hits from the player's party
+							//for the next round...critical hits probably deal double damage
 					}
 					break;
 
@@ -201,37 +229,71 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					}
 				}
 			}
+			else
+			{
+				playerNum++;
+			}
 		}
 
 		for (int i = 0; i < enemies.size(); i++)
 		{
 			if (enemies[i].currentHP > 0)
 			{
-				system("CLS");
-				displayCombatStats(players, enemies);
+				players[enemiesTargets[i]].reduceHP(enemies[i].skills[enemyActionsTaken[i]].damage);
+			}
+		}
+		
+		short partyKO = 0;
+		for (int i = 0; i < players.size(); i++)
+		{
+			if (players[i].currentHP == 0)
+				partyKO++;
 
-				std::mt19937 rng(time(NULL));
-				std::uniform_int_distribution<int> gen(0, enemies[i].skills.size() - 1);
-				int actionTaken = gen(rng);
+			if (partyKO == players.size())
+				gameOver();
+		}
+	}
+}
 
-				std::mt19937 targetRng(time(NULL));
-				std::uniform_int_distribution<int> targetGen(0, players.size() - 1);
-				int targetChosen = targetGen(targetRng);
-
-				players[targetChosen].reduceHP(enemies[i].skills[actionTaken].damage);
-
-				short partyKO = 0;
-				for (int i = 0; i < players.size(); i++)
+void countEnemyNames(vector<Enemy>& enemies)
+{
+	map<string, int> enemyNameTracker;
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		auto result = enemyNameTracker.insert(std::pair<string, int>(enemies[i].getName(), 1));
+		if (result.second == false)
+			result.first->second++;
+	}
+	for (auto& elem : enemyNameTracker)
+	{
+		int enemyNum = 1;
+		if (elem.second > 1)
+		{
+			for (int i = 0; i < enemies.size(); i++)
+			{
+				if (enemies[i].getName() == elem.first)
 				{
-					if (players[i].currentHP == 0)
-						partyKO++;
-
-					if (partyKO == players.size())
-						gameOver();
+					string nameEdit = " " + std::to_string(enemyNum);
+					enemies[i].alterName(nameEdit);
+					enemyNum++;
 				}
 			}
 		}
 	}
+}
+
+void displayEnemiesTargets(vector<Player>& players, vector<Enemy>& enemies, vector<short>& enemiesTargets)
+{
+	int targetIter = 0;
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		if (enemies[i].currentHP > 0)
+		{
+			cout << enemies[i].getName() << " eyes " << players[enemiesTargets[targetIter]].getName() << " suspiciously." << endl;
+			targetIter++;
+		}
+	}
+	cout << endl;
 }
 
 void displayCombatStats(vector<Player>& players, vector<Enemy>& enemies)

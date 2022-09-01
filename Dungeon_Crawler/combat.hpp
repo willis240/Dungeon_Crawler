@@ -6,6 +6,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<map>
 #include<random>
 #include<sstream>
 #include <Windows.h>
@@ -75,6 +76,7 @@ public:
 	std::vector<Skill> skills;
 
 	std::string getName() { return name; };
+	void alterName(std::string& nameEdit) { name += nameEdit; };
 	void reduceHP(int& lostHP);
 	void reduceSP(int& lostSP);
 
@@ -82,6 +84,8 @@ public:
 		name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP), expWorth(inputExpWorth), stances(inputStances), skills(inputSkills) {};
 };
 
+void countEnemyNames(std::vector<Enemy>& enemies);
+void displayEnemiesTargets(std::vector<Player>& players, std::vector<Enemy>& enemies, std::vector<short>& enemiesTargets);
 void displayCombatStats(std::vector<Player>& players, std::vector<Enemy>& enemies);
 void displayPlayerActions(Player& player);
 void displayPlayerSkills(Player& player);
