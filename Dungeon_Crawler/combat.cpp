@@ -235,11 +235,13 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 			}
 		}
 
+		int otherIter = 0;
 		for (int i = 0; i < enemies.size(); i++)
 		{
 			if (enemies[i].currentHP > 0)
 			{
-				players[enemiesTargets[i]].reduceHP(enemies[i].skills[enemyActionsTaken[i]].damage);
+				players[enemiesTargets[otherIter]].reduceHP(enemies[i].skills[enemyActionsTaken[otherIter]].damage);
+				otherIter++;
 			}
 		}
 		
