@@ -57,20 +57,40 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 
 	while (true)
 	{
+		short playersKO = 0;
+		for (int i = 0; i < players.size(); i++)
+		{
+			if (players[i].currentHP == 0)
+				playersKO++;
+
+			if (playersKO == players.size())
+				gameOver();
+		}
+
 		vector<short> enemyActionsTaken = {};
 		vector<short> enemiesTargets = {};
+		
 		for (int i = 0; i < enemies.size(); i++)
 		{
-			if (enemies[i].currentHP > 0)
-			{
-				std::mt19937 rng(time(NULL));
-				std::uniform_int_distribution<int> gen(0, enemies[i].skills.size() - 1);
-				enemyActionsTaken.push_back(gen(rng));
+			std::mt19937 rng(time(NULL));
+			std::uniform_int_distribution<int> gen(0, enemies[i].skills.size() - 1);
+			enemyActionsTaken.push_back(gen(rng));
 
-				std::mt19937 targetRng(time(NULL));
-				std::uniform_int_distribution<int> targetGen(0, players.size() - 1);
-				enemiesTargets.push_back(targetGen(targetRng));
+			std::mt19937 targetRng(time(NULL));
+			std::uniform_int_distribution<int> targetGen(0, players.size() - 1);
+			short target = targetGen(targetRng);
+			if (players[target].currentHP == 0)
+			{
+				for (int i = 0; i < players.size(); i++)
+				{
+					if (players[i].currentHP > 0)
+					{
+						target = i;
+						break;
+					}
+				}
 			}
+			enemiesTargets.push_back(target);
 		}
 
 		short playerNum = 0;
@@ -235,24 +255,12 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 			}
 		}
 
-		int otherIter = 0;
 		for (int i = 0; i < enemies.size(); i++)
 		{
 			if (enemies[i].currentHP > 0)
 			{
-				players[enemiesTargets[otherIter]].reduceHP(enemies[i].skills[enemyActionsTaken[otherIter]].damage);
-				otherIter++;
+				players[enemiesTargets[i]].reduceHP(enemies[i].skills[enemyActionsTaken[i]].damage);
 			}
-		}
-		
-		short partyKO = 0;
-		for (int i = 0; i < players.size(); i++)
-		{
-			if (players[i].currentHP == 0)
-				partyKO++;
-
-			if (partyKO == players.size())
-				gameOver();
 		}
 	}
 }
