@@ -19,7 +19,7 @@ int main()
 
 	//CODE FOR TESTING COMBAT
 	
-	Skill ratPunch("Punch", 2, false, false, 0, "The rat jumps up and punches you in the neck");
+	Skill ratPunch("Punch", 2, false, false, 0, 1, "The rat jumps up and punches you in the neck");
 	Skill doubleSlash("Double Slash", 3, false, false, 2, "Player 2 makes two quick diagonal slashes using each of their swords");
 	Enemy rat("Rat", 10, 10, 10, { "" }, { ratPunch });
 	Enemy bat("Bat", 10, 10, 10, { "" }, { ratPunch });

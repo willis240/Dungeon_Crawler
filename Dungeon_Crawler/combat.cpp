@@ -96,6 +96,7 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 		short playerNum = 0;
 		while (playerNum < players.size())
 		{
+			players[playerNum].guardDirection = -1;
 			if (players[playerNum].currentHP > 0)
 			{
 				system("CLS");
@@ -118,10 +119,17 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 						{
 							if (ii == target)
 							{
+								int damageDealt = players[playerNum].str;
+
+								if (enemies[ii].offBalance)
+									damageDealt *= 2;
+
 								if (enemies[ii].currentHP > 0)
 								{
 									cout << players[playerNum].getName() << " attacks " << enemies[ii].getName() << "!" << endl;
-									cout << enemies[ii].getName() << " receives " << players[playerNum].str << " points of damage!" << endl << endl;
+									if (enemies[ii].offBalance)
+										cout << "It's a critical hit!!!" << endl;
+									cout << enemies[ii].getName() << " receives " << damageDealt << " points of damage!" << endl << endl;
 								}
 								else
 								{
@@ -129,9 +137,10 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 									cout << "Alright. That sure was a turn, I guess." << endl << endl;
 								}
 
-								enemies[ii].reduceHP(players[playerNum].str);
+								enemies[ii].reduceHP(damageDealt);
 								
 								system("pause");
+								cout << endl;
 
 								playerNum++;
 							}
@@ -163,9 +172,14 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 										int damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
 										players[playerNum].reduceSP(players[playerNum].skills[pickSkill].SPcost);
 
+										if (enemies[ii].offBalance)
+											damageDealt *= 2;
+
 										if (enemies[ii].currentHP > 0)
 										{
 											cout << players[playerNum].skills[pickSkill].description << endl;
+											if (enemies[ii].offBalance)
+												cout << "It's a critical hit!!!" << endl;
 											cout << enemies[ii].getName() << " receives " << damageDealt << " points of damage!" << endl << endl;
 										}
 										else
@@ -177,11 +191,13 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 										enemies[ii].reduceHP(damageDealt);
 
 										system("pause");
+										cout << endl;
 									}
 									else
 									{
 										cout << players[playerNum].getName() << " did not have enough SP to use " << players[playerNum].skills[pickSkill].getName() << "!" << endl;
 										system("pause");
+										cout << endl;
 									}
 									playerNum++;
 								}
@@ -205,15 +221,12 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 							displaySupportTargets(players, enemies);
 							int target = getDecisionEscapable(0, players.size() - 1);
 
-							for (int ii = 0; ii < players.size(); ii++)
+							if (target != -1)
 							{
-								if (ii == target)
-								{
-									players[ii].restoreHP(items[pickItem].restoredHP);
-									players[ii].restoreSP(items[pickItem].restoredSP);
-									items.erase(items.begin() + pickItem);
-									playerNum++;
-								}
+								players[target].restoreHP(items[pickItem].restoredHP);
+								players[target].restoreSP(items[pickItem].restoredSP);
+								items.erase(items.begin() + pickItem);
+								playerNum++;
 							}
 						}
 					}
@@ -222,15 +235,18 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					//Defend
 					case 3:
 					{
-						//Pick which direction to focus defense on: up, down, left, or right
-						//If the attacker targets a different direction than what you're defending:
-							//Reduce damage taken from the attack by 50%
-							//Regain 10% of Max SP
-						//If the attacker targets the SAME direction that you're defending:
-							//Reduce damage taken from the attack by 80%
-							//Regain 20% of Max SP
-							//The attacker is thrown off-balance, meaning they are open to GUARANTEED critical hits from the player's party
-							//for the next round...critical hits probably deal double damage
+						cout << "Choose a direction to focus your defense on: " << endl << endl;
+						cout << "(0) Left" << endl;
+						cout << "(1) Right" << endl;
+						cout << "(2) High" << endl;
+						cout << "(3) Low" << endl;
+						short pickDirection = getDecisionEscapable(0, 3);
+
+						if (pickDirection != -1)
+						{
+							players[playerNum].guardDirection = pickDirection;
+							playerNum++;
+						}
 					}
 					break;
 
@@ -259,7 +275,51 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 		{
 			if (enemies[i].currentHP > 0)
 			{
-				players[enemiesTargets[i]].reduceHP(enemies[i].skills[enemyActionsTaken[i]].damage);
+				enemies[i].offBalance = false;
+				if (players[enemiesTargets[i]].guardDirection != -1)
+				{
+					if (players[enemiesTargets[i]].guardDirection == enemies[i].skills[enemyActionsTaken[i]].attackDirection)
+					{
+						//Perfect Block
+						int damageDealt = enemies[i].skills[enemyActionsTaken[i]].damage * 0.2;
+						players[enemiesTargets[i]].reduceHP(damageDealt);
+						int healedSP = players[enemiesTargets[i]].maxSP * 0.2;
+						players[enemiesTargets[i]].restoreSP(healedSP);
+						enemies[i].offBalance = true;
+
+						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
+						cout << players[enemiesTargets[i]].getName() << " perfectly blocked " << enemies[i].getName() << "'s attack!!" << endl;
+						cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl;
+						cout << enemies[i].getName() << " is now off-balance and incredibly susceptible to attacks!" << endl << endl;
+						system("pause");
+						cout << endl;
+					}
+					else
+					{
+						//Normal Block
+						int damageDealt = enemies[i].skills[enemyActionsTaken[i]].damage * 0.5;
+						players[enemiesTargets[i]].reduceHP(damageDealt);
+						int healedSP = players[enemiesTargets[i]].maxSP * 0.1;
+						players[enemiesTargets[i]].restoreSP(healedSP);
+
+						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
+						cout << players[enemiesTargets[i]].getName() << " blocked " << enemies[i].getName() << "'s attack!" << endl;
+						cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl << endl;
+						system("pause");
+						cout << endl;
+					}
+				}
+				else
+				{
+					//No Block
+					players[enemiesTargets[i]].reduceHP(enemies[i].skills[enemyActionsTaken[i]].damage);
+					
+					cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
+					cout << players[enemiesTargets[i]].getName() << " takes " << enemies[i].skills[enemyActionsTaken[i]].damage << " damage." << endl << endl;
+					system("pause");
+					cout << endl;
+				}
+				
 			}
 		}
 	}
@@ -600,6 +660,8 @@ void victory(vector<Player>& players, vector<Enemy>& enemies)
 
 	for (int i = 0; i < players.size(); i++)
 	{
+		players[i].guardDirection = -1;
+
 		players[i].exp += battleEXP;
 		if (players[i].exp >= players[i].lvEXP)
 		{

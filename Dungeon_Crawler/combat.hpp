@@ -21,12 +21,17 @@ public:
 	bool isHealing;
 	bool hasAOE;
 	int SPcost;
+	short attackDirection = -1;
 	std::string description;
 
 	std::string getName() { return name; };
 
 	Skill(std::string inputName, int inputDamage, bool inputIsHealing, bool inputHasAOE, int inputSPcost, std::string inputDescription) :
 		name(inputName), damage(inputDamage), isHealing(inputIsHealing), hasAOE(inputHasAOE), SPcost(inputSPcost), description(inputDescription) {};
+
+	Skill(std::string inputName, int inputDamage, bool inputIsHealing, bool inputHasAOE, int inputSPcost, short inputAttackDirection, std::string inputDescription) :
+		name(inputName), damage(inputDamage), isHealing(inputIsHealing), hasAOE(inputHasAOE), SPcost(inputSPcost), attackDirection(inputAttackDirection),
+		description(inputDescription) {};
 };
 
 class Player
@@ -44,6 +49,7 @@ public:
 	int exp = 0;
 	int lv = 1;
 	int lvEXP = 20;
+	short guardDirection = -1;
 	std::vector<std::string> exploreOptions{};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};
 	std::vector<Skill> skills;
@@ -72,6 +78,7 @@ public:
 	int maxSP;
 	int currentSP;
 	int expWorth;
+	bool offBalance = false;
 	std::vector<std::string> stances;
 	std::vector<Skill> skills;
 
