@@ -652,8 +652,11 @@ void victory(vector<Player>& players, vector<Enemy>& enemies)
 	else
 		cout << "The party gained " << battleEXP << " EXP!" << endl << endl;
 
+	system("pause");
+
 	for (int i = 0; i < players.size(); i++)
 	{
+		system("CLS");
 		players[i].guardDirection = -1;
 
 		players[i].exp += battleEXP;
@@ -719,11 +722,10 @@ void victory(vector<Player>& players, vector<Enemy>& enemies)
 					break;
 				}
 				initialLv++;
+				system("pause");
 			}
 		}
 	}
-
-	system("pause");
 }
 
 void gameOver()

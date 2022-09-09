@@ -22,7 +22,7 @@ Player startGame()
 	getline(cin, playerName);
 
 	Skill punch("Punch", 3, false, false, 2, "You throw your clenched fist into your foe!");
-	Player player(playerName, 10, 5, {punch});
+	Player player(playerName, 10, 10, {punch});
 
 	cout << "Ah, " << player.getName() << "! I like it." << endl << endl;
 	system("pause");
