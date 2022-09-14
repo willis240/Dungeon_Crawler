@@ -93,14 +93,14 @@ void checkInput(int & roomNum, Player& player, std::vector<Item>& items, std::ve
 void showHelp(Player& player);
 void checkArgument(int & i, const bool & isDoor, Room & room, std::vector<Item> & items, std::vector<Key> & keys);
 void enterDoor(Door& door, int & roomNum);
-void checkInventory(Player& player, std::vector<Item>& items, std::vector<Key>& keys, std::vector<Door>& doors);
+void checkInventory(Player& player, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
 void displayItems(std::vector<Item>& items);
 void displayKeys(std::vector<Key>& keys);
 void showInvHelp();
 void checkItems(std::vector<Item>& items, std::string& argument);
 void checkKeys(std::vector<Key>& keys, std::string& argument);
 void useItems(Player& player, std::vector<Item>& items, std::string& argument);
-void useKeys(Player& player, std::vector<Key>& keys, std::vector<Door>& doors, std::string& argument);
+void useKeys(Player& player, std::vector<Key>& keys, Room& room, std::string& argument);
 void explore(Player& player, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void dblEndl();

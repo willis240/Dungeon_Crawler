@@ -69,6 +69,17 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Upon throwing open the refrigerator door, you find that there is no food left inside. Just crumbs. Great. \n"
 		"Oh, wait! There's a single chicken nugget in the very back of the second shelf down. Score!",
 		true, false, 1, 0);
+	Key rawApplePie(2, "Raw Apple Pie",
+		"All of the ingredients for a good apple pie. Has yet to be cooked, though. Eating it raw would be \n"
+		"a waste.");
+	Object pantry("Pantry",
+		"You open the pantry door to take a look inside. You see an assortment of empty boxes of snack foods, ranging \n"
+		"from chips to crackers to cereal. Looking inside the boxes, you realize that not even a crumb remains. Whether \n"
+		"it was people or the rats, whoever ate these snacks was thorough. \n \n"
+		"That being said, you also see a different food item within the Pantry. There is a pie crust, filled with all of \n"
+		"the ingredients necessary for a delicious Apple Pie. It just hasn't been cooked yet. You believe that this \n"
+		"could be handy, so you take the Raw Apple Pie.",
+		true, false, 0, 2);
 	Room kitchen(2, "Kitchen", {refrigerator}, {brittleDoor}, {chickenNugget}, {});
 
 	while (true)
@@ -199,6 +210,12 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 						vector<Player> players = { player };
 						vector<Enemy> enemies = { rat };
 						fight(players, enemies, items);
+
+						cout << "The rat is now slumped against the wall, beaten. Its face contorts to one of anger and frustration." << endl;
+						cout << "The rat slams its clenched fist against the wall, making a quiet little \"thump\" before it retreats back" << endl;
+						cout << "into the hole in the wall.";
+						dblEndl();
+						cout << "Congratulations! You defended yourself and your nugget!" << endl << endl;
 						encounteredRat = true;
 					}
 					else
@@ -243,7 +260,10 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 			}
 			else
 			{
-				// NORMAL KITCHEN DESCRIPTION AND CODE
+				cout << "Looking around the kitchen once more, you realize that there is more in here than just a Refrigerator." << endl;
+				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter.";
+				dblEndl();
+				checkInput(roomNum, player, items, keys, kitchen);
 			}
 		}
 	}

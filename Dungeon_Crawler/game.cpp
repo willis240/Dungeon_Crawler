@@ -105,7 +105,7 @@ void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::v
 			if (command == player.exploreOptions[3]) //inv
 			{
 				cout << endl;
-				checkInventory(player, items, keys, room.doors);
+				checkInventory(player, items, keys, room);
 			}
 			break;
 		}
@@ -130,27 +130,30 @@ void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & ite
 		if (room.objects[i].isVisible)
 		{
 			cout << endl << room.objects[i].description << endl << endl;
-			if (room.objects[i].itemNum != 0)
+			if (!room.objects[i].hasSecret)
 			{
-				for (int ii = 0; ii < room.items.size(); ii++)
+				if (room.objects[i].itemNum != 0)
 				{
-					if (room.items[ii].num == room.objects[i].itemNum)
+					for (int ii = 0; ii < room.items.size(); ii++)
 					{
-						cout << "You grabbed the " << room.items[ii].getName() << "." << endl << endl;
-						items.push_back(room.items[ii]);
-						room.items.erase(room.items.begin() + ii);
+						if (room.items[ii].num == room.objects[i].itemNum)
+						{
+							cout << "You grabbed the " << room.items[ii].getName() << "." << endl << endl;
+							items.push_back(room.items[ii]);
+							room.items.erase(room.items.begin() + ii);
+						}
 					}
 				}
-			}
-			if (room.objects[i].keyNum != 0)
-			{
-				for (int ii = 0; ii < room.keys.size(); ii++)
+				if (room.objects[i].keyNum != 0)
 				{
-					if (room.keys[ii].getKeyNum() == room.objects[i].keyNum)
+					for (int ii = 0; ii < room.keys.size(); ii++)
 					{
-						cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
-						keys.push_back(room.keys[ii]);
-						room.keys.erase(room.keys.begin() + ii);
+						if (room.keys[ii].getKeyNum() == room.objects[i].keyNum)
+						{
+							cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
+							keys.push_back(room.keys[ii]);
+							room.keys.erase(room.keys.begin() + ii);
+						}
 					}
 				}
 			}
@@ -180,7 +183,7 @@ void enterDoor(Door& door, int & roomNum)
 	}
 }
 
-void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, vector<Door>& doors)
+void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, Room & room)
 {
 	while (true)
 	{
@@ -230,7 +233,7 @@ void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, vect
 		else if (command == "use")
 		{
 			useItems(player, items, argument);
-			useKeys(player, keys, doors, argument);
+			useKeys(player, keys, room, argument);
 			return;
 		}
 	}
@@ -253,7 +256,7 @@ void displayItems(vector<Item>& items)
 
 void displayKeys(vector<Key>& keys)
 {
-	cout << "    KEYS" << endl;
+	cout << "    KEY ITEMS" << endl;
 	if (keys.size() > 0)
 	{
 		for (int i = 0; i < keys.size(); i++)
@@ -314,7 +317,7 @@ void useItems(Player& player, vector<Item>& items, string& argument)
 	cout << endl;
 }
 
-void useKeys(Player& player, vector<Key>& keys, vector<Door>& doors, string& argument)
+void useKeys(Player& player, vector<Key>& keys, Room& room, string& argument)
 {
 	for (int i = 0; i < keys.size(); i++)
 	{
@@ -331,29 +334,29 @@ void useKeys(Player& player, vector<Key>& keys, vector<Door>& doors, string& arg
 			if (input == "back")
 				return;
 
-			for (int ii = 0; ii < doors.size(); ii++)
+			for (int ii = 0; ii < room.doors.size(); ii++)
 			{
-				if (input == doors[ii].name)
+				if (input == room.doors[ii].name)
 				{
-					if (doors[ii].isLocked)
+					if (room.doors[ii].isLocked)
 					{
-						if (keys[i].getKeyNum() == doors[ii].lockNum)
+						if (keys[i].getKeyNum() == room.doors[ii].lockNum)
 						{
-							doors[ii].isLocked = false;
-							cout << "You used the " << keys[i].name << " and unlocked the " << doors[ii].name << ".";
+							room.doors[ii].isLocked = false;
+							cout << "You used the " << keys[i].name << " and unlocked the " << room.doors[ii].name << ".";
 							dblEndl();
 							keys.erase(keys.begin() + i);
 							return;
 						}
 						else
 						{
-							cout << "Unfortunately, the " << keys[i].name << " does not fit in the " << doors[ii].name << ".";
+							cout << "Unfortunately, the " << keys[i].name << " does not fit in the " << room.doors[ii].name << ".";
 							dblEndl();
 						}
 					}
 					else
 					{
-						cout << "Actually, the " << doors[ii].name << " is already unlocked.";
+						cout << "Actually, the " << room.doors[ii].name << " is already unlocked.";
 						dblEndl();
 					}
 				}
