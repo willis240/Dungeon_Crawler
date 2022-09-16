@@ -233,7 +233,7 @@ void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, Room
 		else if (command == "use")
 		{
 			useItems(player, items, argument);
-			useKeys(player, keys, room, argument);
+			useKeys(player, items, keys, room, argument);
 			return;
 		}
 	}
@@ -317,7 +317,7 @@ void useItems(Player& player, vector<Item>& items, string& argument)
 	cout << endl;
 }
 
-void useKeys(Player& player, vector<Key>& keys, Room& room, string& argument)
+void useKeys(Player& player, vector<Item>& items, vector<Key>& keys, Room& room, string& argument)
 {
 	for (int i = 0; i < keys.size(); i++)
 	{
@@ -346,18 +346,55 @@ void useKeys(Player& player, vector<Key>& keys, Room& room, string& argument)
 							cout << "You used the " << keys[i].name << " and unlocked the " << room.doors[ii].name << ".";
 							dblEndl();
 							keys.erase(keys.begin() + i);
-							return;
 						}
 						else
 						{
 							cout << "Unfortunately, the " << keys[i].name << " does not fit in the " << room.doors[ii].name << ".";
 							dblEndl();
 						}
+						return;
 					}
 					else
 					{
 						cout << "Actually, the " << room.doors[ii].name << " is already unlocked.";
 						dblEndl();
+						return;
+					}
+				}
+			}
+			for (int ii = 0; ii < room.objects.size(); ii++)
+			{
+				if (input == room.objects[ii].getName())
+				{
+					if (room.objects[ii].hasSecret)
+					{
+						if (keys[i].getKeyNum() == room.objects[ii].answerNum)
+						{
+							room.objects[ii].hasSecret = false;
+							system("CLS");
+							cout << room.objects[ii].secretText;
+							dblEndl();
+							keys.erase(keys.begin() + i);
+							for (int iii = 0; iii < room.keys.size(); iii++)
+							{
+								if (room.keys[iii].getKeyNum() == room.objects[ii].keyNum)
+								{
+									cout << "You obtained the " << room.keys[iii].name << "." << endl << endl;
+									keys.push_back(room.keys[iii]);
+									room.keys.erase(room.keys.begin() + iii);
+								}
+							}
+							for (int iii = 0; iii < room.items.size(); iii++)
+							{
+								if (room.items[iii].num == room.objects[ii].itemNum)
+								{
+									cout << "You obtained the " << room.items[iii].getName() << "." << endl << endl;
+									items.push_back(room.items[iii]);
+									room.items.erase(room.items.begin() + iii);
+								}
+							}
+							return;
+						}
 					}
 				}
 			}

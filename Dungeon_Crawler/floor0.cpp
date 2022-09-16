@@ -69,9 +69,14 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Upon throwing open the refrigerator door, you find that there is no food left inside. Just crumbs. Great. \n"
 		"Oh, wait! There's a single chicken nugget in the very back of the second shelf down. Score!",
 		true, false, 1, 0);
-	Key rawApplePie(2, "Raw Apple Pie",
+	Key rawApplePie(3, "Raw Apple Pie",
 		"All of the ingredients for a good apple pie. Has yet to be cooked, though. Eating it raw would be \n"
 		"a waste.");
+	Item applePie("Apple Pie", 12, 12,
+		"A beautiful baked apple pie... with a hole in the center where the White Key (and your hand) used to be. \n"
+		"Hey, no one is perfect.", 2);
+	Key whiteKey(2, "White Key",
+		"Once you look past all of the pie residue, it appears to be a rather beautiful white key.");
 	Object pantry("Pantry",
 		"You open the pantry door to take a look inside. You see an assortment of empty boxes of snack foods, ranging \n"
 		"from chips to crackers to cereal. Looking inside the boxes, you realize that not even a crumb remains. Whether \n"
@@ -79,8 +84,19 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"That being said, you also see a different food item within the Pantry. There is a pie crust, filled with all of \n"
 		"the ingredients necessary for a delicious Apple Pie. It just hasn't been cooked yet. You believe that this \n"
 		"could be handy, so you take the Raw Apple Pie.",
-		true, false, 0, 2);
-	Room kitchen(2, "Kitchen", {refrigerator}, {brittleDoor}, {chickenNugget}, {});
+		true, false, 0, 3);
+	Object oven("Oven",
+		"The oven has a black door, and despite the transparent glass on the door, the inside is impossible to view \n"
+		"due to how dark it is inside. Once you open the door, however, you see a perfectly usable oven rack.",
+		true, true, 2, 2, 3,
+		"After inserting the Raw Apple Pie into the oven, you close the door and turn the oven on. You then realize \n"
+		"why you don't bake very often: it is a process that takes its sweet time. \n \n"
+		"An hour later, you pull the pie out of the oven. It looks exquisite. You simply can't help yourself. \n"
+		"You grab at the center of the pie like a freak and reel back in shock at how hot the center is. \n"
+		"Sure, the whole pie is piping hot, but the center is especially so. You reach in once more and \n"
+		"this time you yank the center of the pie out when you reel back from the pain. When you look at \n"
+		"your hand, you find a white key.");
+	Room kitchen(2, "Kitchen", {refrigerator, pantry, oven}, {brittleDoor}, {chickenNugget, applePie}, {rawApplePie, whiteKey});
 
 	while (true)
 	{
@@ -264,6 +280,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter.";
 				dblEndl();
 				checkInput(roomNum, player, items, keys, kitchen);
+				system("pause");
 			}
 		}
 	}

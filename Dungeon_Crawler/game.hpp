@@ -44,11 +44,17 @@ public:
 	bool hasSecret;
 	short int itemNum;
 	short int keyNum;
+	short int answerNum = 0;
+	std::string secretText;
 
 	std::string getName() { return name; };
 
 	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum) :
 		name(inputName), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum) {};
+
+	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum,
+		short int inputAnswerNum, std::string inputSecretText) : name(inputName), description(inputDescription), isVisible(inputIsVisible),
+		hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), secretText(inputSecretText) {};
 };
 
 class Door
@@ -100,7 +106,7 @@ void showInvHelp();
 void checkItems(std::vector<Item>& items, std::string& argument);
 void checkKeys(std::vector<Key>& keys, std::string& argument);
 void useItems(Player& player, std::vector<Item>& items, std::string& argument);
-void useKeys(Player& player, std::vector<Key>& keys, Room& room, std::string& argument);
+void useKeys(Player& player, std::vector<Item>& items, std::vector<Key>& keys, Room& room, std::string& argument);
 void explore(Player& player, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void dblEndl();
