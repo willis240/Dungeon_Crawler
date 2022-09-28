@@ -7,6 +7,8 @@ using std::endl;
 using std::cin;
 using std::string;
 using std::vector;
+using std::shared_ptr;
+using std::make_shared;
 
 void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys)
 {
@@ -18,12 +20,13 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Eating it would probably restore around 10HP, if you had to guess.");
 	Door plainDoor(std::make_pair(0, 1), "Plain Door", false,
 		"It is a simple wooden door, and it is slightly ajar. It's a good thing it's not locked.");
+	auto plainDoorPtr = make_shared<Door>(plainDoor);
 	Object nightLight("Night Light",
 		"The night light is plugged into an outlet in the wall. The lightbulb itself is in the shape of a thumbs-up. \n"
 		"Considering the fact that the night light is what allowed you to see in this small dark room in the first place, \n"
 		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\"",
 		true, false, 0, 0);
-	Room startRoom(0, "Starting Room", { nightLight }, { plainDoor }, {}, {});
+	Room startRoom(0, "Starting Room", { nightLight }, {plainDoorPtr}, {}, {});
 
 	//Room 1: The Living Room
 	bool gotBrittleKey = false;
@@ -48,6 +51,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"After you unlocked the door and opened it, it never recovered. It seems to be stuck wide open. It must have put \n"
 		"everything it had into opening one final time. The Brittle Key you inserted, likewise, does not budge. It would \n"
 		"seem that both the door and its key have finally found their eternal rest, together.");
+	auto brittleDoorPtr = make_shared<Door>(brittleDoor);
 	Door whiteDoor(std::make_pair(1, 3), "White Door", true, 2,
 		"This door is painted white, and has a sheen to it that is impossible to miss. It certainly acts as a stark contrast \n"
 		"to the Brittle Door. It looks shiny and well-maintained--polished, even--and it looks like it would still last for \n"
@@ -56,7 +60,9 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Whereas the door had looked rather intimidating with its sheer confidence when it was locked, it feels surprisingly \n"
 		"welcoming upon inserting the key. It feels like seeing a good friend for the first time in a while and having them \n"
 		"invite you into their home so you can pick up where you left off.");
-	Room livingRoom(1, "Living Room", {vase, sofa}, {plainDoor, brittleDoor, whiteDoor}, {}, {brittleKey});
+	auto whiteDoorPtr = make_shared<Door>(whiteDoor);
+	Room livingRoom(1, "Living Room", {vase, sofa}, {plainDoorPtr, brittleDoorPtr, whiteDoorPtr},
+		{}, {brittleKey});
 
 	//Room 2: The Kitchen
 	bool grabbedNugget = false;
@@ -96,7 +102,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Sure, the whole pie is piping hot, but the center is especially so. You reach in once more and \n"
 		"this time you yank the center of the pie out when you reel back from the pain. When you look at \n"
 		"your hand, you find a white key.");
-	Room kitchen(2, "Kitchen", {refrigerator, pantry, oven}, {brittleDoor}, {chickenNugget, applePie}, {rawApplePie, whiteKey});
+	Room kitchen(2, "Kitchen", {refrigerator, pantry, oven}, {brittleDoorPtr}, {chickenNugget, applePie}, {rawApplePie, whiteKey});
 
 	while (true)
 	{

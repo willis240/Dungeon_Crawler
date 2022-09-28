@@ -85,11 +85,11 @@ public:
 	std::string name;
 	int getNumber() { return number; };
 	std::vector<Object> objects{};
-	std::vector<Door> doors{};
+	std::vector<std::shared_ptr<Door>> doors{};
 	std::vector<Item> items{};
 	std::vector<Key> keys{};
 
-	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<Door> inputDoors, std::vector<Item> inputItems, std::vector<Key> inputKeys) :
+	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors, std::vector<Item> inputItems, std::vector<Key> inputKeys) :
 		number(inputNumber), name(inputName), objects(inputObjects), doors(inputDoors), items(inputItems), keys(inputKeys) {};
 };
 
