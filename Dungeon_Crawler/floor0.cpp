@@ -277,11 +277,19 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 			else
 			{
 				cout << "Looking around the kitchen once more, you realize that there is more in here than just a Refrigerator." << endl;
-				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter.";
+				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter. Lastly, there" << endl;
+				cout << "is the Brittle Door which you used to enter the kitchen in the first place.";
 				dblEndl();
 				checkInput(roomNum, player, items, keys, kitchen);
 				system("pause");
 			}
+		}
+
+		if (roomNum == 3)
+		{
+			system("CLS");
+			cout << "Wow! You got through the White Door! Nice job!" << endl;
+			system("pause");
 		}
 	}
 
