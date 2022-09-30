@@ -83,6 +83,8 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Hey, no one is perfect.", 2);
 	Key whiteKey(2, "White Key",
 		"Once you look past all of the pie residue, it appears to be a rather beautiful white key.");
+	Key ironRing(4, "Iron Ring",
+		"It is a small ring made of iron. Perhaps someone else would be better at ascertaining its worth.");
 	Object pantry("Pantry",
 		"You open the pantry door to take a look inside. You see an assortment of empty boxes of snack foods, ranging \n"
 		"from chips to crackers to cereal. Looking inside the boxes, you realize that not even a crumb remains. Whether \n"
@@ -102,7 +104,18 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"Sure, the whole pie is piping hot, but the center is especially so. You reach in once more and \n"
 		"this time you yank the center of the pie out when you reel back from the pain. When you look at \n"
 		"your hand, you find a white key.");
-	Room kitchen(2, "Kitchen", {refrigerator, pantry, oven}, {brittleDoorPtr}, {chickenNugget, applePie}, {rawApplePie, whiteKey});
+	Object cabinets("Cabinets",
+		"Rather than simply open each cabinet one by one, you zoom around the room opening each of the cabinets rapidly \n"
+		"as if you were some sort of tornado. Upon opening the last one you stand in the center of the room and gaze upon \n"
+		"all of the open cabinets. Most of them have dust and crumbs but not much else. Finding it hard to believe that \n"
+		"you wouldn't at least get SOMETHING for your efforts, you decide to scrutinize the cabinets further. \n \n"
+		"Aha! In the back corner of one of the cabinets is a small Iron Ring.",
+		true, false, 0, 4);
+	Room kitchen(2, "Kitchen", {refrigerator, pantry, oven, cabinets}, {brittleDoorPtr}, {chickenNugget, applePie},
+		{rawApplePie, whiteKey, ironRing});
+
+	//Room 3: The Fancy Room
+
 
 	while (true)
 	{
@@ -294,7 +307,13 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		if (roomNum == 3)
 		{
 			system("CLS");
-			cout << "Wow! You got through the White Door! Nice job!" << endl;
+			cout << "Upon entering the room, you find a remarkably clean environment. Everything in the room is pristine. Considering" << endl;
+			cout << "that the majority of the room is the color white, it is very impressive. There is a White Recliner facing a" << endl;
+			cout << "Fireplace that is in the center of the wall opposite the White Door. To your left is a small Bar, fitted with a" << endl;
+			cout << "high counter, bar stools, and many bottles of liquid. Lastly, there is a Tall Bookshelf which reaches the ceiling" << endl;
+			cout << "just a few feet to the left of the fireplace.";
+			dblEndl();
+			//checkInput(roomNum, player, items, keys, fancyRoom);
 			system("pause");
 		}
 	}

@@ -187,7 +187,7 @@ void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, Room
 {
 	while (true)
 	{
-		cout << "    " << player.getName() << "    HP: " << player.currentHP << " / " << player.maxHP << "    SP: " << player.currentSP << " / " << player.maxSP;
+		cout << "    " << player.getName() << "  Lv " << player.lv << "   HP: " << player.currentHP << " / " << player.maxHP << "   SP: " << player.currentSP << " / " << player.maxSP;
 		dblEndl();
 		displayItems(items);
 		displayKeys(keys);
