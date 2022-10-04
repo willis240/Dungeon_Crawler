@@ -115,7 +115,29 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		{rawApplePie, whiteKey, ironRing});
 
 	//Room 3: The Fancy Room
-
+	Object whiteRecliner("White Recliner",
+		"The entire chair is a pristine white, with no signs of stains, dirt, or dust. You could fix that. You feel the \n"
+		"seat cushion with your hand and it is soft, yet firm. Everything about this chair seems perfect. You know that \n"
+		"there has GOT to be SOMETHING wrong with this chair. You pull down the lever at the side of the chair, and watch \n"
+		"as the back of the chair lowers and the foot of the recliner kicks out. The entire process looks remarkably smooth, \n"
+		"and you can tell just by looking that it is incredibly comfortable. This recliner is entirely devoid of imperfections. \n"
+		"Dang.", true, false, 0, 0);
+	Object fireplace("Fireplace",
+		"The fireplace has a clean brick aesthetic, with a real fire burning and providing warmth to the room. You note that there \n"
+		"is a fire poker hanging on a hook to the right of the fireplace, but the fire is already burning quite well. The wood \n"
+		"inside consists of cleanly cut logs. They clearly were cut by someone who must view woodcutting as a work of art. Perhaps \n"
+		"even more interesting, though, is the fact that there is still a lot of wood in the fireplace. This fire must have been \n"
+		"started recently. That being said, you also see a Small Key lying a couple of inches in front of the fire.",
+		true, false, 0, 5);
+	Object bar("Bar",
+		"The bar counter, like much of the room, is a pristine white. The bar stools are black, and act to complement the bar's \n"
+		"aesthetic quite well. There are many bottles of beverages on some shelves lined up against the wall, most of which appear \n"
+		"to be alcoholic. Upon going behind the counter, you see that there are even more bottles beneath the counter. After grabbing \n"
+		"a couple of bottles to check them out, you find a small keyhole behind one of the bottles.",
+		true, true, 0, 0, 5,
+		"Upon inserting the Small Key into the keyhole behind the counter and turning, you hear a clicking sound from your left. You \n"
+		"turn toward the left side of the area behind the counter and watch as a section of the floor slides under the adjacent floor \n"
+		"panel, revealing a ladder leading down. You debate whether it would be a good idea to enter the Bar's Secret Passage.");
 
 	while (true)
 	{
