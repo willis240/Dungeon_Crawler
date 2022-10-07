@@ -170,16 +170,19 @@ void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & ite
 
 void enterDoor(Door& door, int & roomNum)
 {
-	if (door.isLocked)
-		cout << endl << door.lockedMessage << endl << endl;
-	else
+	if (door.isVisible)
 	{
-		cout << endl << "You entered the " << door.name << ".";
-		dblEndl();
-		if (door.getRooms().first == roomNum)
-			roomNum = door.getRooms().second;
+		if (door.isLocked)
+			cout << endl << door.lockedMessage << endl << endl;
 		else
-			roomNum = door.getRooms().first;
+		{
+			cout << endl << "You entered the " << door.name << ".";
+			dblEndl();
+			if (door.getRooms().first == roomNum)
+				roomNum = door.getRooms().second;
+			else
+				roomNum = door.getRooms().first;
+		}
 	}
 }
 
@@ -338,21 +341,24 @@ void useKeys(Player& player, vector<Item>& items, vector<Key>& keys, Room& room,
 			{
 				if (input == room.doors[ii]->name)
 				{
-					if (room.doors[ii]->isLocked)
+					if (room.doors[ii]->isVisible)
 					{
-						if (keys[i].getKeyNum() == room.doors[ii]->lockNum)
+						if (room.doors[ii]->isLocked)
 						{
-							room.doors[ii]->isLocked = false;
-							cout << "You used the " << keys[i].name << " and unlocked the " << room.doors[ii]->name << ".";
-							dblEndl();
-							keys.erase(keys.begin() + i);
+							if (keys[i].getKeyNum() == room.doors[ii]->lockNum)
+							{
+								room.doors[ii]->isLocked = false;
+								cout << "You used the " << keys[i].name << " and unlocked the " << room.doors[ii]->name << ".";
+								dblEndl();
+								keys.erase(keys.begin() + i);
+							}
+							else
+							{
+								cout << "Unfortunately, the " << keys[i].name << " does not fit in the " << room.doors[ii]->name << ".";
+								dblEndl();
+							}
+							return;
 						}
-						else
-						{
-							cout << "Unfortunately, the " << keys[i].name << " does not fit in the " << room.doors[ii]->name << ".";
-							dblEndl();
-						}
-						return;
 					}
 					else
 					{
@@ -391,6 +397,14 @@ void useKeys(Player& player, vector<Item>& items, vector<Key>& keys, Room& room,
 									cout << "You obtained the " << room.items[iii].getName() << "." << endl << endl;
 									items.push_back(room.items[iii]);
 									room.items.erase(room.items.begin() + iii);
+								}
+							}
+							if (room.objects[ii].revealsDoor != 0)
+							{
+								for (int iii = 0; iii < room.doors.size(); iii++)
+								{
+									if (room.objects[ii].revealsDoor == room.doors[iii]->lockNum)
+										room.doors[iii]->isVisible = true;
 								}
 							}
 							return;

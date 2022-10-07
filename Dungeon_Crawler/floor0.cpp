@@ -122,6 +122,9 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"as the back of the chair lowers and the foot of the recliner kicks out. The entire process looks remarkably smooth, \n"
 		"and you can tell just by looking that it is incredibly comfortable. This recliner is entirely devoid of imperfections. \n"
 		"Dang.", true, false, 0, 0);
+	Key smallKey(5, "Small Key",
+		"It is a small key, likely made of iron. It is a little odd that is here, though, as there does not appear to be any doors \n"
+		"in this room other than the White Door which you have already unlocked.");
 	Object fireplace("Fireplace",
 		"The fireplace has a clean brick aesthetic, with a real fire burning and providing warmth to the room. You note that there \n"
 		"is a fire poker hanging on a hook to the right of the fireplace, but the fire is already burning quite well. The wood \n"
@@ -134,10 +137,18 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"aesthetic quite well. There are many bottles of beverages on some shelves lined up against the wall, most of which appear \n"
 		"to be alcoholic. Upon going behind the counter, you see that there are even more bottles beneath the counter. After grabbing \n"
 		"a couple of bottles to check them out, you find a small keyhole behind one of the bottles.",
-		true, true, 0, 0, 5,
+		true, true, 0, 0, 5, 6,
 		"Upon inserting the Small Key into the keyhole behind the counter and turning, you hear a clicking sound from your left. You \n"
 		"turn toward the left side of the area behind the counter and watch as a section of the floor slides under the adjacent floor \n"
 		"panel, revealing a ladder leading down. You debate whether it would be a good idea to enter the Bar's Secret Passage.");
+	Door barSecretPassage(std::make_pair(3, 4), "Bar's Secret Passage", false, false, 6,
+		"The secret passage is a square hole in the floor, about 4 feet by 4 feet. The ladder goes down about 10 feet, to some \n"
+		"underground room. You wonder what could possibly necessitate having a secret passageway like this.");
+	auto barSecretPassagePtr = make_shared<Door>(barSecretPassage);
+	Room fancyRoom(3, "Fancy Room", { whiteRecliner, fireplace, bar }, { whiteDoorPtr, barSecretPassagePtr }, {}, { smallKey });
+
+	//Room 4: The Cell
+
 
 	while (true)
 	{
@@ -193,10 +204,6 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
 				cout << "go through the door.";
 				dblEndl();
-				player.exploreOptions.push_back("help");
-				player.exploreOptions.push_back("check");
-				player.exploreOptions.push_back("enter");
-				player.exploreOptions.push_back("inv");
 				checkInput(roomNum, player, items, keys, startRoom);
 				system("pause");
 				seeOpening = false;
@@ -329,13 +336,33 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		if (roomNum == 3)
 		{
 			system("CLS");
-			cout << "Upon entering the room, you find a remarkably clean environment. Everything in the room is pristine. Considering" << endl;
-			cout << "that the majority of the room is the color white, it is very impressive. There is a White Recliner facing a" << endl;
-			cout << "Fireplace that is in the center of the wall opposite the White Door. To your left is a small Bar, fitted with a" << endl;
-			cout << "high counter, bar stools, and many bottles of liquid. Lastly, there is a Tall Bookshelf which reaches the ceiling" << endl;
-			cout << "just a few feet to the left of the fireplace.";
+			if (!barSecretPassagePtr->isVisible)
+			{
+				cout << "Upon entering the room, you find a remarkably clean environment. Everything in the room is pristine. Considering" << endl;
+				cout << "that the majority of the room is the color white, it is very impressive. There is a White Recliner facing a" << endl;
+				cout << "Fireplace that is in the center of the wall opposite the White Door. To your left is a small Bar, fitted with a" << endl;
+				cout << "high counter, bar stools, and many bottles of liquid. Lastly, there is a Tall Bookshelf which reaches the ceiling" << endl;
+				cout << "just a few feet to the left of the Fireplace.";
+			}
+			else
+			{
+				cout << "Upon entering the room, you find a remarkably clean environment. Everything in the room is pristine. Considering" << endl;
+				cout << "that the majority of the room is the color white, it is very impressive. There is a White Recliner facing a" << endl;
+				cout << "Fireplace that is in the center of the wall opposite the White Door. To your left is a small Bar, fitted with a" << endl;
+				cout << "high counter, bar stools, and many bottles of liquid. Also worthy of note is the Bar's Secret Passage leading" << endl;
+				cout << "down below the floor. Lastly, there is a Tall Bookshelf which reaches the ceiling just a few feet to the left" << endl;
+				cout << "of the Fireplace.";
+			}
 			dblEndl();
-			//checkInput(roomNum, player, items, keys, fancyRoom);
+			checkInput(roomNum, player, items, keys, fancyRoom);
+			system("pause");
+		}
+
+		if (roomNum == 4)
+		{
+			system("CLS");
+			cout << "You made it to the Cell. Nice job!";
+			dblEndl();
 			system("pause");
 		}
 	}

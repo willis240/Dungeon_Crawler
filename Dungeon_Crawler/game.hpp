@@ -45,6 +45,7 @@ public:
 	short int itemNum;
 	short int keyNum;
 	short int answerNum = 0;
+	short int revealsDoor = 0;
 	std::string secretText;
 
 	std::string getName() { return name; };
@@ -55,6 +56,10 @@ public:
 	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum,
 		short int inputAnswerNum, std::string inputSecretText) : name(inputName), description(inputDescription), isVisible(inputIsVisible),
 		hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), secretText(inputSecretText) {};
+
+	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum,
+		short int inputAnswerNum, short int inputRevealsDoor, std::string inputSecretText) : name(inputName), description(inputDescription), isVisible(inputIsVisible),
+		hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), revealsDoor(inputRevealsDoor), secretText(inputSecretText) {};
 };
 
 class Door
@@ -64,6 +69,7 @@ private:
 public:
 	std::string name;
 	bool isLocked;
+	bool isVisible;
 	int lockNum;
 	std::string lockedMessage;
 	std::string unlockedMessage;
@@ -71,10 +77,18 @@ public:
 	std::pair<int, int> getRooms() { return rooms; };
 
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, std::string inputUnlockedMessage) :
-		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockNum(0), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
+		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(true), lockNum(0), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
 
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, int inputLockNum, std::string inputLockedMessage, std::string inputUnlockedMessage) :
-		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
+		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(true), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
+
+	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, bool inputIsVisible, int inputLockNum, std::string inputUnlockedMessage) :
+		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(inputIsVisible), lockNum(inputLockNum), 
+		unlockedMessage(inputUnlockedMessage) {};
+
+	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, bool inputIsVisible, int inputLockNum, std::string inputLockedMessage,
+		std::string inputUnlockedMessage) : rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(inputIsVisible), lockNum(inputLockNum),
+		lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
 };
 
 class Room

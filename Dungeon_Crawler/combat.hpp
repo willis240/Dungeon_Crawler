@@ -50,7 +50,7 @@ public:
 	int lv = 1;
 	int lvEXP = 20;
 	short guardDirection = -1;
-	std::vector<std::string> exploreOptions{};
+	std::vector<std::string> exploreOptions{"help", "check", "enter", "inv"};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};
 	std::vector<Skill> skills;
 
