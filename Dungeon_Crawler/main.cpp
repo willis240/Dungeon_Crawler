@@ -11,6 +11,7 @@ using std::vector;
 int main()
 {
 	Player player = startGame();
+	vector<Player> players = { player };
 	vector<Item> items{};
 	vector<Key> keys{};
 
@@ -42,6 +43,6 @@ int main()
 	victory(players, enemies);
 	*/
 
-	explore(player, floorNum, roomNum, items, keys);
+	explore(players, floorNum, roomNum, items, keys);
 
 }

@@ -10,7 +10,7 @@ using std::vector;
 using std::shared_ptr;
 using std::make_shared;
 
-void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys)
+void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys)
 {
 	//Room 0: The Starting Room
 	bool seeOpening = true;
@@ -145,10 +145,31 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 		"The secret passage is a square hole in the floor, about 4 feet by 4 feet. The ladder goes down about 10 feet, to some \n"
 		"underground room. You wonder what could possibly necessitate having a secret passageway like this.");
 	auto barSecretPassagePtr = make_shared<Door>(barSecretPassage);
-	Room fancyRoom(3, "Fancy Room", { whiteRecliner, fireplace, bar }, { whiteDoorPtr, barSecretPassagePtr }, {}, { smallKey });
+	Object tallBookshelf("Tall Bookshelf",
+		"The bookshelf stretches up to the ceiling, just about. Its shelves are all filled to the brim with books many of which \n"
+		"look quite thick. After observing the books a bit more closely, you realize that this collection is more or less an \n"
+		"assortment of classics. You recognize many of the titles, although you have probably only read a couple out of the \n"
+		"dozens that are here. \n \n"
+		"As you step away from the bookshelf you realize that there is an indentation in the carpet that makes it look like \n"
+		"this bookshelf has been moved. You step to the side of the bookshelf and start pushing. \"Holy crap\", you mutter \n"
+		"as you realize that this bookshelf will be harder to move than you realized.",
+		true, true, 0, 0, -1, 7,
+		"You stand shoulder-to-shoulder with Selena, and start counting to 3. On 3, you both put all of your weight into \n"
+		"pushing the bookshelf and manage to get it to budge! From that point on, it's smooth sailing. Together, the two \n"
+		"of you push the bookshelf several feet away from its starting position, revealing a secret staircase leading \n"
+		"upward. Huh.");
+	Room fancyRoom(3, "Fancy Room", { whiteRecliner, fireplace, bar, tallBookshelf }, { whiteDoorPtr, barSecretPassagePtr }, {}, { smallKey });
 
-	//Room 4: The Cell
-
+	//Room 4: The Cell Exterior
+	Door metalDoor(std::make_pair(4, 5), "Metal Door", false,
+		"The door seems quite sturdy, and it appears to be locked from your side via a deadbolt and a chain. You decide to \n"
+		"look through the door's barred window and see what is being kept in this secret chamber. \n \n"
+		"Inside is a young woman with long black hair. She appears to be sitting against the wall with her head in \n"
+		"her knees. Despite the fact that she likely heard you given how silent the room is otherwise, she doesn't \n"
+		"raise her head to check. You can't help but wonder what a young woman is doing locked up here. What IS this \n"
+		"place?");
+	auto metalDoorPtr = make_shared<Door>(metalDoor);
+	Room cellExterior(4, "Cell Exterior", {}, { metalDoorPtr }, {}, {});
 
 	while (true)
 	{
@@ -204,7 +225,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
 				cout << "go through the door.";
 				dblEndl();
-				checkInput(roomNum, player, items, keys, startRoom);
+				checkInput(roomNum, players, items, keys, startRoom);
 				system("pause");
 				seeOpening = false;
 			}
@@ -214,7 +235,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "Looking around, you see that the room is small and largely empty. However, there is" << endl;
 				cout << "a Night Light in the corner, as well as a Plain Door directly in front of you.";
 				dblEndl();
-				checkInput(roomNum, player, items, keys, startRoom);
+				checkInput(roomNum, players, items, keys, startRoom);
 				system("pause");
 			}
 		}
@@ -228,7 +249,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 			cout << "which you first entered this room. On top of that, there is a White Door to your right as well.";
 			dblEndl();
 
-			checkInput(roomNum, player, items, keys, livingRoom);
+			checkInput(roomNum, players, items, keys, livingRoom);
 			system("pause");
 		}
 
@@ -241,7 +262,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "rumble, your eyes immediately gravitate toward the Refrigerator directly in front of you.";
 				dblEndl();
 
-				checkInput(roomNum, player, items, keys, kitchen);
+				checkInput(roomNum, players, items, keys, kitchen);
 				system("pause");
 				for (int i = 0; i < items.size(); i++)
 				{
@@ -271,7 +292,6 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 
 						Skill ratPunch("Punch", 2, false, false, 0, "The rat jumps up and punches you in the neck");
 						Enemy rat("Rat", 10, 10, 10, { "" }, { ratPunch });
-						vector<Player> players = { player };
 						vector<Enemy> enemies = { rat };
 						fight(players, enemies, items);
 
@@ -328,7 +348,7 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter. Lastly, there" << endl;
 				cout << "is the Brittle Door which you used to enter the kitchen in the first place.";
 				dblEndl();
-				checkInput(roomNum, player, items, keys, kitchen);
+				checkInput(roomNum, players, items, keys, kitchen);
 				system("pause");
 			}
 		}
@@ -354,15 +374,34 @@ void floor0(Player& player, int& roomNum, std::vector<Item>& items, std::vector<
 				cout << "of the Fireplace.";
 			}
 			dblEndl();
-			checkInput(roomNum, player, items, keys, fancyRoom);
+			checkInput(roomNum, players, items, keys, fancyRoom);
 			system("pause");
 		}
 
 		if (roomNum == 4)
 		{
 			system("CLS");
-			cout << "You made it to the Cell. Nice job!";
+			cout << "Once you are at the bottom of the ladder, you get a much better look at the room down here. Your new surroundings" << endl;
+			cout << "are cold, both in terms of atmosphere and the actual temperature. The walls are made of black concrete, and the room" << endl;
+			cout << "is dimly lit. There is only one lightbulb in the room, and its light is weak and takes on a yellow hue. As you look" << endl;
+			cout << "around a bit more, you realize there is nothing else of note in this small room except for a Metal Door with a barred" << endl;
+			cout << "window at eye level.";
 			dblEndl();
+			checkInput(roomNum, players, items, keys, cellExterior);
+			system("pause");
+		}
+
+		if (roomNum == 5)
+		{
+			system("CLS");
+			cout << "Once you step throught the metal door, you get a better look at the room here. Like the room outside, the walls are" << endl;
+			cout << "entirely composed of black concrete, and there is one dim bulb attempting to light up the place. Like the other" << endl;
+			cout << "room, it appears largely empty and cold. There isn't much to note here other than the Metal Door you entered through.";
+			dblEndl();
+			if (players.size() < 2)
+			{
+				//Add the conversation for first meeting Selena 
+			}
 			system("pause");
 		}
 	}

@@ -30,7 +30,7 @@ Player startGame()
 	return player;
 }
 
-void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::vector<Key>& keys, Room & room)
+void checkInput(int & roomNum, std::vector<Player> & players, std::vector<Item>& items, std::vector<Key>& keys, Room & room)
 {
 	while (true)
 	{
@@ -58,18 +58,18 @@ void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::v
 			}
 		}
 
-		if (player.exploreOptions.size() > 0)
+		if (players[0].exploreOptions.size() > 0)
 		{
-			if (command == player.exploreOptions[0]) //help
+			if (command == players[0].exploreOptions[0]) //help
 			{
 				cout << endl;
-				showHelp(player);
+				showHelp(players[0]);
 				break;
 			}
 		}
-		if (player.exploreOptions.size() > 1)
+		if (players[0].exploreOptions.size() > 1)
 		{
-			if (command == player.exploreOptions[1]) //check
+			if (command == players[0].exploreOptions[1]) //check
 			{
 				for (int i = 0; i < room.objects.size(); i++)
 				{
@@ -88,9 +88,9 @@ void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::v
 				break;
 			}
 		}
-		if (player.exploreOptions.size() > 2)
+		if (players[0].exploreOptions.size() > 2)
 		{
-			if (command == player.exploreOptions[2]) //enter
+			if (command == players[0].exploreOptions[2]) //enter
 			{
 				for (int i = 0; i < room.doors.size(); i++)
 				{
@@ -100,12 +100,12 @@ void checkInput(int & roomNum, Player & player, std::vector<Item>& items, std::v
 				break;
 			}
 		}
-		if (player.exploreOptions.size() > 3)
+		if (players[0].exploreOptions.size() > 3)
 		{
-			if (command == player.exploreOptions[3]) //inv
+			if (command == players[0].exploreOptions[3]) //inv
 			{
 				cout << endl;
-				checkInventory(player, items, keys, room);
+				checkInventory(players, items, keys, room);
 			}
 			break;
 		}
@@ -186,12 +186,16 @@ void enterDoor(Door& door, int & roomNum)
 	}
 }
 
-void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, Room & room)
+void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Room & room)
 {
 	while (true)
 	{
-		cout << "    " << player.getName() << "  Lv " << player.lv << "   HP: " << player.currentHP << " / " << player.maxHP << "   SP: " << player.currentSP << " / " << player.maxSP;
-		dblEndl();
+		for (int i = 0; i < players.size(); i++)
+		{
+			cout << "    " << players[i].getName() << "  Lv " << players[i].lv << "   HP: " << players[i].currentHP << " / " << players[i].maxHP;
+			cout << "   SP: " << players[i].currentSP << " / " << players[i].maxSP << endl;
+		}
+		cout << endl;
 		displayItems(items);
 		displayKeys(keys);
 
@@ -235,8 +239,8 @@ void checkInventory(Player& player, vector<Item>& items, vector<Key>& keys, Room
 		}
 		else if (command == "use")
 		{
-			useItems(player, items, argument);
-			useKeys(player, items, keys, room, argument);
+			useItems(players, items, argument);
+			useKeys(players, items, keys, room, argument);
 			return;
 		}
 	}
@@ -300,27 +304,45 @@ void checkKeys(vector<Key>& keys, string& argument)
 	}
 }
 
-void useItems(Player& player, vector<Item>& items, string& argument)
+void useItems(vector<Player>& players, vector<Item>& items, string& argument)
 {
 	for (int i = 0; i < items.size(); i++)
 	{
 		if (argument == items[i].getName())
 		{
-			int beforeHP = player.currentHP;
-			int beforeSP = player.currentSP;
-			player.restoreHP(items[i].restoredHP);
-			player.restoreSP(items[i].restoredSP);
-			cout << endl;
-			cout << player.getName() << " used " << items[i].getName() << "!" << endl;
-			cout << player.getName() << " restored " << (player.currentHP - beforeHP) << " HP and " << (player.currentSP - beforeSP) << " SP!" << endl;
-			items.erase(items.begin() + i);
-			return;
+			cout << "Use " << items[i].getName() << " on who?";
+			dblEndl();
+			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+			dblEndl();
+
+			string input;
+			getline(cin, input);
+
+			if (input == "back")
+				return;
+
+			for (int ii = 0; ii < players.size(); ii++)
+			{
+				if (input == players[ii].getName())
+				{
+					int beforeHP = players[ii].currentHP;
+					int beforeSP = players[ii].currentSP;
+					players[ii].restoreHP(items[i].restoredHP);
+					players[ii].restoreSP(items[i].restoredSP);
+					cout << endl;
+					cout << players[ii].getName() << " used " << items[i].getName() << "!" << endl;
+					cout << players[ii].getName() << " restored " << (players[ii].currentHP - beforeHP) << " HP and ";
+					cout << (players[ii].currentSP - beforeSP) << " SP!" << endl;
+					items.erase(items.begin() + i);
+					return;
+				}
+			}
 		}
 	}
 	cout << endl;
 }
 
-void useKeys(Player& player, vector<Item>& items, vector<Key>& keys, Room& room, string& argument)
+void useKeys(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Room& room, string& argument)
 {
 	for (int i = 0; i < keys.size(); i++)
 	{
@@ -438,13 +460,13 @@ int getDecision(const int minChoice, const int maxChoice)
 	}
 }
 
-void explore(Player& player, int& floor, int& roomNum, vector<Item>& items, vector<Key>& keys)
+void explore(vector<Player>& players, int& floor, int& roomNum, vector<Item>& items, vector<Key>& keys)
 {
 	while (true)
 	{
 		if (floor == 0)
 		{
-			floor0(player, roomNum, items, keys);
+			floor0(players, roomNum, items, keys);
 		}
 	}
 }
