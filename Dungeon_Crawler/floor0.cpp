@@ -169,7 +169,11 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 		"raise her head to check. You can't help but wonder what a young woman is doing locked up here. What IS this \n"
 		"place?");
 	auto metalDoorPtr = make_shared<Door>(metalDoor);
-	Room cellExterior(4, "Cell Exterior", {}, { metalDoorPtr }, {}, {});
+	Room cellExterior(4, "Cell Exterior", {}, { barSecretPassagePtr, metalDoorPtr }, {}, {});
+
+	//Room 5: The Cell Interior
+	Player Selena("Selena", 7, 8, {});
+	Room cellInterior(5, "Cell Interior", {}, { metalDoorPtr }, {}, {});
 
 	while (true)
 	{
@@ -383,9 +387,9 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 			system("CLS");
 			cout << "Once you are at the bottom of the ladder, you get a much better look at the room down here. Your new surroundings" << endl;
 			cout << "are cold, both in terms of atmosphere and the actual temperature. The walls are made of black concrete, and the room" << endl;
-			cout << "is dimly lit. There is only one lightbulb in the room, and its light is weak and takes on a yellow hue. As you look" << endl;
-			cout << "around a bit more, you realize there is nothing else of note in this small room except for a Metal Door with a barred" << endl;
-			cout << "window at eye level.";
+			cout << "is dimly lit, with hardly any light coming through the Bar's Secret Passage. There is only one lightbulb in the room," << endl;
+			cout << "and its light is weak and takes on a yellow hue. As you look around a bit more, you realize there is nothing else of" << endl;
+			cout << "note in this small room except for a Metal Door with a barred window at eye level.";
 			dblEndl();
 			checkInput(roomNum, players, items, keys, cellExterior);
 			system("pause");
@@ -394,14 +398,134 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 		if (roomNum == 5)
 		{
 			system("CLS");
-			cout << "Once you step throught the metal door, you get a better look at the room here. Like the room outside, the walls are" << endl;
+			cout << "From right in front of the metal door, you get a better look at the room here. Like the room outside, the walls are" << endl;
 			cout << "entirely composed of black concrete, and there is one dim bulb attempting to light up the place. Like the other" << endl;
 			cout << "room, it appears largely empty and cold. There isn't much to note here other than the Metal Door you entered through.";
 			dblEndl();
 			if (players.size() < 2)
 			{
-				//Add the conversation for first meeting Selena 
+				cout << "Well, that and the young woman sitting against the wall with her head in her knees.";
+				dblEndl();
+				system("pause");
+
+				system("CLS");
+				cout << "Now that you are in the cell, the woman looks up from her knees. While her eyes initially look exhausted," << endl;
+				cout << "they widen considerably once she sees you, and the door you left wide open. ";
+				dblEndl();
+				cout << "\"W-who are you? I've never seen you before.\"";
+				dblEndl();
+				cout << "(1) \"My name is " << players[0].getName() << ". I just woke up here, like, 15 minutes ago. I don't know where I am.\"" << endl;
+				cout << "(2) \"Why don't you introduce yourself first?\"" << endl;
+				cout << "(3) \"I'm your worst nightmare.\"";
+				dblEndl();
+				int input = getDecision(1, 3);
+
+				if (input == 1)
+				{
+					cout << "\"You don't know where you are either? This could be perfect! Oh, uh, right! My name is Selena. Some man" << endl;
+					cout << "has me locked up in this cell, but I don't know how I got here. You want to get out of here, too, right?" << endl;
+					cout << "Two people are better than one! How about it?\"";
+					dblEndl();
+					cout << "A small smile forms on Selena's face, and her pupils enlarge as she stares directly at you, waiting for" << endl;
+					cout << "for your response.";
+					dblEndl();
+					cout << "(1) \"Yeah, that sounds great! Having a partner would make things a lot easier.\"" << endl;
+					cout << "(2) \"Alright! I don't even remember the last time I spoke to a girl!\"" << endl;
+					cout << "(3) \"Not in a million years.\"";
+					dblEndl();
+					int input2 = getDecision(1, 3);
+
+					if (input2 == 1)
+					{
+
+					}
+					else if (input2 == 2)
+					{
+
+					}
+					else if (input2 == 3)
+					{
+
+					}
+				}
+				else if (input == 2)
+				{
+					cout << "\"O-okay. My name is Selena. I just woke up in this cell one day and I have no idea how I got here." << endl;
+					cout << "You don't work here, do you? You're not with that man?";
+					dblEndl();
+					cout << "A puzzled look forms on your face as you wonder what she meant by \"that man\". Selena seems to catch on" << endl;
+					cout << "to your confused expression.";
+					dblEndl();
+					cout << "\"He comes in here and checks on me every now and again. Sometimes he brings food, other times he just talks" << endl;
+					cout << "and talks and expects me to listen. He's the only person I've seen since I've arrived here, until now.\"";
+					dblEndl();
+					cout << "(1) \"My name is " << players[0].getName() << ". I also don't know where I am.\"" << endl;
+					cout << "(2) \"Well, this is your lucky day. The name's " << players[0].getName() << ". Let's get out of here." << endl;
+					cout << "(3) \"Hey, free food is nothing to shake a stick at. Sounds like you've got a sweet gig going here.\"";
+					dblEndl();
+					int input2 = getDecision(1, 3);
+
+					if (input2 == 1)
+					{
+
+					}
+					else if (input2 == 2)
+					{
+
+					}
+					else if (input2 == 3)
+					{
+
+					}
+				}
+				else if (input == 3)
+				{
+					cout << "The woman freezes for a second before her face shifts to one of bewilderment.";
+					dblEndl();
+					cout << "\"Who introduces themselves like that?\"";
+					dblEndl();
+					cout << "\"I do, apparently.\"";
+					dblEndl();
+					cout << "The woman seems to contemplate something for a solid 15 seconds before she sighs and begins to speak again.";
+					dblEndl();
+					cout << "\"...Do you want to get out of here like I do? Mathematically, we would be more likely to escape if we worked" << endl;
+					cout << "together.\"";
+					dblEndl();
+					cout << "(1) \"Sure, but how did you know I would want to get out of here?\"" << endl;
+					cout << "(2) \"Yeah, that sounds wise.\"" << endl;
+					cout << "(3) \"Nah, I'm more the lone wolf type.\"";
+					dblEndl();
+					int input2 = getDecision(1, 3);
+
+					if (input2 == 1)
+					{
+						cout << "\"I've only seen one other person here, and I don't see an associate of his having your... sense of humor. \"";
+						dblEndl();
+						cout << "\"You've seen another person? Why didn't you team up with them?\"";
+						dblEndl();
+						cout << "\"He is the one who has kept me fed. I do not know why he seems to want me in this cell, but yeah, he " << endl;
+						cout << "isn't exactly a good candidate for a partner.\"";
+						dblEndl();
+						cout << "You nod your head. \"I guess that makes sense. Let's get out of here, then. My name is " << players[0].getName();
+						cout << ", by the way. Not Your Nightmare.\"";
+						dblEndl();
+						cout << "\"Ah, is that so? And here you had almost had me.\" The woman lets out a small grin. \"My name's Selena.\"";
+						dblEndl();
+						cout << "She holds out her hand. You reach out and give it a good shake. Here's hoping this partnership goes well.";
+						dblEndl();
+						players.push_back(Selena);
+					}
+					else if (input2 == 2)
+					{
+
+					}
+					else if (input2 == 3)
+					{
+
+					}
+				}
 			}
+			checkInput(roomNum, players, items, keys, cellInterior);
 			system("pause");
 		}
 	}

@@ -161,10 +161,13 @@ void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & ite
 	}
 	else
 	{
-		if (room.doors[i]->isLocked)
-			cout << endl << room.doors[i]->lockedMessage << endl << endl;
-		else
-			cout << endl << room.doors[i]->unlockedMessage << endl << endl;
+		if (room.doors[i]->isVisible)
+		{
+			if (room.doors[i]->isLocked)
+				cout << endl << room.doors[i]->lockedMessage << endl << endl;
+			else
+				cout << endl << room.doors[i]->unlockedMessage << endl << endl;
+		}
 	}
 }
 
