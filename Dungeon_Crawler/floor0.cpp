@@ -529,5 +529,4 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 			system("pause");
 		}
 	}
-
 }

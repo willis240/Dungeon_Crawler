@@ -121,6 +121,7 @@ void checkItems(std::vector<Item>& items, std::string& argument);
 void checkKeys(std::vector<Key>& keys, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void useKeys(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys, Room& room, std::string& argument);
+void teamUp(int& i, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void floor0(std::vector<Player>& players, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void dblEndl();

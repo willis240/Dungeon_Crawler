@@ -109,17 +109,31 @@ void checkInput(int & roomNum, std::vector<Player> & players, std::vector<Item>&
 			}
 			break;
 		}
+		if (players[0].exploreOptions.size() > 4)
+		{
+			if (command == players[0].exploreOptions[4]) //team up
+			{
+				for (int i = 0; i < room.objects.size(); i++)
+				{
+					if(argument == room.objects[i].getName())
+						teamUp(i, items, keys, room);
+				}
+				break;
+			}
+		}
 	}
 }
 
 void showHelp(Player & player)
 {
 	if(player.exploreOptions.size() > 1)
-		cout << "check (object) -- observe an object more closely" << endl;
+		cout << "check (object)   -- observe an object more closely" << endl;
 	if (player.exploreOptions.size() > 2)
-		cout << "enter (door)   -- proceed through the specified door" << endl;
+		cout << "enter (door)     -- proceed through the specified door" << endl;
 	if (player.exploreOptions.size() > 3)
-		cout << "inv            -- view your inventory and use items" << endl;
+		cout << "inv              -- view your inventory and use items" << endl;
+	if (player.exploreOptions.size() > 4)
+		cout << "team up (object) -- team up with your party members to find secrets" << endl;
 	cout << endl;
 }
 
@@ -434,6 +448,54 @@ void useKeys(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Ro
 							}
 							return;
 						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void teamUp(int & i, vector<Item>& items, vector<Key>& keys, Room& room)
+{
+	if (room.objects[i].answerNum == -1)
+	{
+		if (room.objects[i].revealsDoor != 0)
+		{
+			for (int ii = 0; ii < room.doors.size(); ii++)
+			{
+				if (room.doors[ii]->lockNum == room.objects[i].revealsDoor)
+				{
+					cout << room.objects[i].secretText;
+					dblEndl();
+					room.doors[ii]->isVisible = true;
+				}
+			}
+		}
+		if (room.objects[i].hasSecret)
+		{
+			cout << room.objects[i].secretText;
+			dblEndl();
+			if (room.objects[i].itemNum != 0)
+			{
+				for (int ii = 0; ii < room.keys.size(); ii++)
+				{
+					if (room.keys[ii].getKeyNum() == room.objects[i].keyNum)
+					{
+						cout << "You obtained the " << room.keys[ii].name << "." << endl << endl;
+						keys.push_back(room.keys[ii]);
+						room.keys.erase(room.keys.begin() + ii);
+					}
+				}
+			}
+			if (room.objects[i].keyNum != 0)
+			{
+				for (int ii = 0; ii < room.items.size(); ii++)
+				{
+					if (room.items[ii].num == room.objects[i].itemNum)
+					{
+						cout << "You obtained the " << room.items[ii].getName() << "." << endl << endl;
+						items.push_back(room.items[ii]);
+						room.items.erase(room.items.begin() + ii);
 					}
 				}
 			}
