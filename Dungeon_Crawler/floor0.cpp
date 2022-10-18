@@ -437,7 +437,19 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 
 					if (input2 == 1)
 					{
-
+						cout << "\"Yes! Okay! Come on, let's get out of here!\"";
+						dblEndl();
+						cout << "Selena jumps up from her spot on the floor with a hopeful smile on her face. She walks over to you" << endl;
+						cout << "and shakes your hand. You look her in her brown eyes as she looks back at you.";
+						dblEndl();
+						cout << "\"I am not too experienced in a fight, but I have a lot of practice with a rapier from my time" << endl;
+						cout << "taking some fencing classes for the last few years. If we find something I could use to stab things,\"" << endl;
+						cout << "her eyes widen and she holds out her hands as she realizes what she just said, \"purely for self-defense," << endl;
+						cout << "then I would feel a lot better about our chances should things take a turn for the worse.\"";
+						dblEndl();
+						cout << "\"Alright, I think I may have seen something like that nearby...\"";
+						dblEndl();
+						players.push_back(Selena);
 					}
 					else if (input2 == 2)
 					{

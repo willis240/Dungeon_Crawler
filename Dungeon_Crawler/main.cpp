@@ -16,7 +16,7 @@ int main()
 	vector<Key> keys{};
 
 	int floorNum = 0;
-	int roomNum = 0;
+	int roomNum = 5;
 
 	//CODE FOR TESTING COMBAT
 	/*

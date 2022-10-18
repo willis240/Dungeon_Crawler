@@ -207,10 +207,19 @@ void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& k
 {
 	while (true)
 	{
+		int spacing = 0;
 		for (int i = 0; i < players.size(); i++)
 		{
-			cout << "    " << players[i].getName() << "  Lv " << players[i].lv << "   HP: " << players[i].currentHP << " / " << players[i].maxHP;
-			cout << "   SP: " << players[i].currentSP << " / " << players[i].maxSP << endl;
+			cout << players[i].getName();
+			spacing = players[i].getName().size();
+			displaySpacing(spacing, 10);
+			cout << "HP: " << players[i].currentHP << " / " << players[i].maxHP;
+			spacing = findDigits(players[i].currentHP);
+			spacing += 6;
+			spacing += findDigits(players[i].maxHP);
+			displaySpacing(spacing, 13);
+			cout << "SP: " << players[i].currentSP << " / " << players[i].maxSP << "    ";
+			cout << endl;
 		}
 		cout << endl;
 		displayItems(items);
