@@ -13,12 +13,22 @@ public:
 	std::string description;
 	short int num;
 	std::string getName() { return name; };
+	bool purposeKnown;
+	short int personWithExpertise;
+	std::string expertiseDescription;
 
 	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription) :
-		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(0) {};
+		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(0),
+		purposeKnown(true), personWithExpertise(0) {};
 
 	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription, short int inputNum) :
-		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum) {};
+		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum),
+		purposeKnown(true), personWithExpertise(0) {};
+
+	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription, short int inputNum,
+		bool inputPurposeKnown, short int inputPersonWithExpertise, std::string inputExpertiseDescription) : name(inputName),
+		restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum),
+		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 };
 
 class Key
@@ -29,9 +39,16 @@ public:
 	std::string name;
 	std::string description;
 	int getKeyNum() { return keyNum; };
+	bool purposeKnown;
+	short int personWithExpertise;
+	std::string expertiseDescription;
 	
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
 		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
+
+	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, short int inputPersonWithExpertise,
+		std::string inputExpertiseDescription) : keyNum(inputKeyNum), name(inputName), description(inputDescription), purposeKnown(inputPurposeKnown),
+		personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 };
 
 class Object
@@ -116,11 +133,13 @@ void enterDoor(Door& door, int & roomNum);
 void checkInventory(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
 void displayItems(std::vector<Item>& items);
 void displayKeys(std::vector<Key>& keys);
-void showInvHelp();
+void showInvHelp(std::vector<Player>& players);
 void checkItems(std::vector<Item>& items, std::string& argument);
 void checkKeys(std::vector<Key>& keys, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void useKeys(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys, Room& room, std::string& argument);
+void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
+void showKeys(std::vector<Player>& players, std::vector<Key>& keys, std::string& argument);
 void teamUp(int& i, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
 void floor0(std::vector<Player>& players, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);

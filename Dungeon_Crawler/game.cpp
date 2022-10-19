@@ -256,18 +256,28 @@ void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& k
 			break;
 
 		if (command == "help")
-			showInvHelp();
+			showInvHelp(players);
 
 		if (command == "check")
 		{
 			checkItems(items, argument);
 			checkKeys(keys, argument);
 		}
-		else if (command == "use")
+		
+		if (command == "use")
 		{
 			useItems(players, items, argument);
 			useKeys(players, items, keys, room, argument);
 			return;
+		}
+
+		if (players.size() > 1)
+		{
+			if (command == "show")
+			{
+				showItems(players, items, argument);
+				//showKeys(players, keys, argument);
+			}
 		}
 	}
 }
@@ -302,12 +312,14 @@ void displayKeys(vector<Key>& keys)
 	dblEndl();
 }
 
-void showInvHelp()
+void showInvHelp(vector<Player>& players)
 {
 	cout << endl;
 	cout << "check (item/key) -- observe the item or key more closely" << endl;
 	cout << "use (item)       -- use an item to restore your vitals to their former glory" << endl;
 	cout << "use (key)        -- use a key item to open the path forward" << endl;
+	if (players.size() > 1)
+		cout << "show (item/key)  -- show the item or key to a party member so they may identify it" << endl;
 	cout << "back             -- exit your inventory to continue your exploration" << endl;
 	cout << endl;
 }
@@ -336,32 +348,40 @@ void useItems(vector<Player>& players, vector<Item>& items, string& argument)
 	{
 		if (argument == items[i].getName())
 		{
-			cout << "Use " << items[i].getName() << " on who?";
-			dblEndl();
-			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
-			dblEndl();
-
-			string input;
-			getline(cin, input);
-
-			if (input == "back")
-				return;
-
-			for (int ii = 0; ii < players.size(); ii++)
+			if (items[i].purposeKnown)
 			{
-				if (input == players[ii].getName())
-				{
-					int beforeHP = players[ii].currentHP;
-					int beforeSP = players[ii].currentSP;
-					players[ii].restoreHP(items[i].restoredHP);
-					players[ii].restoreSP(items[i].restoredSP);
-					cout << endl;
-					cout << players[ii].getName() << " used " << items[i].getName() << "!" << endl;
-					cout << players[ii].getName() << " restored " << (players[ii].currentHP - beforeHP) << " HP and ";
-					cout << (players[ii].currentSP - beforeSP) << " SP!" << endl;
-					items.erase(items.begin() + i);
+				cout << "Use " << items[i].getName() << " on who?";
+				dblEndl();
+				cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+				dblEndl();
+
+				string input;
+				getline(cin, input);
+
+				if (input == "back")
 					return;
+
+				for (int ii = 0; ii < players.size(); ii++)
+				{
+					if (input == players[ii].getName())
+					{
+						int beforeHP = players[ii].currentHP;
+						int beforeSP = players[ii].currentSP;
+						players[ii].restoreHP(items[i].restoredHP);
+						players[ii].restoreSP(items[i].restoredSP);
+						cout << endl;
+						cout << players[ii].getName() << " used " << items[i].getName() << "!" << endl;
+						cout << players[ii].getName() << " restored " << (players[ii].currentHP - beforeHP) << " HP and ";
+						cout << (players[ii].currentSP - beforeSP) << " SP!" << endl;
+						items.erase(items.begin() + i);
+						return;
+					}
 				}
+			}
+			else
+			{
+				cout << "You do not know how to use this item, so you figure it would be best not" << endl;
+				cout << "to try or else you may waste it." << endl;
 			}
 		}
 	}
@@ -457,6 +477,47 @@ void useKeys(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Ro
 							}
 							return;
 						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void showItems(vector<Player>& players, vector<Item>& items, string& argument)
+{
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (argument == items[i].getName())
+		{
+			cout << "Show " << items[i].getName() << " to who?";
+			dblEndl();
+			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+			dblEndl();
+
+			string input;
+			getline(cin, input);
+			cout << endl;
+
+			if (input == "back")
+				return;
+
+			for (int ii = 0; ii < players.size(); ii++)
+			{
+				if (input == players[ii].getName())
+				{
+					if (ii == items[i].personWithExpertise)
+					{
+						cout << items[i].expertiseDescription;
+						dblEndl();
+						items[i].purposeKnown = true;
+						return;
+					}
+					else
+					{
+						cout << players[ii].getName() << " turns to you and says, \"I don't know what you want me to do with this.\"";
+						dblEndl();
+						return;
 					}
 				}
 			}
