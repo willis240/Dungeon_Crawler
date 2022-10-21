@@ -10,7 +10,7 @@ using std::vector;
 using std::shared_ptr;
 using std::make_shared;
 
-void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys)
+void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<Key>& keys, vector<Accessory>& accessories)
 {
 	//Room 0: The Starting Room
 	bool seeOpening = true;
@@ -229,7 +229,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 				cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
 				cout << "go through the door.";
 				dblEndl();
-				checkInput(roomNum, players, items, keys, startRoom);
+				checkInput(roomNum, players, items, keys, accessories, startRoom);
 				system("pause");
 				seeOpening = false;
 			}
@@ -239,7 +239,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 				cout << "Looking around, you see that the room is small and largely empty. However, there is" << endl;
 				cout << "a Night Light in the corner, as well as a Plain Door directly in front of you.";
 				dblEndl();
-				checkInput(roomNum, players, items, keys, startRoom);
+				checkInput(roomNum, players, items, keys, accessories, startRoom);
 				system("pause");
 			}
 		}
@@ -253,7 +253,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 			cout << "which you first entered this room. On top of that, there is a White Door to your right as well.";
 			dblEndl();
 
-			checkInput(roomNum, players, items, keys, livingRoom);
+			checkInput(roomNum, players, items, keys, accessories, livingRoom);
 			system("pause");
 		}
 
@@ -266,7 +266,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 				cout << "rumble, your eyes immediately gravitate toward the Refrigerator directly in front of you.";
 				dblEndl();
 
-				checkInput(roomNum, players, items, keys, kitchen);
+				checkInput(roomNum, players, items, keys, accessories, kitchen);
 				system("pause");
 				for (int i = 0; i < items.size(); i++)
 				{
@@ -352,7 +352,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter. Lastly, there" << endl;
 				cout << "is the Brittle Door which you used to enter the kitchen in the first place.";
 				dblEndl();
-				checkInput(roomNum, players, items, keys, kitchen);
+				checkInput(roomNum, players, items, keys, accessories, kitchen);
 				system("pause");
 			}
 		}
@@ -378,7 +378,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 				cout << "of the Fireplace.";
 			}
 			dblEndl();
-			checkInput(roomNum, players, items, keys, fancyRoom);
+			checkInput(roomNum, players, items, keys, accessories, fancyRoom);
 			system("pause");
 		}
 
@@ -391,7 +391,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 			cout << "and its light is weak and takes on a yellow hue. As you look around a bit more, you realize there is nothing else of" << endl;
 			cout << "note in this small room except for a Metal Door with a barred window at eye level.";
 			dblEndl();
-			checkInput(roomNum, players, items, keys, cellExterior);
+			checkInput(roomNum, players, items, keys, accessories, cellExterior);
 			system("pause");
 		}
 
@@ -537,7 +537,7 @@ void floor0(vector<Player>& players, int& roomNum, std::vector<Item>& items, std
 					}
 				}
 			}
-			checkInput(roomNum, players, items, keys, cellInterior);
+			checkInput(roomNum, players, items, keys, accessories, cellInterior);
 			system("pause");
 		}
 	}

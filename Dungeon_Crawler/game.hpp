@@ -39,9 +39,10 @@ public:
 	std::string name;
 	std::string description;
 	int getKeyNum() { return keyNum; };
-	bool purposeKnown;
-	short int personWithExpertise;
-	std::string expertiseDescription;
+	bool purposeKnown = true;
+	short int personWithExpertise = 0;
+	std::string expertiseDescription = "";
+	bool actuallyAccessory = false;
 	
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
 		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
@@ -49,6 +50,32 @@ public:
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, short int inputPersonWithExpertise,
 		std::string inputExpertiseDescription) : keyNum(inputKeyNum), name(inputName), description(inputDescription), purposeKnown(inputPurposeKnown),
 		personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
+
+	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, short int inputPersonWithExpertise,
+		std::string inputExpertiseDescription, bool inputActuallyAccessory) : keyNum(inputKeyNum), name(inputName), description(inputDescription),
+		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription),
+		actuallyAccessory(inputActuallyAccessory) {};
+};
+
+class Accessory
+{
+private:
+	std::string name;
+public:
+	std::string description;
+	std::string getName() { return name; };
+	int HP;
+	int SP;
+	int str;
+	int keyNum = 0;
+	bool beenDiscovered = true;
+
+	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
+		name(inputName), description(inputDescription), HP(inputHP), SP(inputSP), str(inputStr) {};
+
+	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr,
+		int inputKeyNum, bool inputBeenDiscovered) : name(inputName), description(inputDescription), HP(inputHP),
+		SP(inputSP), str(inputStr), keyNum(inputKeyNum), beenDiscovered(inputBeenDiscovered) {};
 };
 
 class Object
@@ -126,13 +153,16 @@ public:
 
 Player startGame();
 int getDecision(const int minChoice, const int maxChoice);
-void checkInput(int & roomNum, std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
+void checkInput(int & roomNum, std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys,
+	std::vector<Accessory>& accessories, Room& room);
 void showHelp(Player& player);
 void checkArgument(int & i, const bool & isDoor, Room & room, std::vector<Item> & items, std::vector<Key> & keys);
 void enterDoor(Door& door, int & roomNum);
-void checkInventory(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
+void checkInventory(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys,
+	std::vector<Accessory>& accessories, Room& room);
 void displayItems(std::vector<Item>& items);
 void displayKeys(std::vector<Key>& keys);
+void displayAccessories(std::vector<Accessory>& accessories);
 void showInvHelp(std::vector<Player>& players);
 void checkItems(std::vector<Item>& items, std::string& argument);
 void checkKeys(std::vector<Key>& keys, std::string& argument);
@@ -141,8 +171,10 @@ void useKeys(std::vector<Player>& players, std::vector<Item>& items, std::vector
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showKeys(std::vector<Player>& players, std::vector<Key>& keys, std::string& argument);
 void teamUp(int& i, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
-void explore(std::vector<Player>& players, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
-void floor0(std::vector<Player>& players, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys);
+void explore(std::vector<Player>& players, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys,
+	std::vector<Accessory>& accessories);
+void floor0(std::vector<Player>& players, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys,
+	std::vector<Accessory>& accessories);
 void dblEndl();
 
 //Function Definitions found in combat.cpp

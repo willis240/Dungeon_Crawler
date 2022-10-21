@@ -14,9 +14,14 @@ int main()
 	vector<Player> players = { player };
 	vector<Item> items{};
 	vector<Key> keys{};
+	vector<Accessory> accessories{};
 
 	int floorNum = 0;
 	int roomNum = 0;
+
+	//CODE FOR TESTING ACCESSORIES
+	//Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
+	//accessories.push_back(placeholder);
 
 	//CODE FOR TESTING COMBAT
 	/*
@@ -43,6 +48,6 @@ int main()
 	victory(players, enemies);
 	*/
 
-	explore(players, floorNum, roomNum, items, keys);
+	explore(players, floorNum, roomNum, items, keys, accessories);
 
 }
