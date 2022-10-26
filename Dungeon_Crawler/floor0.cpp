@@ -26,7 +26,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"Considering the fact that the night light is what allowed you to see in this small dark room in the first place, \n"
 		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\"",
 		true, false, 0, 0);
-	Room startRoom(0, "Starting Room", { nightLight }, {plainDoorPtr}, {}, {});
+	Room startRoom(0, "Starting Room", { nightLight }, { plainDoorPtr }, {}, {});
 
 	//Room 1: The Living Room
 	bool gotBrittleKey = false;
@@ -44,7 +44,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"a lot of dust on them. You wouldn't dare sit on this dusty sofa--what if it made your butt look all dusty? You'd \n"
 		"be patting it off for the rest of your days.",
 		true, false, 0, 0);
-	Door brittleDoor(std::make_pair(1, 2), "Brittle Door", true, 1, 
+	Door brittleDoor(std::make_pair(1, 2), "Brittle Door", true, 1,
 		"It is undoubtedly an old and well-loved door--as long as \"well-loved\" means that it has been used many, many \n"
 		"times over several decades without any maintenance. Nevertheless, the door is locked, and stands between you \n"
 		"and the room that lies behind it. It may be close to retirement, but it still proudly stands and performs its duty.",
@@ -61,8 +61,8 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"welcoming upon inserting the key. It feels like seeing a good friend for the first time in a while and having them \n"
 		"invite you into their home so you can pick up where you left off.");
 	auto whiteDoorPtr = make_shared<Door>(whiteDoor);
-	Room livingRoom(1, "Living Room", {vase, sofa}, {plainDoorPtr, brittleDoorPtr, whiteDoorPtr},
-		{}, {brittleKey});
+	Room livingRoom(1, "Living Room", { vase, sofa }, { plainDoorPtr, brittleDoorPtr, whiteDoorPtr },
+		{}, { brittleKey });
 
 	//Room 2: The Kitchen
 	bool grabbedNugget = false;
@@ -111,8 +111,8 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"you wouldn't at least get SOMETHING for your efforts, you decide to scrutinize the cabinets further. \n \n"
 		"Aha! In the back corner of one of the cabinets is a small Iron Ring.",
 		true, false, 0, 4);
-	Room kitchen(2, "Kitchen", {refrigerator, pantry, oven, cabinets}, {brittleDoorPtr}, {chickenNugget, applePie},
-		{rawApplePie, whiteKey, ironRing});
+	Room kitchen(2, "Kitchen", { refrigerator, pantry, oven, cabinets }, { brittleDoorPtr }, { chickenNugget, applePie },
+		{ rawApplePie, whiteKey, ironRing });
 
 	//Room 3: The Fancy Room
 	Object whiteRecliner("White Recliner",
@@ -158,7 +158,11 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"pushing the bookshelf and manage to get it to budge! From that point on, it's smooth sailing. Together, the two \n"
 		"of you push the bookshelf several feet away from its starting position, revealing a secret staircase leading \n"
 		"upward. Huh.");
-	Room fancyRoom(3, "Fancy Room", { whiteRecliner, fireplace, bar, tallBookshelf }, { whiteDoorPtr, barSecretPassagePtr }, {}, { smallKey });
+	Door bookshelfPassage(std::make_pair(3, 6), "Bookshelf Passage", false, false, 7,
+		"It is a secret passage which was hidden behind the bookshelf. The passage has a staircase leading upwards, \n"
+		"undoubtedly heading to the next floor.");
+	auto bookshelfPassagePtr = make_shared<Door>(bookshelfPassage);
+	Room fancyRoom(3, "Fancy Room", { whiteRecliner, fireplace, bar, tallBookshelf }, { whiteDoorPtr, barSecretPassagePtr, bookshelfPassagePtr }, {}, { smallKey });
 
 	//Room 4: The Cell Exterior
 	Door metalDoor(std::make_pair(4, 5), "Metal Door", false,
@@ -368,7 +372,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 				cout << "high counter, bar stools, and many bottles of liquid. Lastly, there is a Tall Bookshelf which reaches the ceiling" << endl;
 				cout << "just a few feet to the left of the Fireplace.";
 			}
-			else
+			else if (barSecretPassagePtr->isVisible && !bookshelfPassagePtr->isVisible)
 			{
 				cout << "Upon entering the room, you find a remarkably clean environment. Everything in the room is pristine. Considering" << endl;
 				cout << "that the majority of the room is the color white, it is very impressive. There is a White Recliner facing a" << endl;
@@ -377,7 +381,42 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 				cout << "down below the floor. Lastly, there is a Tall Bookshelf which reaches the ceiling just a few feet to the left" << endl;
 				cout << "of the Fireplace.";
 			}
+			else
+			{
+				cout << "Upon entering the room, you find a remarkably clean environment. Everything in the room is pristine. Considering" << endl;
+				cout << "that the majority of the room is the color white, it is very impressive. There is a White Recliner facing a" << endl;
+				cout << "Fireplace that is in the center of the wall opposite the White Door. To your left is a small Bar, fitted with a" << endl;
+				cout << "high counter, bar stools, and many bottles of liquid. Also worthy of note is the Bar's Secret Passage leading" << endl;
+				cout << "down below the floor as well as the Bookshelf Passage leading upstairs now that it is no longer hidden by the" << endl;
+				cout << "Tall Bookshelf. Lastly, there is a cozy fireplace in the center of the back wall.";
+			}
 			dblEndl();
+
+			if (players.size() > 1)
+			{
+				cout << "\"Alright! It's nice being outside of that stupid underground room! Okay! First thing's first--we should look" << endl;
+				cout << "for something that I could use to defend myself. Preferably something sharp.\"";
+				dblEndl();
+				if (players[0].exploreOptions.size() < 5)
+				{
+					cout << "Suddenly, an idea pops into your head. \"Hey, Selena? We should try teaming to take care of some things. I feel" << endl;
+					cout << "if we work together to investigate some objects, we'll be able to uncover more than we would otherwise be able to.\"";
+					dblEndl();
+					cout << "Selena tilts her head for a second as she thinks, before responding,\"Yeah, sure. That makes sense. If you ever" << endl;
+					cout << "find yourself in need of THESE GUNS\", she says as she flexes her fairly average-sized arms, \"then you know who" << endl;
+					cout << "to call.\"";
+					dblEndl();
+					cout << "You can't help but let out a small chuckle in response to that.";
+					dblEndl();
+					cout << "Selena puts her hands on her hips. \"Oh, come on, I'm working on it. It's hard to stay in shape when you're stuck" << endl;
+					cout << "in a cell for who knows how long.\"";
+					dblEndl();
+					cout << "You can now use the \"teamwork\" exploration ability!";
+					dblEndl();
+					players[0].exploreOptions.push_back("teamwork");
+				}
+			}
+
 			checkInput(roomNum, players, items, keys, accessories, fancyRoom);
 			system("pause");
 		}
@@ -536,9 +575,14 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 
 					}
 				}
+				system("pause");
 			}
-			checkInput(roomNum, players, items, keys, accessories, cellInterior);
-			system("pause");
+			else
+			{
+				checkInput(roomNum, players, items, keys, accessories, cellInterior);
+				system("pause");
+			}
+			
 		}
 	}
 }

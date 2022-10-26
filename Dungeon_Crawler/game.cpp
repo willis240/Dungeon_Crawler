@@ -107,16 +107,17 @@ void checkInput(int & roomNum, vector<Player> & players, vector<Item>& items, ve
 			{
 				cout << endl;
 				checkInventory(players, items, keys, accessories, room);
+				break;
 			}
-			break;
 		}
 		if (players[0].exploreOptions.size() > 4)
 		{
-			if (command == players[0].exploreOptions[4]) //team up
+			if (command == players[0].exploreOptions[4]) //teamwork
 			{
+				cout << endl;
 				for (int i = 0; i < room.objects.size(); i++)
 				{
-					if(argument == room.objects[i].getName())
+					if (argument == room.objects[i].getName())
 						teamUp(i, items, keys, room);
 				}
 				break;
@@ -134,7 +135,7 @@ void showHelp(Player & player)
 	if (player.exploreOptions.size() > 3)
 		cout << "inv              -- view your inventory and use items" << endl;
 	if (player.exploreOptions.size() > 4)
-		cout << "team up (object) -- team up with your party members to find secrets" << endl;
+		cout << "teamwork (object) -- team up with your party members to find secrets" << endl;
 	cout << endl;
 }
 
@@ -327,10 +328,8 @@ void displayAccessories(vector<Accessory>& accessories)
 				cout << "    " << accessories[i].getName() << endl;
 			}
 		}
+		dblEndl();
 	}
-	else
-		cout << "    none";
-	dblEndl();
 }
 
 void showInvHelp(vector<Player>& players)
@@ -637,6 +636,12 @@ void teamUp(int & i, vector<Item>& items, vector<Key>& keys, Room& room)
 				}
 			}
 		}
+	}
+	else
+	{
+		cout << "You can't think of a way you could team up to tackle that object, and you wouldn't" << endl;
+		cout << "want to look dumb for suggesting teaming up without even a single idea of how to" << endl;
+		cout << "approach it. Boy, would you look silly if you did that." << endl << endl;
 	}
 }
 
