@@ -492,11 +492,49 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 					}
 					else if (input2 == 2)
 					{
-
+						cout << "Selena's hopeful expression quickly adjusts to one of concern. \"You don't know where you are, you find" << endl;
+						cout << "someone locked in a hidden cell who also doesn't know where they are, and the thing you're focused on is" << endl;
+						cout << "the fact that the person you found is a girl?\"";
+						dblEndl();
+						cout << "\"Yes.\"";
+						dblEndl();
+						cout << "Selena looks herself over briefly, likely reconsidering her proposal, and then looks back up at you." << endl;
+						cout << "As she brushes some strands of her hair off to the side of her face, she responds, \"Alright. Let's" << endl;
+						cout << "see if the novelty lasts.\"";
+						dblEndl();
+						players.push_back(Selena);
 					}
 					else if (input2 == 3)
 					{
-
+						cout << "Selena's eyes open wide as her pupils shrink instantaniously in shock. She then quickly adapts her" << endl;
+						cout << "expression to a grin as she chuckles nervously. \"Haha, you nearly got me with that one. That's some" << endl;
+						cout << "kind of joke to spring on someone in dire need who you just met.\"";
+						dblEndl();
+						cout << "\"Who said anything about a joke? Get lost.\"";
+						dblEndl();
+						cout << "Her grin evaporates. \"I AM LOST!\" She then gestures toward you with both of her arms. \"YOU ARE, TOO!" << endl;
+						cout << "It just makes sense that we would work together! It's a mutually beneficial arrangement!\"";
+						dblEndl();
+						cout << "\"Yeah, right. Any arrangement where I have to partner up with someone I don't know is primed with" << endl;
+						cout << "risk. You could be an incessant whiner for all I know.\"";
+						dblEndl();
+						cout << "\"I DON'T WHINE...much. I'm a hard worker! I put effort into everything that I do! And I have an" << endl;
+						cout << "award-winning personality! You will LOVE me!\"";
+						dblEndl();
+						cout << "You put your index finger and thumb up to your chin as you ponder her claims. \"What you're saying" << endl;
+						cout << "sure SOUNDS nice, but it all sounds pretty subjective to me.\"";
+						dblEndl();
+						cout << "Selena straightens her posture as her face turns serious and professional. \"Listen, I have years of" << endl;
+						cout << "experience fencing, and I was in the top 10% of my class. I'm good in a fight, and I'm not stupid either." << endl;
+						cout << "I stand by everything I said before, as well. Trust me, partnering with me will make your life a whole lot better.";
+						dblEndl();
+						cout << "It was a good sales pitch. And what she was saying made sense. \"Alright. I guess a million years passes" << endl;
+						cout << "by quicker than one would expect.\" You then hold out your hand.";
+						dblEndl();
+						cout << "Selena reaches out and shakes your hand. She then looks you straight in the eyes with a determined expression." << endl;
+						cout << "\"Trust me, you won't regret this.\"";
+						dblEndl();
+						players.push_back(Selena);
 					}
 				}
 				else if (input == 2)
