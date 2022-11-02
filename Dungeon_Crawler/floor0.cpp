@@ -83,8 +83,20 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"Hey, no one is perfect.", 2);
 	Key whiteKey(2, "White Key",
 		"Once you look past all of the pie residue, it appears to be a rather beautiful white key.");
-	Key ironRing(4, "Iron Ring",
-		"It is a small ring made of iron. Perhaps someone else would be better at ascertaining its worth.");
+	Key smallRing(4, "Small Ring",
+		"It is a small ring made of iron. Perhaps someone else would be better at ascertaining its worth.",
+		false, 1,
+		"You put the ring between your fingertips and hold it out to Selena. \n \n"
+		"\"Wow, you sure work fast, don't you? We just met.\" \n \n"
+		"You let out a pained expression as she follows up, \"I'm just kidding. In all honesty, though, I bet we \n"
+		"could really use this. We could wear something like this to aid us should things get ugly.\" \n \n"
+		"Naturally, you respond to this by raising a singular eyebrow. \n \n"
+		"She holds out her hands as she defends herself against your psychological attack. \"No, seriously! I noticed \n"
+		"my jailer put on this bandana and afterward, he just seemed stronger. I'm NOT CRAZY, THAT'S HOW IT WORKS!!\"",
+		true);
+	Accessory ironRing("Iron Ring",
+		"It is a small ring made of iron, and in hindsight, it looks quite equippable. Grants STR +2.",
+		0, 0, 2, 4, false);
 	Object pantry("Pantry",
 		"You open the pantry door to take a look inside. You see an assortment of empty boxes of snack foods, ranging \n"
 		"from chips to crackers to cereal. Looking inside the boxes, you realize that not even a crumb remains. Whether \n"
@@ -112,7 +124,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"Aha! In the back corner of one of the cabinets is a small Iron Ring.",
 		true, false, 0, 4);
 	Room kitchen(2, "Kitchen", { refrigerator, pantry, oven, cabinets }, { brittleDoorPtr }, { chickenNugget, applePie },
-		{ rawApplePie, whiteKey, ironRing });
+		{ rawApplePie, whiteKey, smallRing }, { ironRing });
 
 	//Room 3: The Fancy Room
 	Object whiteRecliner("White Recliner",

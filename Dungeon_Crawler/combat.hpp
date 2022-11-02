@@ -34,6 +34,15 @@ public:
 		description(inputDescription) {};
 };
 
+class Weapon
+{
+public:
+	std::string name;
+	int might;
+
+	Weapon(std::string inputName, int inputMight) : name(inputName), might(inputMight) {};
+};
+
 class Player
 {
 private:

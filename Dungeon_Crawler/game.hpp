@@ -146,9 +146,15 @@ public:
 	std::vector<std::shared_ptr<Door>> doors{};
 	std::vector<Item> items{};
 	std::vector<Key> keys{};
+	std::vector<Accessory> accessories{};
 
-	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors, std::vector<Item> inputItems, std::vector<Key> inputKeys) :
-		number(inputNumber), name(inputName), objects(inputObjects), doors(inputDoors), items(inputItems), keys(inputKeys) {};
+	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors,
+		std::vector<Item> inputItems, std::vector<Key> inputKeys) : number(inputNumber), name(inputName), objects(inputObjects),
+		doors(inputDoors), items(inputItems), keys(inputKeys) {};
+
+	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors,
+		std::vector<Item> inputItems, std::vector<Key> inputKeys, std::vector<Accessory> inputAccessories) : number(inputNumber),
+		name(inputName), objects(inputObjects), doors(inputDoors), items(inputItems), keys(inputKeys), accessories(inputAccessories) {};
 };
 
 Player startGame();
@@ -156,7 +162,8 @@ int getDecision(const int minChoice, const int maxChoice);
 void checkInput(int & roomNum, std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys,
 	std::vector<Accessory>& accessories, Room& room);
 void showHelp(Player& player);
-void checkArgument(int & i, const bool & isDoor, Room & room, std::vector<Item> & items, std::vector<Key> & keys);
+void checkArgument(int& i, const bool& isDoor, Room& room, std::vector<Item>& items, std::vector<Key>& keys,
+	std::vector<Accessory>& accessories);
 void enterDoor(Door& door, int & roomNum);
 void checkInventory(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys,
 	std::vector<Accessory>& accessories, Room& room);
@@ -169,7 +176,7 @@ void checkKeys(std::vector<Key>& keys, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void useKeys(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys, Room& room, std::string& argument);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
-void showKeys(std::vector<Player>& players, std::vector<Key>& keys, std::string& argument);
+void showKeys(std::vector<Player>& players, std::vector<Key>& keys, std::vector<Accessory>& accessories, std::string& argument);
 void teamUp(int& i, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys,
 	std::vector<Accessory>& accessories);

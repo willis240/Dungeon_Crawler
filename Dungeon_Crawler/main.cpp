@@ -17,7 +17,7 @@ int main()
 	vector<Accessory> accessories{};
 
 	int floorNum = 0;
-	int roomNum = 5;
+	int roomNum = 0;
 
 	//CODE FOR TESTING ACCESSORIES
 	//Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);

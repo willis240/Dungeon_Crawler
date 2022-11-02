@@ -76,14 +76,14 @@ void checkInput(int & roomNum, vector<Player> & players, vector<Item>& items, ve
 				{
 					if (argument == room.objects[i].getName())
 					{
-						checkArgument(i, false, room, items, keys);
+						checkArgument(i, false, room, items, keys, accessories);
 					}
 				}
 				for (int i = 0; i < room.doors.size(); i++)
 				{
 					if (argument == room.doors[i]->name)
 					{
-						checkArgument(i, true, room, items, keys);
+						checkArgument(i, true, room, items, keys, accessories);
 					}
 				}
 				break;
@@ -139,7 +139,8 @@ void showHelp(Player & player)
 	cout << endl;
 }
 
-void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & items, vector<Key> & keys)
+void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & items, vector<Key> & keys,
+	vector<Accessory>& accessories)
 {
 	if (!isDoor)
 	{
@@ -168,6 +169,17 @@ void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & ite
 						{
 							cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
 							keys.push_back(room.keys[ii]);
+							if (room.keys[ii].actuallyAccessory)
+							{
+								for (int iii = 0; iii < room.accessories.size(); iii++)
+								{
+									if (room.accessories[iii].keyNum == room.keys[ii].getKeyNum())
+									{
+										accessories.push_back(room.accessories[iii]);
+										room.accessories.erase(room.accessories.begin() + iii);
+									}
+								}
+							}
 							room.keys.erase(room.keys.begin() + ii);
 						}
 					}
@@ -280,7 +292,7 @@ void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& k
 			if (command == "show")
 			{
 				showItems(players, items, argument);
-				showKeys(players, keys, argument);
+				showKeys(players, keys, accessories, argument);
 			}
 		}
 	}
@@ -295,10 +307,14 @@ void displayItems(vector<Item>& items)
 		{
 			cout << "    " << items[i].getName() << endl;
 		}
+		cout << endl;
 	}
 	else
+	{
 		cout << "    none";
-	dblEndl();
+		dblEndl();
+	}
+	
 }
 
 void displayKeys(vector<Key>& keys)
@@ -310,10 +326,13 @@ void displayKeys(vector<Key>& keys)
 		{
 			cout << "    " << keys[i].name << endl;
 		}
+		cout << endl;
 	}
 	else
+	{
 		cout << "    none";
-	dblEndl();
+		dblEndl();
+	}
 }
 
 void displayAccessories(vector<Accessory>& accessories)
@@ -325,10 +344,13 @@ void displayAccessories(vector<Accessory>& accessories)
 			cout << "    ACCESSORIES" << endl;
 			for (int i = 0; i < accessories.size(); i++)
 			{
-				cout << "    " << accessories[i].getName() << endl;
+				if (accessories[i].beenDiscovered)
+				{
+					cout << "    " << accessories[i].getName() << endl;
+				}
 			}
+			cout << endl;
 		}
-		dblEndl();
 	}
 }
 
@@ -545,7 +567,7 @@ void showItems(vector<Player>& players, vector<Item>& items, string& argument)
 	}
 }
 
-void showKeys(vector<Player>& players, vector<Key>& keys, string& argument)
+void showKeys(vector<Player>& players, vector<Key>& keys, vector<Accessory>& accessories, string& argument)
 {
 	for (int i = 0; i < keys.size(); i++)
 	{
@@ -574,7 +596,14 @@ void showKeys(vector<Player>& players, vector<Key>& keys, string& argument)
 						keys[i].purposeKnown = true;
 						if (keys[i].actuallyAccessory)
 						{
-							//make the accessory that corresponds to the key visible and usable
+							for (int iii = 0; iii < accessories.size(); iii++)
+							{
+								if (accessories[iii].keyNum == keys[i].getKeyNum())
+								{
+									accessories[iii].beenDiscovered = true;
+									break;
+								}
+							}
 							keys.erase(keys.begin() + i);
 						}
 						return;
