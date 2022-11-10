@@ -96,7 +96,7 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 		short playerNum = 0;
 		while (playerNum < players.size())
 		{
-			players[playerNum].guardDirection = -1;
+			players[playerNum].guardDirection = none;
 			if (players[playerNum].currentHP > 0)
 			{
 				system("CLS");
@@ -238,12 +238,18 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 
 						if (pickDirection != -1)
 						{
-							players[playerNum].guardDirection = pickDirection;
+							if (pickDirection == 0)
+								players[playerNum].guardDirection = left;
+							else if (pickDirection == 1)
+								players[playerNum].guardDirection = right;
+							else if (pickDirection == 2)
+								players[playerNum].guardDirection = high;
+							else if (pickDirection == 3)
+								players[playerNum].guardDirection = low;
 							playerNum++;
 						}
 					}
 					break;
-
 				}
 
 				short enemyKO = 0;
@@ -657,7 +663,7 @@ void victory(vector<Player>& players, vector<Enemy>& enemies)
 	for (int i = 0; i < players.size(); i++)
 	{
 		system("CLS");
-		players[i].guardDirection = -1;
+		players[i].guardDirection = none;
 
 		players[i].exp += battleEXP;
 		if (players[i].exp >= players[i].lvEXP)

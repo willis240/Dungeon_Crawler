@@ -57,27 +57,6 @@ public:
 		actuallyAccessory(inputActuallyAccessory) {};
 };
 
-class Accessory
-{
-private:
-	std::string name;
-public:
-	std::string description;
-	std::string getName() { return name; };
-	int HP;
-	int SP;
-	int str;
-	int keyNum = 0;
-	bool beenDiscovered = true;
-
-	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
-		name(inputName), description(inputDescription), HP(inputHP), SP(inputSP), str(inputStr) {};
-
-	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr,
-		int inputKeyNum, bool inputBeenDiscovered) : name(inputName), description(inputDescription), HP(inputHP),
-		SP(inputSP), str(inputStr), keyNum(inputKeyNum), beenDiscovered(inputBeenDiscovered) {};
-};
-
 class Object
 {
 private:

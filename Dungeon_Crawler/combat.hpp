@@ -11,6 +11,8 @@
 #include<sstream>
 #include <Windows.h>
 
+enum Direction { none, left, right, high, low };
+
 class Skill
 {
 private:
@@ -21,7 +23,7 @@ public:
 	bool isHealing;
 	bool hasAOE;
 	int SPcost;
-	short attackDirection = -1;
+	Direction attackDirection = none;
 	std::string description;
 
 	std::string getName() { return name; };
@@ -29,7 +31,7 @@ public:
 	Skill(std::string inputName, int inputDamage, bool inputIsHealing, bool inputHasAOE, int inputSPcost, std::string inputDescription) :
 		name(inputName), damage(inputDamage), isHealing(inputIsHealing), hasAOE(inputHasAOE), SPcost(inputSPcost), description(inputDescription) {};
 
-	Skill(std::string inputName, int inputDamage, bool inputIsHealing, bool inputHasAOE, int inputSPcost, short inputAttackDirection, std::string inputDescription) :
+	Skill(std::string inputName, int inputDamage, bool inputIsHealing, bool inputHasAOE, int inputSPcost, Direction inputAttackDirection, std::string inputDescription) :
 		name(inputName), damage(inputDamage), isHealing(inputIsHealing), hasAOE(inputHasAOE), SPcost(inputSPcost), attackDirection(inputAttackDirection),
 		description(inputDescription) {};
 };
@@ -41,6 +43,27 @@ public:
 	int might;
 
 	Weapon(std::string inputName, int inputMight) : name(inputName), might(inputMight) {};
+};
+
+class Accessory
+{
+private:
+	std::string name;
+public:
+	std::string description;
+	std::string getName() { return name; };
+	int HP;
+	int SP;
+	int str;
+	int keyNum = 0;
+	bool beenDiscovered = true;
+
+	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
+		name(inputName), description(inputDescription), HP(inputHP), SP(inputSP), str(inputStr) {};
+
+	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr,
+		int inputKeyNum, bool inputBeenDiscovered) : name(inputName), description(inputDescription), HP(inputHP),
+		SP(inputSP), str(inputStr), keyNum(inputKeyNum), beenDiscovered(inputBeenDiscovered) {};
 };
 
 class Player
@@ -58,7 +81,8 @@ public:
 	int exp = 0;
 	int lv = 1;
 	int lvEXP = 20;
-	short guardDirection = -1;
+	Direction guardDirection = none;
+
 	std::vector<std::string> exploreOptions{"help", "check", "enter", "inv"};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};
 	std::vector<Skill> skills;
