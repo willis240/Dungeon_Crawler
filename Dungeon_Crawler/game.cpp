@@ -548,7 +548,7 @@ void showItems(vector<Player>& players, vector<Item>& items, string& argument)
 			{
 				if (input == players[ii].getName())
 				{
-					if (ii == items[i].personWithExpertise)
+					if (players[ii].getName() == items[i].personWithExpertise)
 					{
 						cout << items[i].expertiseDescription;
 						dblEndl();
@@ -589,7 +589,7 @@ void showKeys(vector<Player>& players, vector<Key>& keys, vector<Accessory>& acc
 			{
 				if (input == players[ii].getName())
 				{
-					if (ii == keys[i].personWithExpertise)
+					if (players[ii].getName() == keys[i].personWithExpertise)
 					{
 						cout << keys[i].expertiseDescription;
 						dblEndl();

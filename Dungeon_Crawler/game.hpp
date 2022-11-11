@@ -14,19 +14,19 @@ public:
 	short int num;
 	std::string getName() { return name; };
 	bool purposeKnown;
-	short int personWithExpertise;
+	std::string personWithExpertise = "";
 	std::string expertiseDescription;
 
 	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription) :
 		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(0),
-		purposeKnown(true), personWithExpertise(0) {};
+		purposeKnown(true) {};
 
 	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription, short int inputNum) :
 		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum),
-		purposeKnown(true), personWithExpertise(0) {};
+		purposeKnown(true) {};
 
 	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription, short int inputNum,
-		bool inputPurposeKnown, short int inputPersonWithExpertise, std::string inputExpertiseDescription) : name(inputName),
+		bool inputPurposeKnown, std::string inputPersonWithExpertise, std::string inputExpertiseDescription) : name(inputName),
 		restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum),
 		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 };
@@ -40,18 +40,18 @@ public:
 	std::string description;
 	int getKeyNum() { return keyNum; };
 	bool purposeKnown = true;
-	short int personWithExpertise = 0;
+	std::string personWithExpertise = "";
 	std::string expertiseDescription = "";
 	bool actuallyAccessory = false;
 	
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
 		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
 
-	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, short int inputPersonWithExpertise,
+	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, std::string inputPersonWithExpertise,
 		std::string inputExpertiseDescription) : keyNum(inputKeyNum), name(inputName), description(inputDescription), purposeKnown(inputPurposeKnown),
 		personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 
-	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, short int inputPersonWithExpertise,
+	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, std::string inputPersonWithExpertise,
 		std::string inputExpertiseDescription, bool inputActuallyAccessory) : keyNum(inputKeyNum), name(inputName), description(inputDescription),
 		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription),
 		actuallyAccessory(inputActuallyAccessory) {};

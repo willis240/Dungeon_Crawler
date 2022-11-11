@@ -85,7 +85,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"Once you look past all of the pie residue, it appears to be a rather beautiful white key.");
 	Key smallRing(4, "Small Ring",
 		"It is a small ring made of iron. Perhaps someone else would be better at ascertaining its worth.",
-		false, 1,
+		false, "Selena",
 		"You put the ring between your fingertips and hold it out to Selena. \n \n"
 		"\"Wow, you sure work fast, don't you? We just met.\" \n \n"
 		"You let out a pained expression as she follows up, \"I'm just kidding. In all honesty, though, I bet we \n"
