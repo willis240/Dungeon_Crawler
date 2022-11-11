@@ -31,6 +31,8 @@ public:
 		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 };
 
+enum Gear {notGear, weapon, armor, accessory};
+
 class Key
 {
 private:
@@ -42,7 +44,7 @@ public:
 	bool purposeKnown = true;
 	std::string personWithExpertise = "";
 	std::string expertiseDescription = "";
-	bool actuallyAccessory = false;
+	Gear actuallyGear = notGear;
 	
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
 		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
@@ -52,9 +54,9 @@ public:
 		personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, std::string inputPersonWithExpertise,
-		std::string inputExpertiseDescription, bool inputActuallyAccessory) : keyNum(inputKeyNum), name(inputName), description(inputDescription),
+		std::string inputExpertiseDescription, Gear inputActuallyGear) : keyNum(inputKeyNum), name(inputName), description(inputDescription),
 		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription),
-		actuallyAccessory(inputActuallyAccessory) {};
+		actuallyGear(inputActuallyGear) {};
 };
 
 class Object

@@ -11,7 +11,7 @@
 #include<sstream>
 #include <Windows.h>
 
-enum Direction { none, left, right, high, low };
+enum Direction { noDirection, left, right, high, low };
 
 class Skill
 {
@@ -23,7 +23,7 @@ public:
 	bool isHealing;
 	bool hasAOE;
 	int SPcost;
-	Direction attackDirection = none;
+	Direction attackDirection = noDirection;
 	std::string description;
 
 	std::string getName() { return name; };
@@ -81,7 +81,7 @@ public:
 	int exp = 0;
 	int lv = 1;
 	int lvEXP = 20;
-	Direction guardDirection = none;
+	Direction guardDirection = noDirection;
 
 	std::vector<std::string> exploreOptions{"help", "check", "enter", "inv"};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};

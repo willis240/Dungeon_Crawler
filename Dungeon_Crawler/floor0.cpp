@@ -92,8 +92,8 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"could really use this. We could wear something like this to aid us should things get ugly.\" \n \n"
 		"Naturally, you respond to this by raising a singular eyebrow. \n \n"
 		"She holds out her hands as she defends herself against your psychological attack. \"No, seriously! I noticed \n"
-		"my jailer put on this bandana and afterward, he just seemed stronger. I'm NOT CRAZY, THAT'S HOW IT WORKS!!\"",
-		true);
+		"my jailer put on this bandana and afterward, he just seemed stronger. I'M NOT CRAZY, THAT'S HOW IT WORKS!!\"",
+		accessory);
 	Accessory ironRing("Iron Ring",
 		"It is a small ring made of iron, and in hindsight, it looks quite equippable. Grants STR +2.",
 		0, 0, 2, 4, false);

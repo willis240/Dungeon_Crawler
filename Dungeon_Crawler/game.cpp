@@ -169,7 +169,7 @@ void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & ite
 						{
 							cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
 							keys.push_back(room.keys[ii]);
-							if (room.keys[ii].actuallyAccessory)
+							if (room.keys[ii].actuallyGear == accessory)
 							{
 								for (int iii = 0; iii < room.accessories.size(); iii++)
 								{
@@ -594,7 +594,7 @@ void showKeys(vector<Player>& players, vector<Key>& keys, vector<Accessory>& acc
 						cout << keys[i].expertiseDescription;
 						dblEndl();
 						keys[i].purposeKnown = true;
-						if (keys[i].actuallyAccessory)
+						if (keys[i].actuallyGear == accessory)
 						{
 							for (int iii = 0; iii < accessories.size(); iii++)
 							{

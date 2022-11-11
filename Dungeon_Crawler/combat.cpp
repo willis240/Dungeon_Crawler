@@ -96,7 +96,7 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 		short playerNum = 0;
 		while (playerNum < players.size())
 		{
-			players[playerNum].guardDirection = none;
+			players[playerNum].guardDirection = noDirection;
 			if (players[playerNum].currentHP > 0)
 			{
 				system("CLS");
@@ -663,7 +663,7 @@ void victory(vector<Player>& players, vector<Enemy>& enemies)
 	for (int i = 0; i < players.size(); i++)
 	{
 		system("CLS");
-		players[i].guardDirection = none;
+		players[i].guardDirection = noDirection;
 
 		players[i].exp += battleEXP;
 		if (players[i].exp >= players[i].lvEXP)
