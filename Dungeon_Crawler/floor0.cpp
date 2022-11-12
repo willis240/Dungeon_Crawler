@@ -562,17 +562,48 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 					dblEndl();
 					cout << "(1) \"My name is " << players[0].getName() << ". I also don't know where I am.\"" << endl;
 					cout << "(2) \"Well, this is your lucky day. The name's " << players[0].getName() << ". Let's get out of here." << endl;
-					cout << "(3) \"Hey, free food is nothing to shake a stick at. Sounds like you've got a sweet gig going here.\"";
+					cout << "(3) \"Hey, free food is nothing to shake a stick at. Sounds like you've got a sweet gig going on here.\"";
 					dblEndl();
 					int input2 = getDecision(1, 3);
 
 					if (input2 == 1)
 					{
-
+						cout << "\"Ah, so we're in the same boat, then.\" Selena pauses for a moment. \"Tell you what, how about we team" << endl;
+						cout << "up? I feel like we would greatly increase our chances of getting out of here if we work together.\"";
+						dblEndl();
+						cout << "\"What you're saying makes sense, but how can I know that I can trust you?\" You fold your arms and" << endl;
+						cout << "raise one eyebrow to assert your skepticism.";
+						dblEndl();
+						cout << "Selena lets out a sigh. \"There's no possible way I can truly prove to you that I can be trusted, but" << endl;
+						cout << "something I CAN do is give you a firm handshake.\" Selena throws her hand out toward you, her face a smile" << endl;
+						cout << "brimming with determination.";
+						dblEndl();
+						cout << "You eye her for a bit before finally deciding to put your hand out there as well. As it turns out, she wasn't" << endl;
+						cout << "lying; she really could give a firm handshake. At the end of the day, you've gotta respect a good handshake." << endl;
+						cout << "And if she turns out to be some kind of freak who uses handshakes to trick people... then you can deal with" << endl;
+						cout << "her later.";
+						dblEndl();
+						players.push_back(Selena);
 					}
 					else if (input2 == 2)
 					{
-
+						cout << "As soon as you finish talking, you wink at her. Her eyes widen in surprise at the combination of your" << endl;
+						cout << "abrupt change in attitude and sheer confidence on display. \"Well, I, uhh... I agree that teaming up" << endl;
+						cout << "would give us our greatest chances of finding our way out of here. But, uhh... why are you so confident?" << endl;
+						cout << "Do you know how to get out of here?\"";
+						dblEndl();
+						cout << "\"Nope.\"";
+						dblEndl();
+						cout << "\"Oh, well, do you have an good lead, then?\"";
+						dblEndl();
+						cout << "You respond with a smug grin. \"Not at all. I've actually currently at a dead end.\"";
+						dblEndl();
+						cout << "Selena's eyes move toward the side as she lets out a sigh. \"Oh.\" She may have a look of both concern and" << endl;
+						cout << "disappointment on her face, but you know that you'll find your way out somehow. Probably. \"Well, let's get" << endl;
+						cout << "going, I guess. I'd much rather get stuck somewhere else than spend another day in here.\" She then shakes her" << endl;
+						cout << "head quickly to psyche herself up. \"Alright! Let's go find a way out of this place!\"";
+						dblEndl();
+						players.push_back(Selena);
 					}
 					else if (input2 == 3)
 					{
