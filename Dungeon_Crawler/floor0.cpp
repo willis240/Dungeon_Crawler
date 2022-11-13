@@ -607,7 +607,22 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 					}
 					else if (input2 == 3)
 					{
-
+						cout << "Selena looks at you with wide eyes like you're crazy. \"Didn't you hear me? I'm trapped here! Being stuck in" << endl;
+						cout << "this room with nothing to do sucks! All I can do is wonder where I am and why I'm being kept here in the first" << endl;
+						cout << "place! It's both boring and creepy.\"";
+						dblEndl();
+						cout << "\"I suppose. Still, though, I haven't seen much food around here. The kitchen was practically bare. Where" << endl;
+						cout << "could they have gotten it from?\"";
+						dblEndl();
+						cout << "Selena leans in closer and responds with a sharp, determined tone. \"I would rather scrounge around for crumbs" << endl;
+						cout << "out there than spend another day in this cell.\"";
+						dblEndl();
+						cout << "\"Alright. Tell you what: help me find a way out of here and I might just share some food I've come across. Deal?" << endl;
+						cout << "You hold out your fist." << endl;
+						dblEndl();
+						cout << "Selena pounds your fist, completing the fist bump. \"Deal.\", she replies, smiling.";
+						dblEndl();
+						players.push_back(Selena);
 					}
 				}
 				else if (input == 3)
