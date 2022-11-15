@@ -664,11 +664,50 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 					}
 					else if (input2 == 2)
 					{
-
+						cout << "\"Alright, let's get going, then, \'My Worst Nightmare\'. I'd like to get out of this cell as soon as" << endl;
+						cout << "I can, and to never see it again while I'm at it.\"";
+						dblEndl();
+						cout << "\"My name is \'YOUR Worst Nightmare\', thank you very much. But hey, I appreciate you trying.\" As you finish" << endl;
+						cout << "saying this, you make an intentionally smug grin.";
+						dblEndl();
+						cout << "The woman chuckles. \"Heh, alright, my bad. Have you got something I can call you that's less of a mouthful?\"";
+						dblEndl();
+						cout << "\"I suppose you could call me " << players[0].getName() << ", if the other name is too much for you.";
+						dblEndl();
+						cout << "She smiles and replies, \"My name is Selena. And " << players[0].getName() << " will work just fine. Alright," << endl;
+						cout << "let's go find our way out of here.";
+						dblEndl();
+						players.push_back(Selena);
 					}
 					else if (input2 == 3)
 					{
-
+						cout << "The woman's pupils shrink as she hears your declaration. \"W-well what if you come across some heavy object" << endl;
+						cout << "you'd need a second person for to help lift? Or if you come across some item you don't recognize or" << endl;
+						cout << "understand? Having a second person around could help your chances of escaping here greatly!\"";
+						dblEndl();
+						cout << "\"Nah, I'm good. I'm kinda the best there is.\"";
+						dblEndl();
+						cout << "The woman blinks rapidly in disbelief at the words she is hearing. W-well, think about this: In addition to" << endl;
+						cout << "helping you explore, I can also help you carry stuff so you don't have to carry as much!\" She smiles, but" << endl;
+						cout << "it is a desperate smile. Still, though...";
+						dblEndl();
+						cout << "\"I do hate carrying a bunch of stuff... Why do you want to work with me so badly?\"";
+						dblEndl();
+						cout << "\"Uh, would you believe me if I said I genuinely believe in the stuff I'm saying?\"";
+						dblEndl();
+						cout << "You stare at her. And stare at her. Annnnd keep staring.";
+						dblEndl();
+						cout << "The woman looks down at the floor and adds quietly, \"Or that I'm lonely and bored and want someone to talk to.";
+						dblEndl();
+						cout << "\"Theeeeeere we go. Well, alright then. But if I'm going to start making fun of- I mean, talking to someone," << endl;
+						cout << "then I'm going to need to know their name.";
+						dblEndl();
+						cout << "The woman glares at you briefly, before forming a smile on her face. \"My name is Selena. I look forward to" << endl;
+						cout << "to getting out of here.\" She extends her hand, and you shake it.";
+						dblEndl();
+						cout << players[0].getName() << ". Let's get out of here.";
+						dblEndl();
+						players.push_back(Selena);
 					}
 				}
 				system("pause");
