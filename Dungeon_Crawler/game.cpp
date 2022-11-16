@@ -15,12 +15,44 @@ void dblEndl()
 
 Player startGame()
 {
-	cout << "Greetings, Player, and welcome to my Role-Playing Game!\n" << endl;
-	cout << "So, uh, what is your name?" << endl;
-
 	string playerName;
-	getline(cin, playerName);
+	int fails = 0;
+	while (true)
+	{
+		cout << "Greetings, Player, and welcome to my Role-Playing Game!\n" << endl;
+		cout << "So, uh, what is your name?" << endl;
 
+		getline(cin, playerName);
+		cout << endl;
+
+		if (playerName.length() <= 10)
+			break;
+		else
+		{
+			fails++;
+			if (fails < 3)
+				cout << "Sorry, please keep your name under the 10-character limit." << endl << endl;
+			else if (fails == 3)
+				cout << "Really? Exceeding the character limit a third time? Alright." << endl << endl;
+			else if (fails == 4)
+				cout << "Okay, you have got to have read about the character limit at least once, right?" << endl << endl;
+			else if (fails == 5)
+			{
+				cout << "You're doing this ON PURPOSE!!! There is NO other explanation! You're wasting MY time," << endl;
+				cout << "and you're wasting YOUR time. Come on, just give me a name that's 10 characters or less." << endl << endl;
+			}
+			else if (fails == 6)
+				cout << "Just make a valid name and PLAY THE FREAKING GAME ALREADY! COME ON!" << endl << endl;
+			else if (fails == 7)
+			{
+				cout << "Screw this." << endl << endl;
+				exit(0);
+			}
+			system("pause");
+			system("CLS");
+		}
+	}
+	
 	Skill punch("Punch", 3, false, false, 2, "You throw your clenched fist into your foe!");
 	Player player(playerName, 10, 10, {punch});
 

@@ -276,7 +276,7 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 			if (enemies[i].currentHP > 0)
 			{
 				enemies[i].offBalance = false;
-				if (players[enemiesTargets[i]].guardDirection != -1)
+				if (players[enemiesTargets[i]].guardDirection != noDirection)
 				{
 					if (players[enemiesTargets[i]].guardDirection == enemies[i].skills[enemyActionsTaken[i]].attackDirection)
 					{

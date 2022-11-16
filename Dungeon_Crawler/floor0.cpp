@@ -138,11 +138,12 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"It is a small key, likely made of iron. It is a little odd that is here, though, as there does not appear to be any doors \n"
 		"in this room other than the White Door which you have already unlocked.");
 	Object fireplace("Fireplace",
-		"The fireplace has a clean brick aesthetic, with a real fire burning and providing warmth to the room. You note that there \n"
-		"is a fire poker hanging on a hook to the right of the fireplace, but the fire is already burning quite well. The wood \n"
-		"inside consists of cleanly cut logs. They clearly were cut by someone who must view woodcutting as a work of art. Perhaps \n"
-		"even more interesting, though, is the fact that there is still a lot of wood in the fireplace. This fire must have been \n"
-		"started recently. That being said, you also see a Small Key lying a couple of inches in front of the fire.",
+		"The fireplace has a clean brick aesthetic, with a real fire burning and providing warmth to the room. You note that \n"
+		"there is a fire poker hanging on a hook to the right of the fireplace, but the fire is already burning quite well. \n"
+		"The wood inside consists of cleanly cut logs. They clearly were cut by someone who must view woodcutting as a work \n"
+		"of art. Perhaps even more interesting, though, is the fact that there is still a lot of wood in the fireplace. This \n"
+		"fire must have been started recently. That being said, you also see a Small Key lying a couple of inches in front of \n "
+		"the fire.",
 		true, false, 0, 5);
 	Object bar("Bar",
 		"The bar counter, like much of the room, is a pristine white. The bar stools are black, and act to complement the bar's \n"
@@ -188,7 +189,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 	Room cellExterior(4, "Cell Exterior", {}, { barSecretPassagePtr, metalDoorPtr }, {}, {});
 
 	//Room 5: The Cell Interior
-	Player Selena("Selena", 7, 8, {});
+	Player Selena("Selena", 7, 13, {});
 	Room cellInterior(5, "Cell Interior", {}, { metalDoorPtr }, {}, {});
 
 	while (true)
@@ -705,7 +706,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 						cout << "The woman glares at you briefly, before forming a smile on her face. \"My name is Selena. I look forward to" << endl;
 						cout << "to getting out of here.\" She extends her hand, and you shake it.";
 						dblEndl();
-						cout << players[0].getName() << ". Let's get out of here.";
+						cout << "\"" << players[0].getName() << ". Let's get out of here.\"";
 						dblEndl();
 						players.push_back(Selena);
 					}
