@@ -49,6 +49,7 @@ class Accessory
 {
 private:
 	std::string name;
+
 public:
 	std::string description;
 	std::string getName() { return name; };
@@ -82,6 +83,7 @@ public:
 	int lv = 1;
 	int lvEXP = 20;
 	Direction guardDirection = noDirection;
+	std::shared_ptr<Accessory> accEquipped = NULL;
 
 	std::vector<std::string> exploreOptions{"help", "check", "enter", "inv"};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};
@@ -89,6 +91,8 @@ public:
 
 	//Member Functions
 	std::string getName() { return name; };
+	void equipAccessory(std::shared_ptr<Accessory> accToEquip);
+	void unequipAccessory();
 	void restoreHP(int& healedHP);
 	void restoreSP(int& healedSP);
 	void reduceHP(int& lostHP);

@@ -199,7 +199,6 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 			if (seeOpening)
 			{
 				system("CLS");
-
 				cout << "You wake up in a room just large enough that you can lie down and not touch" << endl;
 				cout << "any walls. There is a door right in front of you, and a rat munching on some cheese" << endl;
 				cout << "in the corner. What do you do?" << endl << endl;

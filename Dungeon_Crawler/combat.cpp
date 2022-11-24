@@ -9,6 +9,22 @@ using std::string;
 using std::vector;
 using std::map;
 
+void Player::equipAccessory(std::shared_ptr<Accessory> accToEquip)
+{
+	accEquipped = std::move(accToEquip);
+	maxHP += accEquipped->HP;
+	maxSP += accEquipped->SP;
+	str += accEquipped->str;
+}
+
+void Player::unequipAccessory()
+{
+	maxHP -= accEquipped->HP;
+	maxSP -= accEquipped->SP;
+	str -= accEquipped->str;
+	accEquipped = NULL;
+}
+
 void Player::restoreHP(int& healedHP)
 {
 	currentHP += healedHP;
