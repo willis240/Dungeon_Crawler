@@ -7,6 +7,7 @@ using std::endl;
 using std::cin;
 using std::string;
 using std::vector;
+using std::shared_ptr;
 
 void dblEndl()
 {
@@ -62,8 +63,7 @@ Player startGame()
 	return player;
 }
 
-void checkInput(int & roomNum, vector<Player> & players, vector<Item>& items, vector<Key>& keys,
-	vector<Accessory>& accessories, Room & room)
+void checkInput(int & roomNum, vector<Player> & players, Inventory& inventory, Room & room)
 {
 	while (true)
 	{
@@ -77,18 +77,12 @@ void checkInput(int & roomNum, vector<Player> & players, vector<Item>& items, ve
 		for (auto x : input)
 		{
 			if (commandDone)
-			{ 
 				argument = argument + x;
-			}
 
 			if (x == ' ')
-			{
 				commandDone = true;
-			}
 			else if (!commandDone)
-			{
 				command = command + x;
-			}
 		}
 
 		if (players[0].exploreOptions.size() > 0)
@@ -108,14 +102,14 @@ void checkInput(int & roomNum, vector<Player> & players, vector<Item>& items, ve
 				{
 					if (argument == room.objects[i].getName())
 					{
-						checkArgument(i, false, room, items, keys, accessories);
+						checkArgument(i, false, room, inventory);
 					}
 				}
 				for (int i = 0; i < room.doors.size(); i++)
 				{
 					if (argument == room.doors[i]->name)
 					{
-						checkArgument(i, true, room, items, keys, accessories);
+						checkArgument(i, true, room, inventory);
 					}
 				}
 				break;
@@ -138,7 +132,7 @@ void checkInput(int & roomNum, vector<Player> & players, vector<Item>& items, ve
 			if (command == players[0].exploreOptions[3]) //inv
 			{
 				cout << endl;
-				checkInventory(players, items, keys, accessories, room);
+				checkInventory(players, inventory, room);
 				break;
 			}
 		}
@@ -150,7 +144,7 @@ void checkInput(int & roomNum, vector<Player> & players, vector<Item>& items, ve
 				for (int i = 0; i < room.objects.size(); i++)
 				{
 					if (argument == room.objects[i].getName())
-						teamUp(i, items, keys, room);
+						teamUp(i, inventory, room);
 				}
 				break;
 			}
@@ -171,8 +165,7 @@ void showHelp(Player & player)
 	cout << endl;
 }
 
-void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & items, vector<Key> & keys,
-	vector<Accessory>& accessories)
+void checkArgument(int & i, const bool & isDoor, Room & room, Inventory& inventory)
 {
 	if (!isDoor)
 	{
@@ -188,7 +181,7 @@ void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & ite
 						if (room.items[ii].num == room.objects[i].itemNum)
 						{
 							cout << "You grabbed the " << room.items[ii].getName() << "." << endl << endl;
-							items.push_back(room.items[ii]);
+							inventory.items.push_back(room.items[ii]);
 							room.items.erase(room.items.begin() + ii);
 						}
 					}
@@ -200,14 +193,14 @@ void checkArgument(int & i, const bool & isDoor, Room & room, vector<Item> & ite
 						if (room.keys[ii].getKeyNum() == room.objects[i].keyNum)
 						{
 							cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
-							keys.push_back(room.keys[ii]);
+							inventory.keys.push_back(room.keys[ii]);
 							if (room.keys[ii].actuallyGear == accessory)
 							{
 								for (int iii = 0; iii < room.accessories.size(); iii++)
 								{
-									if (room.accessories[iii].keyNum == room.keys[ii].getKeyNum())
+									if (room.accessories[iii]->keyNum == room.keys[ii].getKeyNum())
 									{
-										accessories.push_back(room.accessories[iii]);
+										inventory.accessories.push_back(room.accessories[iii]);
 										room.accessories.erase(room.accessories.begin() + iii);
 									}
 								}
@@ -249,8 +242,7 @@ void enterDoor(Door& door, int & roomNum)
 	}
 }
 
-void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& keys,
-	vector<Accessory>& accessories, Room & room)
+void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 {
 	while (true)
 	{
@@ -269,9 +261,9 @@ void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& k
 			cout << endl;
 		}
 		cout << endl;
-		displayItems(items);
-		displayKeys(keys);
-		displayAccessories(accessories);
+		displayItems(inventory.items);
+		displayKeys(inventory.keys);
+		displayAccessories(inventory.accessories);
 
 		cout << "Call for \"help\" if you need to know how to work with your inventory";
 		dblEndl();
@@ -286,18 +278,12 @@ void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& k
 		for (auto x : input)
 		{
 			if (commandDone)
-			{
 				argument = argument + x;
-			}
 
 			if (x == ' ')
-			{
 				commandDone = true;
-			}
 			else if (!commandDone)
-			{
 				command = command + x;
-			}
 		}
 
 		if (command == "back")
@@ -308,25 +294,28 @@ void checkInventory(vector<Player>& players, vector<Item>& items, vector<Key>& k
 
 		if (command == "check")
 		{
-			checkItems(items, argument);
-			checkKeys(keys, argument);
+			checkItems(inventory, argument);
+			checkKeys(inventory, argument);
 		}
 		
 		if (command == "use")
 		{
-			useItems(players, items, argument);
-			useKeys(players, items, keys, room, argument);
-			return;
+			useItems(players, inventory.items, argument);
+			useKeys(players, inventory, room, argument);
 		}
 
 		if (players.size() > 1)
 		{
 			if (command == "show")
 			{
-				showItems(players, items, argument);
-				showKeys(players, keys, accessories, argument);
+				showItems(players, inventory.items, argument);
+				showKeys(players, inventory, argument);
 			}
 		}
+
+		if (command == "equip")
+			equipGear(players, inventory, argument);
+
 	}
 }
 
@@ -367,18 +356,18 @@ void displayKeys(vector<Key>& keys)
 	}
 }
 
-void displayAccessories(vector<Accessory>& accessories)
+void displayAccessories(vector<shared_ptr<Accessory>>& accessories)
 {
 	if (accessories.size() > 0)
 	{
-		if (accessories[0].beenDiscovered)
+		if (accessories[0]->beenDiscovered)
 		{
 			cout << "    ACCESSORIES" << endl;
 			for (int i = 0; i < accessories.size(); i++)
 			{
-				if (accessories[i].beenDiscovered)
+				if (accessories[i]->beenDiscovered)
 				{
-					cout << "    " << accessories[i].getName() << endl;
+					cout << "    " << accessories[i]->getName() << endl;
 				}
 			}
 			cout << endl;
@@ -398,21 +387,21 @@ void showInvHelp(vector<Player>& players)
 	cout << endl;
 }
 
-void checkItems(vector<Item>& items, string& argument)
+void checkItems(Inventory& inventory, string& argument)
 {
-	for (int i = 0; i < items.size(); i++)
+	for (int i = 0; i < inventory.items.size(); i++)
 	{
-		if (argument == items[i].getName())
-			cout << endl << items[i].getName() << " -- " << items[i].description << endl << endl;
+		if (argument == inventory.items[i].getName())
+			cout << endl << inventory.items[i].getName() << " -- " << inventory.items[i].description << endl << endl;
 	}
 }
 
-void checkKeys(vector<Key>& keys, string& argument)
+void checkKeys(Inventory& inventory, string& argument)
 {
-	for (int i = 0; i < keys.size(); i++)
+	for (int i = 0; i < inventory.keys.size(); i++)
 	{
-		if (argument == keys[i].name)
-			cout << endl << keys[i].name << " -- " << keys[i].description << endl << endl;
+		if (argument == inventory.keys[i].name)
+			cout << endl << inventory.keys[i].name << " -- " << inventory.keys[i].description << endl << endl;
 	}
 }
 
@@ -462,13 +451,13 @@ void useItems(vector<Player>& players, vector<Item>& items, string& argument)
 	cout << endl;
 }
 
-void useKeys(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Room& room, string& argument)
+void useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& argument)
 {
-	for (int i = 0; i < keys.size(); i++)
+	for (int i = 0; i < inventory.keys.size(); i++)
 	{
-		if (argument == keys[i].name)
+		if (argument == inventory.keys[i].name)
 		{
-			cout << "Use " << keys[i].name << " on what?";
+			cout << "Use " << inventory.keys[i].name << " on what?";
 			dblEndl();
 			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
 			dblEndl();
@@ -487,16 +476,16 @@ void useKeys(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Ro
 					{
 						if (room.doors[ii]->isLocked)
 						{
-							if (keys[i].getKeyNum() == room.doors[ii]->lockNum)
+							if (inventory.keys[i].getKeyNum() == room.doors[ii]->lockNum)
 							{
 								room.doors[ii]->isLocked = false;
-								cout << "You used the " << keys[i].name << " and unlocked the " << room.doors[ii]->name << ".";
+								cout << "You used the " << inventory.keys[i].name << " and unlocked the " << room.doors[ii]->name << ".";
 								dblEndl();
-								keys.erase(keys.begin() + i);
+								inventory.keys.erase(inventory.keys.begin() + i);
 							}
 							else
 							{
-								cout << "Unfortunately, the " << keys[i].name << " does not fit in the " << room.doors[ii]->name << ".";
+								cout << "Unfortunately, the " << inventory.keys[i].name << " does not fit in the " << room.doors[ii]->name << ".";
 								dblEndl();
 							}
 							return;
@@ -516,19 +505,19 @@ void useKeys(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Ro
 				{
 					if (room.objects[ii].hasSecret)
 					{
-						if (keys[i].getKeyNum() == room.objects[ii].answerNum)
+						if (inventory.keys[i].getKeyNum() == room.objects[ii].answerNum)
 						{
 							room.objects[ii].hasSecret = false;
 							system("CLS");
 							cout << room.objects[ii].secretText;
 							dblEndl();
-							keys.erase(keys.begin() + i);
+							inventory.keys.erase(inventory.keys.begin() + i);
 							for (int iii = 0; iii < room.keys.size(); iii++)
 							{
 								if (room.keys[iii].getKeyNum() == room.objects[ii].keyNum)
 								{
 									cout << "You obtained the " << room.keys[iii].name << "." << endl << endl;
-									keys.push_back(room.keys[iii]);
+									inventory.keys.push_back(room.keys[iii]);
 									room.keys.erase(room.keys.begin() + iii);
 								}
 							}
@@ -537,7 +526,7 @@ void useKeys(vector<Player>& players, vector<Item>& items, vector<Key>& keys, Ro
 								if (room.items[iii].num == room.objects[ii].itemNum)
 								{
 									cout << "You obtained the " << room.items[iii].getName() << "." << endl << endl;
-									items.push_back(room.items[iii]);
+									inventory.items.push_back(room.items[iii]);
 									room.items.erase(room.items.begin() + iii);
 								}
 							}
@@ -599,13 +588,13 @@ void showItems(vector<Player>& players, vector<Item>& items, string& argument)
 	}
 }
 
-void showKeys(vector<Player>& players, vector<Key>& keys, vector<Accessory>& accessories, string& argument)
+void showKeys(vector<Player>& players, Inventory& inventory, string& argument)
 {
-	for (int i = 0; i < keys.size(); i++)
+	for (int i = 0; i < inventory.keys.size(); i++)
 	{
-		if (argument == keys[i].name)
+		if (argument == inventory.keys[i].name)
 		{
-			cout << "Show " << keys[i].name << " to who?";
+			cout << "Show " << inventory.keys[i].name << " to who?";
 			dblEndl();
 			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
 			dblEndl();
@@ -621,22 +610,22 @@ void showKeys(vector<Player>& players, vector<Key>& keys, vector<Accessory>& acc
 			{
 				if (input == players[ii].getName())
 				{
-					if (players[ii].getName() == keys[i].personWithExpertise)
+					if (players[ii].getName() == inventory.keys[i].personWithExpertise)
 					{
-						cout << keys[i].expertiseDescription;
+						cout << inventory.keys[i].expertiseDescription;
 						dblEndl();
-						keys[i].purposeKnown = true;
-						if (keys[i].actuallyGear == accessory)
+						inventory.keys[i].purposeKnown = true;
+						if (inventory.keys[i].actuallyGear == accessory)
 						{
-							for (int iii = 0; iii < accessories.size(); iii++)
+							for (int iii = 0; iii < inventory.accessories.size(); iii++)
 							{
-								if (accessories[iii].keyNum == keys[i].getKeyNum())
+								if (inventory.accessories[iii]->keyNum == inventory.keys[i].getKeyNum())
 								{
-									accessories[iii].beenDiscovered = true;
+									inventory.accessories[iii]->beenDiscovered = true;
 									break;
 								}
 							}
-							keys.erase(keys.begin() + i);
+							inventory.keys.erase(inventory.keys.begin() + i);
 						}
 						return;
 					}
@@ -652,7 +641,66 @@ void showKeys(vector<Player>& players, vector<Key>& keys, vector<Accessory>& acc
 	}
 }
 
-void teamUp(int & i, vector<Item>& items, vector<Key>& keys, Room& room)
+void equipGear(vector<Player>& players, Inventory& inventory, string& argument)
+{
+	string recipient = "";
+	int recipientNum = -1;
+	int currentOwner = -1;
+	int input = 0;
+	for (int i = 0; i < inventory.accessories.size(); i++)
+	{
+		if (argument == inventory.accessories[i]->getName())
+		{
+			if (inventory.accessories[i]->beenDiscovered)
+			{
+				cout << "Equip to who?" << endl;
+				getline(cin, recipient);
+
+				for (int ii = 0; ii < players.size(); ii++)
+				{
+					if (players[ii].getName() == recipient)
+						recipientNum = ii;
+					if (players[ii].accEquipped->getName() == inventory.accessories[i]->getName())
+					{
+						currentOwner = ii;
+						cout << endl;
+						cout << players[ii].getName() << " already has this equipped. Would you like to take it from them?" << endl;
+						cout << "(1) Yes" << endl;
+						cout << "(2) No" << endl;
+						input = getDecision(1, 2);
+
+						if (recipientNum != -1)
+							break;
+					}
+				}
+
+				if (recipientNum != -1)
+				{
+					if(input == 0)
+					{
+						cout << endl;
+						players[recipientNum].equipAccessory(inventory.accessories[i]);
+						cout << players[recipientNum].getName() << " equipped the " << inventory.accessories[i]->getName() << ".";
+					}
+					else if(input == 1)
+					{
+						players[currentOwner].unequipAccessory();
+						players[recipientNum].equipAccessory(inventory.accessories[i]);
+						cout << players[recipientNum].getName() << " equipped the " << inventory.accessories[i]->getName() << ".";
+					}
+					else
+					{
+						cout << "The " << inventory.accessories[i]->getName() << " remains on " << players[currentOwner].getName() << ".";
+					}
+					dblEndl();
+				}
+			}
+			return;
+		}
+	}
+}
+
+void teamUp(int & i, Inventory& inventory, Room& room)
 {
 	if (room.objects[i].answerNum == -1)
 	{
@@ -679,7 +727,7 @@ void teamUp(int & i, vector<Item>& items, vector<Key>& keys, Room& room)
 					if (room.keys[ii].getKeyNum() == room.objects[i].keyNum)
 					{
 						cout << "You obtained the " << room.keys[ii].name << "." << endl << endl;
-						keys.push_back(room.keys[ii]);
+						inventory.keys.push_back(room.keys[ii]);
 						room.keys.erase(room.keys.begin() + ii);
 					}
 				}
@@ -691,7 +739,7 @@ void teamUp(int & i, vector<Item>& items, vector<Key>& keys, Room& room)
 					if (room.items[ii].num == room.objects[i].itemNum)
 					{
 						cout << "You obtained the " << room.items[ii].getName() << "." << endl << endl;
-						items.push_back(room.items[ii]);
+						inventory.items.push_back(room.items[ii]);
 						room.items.erase(room.items.begin() + ii);
 					}
 				}
@@ -728,13 +776,13 @@ int getDecision(const int minChoice, const int maxChoice)
 	}
 }
 
-void explore(vector<Player>& players, int& floor, int& roomNum, vector<Item>& items, vector<Key>& keys, vector<Accessory>& accessories)
+void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inventory)
 {
 	while (true)
 	{
 		if (floor == 0)
 		{
-			floor0(players, roomNum, items, keys, accessories);
+			floor0(players, roomNum, inventory);
 		}
 	}
 }

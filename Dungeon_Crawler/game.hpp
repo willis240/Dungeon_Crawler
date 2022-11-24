@@ -59,6 +59,16 @@ public:
 		actuallyGear(inputActuallyGear) {};
 };
 
+class Inventory
+{
+public:
+	std::vector<Item> items;
+	std::vector<Key> keys;
+	std::vector<std::shared_ptr<Accessory>> accessories;
+
+	Inventory() {};
+};
+
 class Object
 {
 private:
@@ -127,42 +137,38 @@ public:
 	std::vector<std::shared_ptr<Door>> doors{};
 	std::vector<Item> items{};
 	std::vector<Key> keys{};
-	std::vector<Accessory> accessories{};
+	std::vector<std::shared_ptr<Accessory>> accessories{};
 
 	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors,
 		std::vector<Item> inputItems, std::vector<Key> inputKeys) : number(inputNumber), name(inputName), objects(inputObjects),
 		doors(inputDoors), items(inputItems), keys(inputKeys) {};
 
 	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors,
-		std::vector<Item> inputItems, std::vector<Key> inputKeys, std::vector<Accessory> inputAccessories) : number(inputNumber),
+		std::vector<Item> inputItems, std::vector<Key> inputKeys, std::vector<std::shared_ptr<Accessory>> inputAccessories) : number(inputNumber),
 		name(inputName), objects(inputObjects), doors(inputDoors), items(inputItems), keys(inputKeys), accessories(inputAccessories) {};
 };
 
 Player startGame();
 int getDecision(const int minChoice, const int maxChoice);
-void checkInput(int & roomNum, std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys,
-	std::vector<Accessory>& accessories, Room& room);
+void checkInput(int & roomNum, std::vector<Player>& players, Inventory& inventory, Room& room);
 void showHelp(Player& player);
-void checkArgument(int& i, const bool& isDoor, Room& room, std::vector<Item>& items, std::vector<Key>& keys,
-	std::vector<Accessory>& accessories);
+void checkArgument(int& i, const bool& isDoor, Room& room, Inventory& inventory);
 void enterDoor(Door& door, int & roomNum);
-void checkInventory(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys,
-	std::vector<Accessory>& accessories, Room& room);
+void checkInventory(std::vector<Player>& players, Inventory& inventory, Room& room);
 void displayItems(std::vector<Item>& items);
 void displayKeys(std::vector<Key>& keys);
-void displayAccessories(std::vector<Accessory>& accessories);
+void displayAccessories(std::vector<std::shared_ptr<Accessory>>& accessories);
 void showInvHelp(std::vector<Player>& players);
-void checkItems(std::vector<Item>& items, std::string& argument);
-void checkKeys(std::vector<Key>& keys, std::string& argument);
+void checkItems(Inventory& inventory, std::string& argument);
+void checkKeys(Inventory& inventory, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
-void useKeys(std::vector<Player>& players, std::vector<Item>& items, std::vector<Key>& keys, Room& room, std::string& argument);
+void useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
-void showKeys(std::vector<Player>& players, std::vector<Key>& keys, std::vector<Accessory>& accessories, std::string& argument);
-void teamUp(int& i, std::vector<Item>& items, std::vector<Key>& keys, Room& room);
-void explore(std::vector<Player>& players, int& floor, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys,
-	std::vector<Accessory>& accessories);
-void floor0(std::vector<Player>& players, int& roomNum, std::vector<Item>& items, std::vector<Key>& keys,
-	std::vector<Accessory>& accessories);
+void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);
+void equipGear(std::vector<Player>& players, Inventory& inventory, std::string& argument);
+void teamUp(int& i, Inventory& inventory, Room& room);
+void explore(std::vector<Player>& players, int& floor, int& roomNum, Inventory& inventory);
+void floor0(std::vector<Player>& players, int& roomNum, Inventory& inventory);
 void dblEndl();
 
 //Function Definitions found in combat.cpp

@@ -10,7 +10,7 @@ using std::vector;
 using std::shared_ptr;
 using std::make_shared;
 
-void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<Key>& keys, vector<Accessory>& accessories)
+void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 {
 	//Room 0: The Starting Room
 	bool seeOpening = true;
@@ -97,6 +97,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 	Accessory ironRing("Iron Ring",
 		"It is a small ring made of iron, and in hindsight, it looks quite equippable. Grants STR +2.",
 		0, 0, 2, 4, false);
+	auto ironRingPtr = make_shared<Accessory>(ironRing);
 	Object pantry("Pantry",
 		"You open the pantry door to take a look inside. You see an assortment of empty boxes of snack foods, ranging \n"
 		"from chips to crackers to cereal. Looking inside the boxes, you realize that not even a crumb remains. Whether \n"
@@ -124,7 +125,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 		"Aha! In the back corner of one of the cabinets is a small Iron Ring.",
 		true, false, 0, 4);
 	Room kitchen(2, "Kitchen", { refrigerator, pantry, oven, cabinets }, { brittleDoorPtr }, { chickenNugget, applePie },
-		{ rawApplePie, whiteKey, smallRing }, { ironRing });
+		{ rawApplePie, whiteKey, smallRing }, { ironRingPtr });
 
 	//Room 3: The Fancy Room
 	Object whiteRecliner("White Recliner",
@@ -200,14 +201,6 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 			{
 				system("CLS");
 
-				cout << players[0].accEquipped->getName() << endl;
-				cout << players[0].accEquipped->HP << endl;
-				cout << players[0].maxHP << endl;
-				//players[0].unequipAccessory();
-				cout << players[0].accEquipped->getName() << endl;
-				cout << players[0].accEquipped->HP << endl;
-				cout << players[0].maxHP << endl;
-
 				cout << "You wake up in a room just large enough that you can lie down and not touch" << endl;
 				cout << "any walls. There is a door right in front of you, and a rat munching on some cheese" << endl;
 				cout << "in the corner. What do you do?" << endl << endl;
@@ -237,7 +230,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 					dblEndl();
 					system("pause");
 
-					items.push_back(nibbledCheese);
+					inventory.items.push_back(nibbledCheese);
 					stoleFromRat = true;
 				}
 
@@ -254,7 +247,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 				cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
 				cout << "go through the door.";
 				dblEndl();
-				checkInput(roomNum, players, items, keys, accessories, startRoom);
+				checkInput(roomNum, players, inventory, startRoom);
 				system("pause");
 				seeOpening = false;
 			}
@@ -264,7 +257,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 				cout << "Looking around, you see that the room is small and largely empty. However, there is" << endl;
 				cout << "a Night Light in the corner, as well as a Plain Door directly in front of you.";
 				dblEndl();
-				checkInput(roomNum, players, items, keys, accessories, startRoom);
+				checkInput(roomNum, players, inventory, startRoom);
 				system("pause");
 			}
 		}
@@ -278,7 +271,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 			cout << "which you first entered this room. On top of that, there is a White Door to your right as well.";
 			dblEndl();
 
-			checkInput(roomNum, players, items, keys, accessories, livingRoom);
+			checkInput(roomNum, players, inventory, livingRoom);
 			system("pause");
 		}
 
@@ -291,11 +284,11 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 				cout << "rumble, your eyes immediately gravitate toward the Refrigerator directly in front of you.";
 				dblEndl();
 
-				checkInput(roomNum, players, items, keys, accessories, kitchen);
+				checkInput(roomNum, players, inventory, kitchen);
 				system("pause");
-				for (int i = 0; i < items.size(); i++)
+				for (int i = 0; i < inventory.items.size(); i++)
 				{
-					if (items[i].getName() == "Chicken Nugget")
+					if (inventory.items[i].getName() == "Chicken Nugget")
 						grabbedNugget = true;
 				}
 
@@ -322,7 +315,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 						Skill ratPunch("Punch", 2, false, false, 0, "The rat jumps up and punches you in the neck");
 						Enemy rat("Rat", 10, 10, 10, { "" }, { ratPunch });
 						vector<Enemy> enemies = { rat };
-						fight(players, enemies, items);
+						fight(players, enemies, inventory.items);
 
 						cout << "The rat is now slumped against the wall, beaten. Its face contorts to one of anger and frustration." << endl;
 						cout << "The rat slams its clenched fist against the wall, making a quiet little \"thump\" before it retreats back" << endl;
@@ -351,10 +344,10 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 							cout << "You hold out the chicken nugget and the rat snatches it up faster than you could blink." << endl;
 							cout << "The next thing you know, the rat is back on the counter, nugget in hand. It looks at you" << endl;
 							cout << "and nods before heading off through a hole in the wall. It better enjoy that nugget." << endl << endl;
-							for (int i = 0; i < items.size(); i++)
+							for (int i = 0; i < inventory.items.size(); i++)
 							{
-								if (items[i].getName() == "Chicken Nugget")
-									items.erase(items.begin() + i);
+								if (inventory.items[i].getName() == "Chicken Nugget")
+									inventory.items.erase(inventory.items.begin() + i);
 							}
 							system("pause");
 						}
@@ -377,7 +370,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter. Lastly, there" << endl;
 				cout << "is the Brittle Door which you used to enter the kitchen in the first place.";
 				dblEndl();
-				checkInput(roomNum, players, items, keys, accessories, kitchen);
+				checkInput(roomNum, players, inventory, kitchen);
 				system("pause");
 			}
 		}
@@ -438,7 +431,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 				}
 			}
 
-			checkInput(roomNum, players, items, keys, accessories, fancyRoom);
+			checkInput(roomNum, players, inventory, fancyRoom);
 			system("pause");
 		}
 
@@ -451,7 +444,7 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 			cout << "and its light is weak and takes on a yellow hue. As you look around a bit more, you realize there is nothing else of" << endl;
 			cout << "note in this small room except for a Metal Door with a barred window at eye level.";
 			dblEndl();
-			checkInput(roomNum, players, items, keys, accessories, cellExterior);
+			checkInput(roomNum, players, inventory, cellExterior);
 			system("pause");
 		}
 
@@ -723,10 +716,9 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 			}
 			else
 			{
-				checkInput(roomNum, players, items, keys, accessories, cellInterior);
+				checkInput(roomNum, players, inventory, cellInterior);
 				system("pause");
 			}
-			
 		}
 	}
 }

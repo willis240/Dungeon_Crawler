@@ -7,31 +7,23 @@ using std::endl;
 using std::cin;
 using std::string;
 using std::vector;
+using std::shared_ptr;
 
 int main()
 {
 	Player player = startGame();
 	vector<Player> players = { player };
-	vector<Item> items{};
-	vector<Key> keys{};
-	vector<Accessory> accessories{};
+	Inventory inventory;
 
 	int floorNum = 0;
 	int roomNum = 0;
 
-	cout << players[0].accEquipped->getName() << endl;
-	system("pause");
-
 	//CODE FOR TESTING ACCESSORIES
-
+	/*
 	Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
-	accessories.push_back(placeholder);
 	std::shared_ptr<Accessory> placeholderPtr = std::make_shared<Accessory>(placeholder);
-	players[0].equipAccessory(placeholderPtr);
-	cout << players[0].accEquipped->getName() << endl;
-	cout << players[0].accEquipped->HP << endl;
-	cout << players[0].maxHP << endl;
-	system("pause");
+	inventory.accessories.push_back(placeholderPtr);
+	*/
 
 	//CODE FOR TESTING COMBAT
 	/*
@@ -58,6 +50,6 @@ int main()
 	victory(players, enemies);
 	*/
 
-	explore(players, floorNum, roomNum, items, keys, accessories);
+	explore(players, floorNum, roomNum, inventory);
 
 }
