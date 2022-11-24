@@ -199,6 +199,15 @@ void floor0(vector<Player>& players, int& roomNum, vector<Item>& items, vector<K
 			if (seeOpening)
 			{
 				system("CLS");
+
+				cout << players[0].accEquipped->getName() << endl;
+				cout << players[0].accEquipped->HP << endl;
+				cout << players[0].maxHP << endl;
+				//players[0].unequipAccessory();
+				cout << players[0].accEquipped->getName() << endl;
+				cout << players[0].accEquipped->HP << endl;
+				cout << players[0].maxHP << endl;
+
 				cout << "You wake up in a room just large enough that you can lie down and not touch" << endl;
 				cout << "any walls. There is a door right in front of you, and a rat munching on some cheese" << endl;
 				cout << "in the corner. What do you do?" << endl << endl;

@@ -10,8 +10,6 @@ using std::vector;
 
 int main()
 {
-	//Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
-
 	Player player = startGame();
 	vector<Player> players = { player };
 	vector<Item> items{};
@@ -21,8 +19,12 @@ int main()
 	int floorNum = 0;
 	int roomNum = 0;
 
+	cout << players[0].accEquipped->getName() << endl;
+	system("pause");
+
 	//CODE FOR TESTING ACCESSORIES
-	/*
+
+	Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
 	accessories.push_back(placeholder);
 	std::shared_ptr<Accessory> placeholderPtr = std::make_shared<Accessory>(placeholder);
 	players[0].equipAccessory(placeholderPtr);
@@ -30,7 +32,6 @@ int main()
 	cout << players[0].accEquipped->HP << endl;
 	cout << players[0].maxHP << endl;
 	system("pause");
-	*/
 
 	//CODE FOR TESTING COMBAT
 	/*

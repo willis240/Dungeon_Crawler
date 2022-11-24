@@ -22,7 +22,7 @@ void Player::unequipAccessory()
 	maxHP -= accEquipped->HP;
 	maxSP -= accEquipped->SP;
 	str -= accEquipped->str;
-	accEquipped = NULL;
+	accEquipped = nothingPtr;
 }
 
 void Player::restoreHP(int& healedHP)

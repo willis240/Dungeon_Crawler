@@ -59,6 +59,8 @@ public:
 	int keyNum = 0;
 	bool beenDiscovered = true;
 
+	Accessory() : name("Nothing"), description("Just nothing"), HP(0), SP(0), str(0) {};
+
 	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
 		name(inputName), description(inputDescription), HP(inputHP), SP(inputSP), str(inputStr) {};
 
@@ -73,7 +75,7 @@ private:
 	std::string name;
 
 public:
-	//Member Variables
+	//Stats
 	int maxHP;
 	int currentHP;
 	int maxSP;
@@ -82,9 +84,15 @@ public:
 	int exp = 0;
 	int lv = 1;
 	int lvEXP = 20;
-	Direction guardDirection = noDirection;
-	std::shared_ptr<Accessory> accEquipped = NULL;
 
+	Direction guardDirection = noDirection;
+
+	//Equipment
+	Accessory nothing;
+	std::shared_ptr<Accessory> nothingPtr = std::make_shared<Accessory>(nothing);
+	std::shared_ptr<Accessory> accEquipped = nothingPtr;
+
+	//Member Vectors
 	std::vector<std::string> exploreOptions{"help", "check", "enter", "inv"};
 	std::vector<std::string> actions{"Attack", "Skills", "Items", "Defend"};
 	std::vector<Skill> skills;
