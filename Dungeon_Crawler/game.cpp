@@ -55,7 +55,7 @@ Player startGame()
 	}
 	
 	Skill punch("Punch", 3, false, false, 2, "You throw your clenched fist into your foe!");
-	Player player(playerName, 10, 10, {punch});
+	Player player(playerName, 0, 10, 10, {punch});
 
 	cout << "Ah, " << player.getName() << "! I like it." << endl << endl;
 	system("pause");
@@ -367,7 +367,10 @@ void displayAccessories(vector<shared_ptr<Accessory>>& accessories)
 			{
 				if (accessories[i]->beenDiscovered)
 				{
-					cout << "    " << accessories[i]->getName() << endl;
+					cout << "    ";
+					if (accessories[i]->equippedNum != -1)
+						cout << "[E] ";
+					cout << accessories[i]->getName() << endl;
 				}
 			}
 			cout << endl;
@@ -680,12 +683,14 @@ void equipGear(vector<Player>& players, Inventory& inventory, string& argument)
 					{
 						cout << endl;
 						players[recipientNum].equipAccessory(inventory.accessories[i]);
+						inventory.accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
 						cout << players[recipientNum].getName() << " equipped the " << inventory.accessories[i]->getName() << ".";
 					}
 					else if(input == 1)
 					{
 						players[currentOwner].unequipAccessory();
 						players[recipientNum].equipAccessory(inventory.accessories[i]);
+						inventory.accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
 						cout << players[recipientNum].getName() << " equipped the " << inventory.accessories[i]->getName() << ".";
 					}
 					else

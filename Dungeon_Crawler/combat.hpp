@@ -57,6 +57,7 @@ public:
 	int SP;
 	int str;
 	int keyNum = 0;
+	int equippedNum = -1;
 	bool beenDiscovered = true;
 
 	Accessory() : name("Nothing"), description("Just nothing"), HP(0), SP(0), str(0) {};
@@ -73,6 +74,7 @@ class Player
 {
 private:
 	std::string name;
+	int playerNum;
 
 public:
 	//Stats
@@ -99,6 +101,7 @@ public:
 
 	//Member Functions
 	std::string getName() { return name; };
+	int getPlayerNum() { return playerNum; };
 	void equipAccessory(std::shared_ptr<Accessory> accToEquip);
 	void unequipAccessory();
 	void restoreHP(int& healedHP);
@@ -107,9 +110,9 @@ public:
 	void reduceSP(int& lostSP);
 
 	//Constructors
-	Player(std::string inputName, int inputMaxHP, int inputMaxSP, std::vector<Skill> inputSkills) :
-		name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP), skills(inputSkills) {};
-
+	Player(std::string inputName, int inputPlayerNum, int inputMaxHP, int inputMaxSP, std::vector<Skill> inputSkills) :
+		name(inputName), playerNum(inputPlayerNum), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP),
+		currentSP(inputMaxSP), skills(inputSkills) {};
 };
 
 class Enemy

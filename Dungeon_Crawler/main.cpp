@@ -16,14 +16,14 @@ int main()
 	Inventory inventory;
 
 	int floorNum = 0;
-	int roomNum = 0;
+	int roomNum = 5;
 
 	//CODE FOR TESTING ACCESSORIES
-	/*
+	
 	Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
 	std::shared_ptr<Accessory> placeholderPtr = std::make_shared<Accessory>(placeholder);
 	inventory.accessories.push_back(placeholderPtr);
-	*/
+	
 
 	//CODE FOR TESTING COMBAT
 	/*

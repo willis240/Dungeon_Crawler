@@ -190,7 +190,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 	Room cellExterior(4, "Cell Exterior", {}, { barSecretPassagePtr, metalDoorPtr }, {}, {});
 
 	//Room 5: The Cell Interior
-	Player Selena("Selena", 7, 13, {});
+	Player Selena("Selena", 1, 7, 13, {});
 	Room cellInterior(5, "Cell Interior", {}, { metalDoorPtr }, {}, {});
 
 	while (true)
