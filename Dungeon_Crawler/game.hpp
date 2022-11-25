@@ -165,7 +165,8 @@ void useItems(std::vector<Player>& players, std::vector<Item>& items, std::strin
 void useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);
-void equipGear(std::vector<Player>& players, Inventory& inventory, std::string& argument);
+void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
+void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
 void teamUp(int& i, Inventory& inventory, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, Inventory& inventory);
 void floor0(std::vector<Player>& players, int& roomNum, Inventory& inventory);
