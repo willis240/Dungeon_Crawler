@@ -312,7 +312,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 						dblEndl();
 						system("pause");
 
-						Skill ratPunch("Punch", 2, false, false, 0, "The rat jumps up and punches you in the neck");
+						Skill ratPunch("Punch", 2, false, false, 0, right, "The rat jumps up and punches you in the neck");
 						Enemy rat("Rat", 10, 10, 10, { "" }, { ratPunch });
 						vector<Enemy> enemies = { rat };
 						fight(players, enemies, inventory.items);

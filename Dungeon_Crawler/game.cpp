@@ -246,21 +246,7 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 {
 	while (true)
 	{
-		int spacing = 0;
-		for (int i = 0; i < players.size(); i++)
-		{
-			cout << players[i].getName();
-			spacing = players[i].getName().size();
-			displaySpacing(spacing, 10);
-			cout << "HP: " << players[i].currentHP << " / " << players[i].maxHP;
-			spacing = findDigits(players[i].currentHP);
-			spacing += 6;
-			spacing += findDigits(players[i].maxHP);
-			displaySpacing(spacing, 13);
-			cout << "SP: " << players[i].currentSP << " / " << players[i].maxSP << "    ";
-			cout << endl;
-		}
-		cout << endl;
+		displayInventoryHeader(players);
 		displayItems(inventory.items);
 		displayKeys(inventory.keys);
 		displayAccessories(inventory.accessories);
@@ -290,18 +276,26 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 			break;
 
 		if (command == "help")
-			showInvHelp(players);
+		{
+			showInvHelp(players, inventory);
+			system("pause");
+		}
 
 		if (command == "check")
 		{
 			checkItems(inventory, argument);
 			checkKeys(inventory, argument);
+			system("pause");
 		}
 		
 		if (command == "use")
 		{
+			bool exitInv = false;
 			useItems(players, inventory.items, argument);
-			useKeys(players, inventory, room, argument);
+			exitInv = useKeys(players, inventory, room, argument);
+			if (exitInv)
+				return;
+			system("pause");
 		}
 
 		if (players.size() > 1)
@@ -310,16 +304,47 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 			{
 				showItems(players, inventory.items, argument);
 				showKeys(players, inventory, argument);
+				system("pause");
 			}
 		}
 
 		if (command == "equip")
+		{
 			equipGear(players, inventory.accessories, argument);
+			system("pause");
+		}
 
 		if (command == "unequip")
+		{
 			unequipGear(players, inventory.accessories, argument);
+			system("pause");
+		}
 
+		system("CLS");
 	}
+}
+
+void displayInventoryHeader(vector<Player>& players)
+{
+	int spacing = 0;
+	cout << "-------------" << endl;
+	cout << "- INVENTORY -" << endl;
+	cout << "-------------" << endl << endl;
+
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << players[i].getName();
+		spacing = players[i].getName().size();
+		displaySpacing(spacing, 11);
+		cout << "HP: " << players[i].currentHP << " / " << players[i].maxHP;
+		spacing = findDigits(players[i].currentHP);
+		spacing += 6;
+		spacing += findDigits(players[i].maxHP);
+		displaySpacing(spacing, 13);
+		cout << "SP: " << players[i].currentSP << " / " << players[i].maxSP << "    ";
+		cout << endl;
+	}
+	cout << endl;
 }
 
 void displayItems(vector<Item>& items)
@@ -381,14 +406,21 @@ void displayAccessories(vector<shared_ptr<Accessory>>& accessories)
 	}
 }
 
-void showInvHelp(vector<Player>& players)
+void showInvHelp(vector<Player>& players, Inventory& inventory)
 {
 	cout << endl;
 	cout << "check (item/key) -- observe the item or key more closely" << endl;
-	cout << "use (item)       -- use an item to restore your vitals to their former glory" << endl;
-	cout << "use (key)        -- use a key item to open the path forward" << endl;
+	cout << "use (item/key)   -- use an item to heal or key item to progress" << endl;
 	if (players.size() > 1)
 		cout << "show (item/key)  -- show the item or key to a party member so they may identify it" << endl;
+	if (inventory.accessories.size() > 0)
+	{
+		if (inventory.accessories[0]->beenDiscovered)
+		{
+			cout << "equip (gear)     -- equip gear to a party member to affect their stats" << endl;
+			cout << "unequip (gear)   -- unequip gear to remove its affects from that party member" << endl;
+		}
+	}
 	cout << "back             -- exit your inventory to continue your exploration" << endl;
 	cout << endl;
 }
@@ -457,7 +489,7 @@ void useItems(vector<Player>& players, vector<Item>& items, string& argument)
 	cout << endl;
 }
 
-void useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& argument)
+bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& argument)
 {
 	for (int i = 0; i < inventory.keys.size(); i++)
 	{
@@ -472,7 +504,7 @@ void useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 			getline(cin, input);
 
 			if (input == "back")
-				return;
+				return true;
 
 			for (int ii = 0; ii < room.doors.size(); ii++)
 			{
@@ -488,20 +520,21 @@ void useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 								cout << "You used the " << inventory.keys[i].name << " and unlocked the " << room.doors[ii]->name << ".";
 								dblEndl();
 								inventory.keys.erase(inventory.keys.begin() + i);
+								return true;
 							}
 							else
 							{
 								cout << "Unfortunately, the " << inventory.keys[i].name << " does not fit in the " << room.doors[ii]->name << ".";
 								dblEndl();
+								return false;
 							}
-							return;
 						}
 					}
 					else
 					{
 						cout << "Actually, the " << room.doors[ii]->name << " is already unlocked.";
 						dblEndl();
-						return;
+						return true;
 					}
 				}
 			}
@@ -544,12 +577,13 @@ void useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 										room.doors[iii]->isVisible = true;
 								}
 							}
-							return;
+							return true;
 						}
 					}
 				}
 			}
 		}
+		return false;
 	}
 }
 
