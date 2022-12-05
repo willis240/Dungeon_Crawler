@@ -122,7 +122,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 		"as if you were some sort of tornado. Upon opening the last one you stand in the center of the room and gaze upon \n"
 		"all of the open cabinets. Most of them have dust and crumbs but not much else. Finding it hard to believe that \n"
 		"you wouldn't at least get SOMETHING for your efforts, you decide to scrutinize the cabinets further. \n \n"
-		"Aha! In the back corner of one of the cabinets is a small Iron Ring.",
+		"Aha! In the back corner of one of the cabinets is a Small Ring.",
 		true, false, 0, 4);
 	Room kitchen(2, "Kitchen", { refrigerator, pantry, oven, cabinets }, { brittleDoorPtr }, { chickenNugget, applePie },
 		{ rawApplePie, whiteKey, smallRing }, { ironRingPtr });

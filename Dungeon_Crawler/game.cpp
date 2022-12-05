@@ -583,8 +583,8 @@ bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 				}
 			}
 		}
-		return false;
 	}
+	return false;
 }
 
 void showItems(vector<Player>& players, vector<Item>& items, string& argument)

@@ -36,16 +36,7 @@ public:
 		description(inputDescription) {};
 };
 
-class Weapon
-{
-public:
-	std::string name;
-	int might;
-
-	Weapon(std::string inputName, int inputMight) : name(inputName), might(inputMight) {};
-};
-
-class Accessory
+class Equipment
 {
 private:
 	std::string name;
@@ -60,14 +51,24 @@ public:
 	int equippedNum = -1;
 	bool beenDiscovered = true;
 
-	Accessory() : name("Nothing"), description("Just nothing"), HP(0), SP(0), str(0) {};
+	Equipment() : name("Nothing"), description("Just nothing"), HP(0), SP(0), str(0) {};
 
-	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
+	Equipment(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
 		name(inputName), description(inputDescription), HP(inputHP), SP(inputSP), str(inputStr) {};
 
-	Accessory(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr,
+	Equipment(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr,
 		int inputKeyNum, bool inputBeenDiscovered) : name(inputName), description(inputDescription), HP(inputHP),
 		SP(inputSP), str(inputStr), keyNum(inputKeyNum), beenDiscovered(inputBeenDiscovered) {};
+};
+
+class Weapon : public Equipment
+{
+	using Equipment::Equipment;
+};
+
+class Accessory : public Equipment
+{
+	using Equipment::Equipment;
 };
 
 class Player
