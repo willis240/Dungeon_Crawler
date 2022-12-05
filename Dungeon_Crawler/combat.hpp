@@ -91,6 +91,9 @@ public:
 	Direction guardDirection = noDirection;
 
 	//Equipment
+	Weapon noWeapon;
+	std::shared_ptr<Weapon> noWeaponPtr = std::make_shared<Weapon>(noWeapon);
+	std::shared_ptr<Weapon> weaponEquipped = noWeaponPtr;
 	Accessory nothing;
 	std::shared_ptr<Accessory> nothingPtr = std::make_shared<Accessory>(nothing);
 	std::shared_ptr<Accessory> accEquipped = nothingPtr;
@@ -103,6 +106,8 @@ public:
 	//Member Functions
 	std::string getName() { return name; };
 	int getPlayerNum() { return playerNum; };
+	void equipWeapon(std::shared_ptr<Weapon> weaponToEquip);
+	void unequipWeapon();
 	void equipAccessory(std::shared_ptr<Accessory> accToEquip);
 	void unequipAccessory();
 	void restoreHP(int& healedHP);

@@ -31,7 +31,7 @@ public:
 		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 };
 
-enum Gear {notGear, weapon, armor, accessory};
+enum GearType {notGear, weapon, armor, accessory};
 
 class Key
 {
@@ -44,7 +44,7 @@ public:
 	bool purposeKnown = true;
 	std::string personWithExpertise = "";
 	std::string expertiseDescription = "";
-	Gear actuallyGear = notGear;
+	GearType actuallyGear = notGear;
 	
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
 		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
@@ -54,7 +54,7 @@ public:
 		personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 
 	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, std::string inputPersonWithExpertise,
-		std::string inputExpertiseDescription, Gear inputActuallyGear) : keyNum(inputKeyNum), name(inputName), description(inputDescription),
+		std::string inputExpertiseDescription, GearType inputActuallyGear) : keyNum(inputKeyNum), name(inputName), description(inputDescription),
 		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription),
 		actuallyGear(inputActuallyGear) {};
 };
@@ -64,6 +64,7 @@ class Inventory
 public:
 	std::vector<Item> items;
 	std::vector<Key> keys;
+	std::vector<std::shared_ptr<Weapon>> weapons;
 	std::vector<std::shared_ptr<Accessory>> accessories;
 
 	Inventory() {};
@@ -166,8 +167,10 @@ void useItems(std::vector<Player>& players, std::vector<Item>& items, std::strin
 bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);
-void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
-void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
+void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::vector<std::shared_ptr<Weapon>>& weapons, 
+	std::string& argument);
+void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::vector<std::shared_ptr<Weapon>>& weapons,
+	std::string& argument);
 void teamUp(int& i, Inventory& inventory, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, Inventory& inventory);
 void floor0(std::vector<Player>& players, int& roomNum, Inventory& inventory);

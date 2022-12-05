@@ -18,11 +18,11 @@ int main()
 	int floorNum = 0;
 	int roomNum = 0;
 
-	//CODE FOR TESTING ACCESSORIES
+	//CODE FOR TESTING WEAPONS
 	/*
-	Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
-	std::shared_ptr<Accessory> placeholderPtr = std::make_shared<Accessory>(placeholder);
-	inventory.accessories.push_back(placeholderPtr);
+	Weapon placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
+	std::shared_ptr<Weapon> placeholderPtr = std::make_shared<Weapon>(placeholder);
+	inventory.weapons.push_back(placeholderPtr);
 	*/
 
 	//CODE FOR TESTING COMBAT

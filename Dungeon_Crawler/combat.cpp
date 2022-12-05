@@ -9,6 +9,22 @@ using std::string;
 using std::vector;
 using std::map;
 
+void Player::equipWeapon(std::shared_ptr<Weapon> weaponToEquip)
+{
+	weaponEquipped = std::move(weaponToEquip);
+	maxHP += weaponEquipped->HP;
+	maxSP += weaponEquipped->SP;
+	str += weaponEquipped->str;
+}
+
+void Player::unequipWeapon()
+{
+	maxHP -= weaponEquipped->HP;
+	maxSP -= weaponEquipped->SP;
+	str -= weaponEquipped->str;
+	weaponEquipped = noWeaponPtr;
+}
+
 void Player::equipAccessory(std::shared_ptr<Accessory> accToEquip)
 {
 	accEquipped = std::move(accToEquip);
