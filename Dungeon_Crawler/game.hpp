@@ -159,6 +159,8 @@ void checkInventory(std::vector<Player>& players, Inventory& inventory, Room& ro
 void displayInventoryHeader(std::vector<Player>& players);
 void displayItems(std::vector<Item>& items);
 void displayKeys(std::vector<Key>& keys);
+void displayGear(std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Accessory>>& accessories);
+void displayWeapons(std::vector<std::shared_ptr<Weapon>>& weapons);
 void displayAccessories(std::vector<std::shared_ptr<Accessory>>& accessories);
 void showInvHelp(std::vector<Player>& players, Inventory& inventory);
 void checkItems(Inventory& inventory, std::string& argument);

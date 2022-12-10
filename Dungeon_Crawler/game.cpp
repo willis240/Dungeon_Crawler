@@ -249,7 +249,7 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 		displayInventoryHeader(players);
 		displayItems(inventory.items);
 		displayKeys(inventory.keys);
-		displayAccessories(inventory.accessories);
+		displayGear(inventory.weapons, inventory.accessories);
 
 		cout << "Call for \"help\" if you need to know how to work with your inventory";
 		dblEndl();
@@ -381,6 +381,92 @@ void displayKeys(vector<Key>& keys)
 	{
 		cout << "    none";
 		dblEndl();
+	}
+}
+
+void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Accessory>>& accessories)
+{
+	int spacing = 0;
+	int spaceMax = 25;
+	int iterLimit;
+	if (accessories.size() > 0)
+	{
+		if (accessories[0]->beenDiscovered)
+		{
+			cout << "    WEAPONS";
+			spacing = 7;
+			displaySpacing(spacing, spaceMax);
+			cout << "ACCESSORIES";
+			spacing = 11;
+			displaySpacing(spacing, spaceMax);
+			cout << "ARMOR" << endl;
+
+			if (accessories.size() < weapons.size())
+				iterLimit = weapons.size();
+			else
+				iterLimit = accessories.size();
+
+			for (int i = 0; i < iterLimit; i++)
+			{
+				cout << "    ";
+				if (weapons.size() > i)
+				{
+					if (weapons[i]->equippedNum != -1)
+						cout << "[E] ";
+					cout << weapons[i]->getName();
+					spacing = weapons[i]->getName().length();
+				}
+				else
+					spacing = 0;
+				displaySpacing(spacing, spaceMax);
+
+				if (accessories.size() > i)
+				{
+					if (accessories[i]->equippedNum != -1)
+						cout << "[E] ";
+					cout << accessories[i]->getName();
+					spacing = accessories[i]->getName().length();
+				}
+				else
+					spacing = 0;
+				displaySpacing(spacing, spaceMax);
+
+				/*
+				if (armors.size() > i)
+				{
+					cout << armors[0]->getName();
+					spacing = armors[0]->getName().length();
+				}
+				else
+					spacing = 0;
+				displaySpacing(spacing, spaceMax);
+				*/
+				cout << endl;
+			}
+			cout << endl;
+		}
+	}
+}
+
+void displayWeapons(vector<shared_ptr<Weapon>>& weapons)
+{
+	if (weapons.size() > 0)
+	{
+		if (weapons[0]->beenDiscovered)
+		{
+			cout << "    WEAPONS" << endl;
+			for (int i = 0; i < weapons.size(); i++)
+			{
+				if (weapons[i]->beenDiscovered)
+				{
+					cout << "    ";
+					if (weapons[i]->equippedNum != -1)
+						cout << "[E] ";
+					cout << weapons[i]->getName() << endl;
+				}
+			}
+			cout << endl;
+		}
 	}
 }
 

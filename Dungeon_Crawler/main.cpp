@@ -18,17 +18,21 @@ int main()
 	int floorNum = 0;
 	int roomNum = 0;
 
-	//CODE FOR TESTING WEAPONS
-	
-	Weapon placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
-	std::shared_ptr<Weapon> placeholderPtr = std::make_shared<Weapon>(placeholder);
-	inventory.weapons.push_back(placeholderPtr);
-	
+	//CODE FOR TESTING GEAR
 	/*
+	Weapon stabbyThingy("Stabby Thingy", "Just a thing for stabbing", 1, 2, 3);
+	std::shared_ptr<Weapon> stabbyThingyPtr = std::make_shared<Weapon>(stabbyThingy);
+	inventory.weapons.push_back(stabbyThingyPtr);
+	
 	Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
 	std::shared_ptr<Accessory> placeholderPtr = std::make_shared<Accessory>(placeholder);
 	inventory.accessories.push_back(placeholderPtr);
+
+	Accessory placeholder2("Placeholder2", "Just a placeholder2", 1, 2, 3);
+	std::shared_ptr<Accessory> placeholder2Ptr = std::make_shared<Accessory>(placeholder2);
+	inventory.accessories.push_back(placeholder2Ptr);
 	*/
+
 	//CODE FOR TESTING COMBAT
 	/*
 	Skill ratPunch("Punch", 2, false, false, 0, right, "The rat jumps up and punches you in the neck");
