@@ -754,7 +754,7 @@ void equipGear(vector<Player>& players, vector<shared_ptr<Accessory>>& accessori
 				{
 					if (players[ii].getName() == recipient)
 						recipientNum = ii;
-					if (players[ii].accEquipped->getName() == weapons[i]->getName())
+					if (players[ii].weaponEquipped->getName() == weapons[i]->getName())
 					{
 						currentOwner = ii;
 						cout << endl;
