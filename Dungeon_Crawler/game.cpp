@@ -249,7 +249,7 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 		displayInventoryHeader(players);
 		displayItems(inventory.items);
 		displayKeys(inventory.keys);
-		displayGear(inventory.weapons, inventory.accessories);
+		displayGear(inventory.weapons, inventory.armors, inventory.accessories);
 
 		cout << "Call for \"help\" if you need to know how to work with your inventory";
 		dblEndl();
@@ -310,13 +310,13 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 
 		if (command == "equip")
 		{
-			equipGear(players, inventory.accessories, inventory.weapons, argument);
+			equipGear(players, inventory.weapons, inventory.armors, inventory.accessories, argument);
 			system("pause");
 		}
 
 		if (command == "unequip")
 		{
-			unequipGear(players, inventory.accessories, inventory.weapons, argument);
+			unequipGear(players, inventory.weapons, inventory.armors, inventory.accessories, argument);
 			system("pause");
 		}
 
@@ -384,7 +384,7 @@ void displayKeys(vector<Key>& keys)
 	}
 }
 
-void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Accessory>>& accessories)
+void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>& armors, vector<shared_ptr<Accessory>>& accessories)
 {
 	int spacing = 0;
 	int spaceMax = 25;
@@ -396,10 +396,10 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Accessor
 			cout << "    WEAPONS";
 			spacing = 7;
 			displaySpacing(spacing, spaceMax);
-			cout << "ACCESSORIES";
-			spacing = 11;
+			cout << "ARMOR";
+			spacing = 5;
 			displaySpacing(spacing, spaceMax);
-			cout << "ARMOR" << endl;
+			cout << "ACCESSORIES" << endl;
 
 			if (accessories.size() < weapons.size())
 				iterLimit = weapons.size();
@@ -420,6 +420,15 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Accessor
 					spacing = 0;
 				displaySpacing(spacing, spaceMax);
 
+				if (armors.size() > i)
+				{
+					cout << armors[0]->getName();
+					spacing = armors[0]->getName().length();
+				}
+				else
+					spacing = 0;
+				displaySpacing(spacing, spaceMax);
+				
 				if (accessories.size() > i)
 				{
 					if (accessories[i]->equippedNum != -1)
@@ -430,17 +439,6 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Accessor
 				else
 					spacing = 0;
 				displaySpacing(spacing, spaceMax);
-
-				/*
-				if (armors.size() > i)
-				{
-					cout << armors[0]->getName();
-					spacing = armors[0]->getName().length();
-				}
-				else
-					spacing = 0;
-				displaySpacing(spacing, spaceMax);
-				*/
 				cout << endl;
 			}
 			cout << endl;
@@ -767,65 +765,13 @@ void showKeys(vector<Player>& players, Inventory& inventory, string& argument)
 	}
 }
 
-void equipGear(vector<Player>& players, vector<shared_ptr<Accessory>>& accessories, vector<shared_ptr<Weapon>>& weapons, string& argument)
+void equipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>& armors, 
+	vector<shared_ptr<Accessory>>& accessories, string& argument)
 {
 	string recipient = "";
 	int recipientNum = -1;
 	int currentOwner = -1;
 	int input = 0;
-	for (int i = 0; i < accessories.size(); i++)
-	{
-		if (argument == accessories[i]->getName())
-		{
-			if (accessories[i]->beenDiscovered)
-			{
-				cout << "Equip to who?" << endl;
-				getline(cin, recipient);
-
-				for (int ii = 0; ii < players.size(); ii++)
-				{
-					if (players[ii].getName() == recipient)
-						recipientNum = ii;
-					if (players[ii].accEquipped->getName() == accessories[i]->getName())
-					{
-						currentOwner = ii;
-						cout << endl;
-						cout << players[ii].getName() << " already has this equipped. Would you like to take it from them?" << endl;
-						cout << "(1) Yes" << endl;
-						cout << "(2) No" << endl;
-						input = getDecision(1, 2);
-
-						if (recipientNum != -1)
-							break;
-					}
-				}
-
-				if (recipientNum != -1)
-				{
-					if(input == 0)
-					{
-						cout << endl;
-						players[recipientNum].equipAccessory(accessories[i]);
-						accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
-						cout << players[recipientNum].getName() << " equipped the " << accessories[i]->getName() << ".";
-					}
-					else if(input == 1)
-					{
-						players[currentOwner].unequipAccessory();
-						players[recipientNum].equipAccessory(accessories[i]);
-						accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
-						cout << players[recipientNum].getName() << " equipped the " << accessories[i]->getName() << ".";
-					}
-					else
-					{
-						cout << "The " << accessories[i]->getName() << " remains on " << players[currentOwner].getName() << ".";
-					}
-					dblEndl();
-				}
-			}
-			return;
-		}
-	}
 
 	for (int i = 0; i < weapons.size(); i++)
 	{
@@ -880,32 +826,119 @@ void equipGear(vector<Player>& players, vector<shared_ptr<Accessory>>& accessori
 			return;
 		}
 	}
-}
+	
+	for (int i = 0; i < armors.size(); i++)
+	{
+		if (argument == armors[i]->getName())
+		{
+			if (armors[i]->beenDiscovered)
+			{
+				cout << "Equip to who?" << endl;
+				getline(cin, recipient);
 
-void unequipGear(vector<Player>& players, vector<shared_ptr<Accessory>>& accessories, vector<shared_ptr<Weapon>>& weapons, string& argument)
-{
+				for (int ii = 0; ii < players.size(); ii++)
+				{
+					if (players[ii].getName() == recipient)
+						recipientNum = ii;
+					if (players[ii].armorEquipped->getName() == armors[i]->getName())
+					{
+						currentOwner = ii;
+						cout << endl;
+						cout << players[ii].getName() << " already has this equipped. Would you like to take it from them?" << endl;
+						cout << "(1) Yes" << endl;
+						cout << "(2) No" << endl;
+						input = getDecision(1, 2);
+
+						if (recipientNum != -1)
+							break;
+					}
+				}
+
+				if (recipientNum != -1)
+				{
+					if (input == 0)
+					{
+						cout << endl;
+						players[recipientNum].equipArmor(armors[i]);
+						armors[i]->equippedNum = players[recipientNum].getPlayerNum();
+						cout << players[recipientNum].getName() << " equipped the " << armors[i]->getName() << ".";
+					}
+					else if (input == 1)
+					{
+						players[currentOwner].unequipArmor();
+						players[recipientNum].equipArmor(armors[i]);
+						armors[i]->equippedNum = players[recipientNum].getPlayerNum();
+						cout << players[recipientNum].getName() << " equipped the " << armors[i]->getName() << ".";
+					}
+					else
+					{
+						cout << "The " << armors[i]->getName() << " remains on " << players[currentOwner].getName() << ".";
+					}
+					dblEndl();
+				}
+			}
+			return;
+		}
+	}
+
 	for (int i = 0; i < accessories.size(); i++)
 	{
 		if (argument == accessories[i]->getName())
 		{
 			if (accessories[i]->beenDiscovered)
 			{
-				if (accessories[i]->equippedNum != -1)
+				cout << "Equip to who?" << endl;
+				getline(cin, recipient);
+
+				for (int ii = 0; ii < players.size(); ii++)
 				{
-					for (int ii = 0; ii < players.size(); ii++)
+					if (players[ii].getName() == recipient)
+						recipientNum = ii;
+					if (players[ii].accEquipped->getName() == accessories[i]->getName())
 					{
-						if (players[ii].getPlayerNum() == accessories[i]->equippedNum)
-						{
-							players[ii].unequipAccessory();
-							accessories[i]->equippedNum = -1;
-							return;
-						}
+						currentOwner = ii;
+						cout << endl;
+						cout << players[ii].getName() << " already has this equipped. Would you like to take it from them?" << endl;
+						cout << "(1) Yes" << endl;
+						cout << "(2) No" << endl;
+						input = getDecision(1, 2);
+
+						if (recipientNum != -1)
+							break;
 					}
 				}
+
+				if (recipientNum != -1)
+				{
+					if(input == 0)
+					{
+						cout << endl;
+						players[recipientNum].equipAccessory(accessories[i]);
+						accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
+						cout << players[recipientNum].getName() << " equipped the " << accessories[i]->getName() << ".";
+					}
+					else if(input == 1)
+					{
+						players[currentOwner].unequipAccessory();
+						players[recipientNum].equipAccessory(accessories[i]);
+						accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
+						cout << players[recipientNum].getName() << " equipped the " << accessories[i]->getName() << ".";
+					}
+					else
+					{
+						cout << "The " << accessories[i]->getName() << " remains on " << players[currentOwner].getName() << ".";
+					}
+					dblEndl();
+				}
 			}
+			return;
 		}
 	}
+}
 
+void unequipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>& armors,
+	vector<shared_ptr<Accessory>>& accessories,  string& argument)
+{
 	for (int i = 0; i < weapons.size(); i++)
 	{
 		if (argument == weapons[i]->getName())
@@ -920,6 +953,56 @@ void unequipGear(vector<Player>& players, vector<shared_ptr<Accessory>>& accesso
 						{
 							players[ii].unequipWeapon();
 							weapons[i]->equippedNum = -1;
+							cout << players[ii].getName() << " unequipped the " << weapons[i]->getName() << ".";
+							dblEndl();
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	for (int i = 0; i < armors.size(); i++)
+	{
+		if (argument == armors[i]->getName())
+		{
+			if (armors[i]->beenDiscovered)
+			{
+				if (armors[i]->equippedNum != -1)
+				{
+					for (int ii = 0; ii < players.size(); ii++)
+					{
+						if (players[ii].getPlayerNum() == armors[i]->equippedNum)
+						{
+							players[ii].unequipArmor();
+							armors[i]->equippedNum = -1;
+							cout << players[ii].getName() << " unequipped the " << armors[i]->getName() << ".";
+							dblEndl();
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < accessories.size(); i++)
+	{
+		if (argument == accessories[i]->getName())
+		{
+			if (accessories[i]->beenDiscovered)
+			{
+				if (accessories[i]->equippedNum != -1)
+				{
+					for (int ii = 0; ii < players.size(); ii++)
+					{
+						if (players[ii].getPlayerNum() == accessories[i]->equippedNum)
+						{
+							players[ii].unequipAccessory();
+							accessories[i]->equippedNum = -1;
+							cout << players[ii].getName() << " unequipped the " << accessories[i]->getName() << ".";
+							dblEndl();
 							return;
 						}
 					}

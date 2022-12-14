@@ -25,6 +25,22 @@ void Player::unequipWeapon()
 	weaponEquipped = noWeaponPtr;
 }
 
+void Player::equipArmor(std::shared_ptr<Armor> armorToEquip)
+{
+	armorEquipped = std::move(armorToEquip);
+	maxHP += armorEquipped->HP;
+	maxSP += armorEquipped->SP;
+	str += armorEquipped->str;
+}
+
+void Player::unequipArmor()
+{
+	maxHP -= armorEquipped->HP;
+	maxSP -= armorEquipped->SP;
+	str -= armorEquipped->str;
+	armorEquipped = noArmorPtr;
+}
+
 void Player::equipAccessory(std::shared_ptr<Accessory> accToEquip)
 {
 	accEquipped = std::move(accToEquip);

@@ -65,6 +65,7 @@ public:
 	std::vector<Item> items;
 	std::vector<Key> keys;
 	std::vector<std::shared_ptr<Weapon>> weapons;
+	std::vector<std::shared_ptr<Armor>> armors;
 	std::vector<std::shared_ptr<Accessory>> accessories;
 
 	Inventory() {};
@@ -159,7 +160,7 @@ void checkInventory(std::vector<Player>& players, Inventory& inventory, Room& ro
 void displayInventoryHeader(std::vector<Player>& players);
 void displayItems(std::vector<Item>& items);
 void displayKeys(std::vector<Key>& keys);
-void displayGear(std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Accessory>>& accessories);
+void displayGear(std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors, std::vector<std::shared_ptr<Accessory>>& accessories);
 void displayWeapons(std::vector<std::shared_ptr<Weapon>>& weapons);
 void displayAccessories(std::vector<std::shared_ptr<Accessory>>& accessories);
 void showInvHelp(std::vector<Player>& players, Inventory& inventory);
@@ -169,10 +170,10 @@ void useItems(std::vector<Player>& players, std::vector<Item>& items, std::strin
 bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);
-void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::vector<std::shared_ptr<Weapon>>& weapons, 
-	std::string& argument);
-void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, std::vector<std::shared_ptr<Weapon>>& weapons,
-	std::string& argument);
+void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
+	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
+void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
+	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
 void teamUp(int& i, Inventory& inventory, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, Inventory& inventory);
 void floor0(std::vector<Player>& players, int& roomNum, Inventory& inventory);

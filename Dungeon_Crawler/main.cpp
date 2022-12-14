@@ -19,10 +19,13 @@ int main()
 	int roomNum = 0;
 
 	//CODE FOR TESTING GEAR
-	/*
 	Weapon stabbyThingy("Stabby Thingy", "Just a thing for stabbing", 1, 2, 3);
 	std::shared_ptr<Weapon> stabbyThingyPtr = std::make_shared<Weapon>(stabbyThingy);
 	inventory.weapons.push_back(stabbyThingyPtr);
+
+	Armor somePlate("Some Plate", "Some random piece of metal", 5, 0, 0);
+	std::shared_ptr<Armor> somePlatePtr = std::make_shared<Armor>(somePlate);
+	inventory.armors.push_back(somePlatePtr);
 	
 	Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
 	std::shared_ptr<Accessory> placeholderPtr = std::make_shared<Accessory>(placeholder);
@@ -31,7 +34,6 @@ int main()
 	Accessory placeholder2("Placeholder2", "Just a placeholder2", 1, 2, 3);
 	std::shared_ptr<Accessory> placeholder2Ptr = std::make_shared<Accessory>(placeholder2);
 	inventory.accessories.push_back(placeholder2Ptr);
-	*/
 
 	//CODE FOR TESTING COMBAT
 	/*

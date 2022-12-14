@@ -66,6 +66,11 @@ class Weapon : public Equipment
 	using Equipment::Equipment;
 };
 
+class Armor : public Equipment
+{
+	using Equipment::Equipment;
+};
+
 class Accessory : public Equipment
 {
 	using Equipment::Equipment;
@@ -94,6 +99,9 @@ public:
 	Weapon noWeapon;
 	std::shared_ptr<Weapon> noWeaponPtr = std::make_shared<Weapon>(noWeapon);
 	std::shared_ptr<Weapon> weaponEquipped = noWeaponPtr;
+	Armor noArmor;
+	std::shared_ptr<Armor> noArmorPtr = std::make_shared<Armor>(noArmor);
+	std::shared_ptr<Armor> armorEquipped = noArmorPtr;
 	Accessory nothing;
 	std::shared_ptr<Accessory> nothingPtr = std::make_shared<Accessory>(nothing);
 	std::shared_ptr<Accessory> accEquipped = nothingPtr;
@@ -108,6 +116,8 @@ public:
 	int getPlayerNum() { return playerNum; };
 	void equipWeapon(std::shared_ptr<Weapon> weaponToEquip);
 	void unequipWeapon();
+	void equipArmor(std::shared_ptr<Armor> armorToEquip);
+	void unequipArmor();
 	void equipAccessory(std::shared_ptr<Accessory> accToEquip);
 	void unequipAccessory();
 	void restoreHP(int& healedHP);
