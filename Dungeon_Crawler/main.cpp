@@ -16,22 +16,30 @@ int main()
 	Inventory inventory;
 
 	int floorNum = 0;
-	int roomNum = 0;
+	int roomNum = 5;
 
 	//CODE FOR TESTING GEAR
 	Weapon stabbyThingy("Stabby Thingy", "Just a thing for stabbing", 1, 2, 3);
 	std::shared_ptr<Weapon> stabbyThingyPtr = std::make_shared<Weapon>(stabbyThingy);
 	inventory.weapons.push_back(stabbyThingyPtr);
 
+	Weapon stabbyThingy2("Stabby Thingy 2", "Just a thing for stabbing", 0, 5, 3);
+	std::shared_ptr<Weapon> stabbyThingy2Ptr = std::make_shared<Weapon>(stabbyThingy2);
+	inventory.weapons.push_back(stabbyThingy2Ptr);
+
 	Armor somePlate("Some Plate", "Some random piece of metal", 5, 0, 0);
 	std::shared_ptr<Armor> somePlatePtr = std::make_shared<Armor>(somePlate);
 	inventory.armors.push_back(somePlatePtr);
+
+	Armor otherPlate("Other Plate", "Other random piece of metal", 8, -2, 0);
+	std::shared_ptr<Armor> otherPlatePtr = std::make_shared<Armor>(otherPlate);
+	inventory.armors.push_back(otherPlatePtr);
 	
 	Accessory placeholder("Placeholder", "Just a placeholder", 1, 2, 3);
 	std::shared_ptr<Accessory> placeholderPtr = std::make_shared<Accessory>(placeholder);
 	inventory.accessories.push_back(placeholderPtr);
 
-	Accessory placeholder2("Placeholder2", "Just a placeholder2", 1, 2, 3);
+	Accessory placeholder2("Placeholder2", "Just a placeholder2", 0, 3, 3);
 	std::shared_ptr<Accessory> placeholder2Ptr = std::make_shared<Accessory>(placeholder2);
 	inventory.accessories.push_back(placeholder2Ptr);
 

@@ -819,12 +819,16 @@ void equipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, vec
 					if (input == 0)
 					{
 						cout << endl;
+						players[recipientNum].weaponEquipped->equippedNum = -1;
+						players[recipientNum].unequipWeapon();
 						players[recipientNum].equipWeapon(weapons[i]);
 						weapons[i]->equippedNum = players[recipientNum].getPlayerNum();
 						cout << players[recipientNum].getName() << " equipped the " << weapons[i]->getName() << ".";
 					}
 					else if (input == 1)
 					{
+						players[recipientNum].weaponEquipped->equippedNum = -1;
+						players[recipientNum].unequipWeapon();
 						players[currentOwner].unequipWeapon();
 						players[recipientNum].equipWeapon(weapons[i]);
 						weapons[i]->equippedNum = players[recipientNum].getPlayerNum();
@@ -873,12 +877,16 @@ void equipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, vec
 					if (input == 0)
 					{
 						cout << endl;
+						players[recipientNum].armorEquipped->equippedNum = -1;
+						players[recipientNum].unequipArmor();
 						players[recipientNum].equipArmor(armors[i]);
 						armors[i]->equippedNum = players[recipientNum].getPlayerNum();
 						cout << players[recipientNum].getName() << " equipped the " << armors[i]->getName() << ".";
 					}
 					else if (input == 1)
 					{
+						players[recipientNum].armorEquipped->equippedNum = -1;
+						players[recipientNum].unequipArmor();
 						players[currentOwner].unequipArmor();
 						players[recipientNum].equipArmor(armors[i]);
 						armors[i]->equippedNum = players[recipientNum].getPlayerNum();
@@ -927,12 +935,16 @@ void equipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, vec
 					if(input == 0)
 					{
 						cout << endl;
+						players[recipientNum].accEquipped->equippedNum = -1;
+						players[recipientNum].unequipAccessory();
 						players[recipientNum].equipAccessory(accessories[i]);
 						accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
 						cout << players[recipientNum].getName() << " equipped the " << accessories[i]->getName() << ".";
 					}
 					else if(input == 1)
 					{
+						players[recipientNum].accEquipped->equippedNum = -1;
+						players[recipientNum].unequipAccessory();
 						players[currentOwner].unequipAccessory();
 						players[recipientNum].equipAccessory(accessories[i]);
 						accessories[i]->equippedNum = players[recipientNum].getPlayerNum();
