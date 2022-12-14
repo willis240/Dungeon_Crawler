@@ -412,9 +412,13 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 				if (weapons.size() > i)
 				{
 					if (weapons[i]->equippedNum != -1)
+					{
 						cout << "[E] ";
+						spacing = weapons[i]->getName().length() + 4;
+					}
+					else
+						spacing = weapons[i]->getName().length();
 					cout << weapons[i]->getName();
-					spacing = weapons[i]->getName().length();
 				}
 				else
 					spacing = 0;
@@ -422,8 +426,14 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 
 				if (armors.size() > i)
 				{
-					cout << armors[0]->getName();
-					spacing = armors[0]->getName().length();
+					if (armors[i]->equippedNum != -1)
+					{
+						cout << "[E] ";
+						spacing = armors[i]->getName().length() + 4;
+					}
+					else
+						spacing = armors[i]->getName().length();
+					cout << armors[i]->getName();
 				}
 				else
 					spacing = 0;
@@ -432,9 +442,13 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 				if (accessories.size() > i)
 				{
 					if (accessories[i]->equippedNum != -1)
+					{
 						cout << "[E] ";
+						spacing = accessories[i]->getName().length() + 4;
+					}
+					else
+						spacing = accessories[i]->getName().length();
 					cout << accessories[i]->getName();
-					spacing = accessories[i]->getName().length();
 				}
 				else
 					spacing = 0;

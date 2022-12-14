@@ -2,7 +2,10 @@
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(337,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(405,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(407,35): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(417,46): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(426,45): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(437,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(417,51): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(420,47): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(432,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(435,46): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(447,55): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(450,51): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Dungeon_Crawler.vcxproj -> C:\Users\Wilhelm\source\repos\Dungeon_Crawler\x64\Debug\Dungeon_Crawler.exe
