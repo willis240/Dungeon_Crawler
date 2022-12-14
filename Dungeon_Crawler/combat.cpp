@@ -15,6 +15,10 @@ void Player::equipWeapon(std::shared_ptr<Weapon> weaponToEquip)
 	maxHP += weaponEquipped->HP;
 	maxSP += weaponEquipped->SP;
 	str += weaponEquipped->str;
+	if (maxHP < currentHP)
+		currentHP = maxHP;
+	if (maxSP < currentSP)
+		currentSP = maxSP;
 }
 
 void Player::unequipWeapon()
@@ -22,6 +26,10 @@ void Player::unequipWeapon()
 	maxHP -= weaponEquipped->HP;
 	maxSP -= weaponEquipped->SP;
 	str -= weaponEquipped->str;
+	if (maxHP < currentHP)
+		currentHP = maxHP;
+	if (maxSP < currentSP)
+		currentSP = maxSP;
 	weaponEquipped = noWeaponPtr;
 }
 
@@ -31,6 +39,10 @@ void Player::equipArmor(std::shared_ptr<Armor> armorToEquip)
 	maxHP += armorEquipped->HP;
 	maxSP += armorEquipped->SP;
 	str += armorEquipped->str;
+	if (maxHP < currentHP)
+		currentHP = maxHP;
+	if (maxSP < currentSP)
+		currentSP = maxSP;
 }
 
 void Player::unequipArmor()
@@ -38,6 +50,10 @@ void Player::unequipArmor()
 	maxHP -= armorEquipped->HP;
 	maxSP -= armorEquipped->SP;
 	str -= armorEquipped->str;
+	if (maxHP < currentHP)
+		currentHP = maxHP;
+	if (maxSP < currentSP)
+		currentSP = maxSP;
 	armorEquipped = noArmorPtr;
 }
 
@@ -47,6 +63,10 @@ void Player::equipAccessory(std::shared_ptr<Accessory> accToEquip)
 	maxHP += accEquipped->HP;
 	maxSP += accEquipped->SP;
 	str += accEquipped->str;
+	if (maxHP < currentHP)
+		currentHP = maxHP;
+	if (maxSP < currentSP)
+		currentSP = maxSP;
 }
 
 void Player::unequipAccessory()
@@ -54,6 +74,10 @@ void Player::unequipAccessory()
 	maxHP -= accEquipped->HP;
 	maxSP -= accEquipped->SP;
 	str -= accEquipped->str;
+	if (maxHP < currentHP)
+		currentHP = maxHP;
+	if (maxSP < currentSP)
+		currentSP = maxSP;
 	accEquipped = nothingPtr;
 }
 
