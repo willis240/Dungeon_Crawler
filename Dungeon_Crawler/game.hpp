@@ -139,6 +139,7 @@ public:
 	std::vector<std::shared_ptr<Door>> doors{};
 	std::vector<Item> items{};
 	std::vector<Key> keys{};
+	std::vector<std::shared_ptr<Weapon>> weapons{};
 	std::vector<std::shared_ptr<Accessory>> accessories{};
 
 	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors,
@@ -146,8 +147,9 @@ public:
 		doors(inputDoors), items(inputItems), keys(inputKeys) {};
 
 	Room(int inputNumber, std::string inputName, std::vector<Object> inputObjects, std::vector<std::shared_ptr<Door>> inputDoors,
-		std::vector<Item> inputItems, std::vector<Key> inputKeys, std::vector<std::shared_ptr<Accessory>> inputAccessories) : number(inputNumber),
-		name(inputName), objects(inputObjects), doors(inputDoors), items(inputItems), keys(inputKeys), accessories(inputAccessories) {};
+		std::vector<Item> inputItems, std::vector<Key> inputKeys, std::vector<std::shared_ptr<Weapon>> inputWeapons,
+		std::vector<std::shared_ptr<Accessory>> inputAccessories) : number(inputNumber), name(inputName), objects(inputObjects),
+		doors(inputDoors), items(inputItems), keys(inputKeys), weapons(inputWeapons), accessories(inputAccessories) {};
 };
 
 Player startGame();

@@ -122,10 +122,10 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 		"as if you were some sort of tornado. Upon opening the last one you stand in the center of the room and gaze upon \n"
 		"all of the open cabinets. Most of them have dust and crumbs but not much else. Finding it hard to believe that \n"
 		"you wouldn't at least get SOMETHING for your efforts, you decide to scrutinize the cabinets further. \n \n"
-		"Aha! In the back corner of one of the cabinets is a Small Ring.",
+		"Finally, in the very back corner of one of the cabinets, you find a Small Ring.",
 		true, false, 0, 4);
 	Room kitchen(2, "Kitchen", { refrigerator, pantry, oven, cabinets }, { brittleDoorPtr }, { chickenNugget, applePie },
-		{ rawApplePie, whiteKey, smallRing }, { ironRingPtr });
+		{ rawApplePie, whiteKey, smallRing }, {}, { ironRingPtr });
 
 	//Room 3: The Fancy Room
 	Object whiteRecliner("White Recliner",
@@ -134,28 +134,41 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 		"there has GOT to be SOMETHING wrong with this chair. You pull down the lever at the side of the chair, and watch \n"
 		"as the back of the chair lowers and the foot of the recliner kicks out. The entire process looks remarkably smooth, \n"
 		"and you can tell just by looking that it is incredibly comfortable. This recliner is entirely devoid of imperfections. \n"
-		"Dang.", true, false, 0, 0);
-	Key smallKey(5, "Small Key",
+		"Dang. \n \n"
+		"On the bright side, thanks to your thorough inspection, you find a Small Key hiding underneath the recliner.",
+		true, false, 0, 6);
+	Key smallKey(6, "Small Key",
 		"It is a small key, likely made of iron. It is a little odd that is here, though, as there does not appear to be any doors \n"
 		"in this room other than the White Door which you have already unlocked.");
+	Key firePoker(5, "Fire Poker",
+		"An iron rod which is sharpened at the end and used to stoke fires.",
+		false, "Selena",
+		"\"Oh hey, this Fire Iron would work great as a weapon!\" \n \n"
+		"\"...You mean this Fire Poker?\" \n \n"
+		"\"Fire Iron sounds cooler.\"", weapon);
+	Weapon fireIron("Fire Iron",
+		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
+		"Also used to stoke fires.",
+		0, 0, 1, 5, false);
+	auto fireIronPtr = make_shared<Weapon>(fireIron);
 	Object fireplace("Fireplace",
 		"The fireplace has a clean brick aesthetic, with a real fire burning and providing warmth to the room. You note that \n"
-		"there is a fire poker hanging on a hook to the right of the fireplace, but the fire is already burning quite well. \n"
+		"there is a Fire Poker hanging on a hook to the right of the fireplace, but the fire is already burning quite well. \n"
 		"The wood inside consists of cleanly cut logs. They clearly were cut by someone who must view woodcutting as a work \n"
 		"of art. Perhaps even more interesting, though, is the fact that there is still a lot of wood in the fireplace. This \n"
-		"fire must have been started recently. That being said, you also see a Small Key lying a couple of inches in front of \n "
-		"the fire.",
+		"fire must have been started recently. \n \n"
+		"Upon giving it a second thought, you decide to take the Fire Poker. It could come in handy.",
 		true, false, 0, 5);
 	Object bar("Bar",
 		"The bar counter, like much of the room, is a pristine white. The bar stools are black, and act to complement the bar's \n"
 		"aesthetic quite well. There are many bottles of beverages on some shelves lined up against the wall, most of which appear \n"
 		"to be alcoholic. Upon going behind the counter, you see that there are even more bottles beneath the counter. After grabbing \n"
 		"a couple of bottles to check them out, you find a small keyhole behind one of the bottles.",
-		true, true, 0, 0, 5, 6,
+		true, true, 0, 0, 6, 7,
 		"Upon inserting the Small Key into the keyhole behind the counter and turning, you hear a clicking sound from your left. You \n"
 		"turn toward the left side of the area behind the counter and watch as a section of the floor slides under the adjacent floor \n"
 		"panel, revealing a ladder leading down. You debate whether it would be a good idea to enter the Bar's Secret Passage.");
-	Door barSecretPassage(std::make_pair(3, 4), "Bar's Secret Passage", false, false, 6,
+	Door barSecretPassage(std::make_pair(3, 4), "Bar's Secret Passage", false, false, 7,
 		"The secret passage is a square hole in the floor, about 4 feet by 4 feet. The ladder goes down about 10 feet, to some \n"
 		"underground room. You wonder what could possibly necessitate having a secret passageway like this.");
 	auto barSecretPassagePtr = make_shared<Door>(barSecretPassage);
@@ -176,7 +189,8 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 		"It is a secret passage which was hidden behind the bookshelf. The passage has a staircase leading upwards, \n"
 		"undoubtedly heading to the next floor.");
 	auto bookshelfPassagePtr = make_shared<Door>(bookshelfPassage);
-	Room fancyRoom(3, "Fancy Room", { whiteRecliner, fireplace, bar, tallBookshelf }, { whiteDoorPtr, barSecretPassagePtr, bookshelfPassagePtr }, {}, { smallKey });
+	Room fancyRoom(3, "Fancy Room", { whiteRecliner, fireplace, bar, tallBookshelf }, { whiteDoorPtr, barSecretPassagePtr, bookshelfPassagePtr },
+		{}, { smallKey, firePoker }, { fireIronPtr }, {});
 
 	//Room 4: The Cell Exterior
 	Door metalDoor(std::make_pair(4, 5), "Metal Door", false,

@@ -194,6 +194,17 @@ void checkArgument(int & i, const bool & isDoor, Room & room, Inventory& invento
 						{
 							cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
 							inventory.keys.push_back(room.keys[ii]);
+							if (room.keys[ii].actuallyGear == weapon)
+							{
+								for (int iii = 0; iii < room.weapons.size(); iii++)
+								{
+									if (room.weapons[iii]->keyNum == room.keys[ii].getKeyNum())
+									{
+										inventory.weapons.push_back(room.weapons[iii]);
+										room.weapons.erase(room.weapons.begin() + iii);
+									}
+								}
+							}
 							if (room.keys[ii].actuallyGear == accessory)
 							{
 								for (int iii = 0; iii < room.accessories.size(); iii++)
@@ -389,74 +400,83 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 	int spacing = 0;
 	int spaceMax = 25;
 	int iterLimit;
+	bool showGear = false;
+
 	if (accessories.size() > 0)
 	{
 		if (accessories[0]->beenDiscovered)
+			showGear = true;
+	}
+	if (weapons.size() > 0)
+	{
+		if (weapons[0]->beenDiscovered)
+			showGear = true;
+	}
+	if (showGear)
+	{
+		cout << "    WEAPONS";
+		spacing = 7;
+		displaySpacing(spacing, spaceMax);
+		cout << "ARMOR";
+		spacing = 5;
+		displaySpacing(spacing, spaceMax);
+		cout << "ACCESSORIES" << endl;
+
+		if (accessories.size() < weapons.size())
+			iterLimit = weapons.size();
+		else
+			iterLimit = accessories.size();
+
+		for (int i = 0; i < iterLimit; i++)
 		{
-			cout << "    WEAPONS";
-			spacing = 7;
-			displaySpacing(spacing, spaceMax);
-			cout << "ARMOR";
-			spacing = 5;
-			displaySpacing(spacing, spaceMax);
-			cout << "ACCESSORIES" << endl;
-
-			if (accessories.size() < weapons.size())
-				iterLimit = weapons.size();
-			else
-				iterLimit = accessories.size();
-
-			for (int i = 0; i < iterLimit; i++)
+			cout << "    ";
+			if (weapons.size() > i)
 			{
-				cout << "    ";
-				if (weapons.size() > i)
+				if (weapons[i]->equippedNum != -1)
 				{
-					if (weapons[i]->equippedNum != -1)
-					{
-						cout << "[E] ";
-						spacing = weapons[i]->getName().length() + 4;
-					}
-					else
-						spacing = weapons[i]->getName().length();
-					cout << weapons[i]->getName();
+					cout << "[E] ";
+					spacing = weapons[i]->getName().length() + 4;
 				}
 				else
-					spacing = 0;
-				displaySpacing(spacing, spaceMax);
-
-				if (armors.size() > i)
-				{
-					if (armors[i]->equippedNum != -1)
-					{
-						cout << "[E] ";
-						spacing = armors[i]->getName().length() + 4;
-					}
-					else
-						spacing = armors[i]->getName().length();
-					cout << armors[i]->getName();
-				}
-				else
-					spacing = 0;
-				displaySpacing(spacing, spaceMax);
-				
-				if (accessories.size() > i)
-				{
-					if (accessories[i]->equippedNum != -1)
-					{
-						cout << "[E] ";
-						spacing = accessories[i]->getName().length() + 4;
-					}
-					else
-						spacing = accessories[i]->getName().length();
-					cout << accessories[i]->getName();
-				}
-				else
-					spacing = 0;
-				displaySpacing(spacing, spaceMax);
-				cout << endl;
+					spacing = weapons[i]->getName().length();
+				cout << weapons[i]->getName();
 			}
+			else
+				spacing = 0;
+			displaySpacing(spacing, spaceMax);
+
+			if (armors.size() > i)
+			{
+				if (armors[i]->equippedNum != -1)
+				{
+					cout << "[E] ";
+					spacing = armors[i]->getName().length() + 4;
+				}
+				else
+					spacing = armors[i]->getName().length();
+				cout << armors[i]->getName();
+			}
+			else
+				spacing = 0;
+			displaySpacing(spacing, spaceMax);
+				
+			if (accessories.size() > i)
+			{
+				if (accessories[i]->equippedNum != -1)
+				{
+					cout << "[E] ";
+					spacing = accessories[i]->getName().length() + 4;
+				}
+				else
+					spacing = accessories[i]->getName().length();
+				cout << accessories[i]->getName();
+			}
+			else
+				spacing = 0;
+			displaySpacing(spacing, spaceMax);
 			cout << endl;
 		}
+		cout << endl;
 	}
 }
 
@@ -753,6 +773,18 @@ void showKeys(vector<Player>& players, Inventory& inventory, string& argument)
 						cout << inventory.keys[i].expertiseDescription;
 						dblEndl();
 						inventory.keys[i].purposeKnown = true;
+						if (inventory.keys[i].actuallyGear == weapon)
+						{
+							for (int iii = 0; iii < inventory.weapons.size(); iii++)
+							{
+								if (inventory.weapons[iii]->keyNum == inventory.keys[i].getKeyNum())
+								{
+									inventory.weapons[iii]->beenDiscovered = true;
+									inventory.keys.erase(inventory.keys.begin() + i);
+									return;
+								}
+							}
+						}
 						if (inventory.keys[i].actuallyGear == accessory)
 						{
 							for (int iii = 0; iii < inventory.accessories.size(); iii++)
@@ -760,12 +792,11 @@ void showKeys(vector<Player>& players, Inventory& inventory, string& argument)
 								if (inventory.accessories[iii]->keyNum == inventory.keys[i].getKeyNum())
 								{
 									inventory.accessories[iii]->beenDiscovered = true;
-									break;
+									inventory.keys.erase(inventory.keys.begin() + i);
+									return;
 								}
 							}
-							inventory.keys.erase(inventory.keys.begin() + i);
 						}
-						return;
 					}
 					else
 					{

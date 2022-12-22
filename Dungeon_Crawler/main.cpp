@@ -16,7 +16,7 @@ int main()
 	Inventory inventory;
 
 	int floorNum = 0;
-	int roomNum = 0;
+	int roomNum = 3;
 
 	//CODE FOR TESTING GEAR
 	/*
