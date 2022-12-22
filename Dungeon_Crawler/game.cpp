@@ -63,7 +63,7 @@ Player startGame()
 	return player;
 }
 
-void checkInput(int & roomNum, vector<Player> & players, Inventory& inventory, Room & room)
+void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory& inventory, Room& room)
 {
 	while (true)
 	{
@@ -122,7 +122,7 @@ void checkInput(int & roomNum, vector<Player> & players, Inventory& inventory, R
 				for (int i = 0; i < room.doors.size(); i++)
 				{
 					if (argument == room.doors[i]->name)
-						enterDoor(*room.doors[i], roomNum);
+						enterDoor(*room.doors[i], roomNum, floorNum);
 				}
 				break;
 			}
@@ -235,7 +235,7 @@ void checkArgument(int & i, const bool & isDoor, Room & room, Inventory& invento
 	}
 }
 
-void enterDoor(Door& door, int & roomNum)
+void enterDoor(Door& door, int & roomNum, int & floorNum)
 {
 	if (door.isVisible)
 	{
@@ -245,6 +245,13 @@ void enterDoor(Door& door, int & roomNum)
 		{
 			cout << endl << "You entered the " << door.name << ".";
 			dblEndl();
+			if (door.getFloors().first != -1)
+			{
+				if (door.getFloors().first == floorNum)
+					floorNum = door.getFloors().second;
+				else
+					floorNum = door.getFloors().first;
+			}
 			if (door.getRooms().first == roomNum)
 				roomNum = door.getRooms().second;
 			else
@@ -1151,7 +1158,11 @@ void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inven
 	{
 		if (floor == 0)
 		{
-			floor0(players, roomNum, inventory);
+			floor0(players, roomNum, floor, inventory);
+		}
+		if (floor == 1)
+		{
+			floor1(players, roomNum, floor, inventory);
 		}
 	}
 }

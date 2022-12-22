@@ -10,7 +10,7 @@ using std::vector;
 using std::shared_ptr;
 using std::make_shared;
 
-void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
+void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory)
 {
 	//Room 0: The Starting Room
 	bool seeOpening = true;
@@ -185,7 +185,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 		"pushing the bookshelf and manage to get it to budge! From that point on, it's smooth sailing. Together, the two \n"
 		"of you push the bookshelf several feet away from its starting position, revealing a secret staircase leading \n"
 		"upward. Huh.");
-	Door bookshelfPassage(std::make_pair(3, 6), "Bookshelf Passage", false, false, 7,
+	Door bookshelfPassage(std::make_pair(3, 0), std::make_pair(0, 1), "Bookshelf Passage", false, false, 7, "",
 		"It is a secret passage which was hidden behind the bookshelf. The passage has a staircase leading upwards, \n"
 		"undoubtedly heading to the next floor.");
 	auto bookshelfPassagePtr = make_shared<Door>(bookshelfPassage);
@@ -209,6 +209,8 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 
 	while (true)
 	{
+		if (floorNum != 0)
+			return;
 		if (roomNum == 0)
 		{
 			if (seeOpening)
@@ -261,7 +263,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 				cout << "Perhaps, if you were to call for \"help\", then you could figure out how to" << endl;
 				cout << "go through the door.";
 				dblEndl();
-				checkInput(roomNum, players, inventory, startRoom);
+				checkInput(roomNum, floorNum, players, inventory, startRoom);
 				system("pause");
 				seeOpening = false;
 			}
@@ -271,7 +273,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 				cout << "Looking around, you see that the room is small and largely empty. However, there is" << endl;
 				cout << "a Night Light in the corner, as well as a Plain Door directly in front of you.";
 				dblEndl();
-				checkInput(roomNum, players, inventory, startRoom);
+				checkInput(roomNum, floorNum, players, inventory, startRoom);
 				system("pause");
 			}
 		}
@@ -285,7 +287,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 			cout << "which you first entered this room. On top of that, there is a White Door to your right as well.";
 			dblEndl();
 
-			checkInput(roomNum, players, inventory, livingRoom);
+			checkInput(roomNum, floorNum, players, inventory, livingRoom);
 			system("pause");
 		}
 
@@ -298,7 +300,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 				cout << "rumble, your eyes immediately gravitate toward the Refrigerator directly in front of you.";
 				dblEndl();
 
-				checkInput(roomNum, players, inventory, kitchen);
+				checkInput(roomNum, floorNum, players, inventory, kitchen);
 				system("pause");
 				for (int i = 0; i < inventory.items.size(); i++)
 				{
@@ -384,7 +386,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 				cout << "There is also a Pantry, an Oven, and Cabinets lining the majority of the room's perimeter. Lastly, there" << endl;
 				cout << "is the Brittle Door which you used to enter the kitchen in the first place.";
 				dblEndl();
-				checkInput(roomNum, players, inventory, kitchen);
+				checkInput(roomNum, floorNum, players, inventory, kitchen);
 				system("pause");
 			}
 		}
@@ -445,7 +447,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 				}
 			}
 
-			checkInput(roomNum, players, inventory, fancyRoom);
+			checkInput(roomNum, floorNum, players, inventory, fancyRoom);
 			system("pause");
 		}
 
@@ -458,7 +460,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 			cout << "and its light is weak and takes on a yellow hue. As you look around a bit more, you realize there is nothing else of" << endl;
 			cout << "note in this small room except for a Metal Door with a barred window at eye level.";
 			dblEndl();
-			checkInput(roomNum, players, inventory, cellExterior);
+			checkInput(roomNum, floorNum, players, inventory, cellExterior);
 			system("pause");
 		}
 
@@ -730,7 +732,7 @@ void floor0(vector<Player>& players, int& roomNum, Inventory& inventory)
 			}
 			else
 			{
-				checkInput(roomNum, players, inventory, cellInterior);
+				checkInput(roomNum, floorNum, players, inventory, cellInterior);
 				system("pause");
 			}
 		}

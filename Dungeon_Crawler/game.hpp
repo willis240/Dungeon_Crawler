@@ -103,6 +103,7 @@ class Door
 {
 private:
 	std::pair<int, int> rooms;
+	std::pair<int, int> floors = std::make_pair(-1, -1);
 public:
 	std::string name;
 	bool isLocked;
@@ -112,6 +113,7 @@ public:
 	std::string unlockedMessage;
 
 	std::pair<int, int> getRooms() { return rooms; };
+	std::pair<int, int> getFloors() { return floors; };
 
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, std::string inputUnlockedMessage) :
 		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(true), lockNum(0), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
@@ -126,6 +128,10 @@ public:
 	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, bool inputIsVisible, int inputLockNum, std::string inputLockedMessage,
 		std::string inputUnlockedMessage) : rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(inputIsVisible), lockNum(inputLockNum),
 		lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
+
+	Door(std::pair<int, int> inputRooms, std::pair<int, int> inputFloors, std::string inputName, bool inputIsLocked, bool inputIsVisible, int inputLockNum,
+		std::string inputLockedMessage, std::string inputUnlockedMessage) : rooms(inputRooms), floors(inputFloors), name(inputName), isLocked(inputIsLocked),
+		isVisible(inputIsVisible), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
 };
 
 class Room
@@ -154,10 +160,10 @@ public:
 
 Player startGame();
 int getDecision(const int minChoice, const int maxChoice);
-void checkInput(int & roomNum, std::vector<Player>& players, Inventory& inventory, Room& room);
+void checkInput(int& roomNum, int& floorNum, std::vector<Player>& players, Inventory& inventory, Room& room);
 void showHelp(Player& player);
 void checkArgument(int& i, const bool& isDoor, Room& room, Inventory& inventory);
-void enterDoor(Door& door, int & roomNum);
+void enterDoor(Door& door, int& roomNum, int& floorNum);
 void checkInventory(std::vector<Player>& players, Inventory& inventory, Room& room);
 void displayInventoryHeader(std::vector<Player>& players);
 void displayItems(std::vector<Item>& items);
@@ -178,7 +184,8 @@ void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapo
 	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
 void teamUp(int& i, Inventory& inventory, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, Inventory& inventory);
-void floor0(std::vector<Player>& players, int& roomNum, Inventory& inventory);
+void floor0(std::vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory);
+void floor1(std::vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory);
 void dblEndl();
 
 //Function Definitions found in combat.cpp
