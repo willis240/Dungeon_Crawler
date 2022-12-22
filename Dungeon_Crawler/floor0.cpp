@@ -180,12 +180,12 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"As you step away from the bookshelf you realize that there is an indentation in the carpet that makes it look like \n"
 		"this bookshelf has been moved. You step to the side of the bookshelf and start pushing. \"Holy crap\", you mutter \n"
 		"as you realize that this bookshelf will be harder to move than you realized.",
-		true, false, 0, 0, -1, 7,
+		true, false, 0, 0, -1, 8,
 		"You stand shoulder-to-shoulder with Selena, and start counting to 3. On 3, you both put all of your weight into \n"
 		"pushing the bookshelf and manage to get it to budge! From that point on, it's smooth sailing. Together, the two \n"
 		"of you push the bookshelf several feet away from its starting position, revealing a secret staircase leading \n"
 		"upward. Huh.");
-	Door bookshelfPassage(std::make_pair(3, 0), std::make_pair(0, 1), "Bookshelf Passage", false, false, 7, "",
+	Door bookshelfPassage(std::make_pair(3, 0), std::make_pair(0, 1), "Bookshelf Passage", false, false, 8, "",
 		"It is a secret passage which was hidden behind the bookshelf. The passage has a staircase leading upwards, \n"
 		"undoubtedly heading to the next floor.");
 	auto bookshelfPassagePtr = make_shared<Door>(bookshelfPassage);
