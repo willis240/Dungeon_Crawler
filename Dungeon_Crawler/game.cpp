@@ -1154,6 +1154,7 @@ int getDecision(const int minChoice, const int maxChoice)
 
 void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inventory)
 {
+	bool floor1FirstTime = true;
 	while (true)
 	{
 		if (floor == 0)
@@ -1162,7 +1163,7 @@ void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inven
 		}
 		if (floor == 1)
 		{
-			floor1(players, roomNum, floor, inventory);
+			floor1(players, roomNum, floor, inventory, floor1FirstTime);
 		}
 	}
 }
