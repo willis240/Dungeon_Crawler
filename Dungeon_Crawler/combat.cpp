@@ -391,7 +391,6 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					system("pause");
 					cout << endl;
 				}
-				
 			}
 		}
 	}
