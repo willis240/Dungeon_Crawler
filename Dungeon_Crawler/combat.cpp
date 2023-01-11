@@ -800,6 +800,7 @@ void victory(vector<Player>& players, vector<Enemy>& enemies)
 				}
 				initialLv++;
 				system("pause");
+				system("CLS");
 			}
 		}
 	}

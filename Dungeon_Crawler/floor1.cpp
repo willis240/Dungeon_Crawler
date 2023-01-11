@@ -37,7 +37,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				system("pause");
 				
 				system("CLS");
-				cout << "Suddenly, two holes burst from the ceiling and two men drop down at the same time.";
+				cout << "Suddenly, two holes burst from the ceiling and two men drop through them at the same time.";
 				dblEndl();
 				cout << "\"Well, look at what we have here, Jarvis\", the man on the left said, as he twirled the" << endl;
 				cout << "knife in his hand.";
@@ -155,8 +155,76 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						gameOver();
 					}
 				}
+				cout << "The man with the knife runs at you and stabs rapidly! You swivel left and right, narrowly" << endl;
+				cout << "avoiding each of the possible puncture wounds. \"Agh!\" The man releases a spurt of frustration" << endl;
+				cout << "before going in for a powerful thrust! You slide a foot to the right and, noticing a prime" << endl;
+				cout << "opportunity, you punch his elbow. In the opposite of the direction its supposed to go.";
+				dblEndl();
+				cout << "The man leaps back. \"Aggh!\", he exclaims as he rubs his elbow. He glares at you, his eyes" << endl;
+				cout << "aflame with anger.";
+				dblEndl();
+				cout << "Meanwhile, the gentleman and Selena cross their cane and Fire Iron as if they were both" << endl;
+				cout << "swords. They both repeatedly strike at the other, only for a skillful block to follow each" << endl;
+				cout << "attack. They appear to be at a standstill, but then Selena gets a glint in her eye.";
+				dblEndl();
+				cout << "Selena quickly changes her grip on the fire iron and hurls it like a javelin at the gentleman's" << endl;
+				cout << "head. He jerks to the side, dodging the weapon, but he was not prepared for what was to come." << endl;
+				cout << "Selena had already jumped up, and was now parallel to the floor with her knees tucked in." << endl;
+				cout << "Selena's legs both burst forward, colliding into the gentleman's stomach. The missile dropkick" << endl;
+				cout << "blew the gentleman all the way back until he hit the wall and fell onto the floor.";
+				dblEndl();
+				system("pause");
+				system("CLS");
+				cout << "The gentleman works his way back to standing, although he is clearly in pain. Both of the men are" << endl;
+				cout << "right next to each other now, standing side-to-side. \"I must say,\" the gentleman started, \"that" << endl;
+				cout << "you do not fight like any lady I have ever seen. You do not care about honour in a battle all that" << endl;
+				cout << "much, do you?\"";
+				dblEndl();
+				cout << "Selena brushed her hair out of her face. \"Nah, I'm much more of a win first, tell stories later kind of gal.\"" << endl;
+				cout << "Needless to say, she smirked.";
+				dblEndl();
+				cout << "\"Yeah, I'd say that both of ya are dirty blighters in a fight\", the other man interjected, still" << endl;
+				cout << "rubbing his elbow. \"'Though I almost respect that.\"";
+				dblEndl();
+				cout << "\"Nonetheless, it would appear we underestimated the both of you. You put up a good fight. We shall" << endl;
+				cout << "retreat, but you should heed this warning: A gentleman is at his weakest just before teatime. It will" << endl;
+				cout << "not be this easy next time.";
+				dblEndl();
+				cout << "\"\"Next time?!\"\", you and Selena both exclaim. But by then, it was too late.";
+				dblEndl();
+				cout << "A rope drops down through each hole in the ceiling, and each man scurries up at a rapid pace. Once they" << endl;
+				cout << "reached the next floor, they both looked down through their respective holes. \"Ah, I almost forgot to" << endl;
+				cout << "introduce myself! I must apologize for that. My name is Jarvis\", the gentleman proclaimed.";
+				dblEndl();
+				cout << "\"And my name is Jack\", the other man added. \"And like he said, you won't be so lucky next time.\"";
+				dblEndl();
+				cout << "\"Oh yeah? Well good luck with that! We're going to climb up those ropes of yours and finish-\" but Jack" << endl;
+				cout << "cut the ropes in a flash before Selena could finish. \"...Oh.\"";
+				dblEndl();
+				system("pause");
+				system("CLS");
+				cout << "After hearing some footsteps, you both assume that Jack and Jarvis are gone. \"Well, that was something." << endl;
+				cout << "Did you encounter anyone else like those two before you found me?\"";
+				dblEndl();
+				cout << "\"No, you were the first person I met. Closest thing before that was a rat.\"";
+				dblEndl();
+				cout << "\"Huh. Well, the way that that Jarvis spoke made it sound like there may be more people trying to keep us" << endl;
+				cout << "locked up. I know that there is the guy who would bring me food, but maybe there are still more we have yet" << endl;
+				cout << "to meet.\"";
+				dblEndl();
+				cout << "\"Yeah, I guess that's pretty likely. Maybe there'll be other people who wound up here like we did, too." << endl;
+				cout << "Nonetheless,\" you say as you turn to Selena, \"there's only one thing left for us to do-\"";
+				dblEndl();
+				cout << "\"Continue exploring!\" Selena finishes, as she raises her fist in the air, feigning excitement.";
+				dblEndl();
+				system("pause");
+				system("CLS");
+				floor1FirstTime = false;
 			}
-			checkInput(roomNum, floorNum, players, inventory, hallway);
+			else
+			{
+				checkInput(roomNum, floorNum, players, inventory, hallway);
+			}
 		}
 	}
 }
