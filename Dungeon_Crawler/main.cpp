@@ -19,10 +19,10 @@ int main()
 	int roomNum = 0;
 
 	//A SECOND PLAYER CHARACTER, FOR TESTING
-	/*
+	
 	Player Selena("Selena", 1, 7, 13, {});
 	players.push_back(Selena);
-	*/
+	
 
 	explore(players, floorNum, roomNum, inventory);
 

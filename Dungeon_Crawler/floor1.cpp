@@ -9,11 +9,20 @@ using std::string;
 using std::vector;
 using std::shared_ptr;
 using std::make_shared;
+using std::make_pair;
 
 void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime)
 {
 	//Room 0: Hall of Opportunity
-	Room hallway(0, "Hallway", {}, {}, {}, {});
+	Door rightDoor(make_pair(0, 1), "Right Door", false,
+		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is identical \n"
+		"to both of the other doors in the room.");
+	auto rightDoorPtr = make_shared<Door>(rightDoor);
+	Room hallway(0, "Hallway", {}, {rightDoorPtr}, {}, {});
+
+	//Room 1: Bedroom
+	Room bedroom(1, "Bedroom", {}, { rightDoorPtr }, {}, {});
+
 	while (true)
 	{
 		if (floorNum != 1)
@@ -21,6 +30,11 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 0)
 		{
 			system("CLS");
+			cout << "Upon reaching the top of the stairs, you find yourself in a hallway. There are some pictures of abstract" << endl;
+			cout << "art on the wall, spaced evenly apart throughout the hallway. Between the pictures there are three doors:" << endl;
+			cout << "a Left Door, a Middle Door, and a Right Door.";
+			dblEndl();
+			
 			if (floor1FirstTime)
 			{
 				Skill rapidShank("Rapid Shank", 3, false, false, 0, noDirection, "The man on the left shanks rapidly, one after the next!");
@@ -30,12 +44,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				Skill caneTwirl("Cane Twirl", 2, false, false, 0, right, "The man on the right twirls his cane, hitting you in the chin repeatedly!");
 				Enemy manOnTheRight("The Right Man", 16, 12, 10, { "" }, { caneTwirl });
 
-				cout << "Upon reaching the top of the stairs, you find yourself in a hallway. There are three doors" << endl;
-				cout << "spaced apart evenly throughout the hallway: a Left Door, a Middle Door, and a Right Door." << endl;
 				cout << "Additionally, you hear footsteps above you.";
 				dblEndl();
 				system("pause");
-				
 				system("CLS");
 				cout << "Suddenly, two holes burst from the ceiling and two men drop through them at the same time.";
 				dblEndl();
@@ -225,6 +236,17 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			{
 				checkInput(roomNum, floorNum, players, inventory, hallway);
 			}
+		}
+		if (roomNum == 1)
+		{
+			system("CLS");
+			cout << "You find yourself inside a bedroom. There is a Queen-Sized Bed just a few feet to your left. Also, there is" << endl;
+			cout << "a pair of bifold doors at the other end of the room, likely concealing a Closet. On the opposite side of the" << endl;
+			cout << "bed is a Nightstand, with a reading lamp atop it. Lastly, there is a Window next to the Nightstand.";
+			dblEndl();
+			cout << "Of course, you mustn't forget about the Right Door from which you entered the bedroom.";
+			dblEndl();
+			checkInput(roomNum, floorNum, players, inventory, bedroom);
 		}
 	}
 }
