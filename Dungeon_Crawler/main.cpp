@@ -23,7 +23,7 @@ int main()
 	Player Selena("Selena", 1, 7, 13, {});
 	players.push_back(Selena);
 
-	Skill quickSlash("Quick Slash", 4, false, true, 0, left, "The man on the left slashes from the left!");
+	Skill quickSlash("Quick Slash", 4, false, false, 0, left, "The man on the left slashes from the left!");
 	Enemy manOnTheLeft("The Left Man", 12, 12, 10, { "" }, { quickSlash });
 	vector<Enemy> enemies = { manOnTheLeft };
 	fight(players, enemies, inventory.items);
