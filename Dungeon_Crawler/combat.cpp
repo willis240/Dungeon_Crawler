@@ -348,52 +348,145 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 			if (enemies[i].currentHP > 0)
 			{
 				enemies[i].offBalance = false;
-				if (players[enemiesTargets[i]].guardDirection != noDirection)
+
+				if (enemies[i].skills[enemyActionsTaken[i]].hasAOE)
 				{
-					if (players[enemiesTargets[i]].guardDirection == enemies[i].skills[enemyActionsTaken[i]].attackDirection)
-					{
-						//Perfect Block
-						int damageDealt = enemies[i].skills[enemyActionsTaken[i]].damage * 0.2;
-						players[enemiesTargets[i]].reduceHP(damageDealt);
-						int healedSP = players[enemiesTargets[i]].maxSP * 0.2;
-						players[enemiesTargets[i]].restoreSP(healedSP);
-						enemies[i].offBalance = true;
+					GuardType playerBlock = none;
+					vector<int> damagesDealt = {};
+					vector<int> partySPRestored = {};
 
-						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
-						cout << players[enemiesTargets[i]].getName() << " perfectly blocked " << enemies[i].getName() << "'s attack!!" << endl;
-						cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl;
-						cout << enemies[i].getName() << " is now off-balance and incredibly susceptible to attacks!" << endl << endl;
-						system("pause");
-						cout << endl;
-					}
-					else
+					cout << enemies[i].getName() << " unleashes " << enemies[i].skills[enemyActionsTaken[i]].getName() << " upon the ENTIRE party!!" << endl;
+					for (int ii = 0; ii < players.size(); ii++)
 					{
-						//Normal Block
-						int damageDealt = enemies[i].skills[enemyActionsTaken[i]].damage * 0.5;
-						players[enemiesTargets[i]].reduceHP(damageDealt);
-						int healedSP = players[enemiesTargets[i]].maxSP * 0.1;
-						players[enemiesTargets[i]].restoreSP(healedSP);
+						playerBlock = determineGuardType(enemies[i], players[ii], enemyActionsTaken[i]);
+						damagesDealt.push_back(calculateDamage(enemies[i], players[ii], enemyActionsTaken[i], playerBlock));
+						partySPRestored.push_back(dealDamage(enemies[i], players[ii], damagesDealt[ii], playerBlock));
 
-						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
-						cout << players[enemiesTargets[i]].getName() << " blocked " << enemies[i].getName() << "'s attack!" << endl;
-						cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl << endl;
-						system("pause");
-						cout << endl;
+						if (playerBlock == perfect)
+						{
+							cout << players[ii].getName() << " perfectly blocked " << enemies[i].getName() << "'s attack!!" << endl;
+							cout << players[ii].getName() << " takes " << damagesDealt[ii] << " damage and restores " << partySPRestored[ii] << " SP!" << endl;
+							cout << enemies[i].getName() << " is now off-balance and incredibly susceptible to attacks!" << endl << endl;
+							system("pause");
+							cout << endl;
+						}
+						else if (playerBlock == standard)
+						{
+							cout << players[ii].getName() << " blocked " << enemies[i].getName() << "'s attack!" << endl;
+							cout << players[ii].getName() << " takes " << damagesDealt[ii] << " damage and restores " << partySPRestored[ii] << " SP!" << endl << endl;
+							system("pause");
+							cout << endl;
+						}
+						else
+						{
+							cout << players[ii].getName() << " takes " << enemies[i].skills[enemyActionsTaken[i]].damage << " damage." << endl << endl;
+							system("pause");
+							cout << endl;
+						}
 					}
 				}
 				else
 				{
-					//No Block
-					players[enemiesTargets[i]].reduceHP(enemies[i].skills[enemyActionsTaken[i]].damage);
-					
-					cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
-					cout << players[enemiesTargets[i]].getName() << " takes " << enemies[i].skills[enemyActionsTaken[i]].damage << " damage." << endl << endl;
-					system("pause");
-					cout << endl;
+					if (players[enemiesTargets[i]].guardDirection != noDirection)
+					{
+						if (players[enemiesTargets[i]].guardDirection == enemies[i].skills[enemyActionsTaken[i]].attackDirection)
+						{
+							//Perfect Block
+							int damageDealt = enemies[i].skills[enemyActionsTaken[i]].damage * 0.2;
+							players[enemiesTargets[i]].reduceHP(damageDealt);
+							int healedSP = players[enemiesTargets[i]].maxSP * 0.2;
+							players[enemiesTargets[i]].restoreSP(healedSP);
+							enemies[i].offBalance = true;
+
+							cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
+							cout << players[enemiesTargets[i]].getName() << " perfectly blocked " << enemies[i].getName() << "'s attack!!" << endl;
+							cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl;
+							cout << enemies[i].getName() << " is now off-balance and incredibly susceptible to attacks!" << endl << endl;
+							system("pause");
+							cout << endl;
+						}
+						else
+						{
+							//Normal Block
+							int damageDealt = enemies[i].skills[enemyActionsTaken[i]].damage * 0.5;
+							players[enemiesTargets[i]].reduceHP(damageDealt);
+							int healedSP = players[enemiesTargets[i]].maxSP * 0.1;
+							players[enemiesTargets[i]].restoreSP(healedSP);
+
+							cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
+							cout << players[enemiesTargets[i]].getName() << " blocked " << enemies[i].getName() << "'s attack!" << endl;
+							cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl << endl;
+							system("pause");
+							cout << endl;
+						}
+					}
+					else
+					{
+						//No Block
+						players[enemiesTargets[i]].reduceHP(enemies[i].skills[enemyActionsTaken[i]].damage);
+
+						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
+						cout << players[enemiesTargets[i]].getName() << " takes " << enemies[i].skills[enemyActionsTaken[i]].damage << " damage." << endl << endl;
+						system("pause");
+						cout << endl;
+					}
 				}
 			}
 		}
 	}
+}
+
+GuardType determineGuardType(Enemy& enemy, Player& player, short& enemyAction)
+{
+	GuardType block = none;
+
+	if (player.guardDirection == enemy.skills[enemyAction].attackDirection)
+		block = perfect;
+	else if (player.guardDirection != noDirection)
+		block = standard;
+	else
+		block = none;
+
+	return block;
+}
+
+int calculateDamage(Enemy& enemy, Player& player, short& enemyAction, GuardType& block)
+{
+	int damageDealt = 0;
+	if (block == perfect)
+	{
+		damageDealt = enemy.skills[enemyAction].damage * 0.2;
+	}
+	else if (block == standard)
+	{
+		damageDealt = enemy.skills[enemyAction].damage * 0.5;
+	}
+	else
+	{
+		damageDealt = enemy.skills[enemyAction].damage;
+	}
+	return damageDealt;
+}
+
+int dealDamage(Enemy& enemy, Player& player, int& damageDealt, GuardType& block)
+{
+	int healedSP = 0;
+	if (block == perfect)
+	{
+		healedSP = player.maxSP * 0.2;
+		enemy.offBalance = true;
+	}
+	else if (block == standard)
+	{
+		healedSP = player.maxSP * 0.1;
+	}
+	else
+		healedSP = 0;
+
+	player.restoreSP(healedSP);
+	player.reduceHP(damageDealt);
+
+	return healedSP;
 }
 
 void countEnemyNames(vector<Enemy>& enemies)

@@ -12,6 +12,7 @@
 #include <Windows.h>
 
 enum Direction { noDirection, left, right, high, low };
+enum GuardType { perfect, standard, none };
 
 class Skill
 {
@@ -155,6 +156,9 @@ public:
 		name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP), expWorth(inputExpWorth), stances(inputStances), skills(inputSkills) {};
 };
 
+GuardType determineGuardType(Enemy& enemy, Player& player, short& enemyAction);
+int calculateDamage(Enemy& enemy, Player& player, short& enemyAction, GuardType& block);
+int dealDamage(Enemy& enemy, Player& player, int& damageDealt, GuardType& block);
 void countEnemyNames(std::vector<Enemy>& enemies);
 void displayEnemiesTargets(std::vector<Player>& players, std::vector<Enemy>& enemies, std::vector<short>& enemiesTargets);
 void displayCombatStats(std::vector<Player>& players, std::vector<Enemy>& enemies);

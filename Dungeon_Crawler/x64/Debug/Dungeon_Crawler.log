@@ -1,2 +1,34 @@
-﻿  floor1.cpp
+﻿  combat.cpp
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(147,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(148,74): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(151,31): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(152,70): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(179,69): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(188,62): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(227,83): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(233,63): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(282,62): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(288,63): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(395,24): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(397,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(411,24): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(413,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(458,50): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(462,50): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(476,27): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(481,27): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(541,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(563,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(625,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(647,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(690,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\combat.cpp(712,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Dungeon_Crawler.vcxproj -> C:\Users\Wilhelm\source\repos\Dungeon_Crawler\x64\Debug\Dungeon_Crawler.exe
