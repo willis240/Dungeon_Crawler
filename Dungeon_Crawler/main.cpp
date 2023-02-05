@@ -22,10 +22,13 @@ int main()
 	
 	Player Selena("Selena", 1, 7, 13, {});
 	players.push_back(Selena);
+	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
+	players[1].skills.push_back(oblivionSlash);
 
-	Skill quickSlash("Quick Slash", 4, false, false, 0, left, "The man on the left slashes from the left!");
+	//AN EXAMPLE FIGHT, ALSO FOR TESTING
+	Skill quickSlash("Quick Slash", 4, false, true, 0, left, "The man on the left slashes from the left!");
 	Enemy manOnTheLeft("The Left Man", 12, 12, 10, { "" }, { quickSlash });
-	vector<Enemy> enemies = { manOnTheLeft };
+	vector<Enemy> enemies = { manOnTheLeft, manOnTheLeft };
 	fight(players, enemies, inventory.items);
 
 	explore(players, floorNum, roomNum, inventory);

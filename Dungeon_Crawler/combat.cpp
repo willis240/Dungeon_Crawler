@@ -228,46 +228,68 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 
 						if (pickSkill != -1)
 						{
-							system("CLS");
-							displayAttackTargets(players, enemies);
-							int target = getDecisionEscapable(0, enemies.size() - 1);
-
-							if (target != -1)
+							if (players[playerNum].currentSP >= players[playerNum].skills[pickSkill].SPcost)
 							{
-								if (players[playerNum].currentSP >= players[playerNum].skills[pickSkill].SPcost)
+								if (players[playerNum].skills[pickSkill].hasAOE)
 								{
-									int damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
-									players[playerNum].reduceSP(players[playerNum].skills[pickSkill].SPcost);
-
-									if (enemies[target].offBalance)
-										damageDealt *= 2;
-
-									if (enemies[target].currentHP > 0)
+									cout << players[playerNum].skills[pickSkill].description << endl;
+									int damageDealt = 0;
+									for (int i = 0; i < enemies.size(); i++)
 									{
-										cout << players[playerNum].skills[pickSkill].description << endl;
-										if (enemies[target].offBalance)
+										damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
+										if (enemies[i].offBalance)
+										{
 											cout << "It's a critical hit!!!" << endl;
-										cout << enemies[target].getName() << " receives " << damageDealt << " points of damage!" << endl << endl;
+											damageDealt *= 2;
+										}
+										cout << enemies[i].getName() << " receives " << damageDealt << " points of damage!";
+										dblEndl();
+										enemies[i].reduceHP(damageDealt);
+										system("pause");
+										cout << endl;
 									}
-									else
-									{
-										cout << players[playerNum].getName() << " wastes a perfectly good " << players[playerNum].skills[pickSkill].getName();
-										cout << " on " << enemies[target].getName() << "'s corpse." << endl;
-										cout << "Huh. Well, I guess it is your turn. Who am I to tell you what to do?" << endl << endl;
-									}
-									enemies[target].reduceHP(damageDealt);
-
-									system("pause");
-									cout << endl;
 								}
 								else
 								{
-									cout << players[playerNum].getName() << " did not have enough SP to use " << players[playerNum].skills[pickSkill].getName() << "!" << endl;
-									system("pause");
-									cout << endl;
+									system("CLS");
+									displayAttackTargets(players, enemies);
+									int target = getDecisionEscapable(0, enemies.size() - 1);
+
+									if (target != -1)
+									{
+										int damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
+										players[playerNum].reduceSP(players[playerNum].skills[pickSkill].SPcost);
+
+										if (enemies[target].offBalance)
+											damageDealt *= 2;
+
+										if (enemies[target].currentHP > 0)
+										{
+											cout << players[playerNum].skills[pickSkill].description << endl;
+											if (enemies[target].offBalance)
+												cout << "It's a critical hit!!!" << endl;
+											cout << enemies[target].getName() << " receives " << damageDealt << " points of damage!" << endl << endl;
+										}
+										else
+										{
+											cout << players[playerNum].getName() << " wastes a perfectly good " << players[playerNum].skills[pickSkill].getName();
+											cout << " on " << enemies[target].getName() << "'s corpse." << endl;
+											cout << "Huh. Well, I guess it is your turn. Who am I to tell you what to do?" << endl << endl;
+										}
+										enemies[target].reduceHP(damageDealt);
+
+										system("pause");
+										cout << endl;
+									}
 								}
-								playerNum++;
 							}
+							else
+							{
+								cout << players[playerNum].getName() << " did not have enough SP to use " << players[playerNum].skills[pickSkill].getName() << "!" << endl;
+								system("pause");
+								cout << endl;
+							}
+							playerNum++;
 						}
 					}
 					break;
