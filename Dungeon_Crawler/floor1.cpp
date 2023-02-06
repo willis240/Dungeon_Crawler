@@ -244,7 +244,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			cout << "a pair of bifold doors at the other end of the room, likely concealing a Closet. On the opposite side of the" << endl;
 			cout << "bed is a Nightstand, with a reading lamp atop it. Lastly, there is a Window next to the Nightstand.";
 			dblEndl();
-			cout << "Of course, you mustn't forget about the Right Door from which you entered the bedroom.";
+			cout << "Of course, you mustn't forget about the hallway's Right Door from which you entered the bedroom.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, bedroom);
 		}

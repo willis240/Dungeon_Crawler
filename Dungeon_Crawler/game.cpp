@@ -316,6 +316,12 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 			system("pause");
 		}
 
+		if (command == "status")
+		{
+			showStatus(players);
+			system("pause");
+		}
+
 		if (players.size() > 1)
 		{
 			if (command == "show")
@@ -710,6 +716,58 @@ bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 		}
 	}
 	return false;
+}
+
+void showStatus(vector<Player>& players)
+{
+	system("CLS");
+	cout << "----------" << endl;
+	cout << "- STATUS -" << endl;
+	cout << "----------";
+	dblEndl();
+
+	int spacing = 0;
+	int spaceMax = 18;
+
+	//Names
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << players[i].getName();
+		spacing = players[i].getName().size();
+		displaySpacing(spacing, spaceMax);
+	}
+	cout << endl;
+
+	//HP
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << "HP: " << players[i].currentHP << " / " << players[i].maxHP;
+		spacing = findDigits(players[i].currentHP);
+		spacing += 6;
+		spacing += findDigits(players[i].maxHP);
+		displaySpacing(spacing, spaceMax - 1);
+	}
+	cout << endl;
+
+	//SP
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << "SP: " << players[i].currentSP << " / " << players[i].maxSP;
+		spacing = findDigits(players[i].currentSP);
+		spacing += 6;
+		spacing += findDigits(players[i].maxSP);
+		displaySpacing(spacing, spaceMax - 1);
+	}
+
+	//STR
+
+	//EXP & EXP til next level
+
+	//LV
+
+	//Relationship
+
+	cout << endl;
 }
 
 void showItems(vector<Player>& players, vector<Item>& items, string& argument)

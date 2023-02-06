@@ -13,6 +13,7 @@
 
 enum Direction { noDirection, left, right, high, low };
 enum GuardType { perfect, standard, none };
+enum Relation {strangers, acquaintances, friends, bestFriends};
 
 class Skill
 {
@@ -93,6 +94,8 @@ public:
 	int exp = 0;
 	int lv = 1;
 	int lvEXP = 20;
+	int friendship = 0;
+	Relation relationship = strangers;
 
 	Direction guardDirection = noDirection;
 
