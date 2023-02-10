@@ -727,7 +727,9 @@ void showStatus(vector<Player>& players)
 	dblEndl();
 
 	int spacing = 0;
-	int spaceMax = 18;
+	int spaceMax = 28;
+
+	int equipBonus = 0;
 
 	//Names
 	for (int i = 0; i < players.size(); i++)
@@ -742,10 +744,29 @@ void showStatus(vector<Player>& players)
 	for (int i = 0; i < players.size(); i++)
 	{
 		cout << "HP: " << players[i].currentHP << " / " << players[i].maxHP;
+
+		equipBonus = players[i].weaponEquipped->HP;
+		equipBonus += players[i].armorEquipped->HP;
+		equipBonus += players[i].accEquipped->HP;
 		spacing = findDigits(players[i].currentHP);
-		spacing += 6;
+		spacing += 7;
 		spacing += findDigits(players[i].maxHP);
-		displaySpacing(spacing, spaceMax - 1);
+
+		if (equipBonus != 0)
+		{
+			if (equipBonus > 0)
+			{
+				cout << " (+" << equipBonus << ")";
+			}
+			else
+			{
+				cout << " (-" << equipBonus << ")";
+			}
+			spacing += 4;
+			spacing += findDigits(equipBonus);
+		}
+
+		displaySpacing(spacing, spaceMax);
 	}
 	cout << endl;
 
@@ -753,19 +774,71 @@ void showStatus(vector<Player>& players)
 	for (int i = 0; i < players.size(); i++)
 	{
 		cout << "SP: " << players[i].currentSP << " / " << players[i].maxSP;
+
+		equipBonus = players[i].weaponEquipped->SP;
+		equipBonus += players[i].armorEquipped->SP;
+		equipBonus += players[i].accEquipped->SP;
 		spacing = findDigits(players[i].currentSP);
-		spacing += 6;
+		spacing += 7;
 		spacing += findDigits(players[i].maxSP);
-		displaySpacing(spacing, spaceMax - 1);
+
+		if (equipBonus != 0)
+		{
+			if (equipBonus > 0)
+			{
+				cout << " (+" << equipBonus << ")";
+			}
+			else
+			{
+				cout << " (-" << equipBonus << ")";
+			}
+			spacing += 4;
+			spacing += findDigits(equipBonus);
+		}
+
+		displaySpacing(spacing, spaceMax);
 	}
+	cout << endl;
 
 	//STR
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << "STR: " << players[i].str;
+
+		equipBonus = players[i].weaponEquipped->str;
+		equipBonus += players[i].armorEquipped->str;
+		equipBonus += players[i].accEquipped->str;
+		spacing = findDigits(players[i].str);
+		spacing += 5;
+
+		if (equipBonus != 0)
+		{
+			if (equipBonus > 0)
+			{
+				cout << " (+" << equipBonus << ")";
+			}
+			else
+			{
+				cout << " (-" << equipBonus << ")";
+			}
+			spacing += 4;
+			spacing += findDigits(equipBonus);
+		}
+
+		displaySpacing(spacing, spaceMax);
+	}
 
 	//EXP & EXP til next level
 
 	//LV
 
 	//Relationship
+
+	//Weapon
+
+	//Armor
+
+	//Accessory
 
 	cout << endl;
 }

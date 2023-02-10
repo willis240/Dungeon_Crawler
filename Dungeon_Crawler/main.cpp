@@ -25,6 +25,14 @@ int main()
 	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
 	players[1].skills.push_back(oblivionSlash);
 
+	Weapon brassKnucks("Brass Knuckles", "Put 'em on ya hands", 2, 1, 4);
+	auto brassKnucksPtr = std::make_shared<Weapon>(brassKnucks);
+	players[0].equipWeapon(brassKnucksPtr);
+
+	Accessory pocketWatch("Pocket Watch", "Tick, tock, tick, tock", 4, 0, 1);
+	auto pocketWatchPtr = std::make_shared<Accessory>(pocketWatch);
+	players[1].equipAccessory(pocketWatchPtr);
+
 	//AN EXAMPLE FIGHT, ALSO FOR TESTING
 	/*
 	Skill quickSlash("Quick Slash", 4, false, true, 0, left, "The man on the left slashes from the left!");
