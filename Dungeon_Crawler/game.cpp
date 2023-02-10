@@ -548,6 +548,7 @@ void showInvHelp(vector<Player>& players, Inventory& inventory)
 	{
 		if (inventory.accessories[0]->beenDiscovered)
 		{
+			cout << "status           -- check your stats and equipment" << endl;
 			cout << "equip (gear)     -- equip gear to a party member to affect their stats" << endl;
 			cout << "unequip (gear)   -- unequip gear to remove its affects from that party member" << endl;
 		}
@@ -740,6 +741,27 @@ void showStatus(vector<Player>& players)
 	}
 	cout << endl;
 
+	//LV
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << "Lv " << players[i].lv;
+		spacing = findDigits(players[i].lv);
+		spacing += 3;
+		displaySpacing(spacing, spaceMax);
+	}
+	cout << endl;
+
+	//EXP & EXP til next level
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << "EXP: " << players[i].exp << " / " << players[i].lvEXP;
+		spacing = findDigits(players[i].exp);
+		spacing += 8;
+		spacing += findDigits(players[i].lvEXP);
+		displaySpacing(spacing, spaceMax);
+	}
+	dblEndl();
+
 	//HP
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -827,10 +849,7 @@ void showStatus(vector<Player>& players)
 
 		displaySpacing(spacing, spaceMax);
 	}
-
-	//EXP & EXP til next level
-
-	//LV
+	dblEndl();
 
 	//Relationship
 
