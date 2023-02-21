@@ -13,7 +13,7 @@
 
 enum Direction { noDirection, left, right, high, low };
 enum GuardType { perfect, standard, none };
-enum Relation {strangers, acquaintances, friends, bestFriends};
+//enum Relation {strangers, acquaintances, friends, bestFriends};
 
 class Skill
 {
@@ -95,7 +95,7 @@ public:
 	int lv = 1;
 	int lvEXP = 20;
 	int friendship = 0;
-	Relation relationship = strangers;
+	std::string relationship = "Stranger";
 
 	Direction guardDirection = noDirection;
 

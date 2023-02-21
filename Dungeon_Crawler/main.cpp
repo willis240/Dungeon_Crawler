@@ -12,6 +12,7 @@ using std::shared_ptr;
 int main()
 {
 	Player player = startGame();
+	player.relationship = "Self";
 	vector<Player> players = { player };
 	Inventory inventory;
 

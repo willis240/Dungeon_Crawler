@@ -760,6 +760,15 @@ void showStatus(vector<Player>& players)
 		spacing += findDigits(players[i].lvEXP);
 		displaySpacing(spacing, spaceMax);
 	}
+	cout << endl;
+
+	//Relationship
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << players[i].relationship;
+		spacing = players[i].relationship.size();
+		displaySpacing(spacing, spaceMax);
+	}
 	dblEndl();
 
 	//HP
@@ -851,14 +860,70 @@ void showStatus(vector<Player>& players)
 	}
 	dblEndl();
 
-	//Relationship
-
 	//Weapon
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << players[i].weaponEquipped->getName();
+		spacing = players[i].weaponEquipped->getName().size();
+		displaySpacing(spacing, spaceMax);
+	}
+	cout << endl;
+
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << " HP +" << players[i].weaponEquipped->HP;
+		cout << " SP +" << players[i].weaponEquipped->SP;
+		cout << " STR +" << players[i].weaponEquipped->str;
+		spacing = 16;
+		spacing += findDigits(players[i].weaponEquipped->HP);
+		spacing += findDigits(players[i].weaponEquipped->SP);
+		spacing += findDigits(players[i].weaponEquipped->str);
+		displaySpacing(spacing, spaceMax);
+	}
+	cout << endl;
 
 	//Armor
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << players[i].armorEquipped->getName();
+		spacing = players[i].armorEquipped->getName().size();
+		displaySpacing(spacing, spaceMax);
+	}
+	cout << endl;
+
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << " HP +" << players[i].armorEquipped->HP;
+		cout << " SP +" << players[i].armorEquipped->SP;
+		cout << " STR +" << players[i].armorEquipped->str;
+		spacing = 16;
+		spacing += findDigits(players[i].armorEquipped->HP);
+		spacing += findDigits(players[i].armorEquipped->SP);
+		spacing += findDigits(players[i].armorEquipped->str);
+		displaySpacing(spacing, spaceMax);
+	}
+	cout << endl;
 
 	//Accessory
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << players[i].accEquipped->getName();
+		spacing = players[i].accEquipped->getName().size();
+		displaySpacing(spacing, spaceMax);
+	}
+	cout << endl;
 
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << " HP +" << players[i].accEquipped->HP;
+		cout << " SP +" << players[i].accEquipped->SP;
+		cout << " STR +" << players[i].accEquipped->str;
+		spacing = 16;
+		spacing += findDigits(players[i].accEquipped->HP);
+		spacing += findDigits(players[i].accEquipped->SP);
+		spacing += findDigits(players[i].accEquipped->str);
+		displaySpacing(spacing, spaceMax);
+	}
 	cout << endl;
 }
 
