@@ -26,6 +26,7 @@ int main()
 	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
 	players[1].skills.push_back(oblivionSlash);
 
+	/*
 	Weapon brassKnucks("Brass Knuckles", "Put 'em on ya hands", 2, 1, 4);
 	auto brassKnucksPtr = std::make_shared<Weapon>(brassKnucks);
 	players[0].equipWeapon(brassKnucksPtr);

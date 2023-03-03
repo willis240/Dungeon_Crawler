@@ -11,7 +11,7 @@ using std::shared_ptr;
 using std::make_shared;
 using std::make_pair;
 
-void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime)
+void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria)
 {
 	//Room 0: Hall of Opportunity
 	Door rightDoor(make_pair(0, 1), "Right Door", false,
@@ -21,7 +21,51 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Room hallway(0, "Hallway", {}, {rightDoorPtr}, {}, {});
 
 	//Room 1: Bedroom
-	Room bedroom(1, "Bedroom", {}, { rightDoorPtr }, {}, {});
+	Object closet("Closet", 
+		"You put your hand on the knob of the bifold door and try to pull it open, but there is some serious \n"
+		"resistance coming from the other side. You stop for a moment, and then try again, harder. However, as you \n"
+		"pull harder, the resistance from the other side increases to match. You turn to Selena, and begin whispering. \n"
+		"\"It doesn't feel like the door is getting caught on something behind it. I think there's someone IN there.\" \n \n"
+		"\"Hey, we know you're in there. Come on out. We won't hurt you... unless you're that thug or that weirdo with the \n"
+		"monocle. Then we're gonna hurt you.\" \n \n"
+		"Despite Selena's... comforting... words, whoever is behind the closet does not budge. All that you hear is a quiet \n"
+		"rumbling from behind the bifold doors and then... silence.",
+		true, true, 0, 0, 3,
+		"You hold up the pomegranate a couple of feet in front of your face, as if you were observing a work of art. \"Ah,"
+		"the pomegranate. Truly God's masterpiece of fruit. Wouldn't you agree, Selena?\" \n \n"
+		"\"Most certainly, my good sir. From the beautiful red outer husk to the white inner wall and the crimson seeds within, \n"
+		"this fruit is a delight simply for the eyes, to say nothing of the tongue and stomach. To speak of the taste, though-\" \n \n"
+		"\"Oh, utterly delectable. The initial wave of tart, followed by a familiar sweetness. I simply don't understand how-\" \n \n"
+		"\"I CAN'T TAKE ANYMORE!!!\" A shout pierced through the closet's bifold doors before a girl threw them open and \n"
+		"bursted threw the opening. Suddenly, in a flash the pomegranate in your hand disappeared. You turn to find the girl \n"
+		"now sitting on the bed, munching on the pomegranate. Success.");
+	Object queenBed("Queen Size Bed", 
+		"As you press your hand down upon it, you find that the bed is soft--very soft. The violet blanket covering\n"
+		"it is well-insulated and comforting to the touch. You simply can't resist. You throw yourself upon the bed,\n"
+		"back first. A dumb grin widens across your face as the bed soothes your back. Selena raises an eyebrow, acting\n"
+		"as the resident comfortability skeptic, you suppose. However, in order to be a fair judge, she reaches a hand \n"
+		"out to the bed and clutches the blanket... Needless to say, she then jumps onto the bed alongside you as a stupid \n"
+		"grin finds its way onto her face. \n \n"
+		"\"\"Ahhhhh...\"\", you both sigh in relief. A delightful respite.",
+		true, false, 0, 0);
+	Key greenKey(1, "Green Key", "A standard door key, albeit with a green coloring scheme.");
+	Object nightstand("Nightstand", 
+		"It appears to be a simple, yet elegant nightstand. The edges are all black, but the rest of the surfaces\n"
+		"have a brown marble aesthetic. There is a drawer in the nightstand. While everything else you've done to\n"
+		"this point could at worst be described as looting a family room, this feels like it would be a bit too personal. \n \n"
+		"Welp, there's a first for everything. \n \n"
+		"You open the drawer, and find a Green Key. \"That was easy.\"",
+		true, false, 0, 1);
+	Object window("Window", 
+		"You run to the window, hoping to get a look at the outside for the first time since you woke up. Perhaps if you \n"
+		"see what the outside looks like, you can get an idea of where you are and also get some ever-desirable Vitamin D.\n"
+		"You make it to the window and find that the outside looks like... a wall. \n \n"
+		"In hindsight, you saw from the previous hallway that there was a room directly to the left of this one. Still, \n"
+		"the people who constructed this building could've at least put more than an inch between this room and the next \n"
+		"if they were going to leave outdoor space between them and make a window. You found this simultaneously bewildering \n"
+		"and disappointing. Selena then describes the situation succinctly: \"This window sucks.\"",
+		true, false, 0, 0);
+	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window }, { rightDoorPtr }, {}, {greenKey});
 
 	while (true)
 	{
@@ -240,13 +284,14 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 1)
 		{
 			system("CLS");
-			cout << "You find yourself inside a bedroom. There is a Queen-Sized Bed just a few feet to your left. Also, there is" << endl;
+			cout << "You find yourself inside a bedroom. There is a Queen Size Bed just a few feet to your left. Also, there is" << endl;
 			cout << "a pair of bifold doors at the other end of the room, likely concealing a Closet. On the opposite side of the" << endl;
 			cout << "bed is a Nightstand, with a reading lamp atop it. Lastly, there is a Window next to the Nightstand.";
 			dblEndl();
 			cout << "Of course, you mustn't forget about the hallway's Right Door from which you entered the bedroom.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, bedroom);
+			system("pause");
 		}
 	}
 }
