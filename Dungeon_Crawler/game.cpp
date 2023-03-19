@@ -1369,6 +1369,10 @@ int getDecision(const int minChoice, const int maxChoice)
 
 void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inventory)
 {
+	//Floor 0 Bools
+	bool seeOpening = true;
+	bool encounteredRat = false;
+
 	//Floor 1 Bools
 	bool floor1FirstTime = true;
 	bool foundAria = false;
@@ -1377,7 +1381,7 @@ void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inven
 	{
 		if (floor == 0)
 		{
-			floor0(players, roomNum, floor, inventory);
+			floor0(players, roomNum, floor, inventory, seeOpening, encounteredRat);
 		}
 		if (floor == 1)
 		{

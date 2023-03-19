@@ -10,11 +10,9 @@ using std::vector;
 using std::shared_ptr;
 using std::make_shared;
 
-void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory)
+void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& seeOpening, bool& encounteredRat)
 {
 	//Room 0: The Starting Room
-	bool seeOpening = true;
-	bool stoleFromRat = false;
 	Item nibbledCheese("Nibbled Cheese", 5, 0,
 		"Cheese that has already been nibbled by a rat. Hey, at least there's still a good chunk of cheese left. \n"
 		"Eating it would probably restore around 10HP, if you had to guess.");
@@ -29,7 +27,6 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Room startRoom(0, "Starting Room", { nightLight }, { plainDoorPtr }, {}, {});
 
 	//Room 1: The Living Room
-	bool gotBrittleKey = false;
 	Key brittleKey(1, "Brittle Key",
 		"A key which feels like it has been used a million times. It has a crack stretching vertically down the middle. \n"
 		"...Hopefully it'll still unlock what it needs to.");
@@ -66,8 +63,6 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 
 	//Room 2: The Kitchen
 	bool grabbedNugget = false;
-	bool encounteredRat = false;
-	bool helpedRat = false;
 	Item chickenNugget("Chicken Nugget", 5, 0,
 		"One singular chicken nugget. While it may not be much, it is like a drop from heaven and men have certainly \n"
 		"killed for less.", 1);
@@ -247,7 +242,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					system("pause");
 
 					inventory.items.push_back(nibbledCheese);
-					stoleFromRat = true;
+					players[0].ratlationship -= 2;
 				}
 
 				system("CLS");
@@ -314,7 +309,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "Suddenly, you catch a glimpse of something out of the corner of your eye.";
 					dblEndl();
 					system("pause");
-					if (stoleFromRat)
+					if (players[0].ratlationship < 0)
 					{
 						system("CLS");
 						cout << "You instinctively duck behind the open refrigerator door and hear a loud \"clank!\"" << endl;
@@ -356,7 +351,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						if (input == 1) // Give the rat the chicken nugget
 						{
 							system("CLS");
-							helpedRat = true;
+							players[0].ratlationship += 1;
 							cout << "You hold out the chicken nugget and the rat snatches it up faster than you could blink." << endl;
 							cout << "The next thing you know, the rat is back on the counter, nugget in hand. It looks at you" << endl;
 							cout << "and nods before heading off through a hole in the wall. It better enjoy that nugget." << endl << endl;

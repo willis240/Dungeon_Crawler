@@ -96,6 +96,7 @@ public:
 	int lvEXP = 20;
 	int friendship = 0;
 	std::string relationship = "Stranger";
+	int ratlationship = 0;
 
 	Direction guardDirection = noDirection;
 

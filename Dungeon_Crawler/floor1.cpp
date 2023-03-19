@@ -15,10 +15,18 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 {
 	//Room 0: Hall of Opportunity
 	Door rightDoor(make_pair(0, 1), "Right Door", false,
-		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is identical \n"
-		"to both of the other doors in the room.");
+		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is pretty \n"
+		"much identical to both of the other doors in the room.");
 	auto rightDoorPtr = make_shared<Door>(rightDoor);
-	Room hallway(0, "Hallway", {}, {rightDoorPtr}, {}, {});
+	Door leftDoor(make_pair(0, 2), "Left Door", true, true, 1,
+		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is identical \n"
+		"to both of the other doors in the room, except for a green rim around the doorknob. Upon trying the handle, you \n"
+		"find that it is locked.",
+		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is identical \n"
+		"to both of the other doors in the room, except for a green rim around the doorknob. Since you stuck the Green \n"
+		"Key in it, it is now unlocked.");
+	auto leftDoorPtr = make_shared<Door>(leftDoor);
+	Room hallway(0, "Hallway", {}, {rightDoorPtr, leftDoorPtr}, {}, {});
 
 	//Room 1: Bedroom
 	Object closet("Closet", 
@@ -66,6 +74,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"and disappointing. Selena then describes the situation succinctly: \"This window sucks.\"",
 		true, false, 0, 0);
 	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window }, { rightDoorPtr }, {}, {greenKey});
+
+	//Room 2: Greenhouse Room
+	Room greenhouseRoom(2, "Greenhouse Room", {}, {leftDoorPtr}, {}, {});
 
 	while (true)
 	{
