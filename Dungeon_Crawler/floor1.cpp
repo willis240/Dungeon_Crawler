@@ -290,6 +290,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			else
 			{
 				checkInput(roomNum, floorNum, players, inventory, hallway);
+				system("pause");
 			}
 		}
 		if (roomNum == 1)
@@ -302,6 +303,14 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			cout << "Of course, you mustn't forget about the hallway's Right Door from which you entered the bedroom.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, bedroom);
+			system("pause");
+		}
+		if (roomNum == 2)
+		{
+			system("CLS");
+			cout << "You made it to the Greenhouse Room!";
+			dblEndl();
+			checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
 			system("pause");
 		}
 	}

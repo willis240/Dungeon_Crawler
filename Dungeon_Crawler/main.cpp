@@ -16,7 +16,7 @@ int main()
 	vector<Player> players = { player };
 	Inventory inventory;
 
-	int floorNum = 0;
+	int floorNum = 1;
 	int roomNum = 0;
 
 	//A SECOND PLAYER CHARACTER, FOR TESTING

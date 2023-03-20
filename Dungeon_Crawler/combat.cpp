@@ -233,21 +233,26 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 								if (players[playerNum].skills[pickSkill].hasAOE)
 								{
 									cout << players[playerNum].skills[pickSkill].description << endl;
+									players[playerNum].reduceSP(players[playerNum].skills[pickSkill].SPcost);
 									int damageDealt = 0;
 									for (int i = 0; i < enemies.size(); i++)
 									{
-										damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
-										if (enemies[i].offBalance)
+										if (enemies[i].currentHP > 0)
 										{
-											cout << "It's a critical hit!!!" << endl;
-											damageDealt *= 2;
+											damageDealt = players[playerNum].str + players[playerNum].skills[pickSkill].damage;
+											if (enemies[i].offBalance)
+											{
+												cout << "It's a critical hit!!!" << endl;
+												damageDealt *= 2;
+											}
+											cout << enemies[i].getName() << " receives " << damageDealt << " points of damage!";
+											dblEndl();
+											enemies[i].reduceHP(damageDealt);
+											system("pause");
+											cout << endl;
 										}
-										cout << enemies[i].getName() << " receives " << damageDealt << " points of damage!";
-										dblEndl();
-										enemies[i].reduceHP(damageDealt);
-										system("pause");
-										cout << endl;
 									}
+									playerNum++;
 								}
 								else
 								{
@@ -280,6 +285,7 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 
 										system("pause");
 										cout << endl;
+										playerNum++;
 									}
 								}
 							}
@@ -289,7 +295,6 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 								system("pause");
 								cout << endl;
 							}
-							playerNum++;
 						}
 					}
 					break;
@@ -451,7 +456,10 @@ GuardType determineGuardType(Enemy& enemy, Player& player, short& enemyAction)
 	GuardType block = none;
 
 	if (player.guardDirection == enemy.skills[enemyAction].attackDirection)
-		block = perfect;
+	{
+		if (player.guardDirection != noDirection)
+			block = perfect;
+	}
 	else if (player.guardDirection != noDirection)
 		block = standard;
 	else
