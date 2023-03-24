@@ -17,7 +17,7 @@ int main()
 	Inventory inventory;
 
 	int floorNum = 1;
-	int roomNum = 0;
+	int roomNum = 2;
 
 	//A SECOND PLAYER CHARACTER, FOR TESTING
 

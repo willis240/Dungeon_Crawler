@@ -186,7 +186,8 @@ void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapo
 void teamUp(int& i, Inventory& inventory, Room& room);
 void explore(std::vector<Player>& players, int& floor, int& roomNum, Inventory& inventory);
 void floor0(std::vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& seeOpening, bool& encounteredRat);
-void floor1(std::vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria);
+void floor1(std::vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria,
+	bool& greenhouseFirstTime);
 void dblEndl();
 
 //Function Definitions found in combat.cpp

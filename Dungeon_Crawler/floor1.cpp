@@ -11,7 +11,8 @@ using std::shared_ptr;
 using std::make_shared;
 using std::make_pair;
 
-void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria)
+void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria,
+	bool& greenhouseFirstTime)
 {
 	//Room 0: Hall of Opportunity
 	Door rightDoor(make_pair(0, 1), "Right Door", false,
@@ -76,6 +77,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window }, { rightDoorPtr }, {}, {greenKey});
 
 	//Room 2: Greenhouse Room
+	Accessory fingerlessGloves("Fingerless Gloves", "A pair of gloves with holes where your fingers go. Not useful for dealing with firewood.",
+		0, 0, 2);
+	auto fingerlessGlovesPtr = make_shared<Accessory>(fingerlessGloves);
 	Room greenhouseRoom(2, "Greenhouse Room", {}, {leftDoorPtr}, {}, {});
 
 	while (true)
@@ -308,7 +312,46 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 2)
 		{
 			system("CLS");
-			cout << "You made it to the Greenhouse Room!";
+			cout << "The room is bright--very bright. This is because unlike any other room up to this point, it has windows which" << endl;
+			cout << "provide a direct line-of-sight to the sun. As you look around the rest of the room, you can't help but notice" << endl;
+			cout << "the wide variety of flora present. There are a few rows of white folding tables taking up most of the space" << endl;
+			cout << "in the room, each with plants atop them. There is a Tall Plant, a Green Tree, an Apple Tree, a Brown Tree, and" << endl;
+			cout << "there are some plants which likely conceal some Buried Veggies as well.";
+			dblEndl();
+
+			if (greenhouseFirstTime)
+			{
+				cout << "That being said... you then notice a small rodent on a table about 6 feet away from you.";
+				dblEndl();
+				system("pause");
+				system("CLS");
+
+				if (players[0].ratlationship > 0)
+				{
+					cout << "It's not just any rodent; it appears to be the rat which you gave a chicken nugget to earlier. Not any" << endl;
+					cout << "later than you recognize it, it turns around and pulls an item out from behind one of the potted plants." << endl;
+					cout << "It appears to be a fingerless glove. The rat then runs back behind the potted plant and into a hole in" << endl;
+					cout << "the wall only slightly larger than the rat itself. About 10 seconds later, the rat returns with a second" << endl;
+					cout << "fingerless glove. It puts the glove on top of the first one, and then nudges them both with its nose.";
+					dblEndl();
+					cout << "\"Are these for me? Thanks, little buddy.\" As you say this, you pet the top of the rat's head with your" << endl;
+					cout << "index finger. You could swear you saw him smile a bit while you were petting him, too.";
+					dblEndl();
+					cout << "...Selena is horribly confused.";
+					dblEndl();
+					cout << "You got the Fingerless Gloves!";
+					dblEndl();
+					inventory.accessories.push_back(fingerlessGlovesPtr);
+					players[0].ratlationship++;
+					system("pause");
+					system("CLS");
+				}
+				else
+				{
+					//fight with the rat, followed by opportunity to give it some food to build ratlationship
+
+				}
+			}
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
 			system("pause");
