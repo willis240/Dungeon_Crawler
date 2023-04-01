@@ -349,7 +349,37 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				else
 				{
 					//fight with the rat, followed by opportunity to give it some food to build ratlationship
+					Skill jumpSlash("Jump Slash", 5, false, false, 0, high, "The rat leaps into the air and brings its knife down!");
+					Skill sweepSlash("Sweep Slash", 3, false, true, 0, low,
+						"The rat dashes around your legs from all directions, making rapid cuts all the while");
+					Enemy hungryRat("Hungry Rat", 20, 10, 20, {}, { jumpSlash, sweepSlash });
+					cout << "You lock eyes with the rodent. You recognize it as the rat you met before. No sooner than you recognize" << endl;
+					cout << "it, it leaps at you with a knife! You sidestep the attack, and the rat immediately follows up with a" << endl;
+					cout << "sweeping attack at your feet. You dodge by jumping back a couple of feet, then crack your knuckles in" << endl;
+					cout << "response. It's time for a fight!";
+					dblEndl();
+					system("pause");
+					system("CLS");
 
+					vector<Enemy> enemies = { hungryRat };
+					fight(players, enemies, inventory.items);
+
+					cout << "The rat sits down, its back against a flower pot on the table. It is clearly exhausted from the fight." << endl;
+					cout << "It makes a move to get up and retreat through a hole in the wall. What do you do?";
+					dblEndl();
+					cout << "(1) Let it leave" << endl;
+					cout << "(2) Tell it to wait";
+					dblEndl();
+					int input = getDecision(1, 2);
+
+					if (input == 1)
+					{
+						// the rat leaves, selena asks the player what that was all about
+					}
+					else
+					{
+						// the rat waits, and the player can either feed the rat or try to attack it
+					}
 				}
 			}
 			dblEndl();
