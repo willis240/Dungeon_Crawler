@@ -371,20 +371,49 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "(2) Tell it to wait";
 					dblEndl();
 					int input = getDecision(1, 2);
+					system("CLS");
 
 					if (input == 1)
 					{
-						// the rat leaves, selena asks the player what that was all about
+						cout << "The rat hobbles away into the hole in the wall. As it disappears into the shadows, you swear" << endl;
+						cout << "you hear what sounds like a stomach grumbling.";
+						dblEndl();
+						cout << "\"I think he may have just been hungry.\" Selena stated, breaking the silence. \"Still, that's" << endl;
+						cout << "an incredibly aggressive way to \'ask\' for food.\"";
+						dblEndl();
+						cout << "\"No kidding. And that sucker just had some cheese not that long ago!\"";
+						dblEndl();
+						cout << "\"Wait, what?\" Selena raises an eyebrow as she turns to you. \"You've met that rat before? And you" << endl;
+						cout << "you recognize that it is that same rat?\"";
+						dblEndl();
+						cout << "\"He has distinct mannerisms.\" Selena's eyebrow gets closer to Heaven. \"Th-they're obvious once you" << endl;
+						cout << "notice them!\" She folds her arms. \"He was just wielding a freaking KNIFE! Have you seen any other" << endl;
+						cout << "rats do that kind of crap?!\"";
+						dblEndl();
+						cout << "Selena puts two fingers to her chin, contemplatively. \"You know what, that's a fair point. What a" << endl;
+						cout << "strange creature.\"";
+						dblEndl();
+						system("pause");
+						system("CLS");
 					}
 					else
 					{
 						// the rat waits, and the player can either feed the rat or try to attack it
+						cout << "The rat stops for a moment after hearing your voice. It slowly turns toward you, with its eyes flicking" << endl;
+						cout << "between your face and your hands. It is clearly on the defensive. That being said, it has stopped and is" << endl;
+						cout << "waiting to see what you told it to wait for.";
+						system("pause");
+						system("CLS");
 					}
 				}
+				greenhouseFirstTime = false;
 			}
-			dblEndl();
-			checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
-			system("pause");
+			else
+			{
+				dblEndl();
+				checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
+				system("pause");
+			}
 		}
 	}
 }
