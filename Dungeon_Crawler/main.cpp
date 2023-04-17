@@ -27,6 +27,13 @@ int main()
 	players[1].skills.push_back(oblivionSlash);
 
 	/*
+	Item orange("Orange", 5, 2, "Filler", 1);
+	inventory.items.push_back(orange);
+	inventory.items.push_back(orange);
+	inventory.items.push_back(orange);
+	*/
+
+	/*
 	Weapon brassKnucks("Brass Knuckles", "Put 'em on ya hands", 2, 1, 4);
 	auto brassKnucksPtr = std::make_shared<Weapon>(brassKnucks);
 	players[0].equipWeapon(brassKnucksPtr);

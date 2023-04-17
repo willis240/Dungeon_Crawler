@@ -80,6 +80,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Accessory fingerlessGloves("Fingerless Gloves", "A pair of gloves with holes where your fingers go. Not useful for dealing with firewood.",
 		0, 0, 2);
 	auto fingerlessGlovesPtr = make_shared<Accessory>(fingerlessGloves);
+	Accessory redArmband("Red Armband", "An armband with a scarlet hue. Some might call it fashionable.", 2, 2, 0);
+	auto redArmbandPtr = make_shared<Accessory>(redArmband);
 	Room greenhouseRoom(2, "Greenhouse Room", {}, {leftDoorPtr}, {}, {});
 
 	while (true)
@@ -384,7 +386,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "\"No kidding. And that sucker just had some cheese not that long ago!\"";
 						dblEndl();
 						cout << "\"Wait, what?\" Selena raises an eyebrow as she turns to you. \"You've met that rat before? And you" << endl;
-						cout << "you recognize that it is that same rat?\"";
+						cout << "recognize that it is that same rat?\"";
 						dblEndl();
 						cout << "\"He has distinct mannerisms.\" Selena's eyebrow gets closer to Heaven. \"Th-they're obvious once you" << endl;
 						cout << "notice them!\" She folds her arms. \"He was just wielding a freaking KNIFE! Have you seen any other" << endl;
@@ -399,18 +401,113 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					else
 					{
 						// the rat waits, and the player can either feed the rat or try to attack it
-						cout << "The rat stops for a moment after hearing your voice. It slowly turns toward you, with its eyes flicking" << endl;
-						cout << "between your face and your hands. It is clearly on the defensive. That being said, it has stopped and is" << endl;
-						cout << "waiting to see what you told it to wait for.";
-						system("pause");
-						system("CLS");
+						while (true)
+						{
+							cout << "The rat stops for a moment after hearing your voice. It slowly turns toward you, with its eyes flicking" << endl;
+							cout << "between your face and your hands. It is clearly on the defensive. That being said, it has stopped and is" << endl;
+							cout << "waiting to see what you told it to wait for.";
+							dblEndl();
+							cout << "What do you do?";
+							dblEndl();
+							cout << "(1) Give the rat some food" << endl;
+							cout << "(2) Give him a good sucker punch" << endl;
+							cout << "(3) On second thought, do nothing";
+							dblEndl();
+							int input = getDecision(1, 3);
+							system("CLS");
+
+							if (input == 1)
+							{
+								cout << "You look through your bag of items to see what you would like to give to the hungry rat.";
+								dblEndl();
+								displayItemsBattle(inventory.items);
+								int pickItem = getDecisionEscapable(0, inventory.items.size() - 1);
+								if (pickItem != -1)
+								{
+									cout << "You gave the rat your " << inventory.items[pickItem].getName() << "." << endl;
+									cout << "It nibbles through the entire " << inventory.items[pickItem].getName() << " ravenously, finishing it ";
+									cout << "in mere seconds.";
+									dblEndl();
+									inventory.items.erase(inventory.items.begin() + pickItem);
+									cout << "The rat's face appears content upon finishing the food you gave him. He looks up at you, a small tear" << endl;
+									cout << "forming in his right eye. Perhaps he is grateful that you fed him, and also moved that such an act of" << endl;
+									cout << "kindness took place after he had already attacked you.";
+									dblEndl();
+									cout << "The rat scurries away into a hole in the wall. A few seconds later, it comes back from the hole with" << endl;
+									cout << "something in its mouth. It sits up and drops the item near the edge of the table. It seems he wants" << endl;
+									cout << "you to have it.";
+									dblEndl();
+									cout << "You got the Red Armband!" << endl;
+									inventory.accessories.push_back(redArmbandPtr);
+									players[0].ratlationship++;
+									dblEndl();
+									cout << "The rat smiles at you, and you smile back. \"Thanks, little buddy.\" You briefly consider petting him" << endl;
+									cout << "before remembering that rats are infamous for carrying diseases. Instead, as the rat begins heading back" << endl;
+									cout << "you wave goodbye.";
+									dblEndl();
+									cout << "\"...The heck was that all about?\" Perhaps Selena's surprise was to be expected, all things considered." << endl;
+									cout << "You decide to tell her about your previous encounters with the rat, even though you think that not telling" << endl;
+									cout << "her would be kinda funny.";
+									dblEndl();
+									system("pause");
+									break;
+								}
+								system("CLS");
+							}
+							else if (input == 2)
+							{
+								cout << "You take a quick step forward and take a swing with your right arm. Your knuckles collide with the rat's" << endl;
+								cout << "left cheek, although given the size of the rat the rest of your fist ends up connecting with the rat's" << endl;
+								cout << "entire upper half. The rat launches away several feet, hitting the wall. As it gets back up on its paws" << endl;
+								cout << "it glares at you with murder in its eyes. At last, it scurries away into a hole in the wall, and all you" << endl;
+								cout << "hear is tapping in the walls growing increasingly distant.";
+								dblEndl();
+								cout << "\"I know he attacked us, but was decking him afterward really necessary?\" Selena questioned. \"He was" << endl;
+								cout << "already going to leave.\"";
+								dblEndl();
+								cout << "\"It's about sending a message. He attacked us, clearly thinking he could win. We need to show him that" << endl;
+								cout << "attacking us is not a good idea. He's met me before, so if he is still willing to strike at me like that," << endl;
+								cout << "then I must have been too soft on him.\"";
+								dblEndl();
+								cout << "\"...Okay. You could still try not being underhanded next time.\"";
+								dblEndl();
+								cout << "\"...Maybe.";
+								dblEndl();
+								players[0].ratlationship--;
+								system("pause");
+								break;
+							}
+							else
+							{
+								cout << "You wait and simply do nothing. After about twenty seconds of nobody doing anything, the rat turns around" << endl;
+								cout << "and retreats into the hole in the wall it was heading toward just before.";
+								dblEndl();
+								cout << "Selena turns to you with an eyebrow raised. \"What was that? Why'd you tell it to wait if you weren't going" << endl;
+								cout << "to do anything?\"";
+								dblEndl();
+								cout << "\"I don't really know why I did it. Although, you've gotta admit it was pretty neat that the rat listened" << endl;
+								cout << "when I told it to wait.\"";
+								dblEndl();
+								cout << "Selena tilts her head as she looks at you for a second. She lets out a small chuckle. \"Alright, that was" << endl;
+								cout << "pretty neat. That is easily the weirdest rat I've ever seen.";
+								dblEndl();
+								cout << "\"Yeah, that was, like, the third time I've seen him and it's still a little weird to me.\"";
+								dblEndl();
+								cout << "\"Wait, you've seen that rat before?\"";
+								dblEndl();
+								cout << "You decide to tell Selena about your prior encounters with the rat. Once you finish up, you both opt to" << endl;
+								cout << "return to exploring the room proper.";
+								dblEndl();
+								system("pause");
+								break;
+							}
+						}
 					}
 				}
 				greenhouseFirstTime = false;
 			}
 			else
 			{
-				dblEndl();
 				checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
 				system("pause");
 			}
