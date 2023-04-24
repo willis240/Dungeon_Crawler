@@ -82,7 +82,23 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	auto fingerlessGlovesPtr = make_shared<Accessory>(fingerlessGloves);
 	Accessory redArmband("Red Armband", "An armband with a scarlet hue. Some might call it fashionable.", 2, 2, 0);
 	auto redArmbandPtr = make_shared<Accessory>(redArmband);
-	Room greenhouseRoom(2, "Greenhouse Room", {}, {leftDoorPtr}, {}, {});
+	Key tomato(2, "Tomato", "A plump, red tomato. Good on sandwiches.");
+	Object tallPlant("Tall Plant",
+		"The Tall Plant stands straight and green. Notably, it would likely not stand so straight were it not being supported \n"
+		"by what looks to be a wireframe. After feeling around the plant's leaves you begin to hypothesize that this is a \n"
+		"tomato plant. Your hypothesis is backed up by the several soft red fruit growing on the plant. Might as well take one.",
+		true, false, 0, 2);
+	Key persimmon(3, "Persimmon", "An orange fruit, similar to a tomato in terms of stature. An old favorite of Selena's.");
+	Object greenTree("Green Tree",
+		"The tree, though small by tree standards, has a strong trunk with the kind of standard brown bark one would commonly \n"
+		"associate with trees. The top of the tree has many green leaves covering it, enough to obscure a significant part of \n"
+		"the window behind it from view. You look around its leaves and find something resembling a fruit hiding there. You \n"
+		"grab the object, and before you have time to comment on it, you hear Selena from over your shoulder: \"Ooo, a Persimmon! \n"
+		"I used to have these with my lunch all the time when I was a kid.\" She then proceeds to reach for a Persimmon from \n"
+		"the tree as well and takes a big chomp out of it. \"Mmm. Still good.\"",
+		true, false, 0, 3);
+	//Green Tree, Apple Tree, Palm Tree, Buried Veggies
+	Room greenhouseRoom(2, "Greenhouse Room", {tallPlant, greenTree}, {leftDoorPtr}, {}, {tomato, persimmon});
 
 	while (true)
 	{
@@ -317,7 +333,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			cout << "The room is bright--very bright. This is because unlike any other room up to this point, it has windows which" << endl;
 			cout << "provide a direct line-of-sight to the sun. As you look around the rest of the room, you can't help but notice" << endl;
 			cout << "the wide variety of flora present. There are a few rows of white folding tables taking up most of the space" << endl;
-			cout << "in the room, each with plants atop them. There is a Tall Plant, a Green Tree, an Apple Tree, a Brown Tree, and" << endl;
+			cout << "in the room, each with plants atop them. There is a Tall Plant, a Green Tree, an Apple Tree, a Palm Tree, and" << endl;
 			cout << "there are some plants which likely conceal some Buried Veggies as well.";
 			dblEndl();
 
