@@ -97,8 +97,24 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"I used to have these with my lunch all the time when I was a kid.\" She then proceeds to reach for a Persimmon from \n"
 		"the tree as well and takes a big chomp out of it. \"Mmm. Still good.\"",
 		true, false, 0, 3);
+	Key apple(4, "Apple", "An iconic red fruit, said to keep those with PhDs away.");
+	Object appleTree("Apple Tree",
+		"Now this was a tree you could easily recognize at a glance. You would recognize that crisp, red fruit anywhere. You \n"
+		"reach up and pluck an Apple from one of the lower branches. It was at this moment that you realized the ceiling of \n"
+		"of this room is quite high. All the better for growing the trees and taller plants, you suppose.",
+		true, false, 0, 4);
+	Key coconut(5, "Coconut", "A big, brown, durable fruit. Not entirely unlike a bowling ball.");
+	Object palmTree("Palm Tree",
+		"Amongst all of the different plants in the room, this one stands out quite a bit. Its large leaves lend it a visual \n"
+		"flavor that is distinct. The fruit it carries likewise have a distinct look to them. They are brown, and similar \n"
+		"in shape to a bowling ball. You kick off of the palm tree and manage to snag one of the \"bowling balls\". \n \n"
+		"Next, you turn toward Selena, who appears to be investigating a different plant with her back facing you. Big mistake. \n"
+		"You then roll the home-grown bowling ball toward Selena's \"pins\", and manage to strike one. \"Ow!\" She lifts her \n"
+		"struck leg and grabs the back of her calf, but the other pin still stands. Before you have time to think of securing \n"
+		"a spare, she shoots a deadly glare in your direction. You decide that leaving one pin standing doesn't sound so bad.",
+		true, false, 0, 5);
 	//Green Tree, Apple Tree, Palm Tree, Buried Veggies
-	Room greenhouseRoom(2, "Greenhouse Room", {tallPlant, greenTree}, {leftDoorPtr}, {}, {tomato, persimmon});
+	Room greenhouseRoom(2, "Greenhouse Room", {tallPlant, greenTree, appleTree, palmTree}, {leftDoorPtr}, {}, {tomato, persimmon, apple, coconut});
 
 	while (true)
 	{
