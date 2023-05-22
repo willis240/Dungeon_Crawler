@@ -74,7 +74,44 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"if they were going to leave outdoor space between them and make a window. You found this simultaneously bewildering \n"
 		"and disappointing. Selena then describes the situation succinctly: \"This window sucks.\"",
 		true, false, 0, 0);
-	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window }, { rightDoorPtr }, {}, {greenKey});
+	Key diary(7, "Diary",
+		"A diary detailing many events in a young girl's life. It seems she would write in it once a week, every week, \n"
+		"and did so for years. The beginning is quite dull, so you decide to skim the book for anything that could be \n"
+		"interesting. \n \n"
+		"\"May 5th- \n"
+		"Miranda is a dear friend and I love her, but she really has some poor taste. She says that the new Gargoyle \n"
+		"Wars movie is way better than The Stars Beyond Our Reach, when the new Gargoyle Wars movie is actual hot garbage. \n"
+		"I mean, it COMPLETELY obliterates all of the character development that Gray went through in the previous movie, \n"
+		"acting as if it just never even happened! It is horribly frustrating to watch as someone who was such a big fan \n"
+		"up to this point.\" \n \n"
+		"\"May 12th- \n"
+		"Oh my gosh Miranda keeps talking about the new Gargoyle Wars movie. I've said my piece to her about how I feel \n"
+		"about the movie, but I was polite about it since I knew that she really liked it. If I hear her talking about \n"
+		"that stupid fricking movie one more time I am going to tear it to shreds. It's like comparing an apple to a \n"
+		"persimmon; one is a delicious snack with a deep, delectable flavor and the other is best used as a thrown \n"
+		"weapon. If I wanted to eat something that hard, I'd take a bite out of a rock. Still, I'd prefer that to \n"
+		"watching Gargoyle Wars 8 again.\" \n \n"
+		"\"May 19th- \n"
+		"Okay, if I had to write about the stupid movie a third week in a row I would lose my mind. Thankfully, it's been \n"
+		"quiet on that front. Miranda and I went together with Abby and Toby yesterday to the ice cream shop and got some \n"
+		"milkshakes. There were a lot of options there, including orange, strawberry, banana, and even some really strange \n"
+		"flavors like tomato and carrot. I'm not a fan of any of those fruit, but I still consider myself to be a gal with \n"
+		"simple taste. I went with chocolate. It was SO GOOD!! Ah, I love the spring.\" \n \n"
+		"\"This girl gets it. Gargoyle Wars 8 freaking sucks.\"");
+	Object desk("Desk",
+		"You find that it is a simple wooden desk. It does not have any particular decorations to make it stand out \n"
+		"or feel fancy. It has a single drawer under its mid-section, inside of which is a book. One look at the cover \n"
+		"and you immediately realize it's a diary. \n \n"
+		"\"You're not seriously going to-\" \n \n"
+		"\"Desperate times call for desperate measures. There could be a clue in here. Or a hollowed-out section with \n"
+		"a key in it! This book holds too much potential for us to simply ignore it!\" \n \n"
+		"Selena ponders for a moment, a slightly grumpy frown showcasing her displeasure for intruding on another's \n"
+		"privacy. You speak up once again, \"Tell you what: If we come across this journal's owner, then I will let \n"
+		"them read my journal and learn all of the juicy secrets within it, just to be fair.\" \n \n"
+		"Selena chuckled. \"I'll hold you to that.\" After a short pause, she added, \"I just know I wouldn't want \n"
+		"some random person to read all of my diary.\"",
+		true, false, 0, 7);
+	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window, desk }, { rightDoorPtr }, {}, { greenKey, diary });
 
 	//Room 2: Greenhouse Room
 	Accessory fingerlessGloves("Fingerless Gloves", "A pair of gloves with holes where your fingers go. Not useful for dealing with firewood.",
@@ -113,8 +150,14 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"struck leg and grabs the back of her calf, but the other pin still stands. Before you have time to think of securing \n"
 		"a spare, she shoots a deadly glare in your direction. You decide that leaving one pin standing doesn't sound so bad.",
 		true, false, 0, 5);
-	//Green Tree, Apple Tree, Palm Tree, Buried Veggies
-	Room greenhouseRoom(2, "Greenhouse Room", {tallPlant, greenTree, appleTree, palmTree}, {leftDoorPtr}, {}, {tomato, persimmon, apple, coconut});
+	Key carrot(6, "Carrot", "An orange vegetable. Rumored to improve eyesight.");
+	Object buriedVeggies("Buried Veggies",
+		"While you recognize that the green leaves sticking out of the dirt indicate that there are vegetables hiding below, \n"
+		"you are not exactly a botanist. Pinpointing which vegetable it is exactly will have to fall to the tried-and-true \n"
+		"approach. As you yank the veggie out of the dirt, you find a familiar orange shape.",
+		true, false, 0, 6);
+	Room greenhouseRoom(2, "Greenhouse Room", {tallPlant, greenTree, appleTree, palmTree, buriedVeggies}, {leftDoorPtr},
+		{}, {tomato, persimmon, apple, coconut, carrot});
 
 	while (true)
 	{
@@ -201,7 +244,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 
 					if (input2 == 1)
 					{
-						cout << "Selena glares at you for a second--the disappointment in your sense of humor abundantly palpable--and" << endl;
+						cout << "Selena glares at you for a second--the disappointment in your sense of humor exceedingly palpable--and" << endl;
 						cout << "then returns her focus to the two men in front of you.";
 						dblEndl();
 						cout << "The man on the right looks toward you. \"I'm afraid that not even your partner appreciated your \'jest\'." << endl;
@@ -336,7 +379,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			system("CLS");
 			cout << "You find yourself inside a bedroom. There is a Queen Size Bed just a few feet to your left. Also, there is" << endl;
 			cout << "a pair of bifold doors at the other end of the room, likely concealing a Closet. On the opposite side of the" << endl;
-			cout << "bed is a Nightstand, with a reading lamp atop it. Lastly, there is a Window next to the Nightstand.";
+			cout << "bed is a Nightstand, with a reading lamp atop it. Lastly, there is a Window next to the Nightstand, with a Desk" << endl;
+			cout << "just a few feet to the right of it.";
 			dblEndl();
 			cout << "Of course, you mustn't forget about the hallway's Right Door from which you entered the bedroom.";
 			dblEndl();
