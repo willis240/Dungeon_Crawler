@@ -40,13 +40,13 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Despite Selena's... comforting... words, whoever is behind the closet does not budge. All that you hear is a quiet \n"
 		"rumbling from behind the bifold doors and then... silence.",
 		true, true, 0, 0, 3,
-		"You hold up the pomegranate a couple of feet in front of your face, as if you were observing a work of art. \"Ah,"
+		"You hold up the pomegranate a couple of feet in front of your face, as if you were observing a work of art. \"Ah, \n"
 		"the pomegranate. Truly God's masterpiece of fruit. Wouldn't you agree, Selena?\" \n \n"
 		"\"Most certainly, my good sir. From the beautiful red outer husk to the white inner wall and the crimson seeds within, \n"
 		"this fruit is a delight simply for the eyes, to say nothing of the tongue and stomach. To speak of the taste, though-\" \n \n"
 		"\"Oh, utterly delectable. The initial wave of tart, followed by a familiar sweetness. I simply don't understand how-\" \n \n"
-		"\"I CAN'T TAKE ANYMORE!!!\" A shout pierced through the closet's bifold doors before a girl threw them open and \n"
-		"bursted threw the opening. Suddenly, in a flash the pomegranate in your hand disappeared. You turn to find the girl \n"
+		"\"I CAN'T TAKE ANYMORE!!!\" A shout pierces through the closet's bifold doors before a girl throws them open and \n"
+		"bursts through the opening. Suddenly, in a flash the pomegranate in your hand disappears. You turn to find the girl \n"
 		"now sitting on the bed, munching on the pomegranate. Success.");
 	Object queenBed("Queen Size Bed", 
 		"As you press your hand down upon it, you find that the bed is soft--very soft. The violet blanket covering\n"
@@ -385,9 +385,25 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			cout << "Of course, you mustn't forget about the hallway's Right Door from which you entered the bedroom.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, bedroom);
+
 			if (!foundAria)
 			{
-				if ()
+				if (!bedroom.objects[0].hasSecret)
+				{
+					foundAria = true;
+					closet.description = "Behind the bifold doors are a bunch of girl's clothes on hangers. Primarily simple dresses \n"
+						"and button-up shirts. There are also some skirts and pants folded up neatly along the wall. \n"
+						"While there may be no dresser, it is clear the owner of these clothes is rather organized.";
+					system("pause");
+					system("CLS");
+
+					cout << "\"So, who are you and what were you doing in that closet?\"";
+					dblEndl();
+					cout << "\"Well, my name is Aria\", the girl stated, still munching on the pomegranate, \"and I live here. Really, I should" << endl;
+					cout << "be asking why YOU two are here in my room.\"";
+					dblEndl();
+					//CONTINUE DIALOGUE HERE!!! YAY, STORY STUFF!!!!!
+				}
 			}
 			system("pause");
 		}

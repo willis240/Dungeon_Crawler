@@ -26,12 +26,8 @@ int main()
 	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
 	players[1].skills.push_back(oblivionSlash);
 
-	/*
-	Item orange("Orange", 5, 2, "Filler", 1);
-	inventory.items.push_back(orange);
-	inventory.items.push_back(orange);
-	inventory.items.push_back(orange);
-	*/
+	Key pomegranate(3, "Pomegranate", "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
+	inventory.keys.push_back(pomegranate);
 
 	/*
 	Weapon brassKnucks("Brass Knuckles", "Put 'em on ya hands", 2, 1, 4);
