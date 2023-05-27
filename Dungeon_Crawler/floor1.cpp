@@ -88,9 +88,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Oh my gosh Miranda keeps talking about the new Gargoyle Wars movie. I've said my piece to her about how I feel \n"
 		"about the movie, but I was polite about it since I knew that she really liked it. If I hear her talking about \n"
 		"that stupid fricking movie one more time I am going to tear it to shreds. It's like comparing an apple to a \n"
-		"persimmon; one is a delicious snack with a deep, delectable flavor and the other is best used as a thrown \n"
-		"weapon. If I wanted to eat something that hard, I'd take a bite out of a rock. Still, I'd prefer that to \n"
-		"watching Gargoyle Wars 8 again.\" \n \n"
+		"pomegranate; one is a delicious snack with a deep, delectable flavor and the other is best used as a thrown \n"
+		"weapon. The only thing an apple is good for is for apple pie. Still, I'd prefer eating five apples to watching \n"
+		"Gargoyle Wars 8 again.\" \n \n"
 		"\"May 19th- \n"
 		"Okay, if I had to write about the stupid movie a third week in a row I would lose my mind. Thankfully, it's been \n"
 		"quiet on that front. Miranda and I went together with Abby and Toby yesterday to the ice cream shop and got some \n"
@@ -125,13 +125,13 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"by what looks to be a wireframe. After feeling around the plant's leaves you begin to hypothesize that this is a \n"
 		"tomato plant. Your hypothesis is backed up by the several soft red fruit growing on the plant. Might as well take one.",
 		true, false, 0, 2);
-	Key persimmon(3, "Persimmon", "An orange fruit, similar to a tomato in terms of stature. An old favorite of Selena's.");
+	Key pomegranate(3, "Pomegranate", "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	Object greenTree("Green Tree",
 		"The tree, though small by tree standards, has a strong trunk with the kind of standard brown bark one would commonly \n"
 		"associate with trees. The top of the tree has many green leaves covering it, enough to obscure a significant part of \n"
 		"the window behind it from view. You look around its leaves and find something resembling a fruit hiding there. You \n"
-		"grab the object, and before you have time to comment on it, you hear Selena from over your shoulder: \"Ooo, a Persimmon! \n"
-		"I used to have these with my lunch all the time when I was a kid.\" She then proceeds to reach for a Persimmon from \n"
+		"grab the object, and before you have time to comment on it, you hear Selena from over your shoulder: \"Ooo, a pomegranate! \n"
+		"I used to have these with my lunch all the time when I was a kid.\" She then proceeds to reach for a pomegranate from \n"
 		"the tree as well and takes a big chomp out of it. \"Mmm. Still good.\"",
 		true, false, 0, 3);
 	Key apple(4, "Apple", "An iconic red fruit, said to keep those with PhDs away.");
@@ -157,7 +157,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"approach. As you yank the veggie out of the dirt, you find a familiar orange shape.",
 		true, false, 0, 6);
 	Room greenhouseRoom(2, "Greenhouse Room", {tallPlant, greenTree, appleTree, palmTree, buriedVeggies}, {leftDoorPtr},
-		{}, {tomato, persimmon, apple, coconut, carrot});
+		{}, {tomato, pomegranate, apple, coconut, carrot});
 
 	while (true)
 	{
@@ -385,6 +385,10 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			cout << "Of course, you mustn't forget about the hallway's Right Door from which you entered the bedroom.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, bedroom);
+			if (!foundAria)
+			{
+				if ()
+			}
 			system("pause");
 		}
 		if (roomNum == 2)
