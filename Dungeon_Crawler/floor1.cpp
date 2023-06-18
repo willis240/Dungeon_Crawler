@@ -429,7 +429,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "from him in a week or two.\" Both your face and Selena's form up for the obvious question that comes next, but \n";
 					cout << "Aria already knew it was coming. \"I looked around the house for him right when he first disappeared, but I \n";
 					cout << "couldn't find him anywhere. Then I heard some strange men talking, and when I peeked around the corner I didn't \n";
-					cout << "recognize them. \"";
+					cout << "recognize them.\"";
 					dblEndl();
 					cout << "\"And you didn't leave? Maybe even call the cops?\"";
 					dblEndl();
@@ -438,7 +438,19 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "I'm not getting any signal anymore.\" She shows both you and Selena her cell phone and, sure enough, the three \n";
 					cout << "bars representing cell signal are all empty.";
 					dblEndl();
-
+					cout << "\"But you used to have cell signal?\"";
+					dblEndl();
+					cout << "\"Yes, but right around when my brother disappeared, the cell signal did too. Anyway, ever since those strange \n";
+					cout << "men showed up I've mostly been hiding in my room. I went out to check on the front door a couple times early on \n";
+					cout << "but, like I said, they've always got someone there so I haven't tried escaping. After a couple days of waiting \n";
+					cout << "I made a run into the kitchen and grabbed all the food I could. Since then I've just been hiding in here, but as \n";
+					cout << "you seemed to have caught onto, I ran out of food a day or two ago.\"";
+					dblEndl();
+					cout << "You think back to how barren the kitchen was. Her story so far seems to add up. But- \"If you were hiding in here, \n";
+					cout << "then why did you leave the door unlocked?\"";
+					dblEndl();
+					//Aria explains she was about to go out and try to get some food from the greenhouse room but the loud noise in the hallway
+					//caused her to run for the closet
 				}
 			}
 			system("pause");
