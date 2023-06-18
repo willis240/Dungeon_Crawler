@@ -399,10 +399,46 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 
 					cout << "\"So, who are you and what were you doing in that closet?\"";
 					dblEndl();
-					cout << "\"Well, my name is Aria\", the girl stated, still munching on the pomegranate, \"and I live here. Really, I should" << endl;
-					cout << "be asking why YOU two are here in my room.\"";
+					cout << "\"Well, my name is Aria\", the girl stated, still chowing down on the pomegranate, \"and I live here. Really," << endl;
+					cout << "I should be asking why YOU two are here in my room.\"";
 					dblEndl();
-					//CONTINUE DIALOGUE HERE!!! YAY, STORY STUFF!!!!!
+					cout << "You and Selena share a wide-eyed glance before turning back to Aria. \"So wait, this is YOUR room? You live here?\"";
+					dblEndl();
+					cout << "\"Uh, yeah.\"";
+					dblEndl();
+					cout << "\"Could you tell us the way out of here? We just want to get out of here.\" However, before Aria could respond, \n";
+					cout << "Selena followed up with a question of her own.";
+					dblEndl();
+					cout << "\"Why do you have a secret passageway with a prison cell in your house?\"";
+					dblEndl();
+					cout << "Aria's eyebrows straightened. \"What?\"";
+					dblEndl();
+					cout << "\"Beneath the bar downstairs there is a secret passageway leading to a cell. That's where I found her\", you \n";
+					cout << "clarify as you gesture toward Selena.";
+					dblEndl();
+					cout << "\"I... I never knew about a secret passage. Honestly, I hardly do anything with the bar anyway. I like the \n";
+					cout << "fruity drinks but I'm not particularly a fan of alcohol. \"";
+					dblEndl();
+					cout << "Selena's face contorts to one of frustration. \"Then why do you have a bar in your house?! Does anyone else live \n";
+					cout << "here?\"";
+					dblEndl();
+					system("pause");
+					system("CLS");
+
+					cout << "Aria's eyes retreat from Selena's. \"Well, my brother lived here with me, but... I haven't seen him or heard \n";
+					cout << "from him in a week or two.\" Both your face and Selena's form up for the obvious question that comes next, but \n";
+					cout << "Aria already knew it was coming. \"I looked around the house for him right when he first disappeared, but I \n";
+					cout << "couldn't find him anywhere. Then I heard some strange men talking, and when I peeked around the corner I didn't \n";
+					cout << "recognize them. \"";
+					dblEndl();
+					cout << "\"And you didn't leave? Maybe even call the cops?\"";
+					dblEndl();
+					cout << "\"I went to the front door, but they have someone stationed there. From what I've been able to tell they have \n";
+					cout << "rotating shifts so someone is always stationed there. As for calling the cops, I tried. But for some reason, \n";
+					cout << "I'm not getting any signal anymore.\" She shows both you and Selena her cell phone and, sure enough, the three \n";
+					cout << "bars representing cell signal are all empty.";
+					dblEndl();
+
 				}
 			}
 			system("pause");
