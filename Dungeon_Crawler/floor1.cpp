@@ -433,8 +433,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					dblEndl();
 					cout << "\"And you didn't leave? Maybe even call the cops?\"";
 					dblEndl();
-					cout << "\"I went to the front door, but they have someone stationed there. From what I've been able to tell they have \n";
-					cout << "rotating shifts so someone is always stationed there. As for calling the cops, I tried. But for some reason, \n";
+					cout << "\"I went to the front door, but they have someone stationed there. From what I've been able to tell they must have \n";
+					cout << "rotating shifts because someone is always stationed there. As for calling the cops, I tried. But for some reason, \n";
 					cout << "I'm not getting any signal anymore.\" She shows both you and Selena her cell phone and, sure enough, the three \n";
 					cout << "bars representing cell signal are all empty.";
 					dblEndl();
@@ -449,8 +449,28 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "You think back to how barren the kitchen was. Her story so far seems to add up. But- \"If you were hiding in here, \n";
 					cout << "then why did you leave the door unlocked?\"";
 					dblEndl();
-					//Aria explains she was about to go out and try to get some food from the greenhouse room but the loud noise in the hallway
-					//caused her to run for the closet
+					cout << "Aria sighs. \"The lock on my door is broken so I've been barricading the door with my desk. But, you see, I'm starving. \n";
+					cout << "I was going to go to the indoor greenhouse and see if some of the fruits and veggies were ready to eat. So, I pulled \n";
+					cout << "my desk away from the door, but then I heard some TALKING outside my door, and I ran for the closet.\"";
+					dblEndl();
+					cout << "You put two and two together. \"Ah, so what you probably heard was Selena and I encountering those weirdos in the \n";
+					cout << "hallway.\"";
+					dblEndl();
+					system("pause");
+					system("CLS");
+
+					cout << "Aria's turns her head toward the ceiling, takes a deep breath, and then turns back to facing you and Selena, a \n";
+					cout << "fiery determination in her eyes. \"So, obviously you guys are not working with the other people here. I really \n";
+					cout << "don't want to starve, and I can't get past those guys at the door by myself. I'm sure you can tell where I'm";
+					cout << "going with this.\"";
+					dblEndl();
+					cout << "You sure can.";
+					dblEndl();
+					cout << "\"I can help you guys out. I know my house and the neighborhood pretty well. I would be a valuable asset for \n";
+					cout << "getting out of here and staying out of here. What do you say?\"";
+					dblEndl();
+					cout << "You and Selena share a glance and you then hold a finger up to Aria, signifying \"just a moment\". You both \n";
+					cout << "turn away from her and whisper next to the door. ";
 				}
 			}
 			system("pause");
