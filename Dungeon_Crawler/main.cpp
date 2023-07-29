@@ -16,11 +16,11 @@ int main()
 	vector<Player> players = { player };
 	Inventory inventory;
 
-	int floorNum = 1;
-	int roomNum = 1;
+	int floorNum = 0;
+	int roomNum = 0;
 
 	//A SECOND PLAYER CHARACTER, FOR TESTING
-
+	/*
 	Player Selena("Selena", 1, 7, 13, {});
 	players.push_back(Selena);
 	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
@@ -28,6 +28,7 @@ int main()
 
 	Key pomegranate(3, "Pomegranate", "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);
+	*/
 
 	/*
 	Weapon brassKnucks("Brass Knuckles", "Put 'em on ya hands", 2, 1, 4);

@@ -148,7 +148,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Next, you turn toward Selena, who appears to be investigating a different plant with her back facing you. Big mistake. \n"
 		"You then roll the home-grown bowling ball toward Selena's \"pins\", and manage to strike one. \"Ow!\" She lifts her \n"
 		"struck leg and grabs the back of her calf, but the other pin still stands. Before you have time to think of securing \n"
-		"a spare, she shoots a deadly glare in your direction. You decide that leaving one pin standing doesn't sound so bad.",
+		"a spare, she shoots a deadly glare in your direction. Next time.",
 		true, false, 0, 5);
 	Key carrot(6, "Carrot", "An orange vegetable. Rumored to improve eyesight.");
 	Object buriedVeggies("Buried Veggies",
@@ -282,7 +282,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "You sit down with your legs crossed and watch as the two men work to subdue your furious partner. She continues" << endl;
 						cout << "flailing her arms and legs, but the man restricting her prevents her from getting any good hits on the gentleman." << endl;
 						cout << "The gentlemen, now in close, pulls a cloth from his suit and puts it up against her face. After a few seconds," << endl;
-						cout << "her limbs start slowing down before finally ceasing movement.";
+						cout << "her limbs begin slowing down before finally ceasing movement.";
 						dblEndl();
 						cout << "Both men let out a sigh of relief, and then the man on the left sets Selena down gently on the floor. They then" << endl;
 						cout << "both wipe the sweat from their brows. Finally, they turn towards you and their eyes go wide. They must have" << endl;
@@ -295,7 +295,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "\"Yes\", the gentleman responds as he starts walking toward you. \"I suppose it does.\" Suddenly, the gentlemen is" << endl;
 						cout << "right in front of you, and then the cloth covers your face. It's a funny feeling, you were wide awake just a moment" << endl;
 						cout << "ago, but now... now you can feel the sweet tug of sleep dropping your eyelids. Right before your last drop of" << endl;
-						cout << "of consciousness drips out of your head, you swear you hear the men talking. \"We should install new locks on their" << endl;
+						cout << "consciousness drips out of your head, you swear you hear the men talking. \"We should install new locks on their" << endl;
 						cout << "respective doors, with new keys made for only specific personnel to use. They will not escape again.\"";
 						dblEndl();
 						system("pause");
@@ -322,8 +322,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				dblEndl();
 				system("pause");
 				system("CLS");
-				cout << "The gentleman works his way back to standing, although he is clearly in pain. Both of the men are" << endl;
-				cout << "right next to each other now, standing side-to-side. \"I must say,\" the gentleman started, \"that" << endl;
+				cout << "The gentleman worked his way back to standing, although he was clearly in pain. Both of the men were" << endl;
+				cout << "now right next to each other, standing side-to-side. \"I must say,\" the gentleman started, \"that" << endl;
 				cout << "you do not fight like any lady I have ever seen. You do not care about honour in a battle all that" << endl;
 				cout << "much, do you?\"";
 				dblEndl();
@@ -377,12 +377,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 1)
 		{
 			system("CLS");
-			cout << "You find yourself inside a bedroom. There is a Queen Size Bed just a few feet to your left. Also, there is" << endl;
-			cout << "a pair of bifold doors at the other end of the room, likely concealing a Closet. On the opposite side of the" << endl;
-			cout << "bed is a Nightstand, with a reading lamp atop it. Lastly, there is a Window next to the Nightstand, with a Desk" << endl;
-			cout << "just a few feet to the right of it.";
-			dblEndl();
-			cout << "Of course, you mustn't forget about the hallway's Right Door from which you entered the bedroom.";
+			cout << "You find yourself inside a bedroom. Going clockwise starting from the Right Door, there is a Queen Size Bed to" << endl;
+			cout << "your left, then a Nightstand against the wall. Next up is a Window with a Desk just to the right of it. Along" << endl;
+			cout << "the back wall is a pair of bifold doors, likely concealing a Closet.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, bedroom);
 
@@ -406,8 +403,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					dblEndl();
 					cout << "\"Uh, yeah.\"";
 					dblEndl();
-					cout << "\"Could you tell us the way out of here? We just want to get out of here.\" However, before Aria could respond, \n";
-					cout << "Selena followed up with a question of her own.";
+					cout << "\"Tell us the way out of here. Now.\" However, before Aria could respond, Selena followed up with a \n";
+					cout << "question.";
 					dblEndl();
 					cout << "\"Why do you have a secret passageway with a prison cell in your house?\"";
 					dblEndl();

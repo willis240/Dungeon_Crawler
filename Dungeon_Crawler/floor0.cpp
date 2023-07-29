@@ -91,7 +91,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		accessory);
 	Accessory ironRing("Iron Ring",
 		"It is a small ring made of iron, and in hindsight, it looks quite equippable. Grants STR +2.",
-		0, 0, 2, 4, false);
+		0, 0, 1, 4, false);
 	auto ironRingPtr = make_shared<Accessory>(ironRing);
 	Object pantry("Pantry",
 		"You open the pantry door to take a look inside. You see an assortment of empty boxes of snack foods, ranging \n"
@@ -140,11 +140,12 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		false, "Selena",
 		"\"Oh hey, this Fire Iron would work great as a weapon!\" \n \n"
 		"\"...You mean this Fire Poker?\" \n \n"
-		"\"Fire Iron sounds cooler.\"", weapon);
+		"\"Fire Iron sounds cooler.\" \n \n"
+		"You realize that you agree, but you're not gonna tell her that.", weapon);
 	Weapon fireIron("Fire Iron",
 		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
 		"Also used to stoke fires.",
-		0, 0, 1, 5, false);
+		0, 0, 2, 5, false);
 	auto fireIronPtr = make_shared<Weapon>(fireIron);
 	Object fireplace("Fireplace",
 		"The fireplace has a clean brick aesthetic, with a real fire burning and providing warmth to the room. You note that \n"
@@ -199,7 +200,8 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Room cellExterior(4, "Cell Exterior", {}, { barSecretPassagePtr, metalDoorPtr }, {}, {});
 
 	//Room 5: The Cell Interior
-	Player Selena("Selena", 1, 7, 13, {});
+	Skill rapidJabs("Rapid Jabs", 5, false, false, 4, "Selena unleashes repeated jabs at the enemy!");
+	Player Selena("Selena", 1, 7, 13, {rapidJabs});
 	Room cellInterior(5, "Cell Interior", {}, { metalDoorPtr }, {}, {});
 
 	while (true)
@@ -511,7 +513,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "her eyes widen and she holds out her hands as she realizes what she just said, \"purely for self-defense," << endl;
 						cout << "then I would feel a lot better about our chances should things take a turn for the worse.\"";
 						dblEndl();
-						cout << "\"Alright, I think I may have seen something like that nearby...\"";
+						cout << "You eye her skeptically. \"Alright, I think I may have seen something like that nearby...\"";
 						dblEndl();
 						players.push_back(Selena);
 					}
@@ -630,8 +632,8 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "Selena leans in closer and responds with a sharp, determined tone. \"I would rather scrounge around for crumbs" << endl;
 						cout << "out there than spend another day in this cell.\"";
 						dblEndl();
-						cout << "\"Alright. Tell you what: help me find a way out of here and I might just share some food I've come across. Deal?" << endl;
-						cout << "You hold out your fist." << endl;
+						cout << "\"Alright. Tell you what: help me find a way out of here and I might just share some food I've come across. Deal?\"" << endl;
+						cout << "You hold out your fist.";
 						dblEndl();
 						cout << "Selena pounds your fist, completing the fist bump. \"Deal.\", she replies, smiling.";
 						dblEndl();
@@ -685,10 +687,10 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						cout << "The woman chuckles. \"Heh, alright, my bad. Have you got something I can call you that's less of a mouthful?\"";
 						dblEndl();
-						cout << "\"I suppose you could call me " << players[0].getName() << ", if the other name is too much for you.";
+						cout << "\"I suppose you could call me " << players[0].getName() << ", if the other name is too much for you.\"";
 						dblEndl();
 						cout << "She smiles and replies, \"My name is Selena. And " << players[0].getName() << " will work just fine. Alright," << endl;
-						cout << "let's go find our way out of here.";
+						cout << "let's go find our way out of here.\"";
 						dblEndl();
 						players.push_back(Selena);
 					}
@@ -700,7 +702,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						cout << "\"Nah, I'm good. I'm kinda the best there is.\"";
 						dblEndl();
-						cout << "The woman blinks rapidly in disbelief at the words she is hearing. W-well, think about this: In addition to" << endl;
+						cout << "The woman blinks rapidly in disbelief at the words she is hearing. \"W-well, think about this: In addition to" << endl;
 						cout << "helping you explore, I can also help you carry stuff so you don't have to carry as much!\" She smiles, but" << endl;
 						cout << "it is a desperate smile. Still, though...";
 						dblEndl();
@@ -710,10 +712,10 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						cout << "You stare at her. And stare at her. Annnnd keep staring.";
 						dblEndl();
-						cout << "The woman looks down at the floor and adds quietly, \"Or that I'm lonely and bored and want someone to talk to.";
+						cout << "The woman looks down at the floor and adds quietly, \"Or that I'm lonely and bored and want someone to talk to?\"";
 						dblEndl();
 						cout << "\"Theeeeeere we go. Well, alright then. But if I'm going to start making fun of- I mean, talking to someone," << endl;
-						cout << "then I'm going to need to know their name.";
+						cout << "then I'm going to need to know their name.\"";
 						dblEndl();
 						cout << "The woman glares at you briefly, before forming a smile on her face. \"My name is Selena. I look forward to" << endl;
 						cout << "to getting out of here.\" She extends her hand, and you shake it.";

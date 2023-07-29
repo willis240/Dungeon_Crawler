@@ -452,7 +452,8 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 				}
 				else
 					spacing = weapons[i]->getName().length();
-				cout << weapons[i]->getName();
+				if (weapons[i]->beenDiscovered)
+					cout << weapons[i]->getName();
 			}
 			else
 				spacing = 0;
@@ -482,7 +483,8 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 				}
 				else
 					spacing = accessories[i]->getName().length();
-				cout << accessories[i]->getName();
+				if(accessories[i]->beenDiscovered)
+					cout << accessories[i]->getName();
 			}
 			else
 				spacing = 0;
