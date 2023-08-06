@@ -117,6 +117,11 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 					{
 						checkArgument(i, true, room, inventory);
 					}
+					for (int ii = 0; ii < room.doors[i]->aliases.size(); ii++)
+					{
+						if (argument == room.doors[i]->aliases[ii])
+							checkArgument(i, true, room, inventory);
+					}
 				}
 				break;
 			}
@@ -129,6 +134,12 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 				{
 					if (argument == room.doors[i]->name)
 						enterDoor(*room.doors[i], roomNum, floorNum);
+
+					for (int ii = 0; ii < room.doors[i]->aliases.size(); ii++)
+					{
+						if (argument == room.doors[i]->aliases[ii])
+							enterDoor(*room.doors[i], roomNum, floorNum);
+					}
 				}
 				break;
 			}
@@ -151,6 +162,12 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 				{
 					if (argument == room.objects[i].getName())
 						teamUp(i, inventory, room);
+
+					for (int ii = 0; ii < room.objects[i].aliases.size(); ii++)
+					{
+						if (argument == room.objects[i].aliases[ii])
+							teamUp(i, inventory, room);
+					}
 				}
 				break;
 			}
@@ -650,31 +667,13 @@ bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 			{
 				if (input == room.doors[ii]->name)
 				{
-					if (room.doors[ii]->isVisible)
+					return unlockDoor(inventory, room, i, ii);
+				}
+				for (int aliasIter = 0; aliasIter < room.doors[ii]->aliases.size(); aliasIter++)
+				{
+					if (input == room.doors[ii]->aliases[aliasIter])
 					{
-						if (room.doors[ii]->isLocked)
-						{
-							if (inventory.keys[i].getKeyNum() == room.doors[ii]->lockNum)
-							{
-								room.doors[ii]->isLocked = false;
-								cout << "You used the " << inventory.keys[i].name << " and unlocked the " << room.doors[ii]->name << ".";
-								dblEndl();
-								inventory.keys.erase(inventory.keys.begin() + i);
-								return true;
-							}
-							else
-							{
-								cout << "Unfortunately, the " << inventory.keys[i].name << " does not fit in the " << room.doors[ii]->name << ".";
-								dblEndl();
-								return false;
-							}
-						}
-					}
-					else
-					{
-						cout << "Actually, the " << room.doors[ii]->name << " is already unlocked.";
-						dblEndl();
-						return true;
+						return unlockDoor(inventory, room, i, ii);
 					}
 				}
 			}
@@ -725,6 +724,36 @@ bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 		}
 	}
 	return false;
+}
+
+bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii)
+{
+	if (room.doors[ii]->isVisible)
+	{
+		if (room.doors[ii]->isLocked)
+		{
+			if (inventory.keys[i].getKeyNum() == room.doors[ii]->lockNum)
+			{
+				room.doors[ii]->isLocked = false;
+				cout << "You used the " << inventory.keys[i].name << " and unlocked the " << room.doors[ii]->name << ".";
+				dblEndl();
+				inventory.keys.erase(inventory.keys.begin() + i);
+				return true;
+			}
+			else
+			{
+				cout << "Unfortunately, the " << inventory.keys[i].name << " does not fit in the " << room.doors[ii]->name << ".";
+				dblEndl();
+				return false;
+			}
+		}
+	}
+	else
+	{
+		cout << "Actually, the " << room.doors[ii]->name << " is already unlocked.";
+		dblEndl();
+		return true;
+	}
 }
 
 void showStatus(vector<Player>& players)

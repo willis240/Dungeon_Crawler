@@ -15,11 +15,11 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	bool& greenhouseFirstTime)
 {
 	//Room 0: Hall of Opportunity
-	Door rightDoor(make_pair(0, 1), "Right Door", false,
+	Door rightDoor(make_pair(0, 1), "Right Door", {"right door", "right"}, false,
 		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is pretty \n"
 		"much identical to both of the other doors in the room.");
 	auto rightDoorPtr = make_shared<Door>(rightDoor);
-	Door leftDoor(make_pair(0, 2), "Left Door", true, true, 1,
+	Door leftDoor(make_pair(0, 2), "Left Door", {"left door", "left"}, true, true, 1,
 		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is identical \n"
 		"to both of the other doors in the room, except for a green rim around the doorknob. Upon trying the handle, you \n"
 		"find that it is locked.",

@@ -110,6 +110,7 @@ private:
 	std::pair<int, int> floors = std::make_pair(-1, -1);
 public:
 	std::string name;
+	std::vector<std::string> aliases;
 	bool isLocked;
 	bool isVisible;
 	int lockNum;
@@ -119,23 +120,27 @@ public:
 	std::pair<int, int> getRooms() { return rooms; };
 	std::pair<int, int> getFloors() { return floors; };
 
-	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, std::string inputUnlockedMessage) :
-		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(true), lockNum(0), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
+	Door(std::pair<int, int> inputRooms, std::string inputName, std::vector<std::string> inputAliases, bool inputIsLocked,
+		std::string inputUnlockedMessage) : rooms(inputRooms), name(inputName), aliases(inputAliases), isLocked(inputIsLocked),
+		isVisible(true), lockNum(0), lockedMessage(""), unlockedMessage(inputUnlockedMessage) {};
 
-	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, int inputLockNum, std::string inputLockedMessage, std::string inputUnlockedMessage) :
-		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(true), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
+	Door(std::pair<int, int> inputRooms, std::string inputName, std::vector<std::string> inputAliases, bool inputIsLocked, int inputLockNum,
+		std::string inputLockedMessage, std::string inputUnlockedMessage) : rooms(inputRooms), name(inputName), aliases(inputAliases),
+		isLocked(inputIsLocked), isVisible(true), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
 
-	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, bool inputIsVisible, int inputLockNum, std::string inputUnlockedMessage) :
-		rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(inputIsVisible), lockNum(inputLockNum), 
+	Door(std::pair<int, int> inputRooms, std::string inputName, std::vector<std::string> inputAliases, bool inputIsLocked, bool inputIsVisible,
+		int inputLockNum, std::string inputUnlockedMessage) : rooms(inputRooms), name(inputName), aliases(inputAliases), isLocked(inputIsLocked),
+		isVisible(inputIsVisible), lockNum(inputLockNum), unlockedMessage(inputUnlockedMessage) {};
+
+	Door(std::pair<int, int> inputRooms, std::string inputName, std::vector<std::string> inputAliases, bool inputIsLocked, bool inputIsVisible,
+		int inputLockNum, std::string inputLockedMessage, std::string inputUnlockedMessage) : rooms(inputRooms), name(inputName), aliases(inputAliases),
+		isLocked(inputIsLocked), isVisible(inputIsVisible), lockNum(inputLockNum), lockedMessage(inputLockedMessage),
 		unlockedMessage(inputUnlockedMessage) {};
 
-	Door(std::pair<int, int> inputRooms, std::string inputName, bool inputIsLocked, bool inputIsVisible, int inputLockNum, std::string inputLockedMessage,
-		std::string inputUnlockedMessage) : rooms(inputRooms), name(inputName), isLocked(inputIsLocked), isVisible(inputIsVisible), lockNum(inputLockNum),
-		lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
-
-	Door(std::pair<int, int> inputRooms, std::pair<int, int> inputFloors, std::string inputName, bool inputIsLocked, bool inputIsVisible, int inputLockNum,
-		std::string inputLockedMessage, std::string inputUnlockedMessage) : rooms(inputRooms), floors(inputFloors), name(inputName), isLocked(inputIsLocked),
-		isVisible(inputIsVisible), lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
+	Door(std::pair<int, int> inputRooms, std::pair<int, int> inputFloors, std::string inputName, std::vector<std::string> inputAliases, 
+		bool inputIsLocked, bool inputIsVisible, int inputLockNum, std::string inputLockedMessage, std::string inputUnlockedMessage) : 
+		rooms(inputRooms), floors(inputFloors), name(inputName), aliases(inputAliases), isLocked(inputIsLocked), isVisible(inputIsVisible),
+		lockNum(inputLockNum), lockedMessage(inputLockedMessage), unlockedMessage(inputUnlockedMessage) {};
 };
 
 class Room
@@ -180,6 +185,7 @@ void checkItems(Inventory& inventory, std::string& argument);
 void checkKeys(Inventory& inventory, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
+bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii);
 void showStatus(std::vector<Player>& players);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);

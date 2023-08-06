@@ -16,7 +16,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Item nibbledCheese("Nibbled Cheese", 5, 0,
 		"Cheese that has already been nibbled by a rat. Hey, at least there's still a good chunk of cheese left. \n"
 		"Eating it would probably restore around 10HP, if you had to guess.");
-	Door plainDoor(std::make_pair(0, 1), "Plain Door", false,
+	Door plainDoor(std::make_pair(0, 1), "Plain Door", {"plain door", "plain"}, false,
 		"It is a simple wooden door, and it is slightly ajar. It's a good thing it's not locked.");
 	auto plainDoorPtr = make_shared<Door>(plainDoor);
 	Object nightLight("Night Light", {"night light", "light"},
@@ -41,7 +41,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"a lot of dust on them. You wouldn't dare sit on this dusty sofa--what if it made your butt look all dusty? You'd \n"
 		"be patting it off for the rest of your days.",
 		true, false, 0, 0);
-	Door brittleDoor(std::make_pair(1, 2), "Brittle Door", true, 1,
+	Door brittleDoor(std::make_pair(1, 2), "Brittle Door", {"brittle door", "brittle"}, true, 1,
 		"It is undoubtedly an old and well-loved door--as long as \"well-loved\" means that it has been used many, many \n"
 		"times over several decades without any maintenance. Nevertheless, the door is locked, and stands between you \n"
 		"and the room that lies behind it. It may be close to retirement, but it still proudly stands and performs its duty.",
@@ -49,7 +49,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"everything it had into opening one final time. The Brittle Key you inserted, likewise, does not budge. It would \n"
 		"seem that both the door and its key have finally found their eternal rest, together.");
 	auto brittleDoorPtr = make_shared<Door>(brittleDoor);
-	Door whiteDoor(std::make_pair(1, 3), "White Door", true, 2,
+	Door whiteDoor(std::make_pair(1, 3), "White Door", {"white door", "white"}, true, 2,
 		"This door is painted white, and has a sheen to it that is impossible to miss. It certainly acts as a stark contrast \n"
 		"to the Brittle Door. It looks shiny and well-maintained--polished, even--and it looks like it would still last for \n"
 		"decades to come. You'd even say the only thing the doors have in common is that they both stand in your way quite well \n"
@@ -164,7 +164,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Upon inserting the Small Key into the keyhole behind the counter and turning, you hear a clicking sound from your left. You \n"
 		"turn toward the left side of the area behind the counter and watch as a section of the floor slides under the adjacent floor \n"
 		"panel, revealing a ladder leading down. You debate whether it would be a good idea to enter the Bar's Secret Passage.");
-	Door barSecretPassage(std::make_pair(3, 4), "Bar's Secret Passage", false, false, 7,
+	Door barSecretPassage(std::make_pair(3, 4), "Bar's Secret Passage", { "bar's secret passage", "bar passage", "secret passage" }, false, false, 7,
 		"The secret passage is a square hole in the floor, about 4 feet by 4 feet. The ladder goes down about 10 feet, to some \n"
 		"underground room. You wonder what could possibly necessitate having a secret passageway like this.");
 	auto barSecretPassagePtr = make_shared<Door>(barSecretPassage);
@@ -181,7 +181,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"pushing the bookshelf and manage to get it to budge! From that point on, it's smooth sailing. Together, the two \n"
 		"of you push the bookshelf several feet away from its starting position, revealing a secret staircase leading \n"
 		"upward. Huh.");
-	Door bookshelfPassage(std::make_pair(3, 0), std::make_pair(0, 1), "Bookshelf Passage", false, false, 8, "",
+	Door bookshelfPassage(std::make_pair(3, 0), std::make_pair(0, 1), "Bookshelf Passage", {"bookshelf passage", "staircase"}, false, false, 8, "",
 		"It is a secret passage which was hidden behind the bookshelf. The passage has a staircase leading upwards, \n"
 		"undoubtedly heading to the next floor.");
 	auto bookshelfPassagePtr = make_shared<Door>(bookshelfPassage);
@@ -189,7 +189,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{}, { smallKey, firePoker }, { fireIronPtr }, {});
 
 	//Room 4: The Cell Exterior
-	Door metalDoor(std::make_pair(4, 5), "Metal Door", false,
+	Door metalDoor(std::make_pair(4, 5), "Metal Door", {"metal door", "metal"}, false,
 		"The door seems quite sturdy, and it appears to be locked from your side via a deadbolt and a chain. You decide to \n"
 		"look through the door's barred window and see what is being kept in this secret chamber. \n \n"
 		"Inside is a young woman with long black hair. She appears to be sitting against the wall with her head in \n"
