@@ -186,6 +186,7 @@ void checkKeys(Inventory& inventory, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
 bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii);
+bool unlockObject(Inventory& inventory, Room& room, int& i, int& ii);
 void showStatus(std::vector<Player>& players);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);

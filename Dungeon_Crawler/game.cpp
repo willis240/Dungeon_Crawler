@@ -681,43 +681,17 @@ bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 			{
 				if (input == room.objects[ii].getName())
 				{
-					if (room.objects[ii].hasSecret)
+					bool exit = unlockObject(inventory, room, i, ii);
+					if (exit)
+						return exit;
+				}
+				for (int aliasIter = 0; aliasIter < room.objects[ii].aliases.size(); aliasIter++)
+				{
+					if (input == room.objects[ii].aliases[aliasIter])
 					{
-						if (inventory.keys[i].getKeyNum() == room.objects[ii].answerNum)
-						{
-							room.objects[ii].hasSecret = false;
-							system("CLS");
-							cout << room.objects[ii].secretText;
-							dblEndl();
-							inventory.keys.erase(inventory.keys.begin() + i);
-							for (int iii = 0; iii < room.keys.size(); iii++)
-							{
-								if (room.keys[iii].getKeyNum() == room.objects[ii].keyNum)
-								{
-									cout << "You obtained the " << room.keys[iii].name << "." << endl << endl;
-									inventory.keys.push_back(room.keys[iii]);
-									room.keys.erase(room.keys.begin() + iii);
-								}
-							}
-							for (int iii = 0; iii < room.items.size(); iii++)
-							{
-								if (room.items[iii].num == room.objects[ii].itemNum)
-								{
-									cout << "You obtained the " << room.items[iii].getName() << "." << endl << endl;
-									inventory.items.push_back(room.items[iii]);
-									room.items.erase(room.items.begin() + iii);
-								}
-							}
-							if (room.objects[ii].revealsDoor != 0)
-							{
-								for (int iii = 0; iii < room.doors.size(); iii++)
-								{
-									if (room.objects[ii].revealsDoor == room.doors[iii]->lockNum)
-										room.doors[iii]->isVisible = true;
-								}
-							}
-							return true;
-						}
+						bool exit = unlockObject(inventory, room, i, ii);
+						if (exit)
+							return exit;
 					}
 				}
 			}
@@ -754,6 +728,49 @@ bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii)
 		dblEndl();
 		return true;
 	}
+}
+
+bool unlockObject(Inventory& inventory, Room& room, int& i, int& ii)
+{
+	if (room.objects[ii].hasSecret)
+	{
+		if (inventory.keys[i].getKeyNum() == room.objects[ii].answerNum)
+		{
+			room.objects[ii].hasSecret = false;
+			system("CLS");
+			cout << room.objects[ii].secretText;
+			dblEndl();
+			inventory.keys.erase(inventory.keys.begin() + i);
+			for (int iii = 0; iii < room.keys.size(); iii++)
+			{
+				if (room.keys[iii].getKeyNum() == room.objects[ii].keyNum)
+				{
+					cout << "You obtained the " << room.keys[iii].name << "." << endl << endl;
+					inventory.keys.push_back(room.keys[iii]);
+					room.keys.erase(room.keys.begin() + iii);
+				}
+			}
+			for (int iii = 0; iii < room.items.size(); iii++)
+			{
+				if (room.items[iii].num == room.objects[ii].itemNum)
+				{
+					cout << "You obtained the " << room.items[iii].getName() << "." << endl << endl;
+					inventory.items.push_back(room.items[iii]);
+					room.items.erase(room.items.begin() + iii);
+				}
+			}
+			if (room.objects[ii].revealsDoor != 0)
+			{
+				for (int iii = 0; iii < room.doors.size(); iii++)
+				{
+					if (room.objects[ii].revealsDoor == room.doors[iii]->lockNum)
+						room.doors[iii]->isVisible = true;
+				}
+			}
+			return true;
+		}
+	}
+	return false;
 }
 
 void showStatus(vector<Player>& players)
