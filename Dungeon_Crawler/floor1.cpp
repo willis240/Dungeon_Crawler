@@ -27,6 +27,11 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"to both of the other doors in the room, except for a green rim around the doorknob. Since you stuck the Green \n"
 		"Key in it, it is now unlocked.");
 	auto leftDoorPtr = make_shared<Door>(leftDoor);
+	Weapon fireIron("Fire Iron",
+		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
+		"Also used to stoke fires.",
+		0, 0, 2, 5, false);
+	auto fireIronPtr = make_shared<Weapon>(fireIron);
 	Room hallway(0, "Hallway", {}, {rightDoorPtr, leftDoorPtr}, {}, {});
 
 	//Room 1: Bedroom
@@ -303,7 +308,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					}
 				}
 				cout << "The man with the knife runs at you and stabs rapidly! You swivel left and right, narrowly" << endl;
-				cout << "avoiding each of the possible puncture wounds. \"Agh!\" The man releases a spurt of frustration" << endl;
+				cout << "avoiding each of the possible puncture wounds. \"Ugh!\" The man releases a spurt of frustration" << endl;
 				cout << "before going in for a powerful thrust! You slide a foot to the right and, noticing a prime" << endl;
 				cout << "opportunity, you punch his elbow. In the opposite of the direction its supposed to go.";
 				dblEndl();
@@ -311,7 +316,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "aflame with anger.";
 				dblEndl();
 				cout << "Meanwhile, the gentleman and Selena cross their cane and Fire Iron as if they were both" << endl;
-				cout << "swords. They both repeatedly strike at the other, only for a skillful block to follow each" << endl;
+				cout << "swords. They both repeatedly strike at the other, only for a skillful deflect to follow each" << endl;
 				cout << "attack. They appear to be at a standstill, but then Selena gets a glint in her eye.";
 				dblEndl();
 				cout << "Selena quickly changes her grip on the fire iron and hurls it like a javelin at the gentleman's" << endl;
@@ -322,6 +327,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				dblEndl();
 				system("pause");
 				system("CLS");
+
 				cout << "The gentleman worked his way back to standing, although he was clearly in pain. Both of the men were" << endl;
 				cout << "now right next to each other, standing side-to-side. \"I must say,\" the gentleman started, \"that" << endl;
 				cout << "you do not fight like any lady I have ever seen. You do not care about honour in a battle all that" << endl;
@@ -350,6 +356,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				dblEndl();
 				system("pause");
 				system("CLS");
+
 				cout << "After hearing some footsteps, you both assume that Jack and Jarvis are gone. \"Well, that was something." << endl;
 				cout << "Did you encounter anyone else like those two before you found me?\"";
 				dblEndl();

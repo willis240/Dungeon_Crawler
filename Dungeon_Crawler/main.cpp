@@ -28,6 +28,13 @@ int main()
 
 	Key pomegranate(3, "Pomegranate", "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);
+	
+	Weapon fireIron("Fire Iron",
+		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
+		"Also used to stoke fires.",
+		0, 0, 2, 5, false);
+	auto fireIronPtr = std::make_shared<Weapon>(fireIron);
+	players[1].equipWeapon(fireIronPtr);
 	*/
 
 	/*

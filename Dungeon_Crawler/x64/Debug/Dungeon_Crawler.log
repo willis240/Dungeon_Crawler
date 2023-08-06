@@ -1,5 +1,4 @@
-﻿  floor0.cpp
-  game.cpp
+﻿  game.cpp
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(361,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(439,30): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(441,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
@@ -14,5 +13,4 @@ C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(771,43): 
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(869,56): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(891,55): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(913,53): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
   Dungeon_Crawler.vcxproj -> C:\Users\Wilhelm\source\repos\Dungeon_Crawler\x64\Debug\Dungeon_Crawler.exe

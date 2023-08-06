@@ -96,7 +96,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 		}
 		if (players[0].exploreOptions.size() > 1)
 		{
-			if (command == players[0].exploreOptions[1]) //check
+			if (command == players[0].exploreOptions[1] || command == "c") //check
 			{
 				for (int i = 0; i < room.objects.size(); i++)
 				{
@@ -117,7 +117,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 		}
 		if (players[0].exploreOptions.size() > 2)
 		{
-			if (command == players[0].exploreOptions[2]) //enter
+			if (command == players[0].exploreOptions[2] || command == "e") //enter
 			{
 				for (int i = 0; i < room.doors.size(); i++)
 				{
@@ -129,7 +129,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 		}
 		if (players[0].exploreOptions.size() > 3)
 		{
-			if (command == players[0].exploreOptions[3]) //inv
+			if (command == players[0].exploreOptions[3] || command == "i") //inv
 			{
 				cout << endl;
 				checkInventory(players, inventory, room);
@@ -138,7 +138,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 		}
 		if (players[0].exploreOptions.size() > 4)
 		{
-			if (command == players[0].exploreOptions[4]) //teamwork
+			if (command == players[0].exploreOptions[4] || command == "t") //teamwork
 			{
 				cout << endl;
 				for (int i = 0; i < room.objects.size(); i++)
@@ -299,14 +299,14 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 			system("pause");
 		}
 
-		if (command == "check")
+		if (command == "check" || command == "c")
 		{
 			checkItems(inventory, argument);
 			checkKeys(inventory, argument);
 			system("pause");
 		}
 		
-		if (command == "use")
+		if (command == "use" || command == "u")
 		{
 			bool exitInv = false;
 			useItems(players, inventory.items, argument);
@@ -316,7 +316,7 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 			system("pause");
 		}
 
-		if (command == "status")
+		if (command == "status" || command == "st")
 		{
 			showStatus(players);
 			system("pause");
@@ -324,7 +324,7 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 
 		if (players.size() > 1)
 		{
-			if (command == "show")
+			if (command == "show" || command == "s")
 			{
 				showItems(players, inventory.items, argument);
 				showKeys(players, inventory, argument);
@@ -332,13 +332,13 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 			}
 		}
 
-		if (command == "equip")
+		if (command == "equip" || command == "e")
 		{
 			equipGear(players, inventory.weapons, inventory.armors, inventory.accessories, argument);
 			system("pause");
 		}
 
-		if (command == "unequip")
+		if (command == "unequip" || command == "ue")
 		{
 			unequipGear(players, inventory.weapons, inventory.armors, inventory.accessories, argument);
 			system("pause");
