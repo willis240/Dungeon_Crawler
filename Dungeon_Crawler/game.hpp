@@ -76,6 +76,7 @@ class Object
 private:
 	std::string name;
 public:
+	std::vector<std::string> aliases;
 	std::string description;
 	bool isVisible;
 	bool hasSecret;
@@ -87,16 +88,19 @@ public:
 
 	std::string getName() { return name; };
 
-	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum) :
-		name(inputName), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum) {};
+	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, 
+		short int inputItemNum, short int inputKeyNum) : name(inputName), aliases(inputAliases), description(inputDescription), isVisible(inputIsVisible), 
+		hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum) {};
 
-	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum,
-		short int inputAnswerNum, std::string inputSecretText) : name(inputName), description(inputDescription), isVisible(inputIsVisible),
-		hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), secretText(inputSecretText) {};
+	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsVisible, bool inputHasSecret,
+		short int inputItemNum, short int inputKeyNum, short int inputAnswerNum, std::string inputSecretText) : name(inputName), aliases(inputAliases),
+		description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum),
+		answerNum(inputAnswerNum), secretText(inputSecretText) {};
 
-	Object(std::string inputName, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, short int inputItemNum, short int inputKeyNum,
-		short int inputAnswerNum, short int inputRevealsDoor, std::string inputSecretText) : name(inputName), description(inputDescription), isVisible(inputIsVisible),
-		hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), revealsDoor(inputRevealsDoor), secretText(inputSecretText) {};
+	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsVisible, bool inputHasSecret,
+		short int inputItemNum, short int inputKeyNum, short int inputAnswerNum, short int inputRevealsDoor, std::string inputSecretText) :
+		name(inputName), aliases(inputAliases), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret),
+		itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), revealsDoor(inputRevealsDoor), secretText(inputSecretText) {};
 };
 
 class Door

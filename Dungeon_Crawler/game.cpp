@@ -104,6 +104,12 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 					{
 						checkArgument(i, false, room, inventory);
 					}
+
+					for (int ii = 0; ii < room.objects[i].aliases.size(); ii++)
+					{
+						if (argument == room.objects[i].aliases[ii])
+							checkArgument(i, false, room, inventory);
+					}
 				}
 				for (int i = 0; i < room.doors.size(); i++)
 				{

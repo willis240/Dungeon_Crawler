@@ -19,7 +19,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Door plainDoor(std::make_pair(0, 1), "Plain Door", false,
 		"It is a simple wooden door, and it is slightly ajar. It's a good thing it's not locked.");
 	auto plainDoorPtr = make_shared<Door>(plainDoor);
-	Object nightLight("Night Light",
+	Object nightLight("Night Light", {"night light", "light"},
 		"The night light is plugged into an outlet in the wall. The lightbulb itself is in the shape of a thumbs-up. \n"
 		"Considering the fact that the night light is what allowed you to see in this small dark room in the first place, \n"
 		"you decide to give it a thumbs-up in return. \n \n \"Stay cool, little light dude.\"",
@@ -30,13 +30,13 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Key brittleKey(1, "Brittle Key",
 		"A key which feels like it has been used a million times. It has a crack stretching vertically down the middle. \n"
 		"...Hopefully it'll still unlock what it needs to.");
-	Object vase("Vase",
+	Object vase("Vase", {"vase"},
 		"The vase has a white color, and appears to be ceramic. It seems quite old, and has clearly not been dusted in \n"
 		"a long while. While it is rather dirty, you imagine it must've looked rather eye-catching when it was clean. \n"
 		"Clearly, it's purpose here was to add some flavor to the room, some style and grace, rather than to do something \n"
 		"menial like hide some--Oh, look, there's a key inside.",
 		true, false, 0, 1);
-	Object sofa("Sofa",
+	Object sofa("Sofa", {"sofa", "couch"},
 		"The sofa is a dark blue color, and it looks like the cushions are rather soft. However, there also appears to be \n"
 		"a lot of dust on them. You wouldn't dare sit on this dusty sofa--what if it made your butt look all dusty? You'd \n"
 		"be patting it off for the rest of your days.",
@@ -66,7 +66,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Item chickenNugget("Chicken Nugget", 5, 0,
 		"One singular chicken nugget. While it may not be much, it is like a drop from heaven and men have certainly \n"
 		"killed for less.", 1);
-	Object refrigerator("Refrigerator",
+	Object refrigerator("Refrigerator", {"refrigerator", "fridge"},
 		"Upon throwing open the refrigerator door, you find that there is no food left inside. Just crumbs. Great. \n"
 		"Oh, wait! There's a single chicken nugget in the very back of the second shelf down. Score!",
 		true, false, 1, 0);
@@ -93,7 +93,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"It is a small ring made of iron, and in hindsight, it looks quite equippable. Grants STR +2.",
 		0, 0, 1, 4, false);
 	auto ironRingPtr = make_shared<Accessory>(ironRing);
-	Object pantry("Pantry",
+	Object pantry("Pantry", {"pantry"},
 		"You open the pantry door to take a look inside. You see an assortment of empty boxes of snack foods, ranging \n"
 		"from chips to crackers to cereal. Looking inside the boxes, you realize that not even a crumb remains. Whether \n"
 		"it was people or the rats, whoever ate these snacks was thorough. \n \n"
@@ -101,7 +101,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"the ingredients necessary for a delicious Apple Pie. It just hasn't been cooked yet. You believe that this \n"
 		"could be handy, so you take the Raw Apple Pie.",
 		true, false, 0, 3);
-	Object oven("Oven",
+	Object oven("Oven", {"oven"},
 		"The oven has a black door, and despite the transparent glass on the door, the inside is impossible to view \n"
 		"due to how dark it is inside. Once you open the door, however, you see a perfectly usable oven rack.",
 		true, true, 2, 2, 3,
@@ -112,7 +112,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Sure, the whole pie is piping hot, but the center is especially so. You reach in once more and \n"
 		"this time you yank the center of the pie out when you reel back from the pain. When you look at \n"
 		"your hand, you find a white key.");
-	Object cabinets("Cabinets",
+	Object cabinets("Cabinets", {"cabinets"},
 		"Rather than simply open each cabinet one by one, you zoom around the room opening each of the cabinets rapidly \n"
 		"as if you were some sort of tornado. Upon opening the last one you stand in the center of the room and gaze upon \n"
 		"all of the open cabinets. Most of them have dust and crumbs but not much else. Finding it hard to believe that \n"
@@ -123,7 +123,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{ rawApplePie, whiteKey, smallRing }, {}, { ironRingPtr });
 
 	//Room 3: The Fancy Room
-	Object whiteRecliner("White Recliner",
+	Object whiteRecliner("White Recliner", {"white recliner", "recliner"},
 		"The entire chair is a pristine white, with no signs of stains, dirt, or dust. You could fix that. You feel the \n"
 		"seat cushion with your hand and it is soft, yet firm. Everything about this chair seems perfect. You know that \n"
 		"there has GOT to be SOMETHING wrong with this chair. You pull down the lever at the side of the chair, and watch \n"
@@ -147,7 +147,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Also used to stoke fires.",
 		0, 0, 2, 5, false);
 	auto fireIronPtr = make_shared<Weapon>(fireIron);
-	Object fireplace("Fireplace",
+	Object fireplace("Fireplace", {"fireplace"},
 		"The fireplace has a clean brick aesthetic, with a real fire burning and providing warmth to the room. You note that \n"
 		"there is a Fire Poker hanging on a hook to the right of the fireplace, but the fire is already burning quite well. \n"
 		"The wood inside consists of cleanly cut logs. They clearly were cut by someone who must view woodcutting as a work \n"
@@ -155,7 +155,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"fire must have been started recently. \n \n"
 		"Upon giving it a second thought, you decide to take the Fire Poker. It could come in handy.",
 		true, false, 0, 5);
-	Object bar("Bar",
+	Object bar("Bar", {"bar"},
 		"The bar counter, like much of the room, is a pristine white. The bar stools are black, and act to complement the bar's \n"
 		"aesthetic quite well. There are many bottles of beverages on some shelves lined up against the wall, most of which appear \n"
 		"to be alcoholic. Upon going behind the counter, you see that there are even more bottles beneath the counter. After grabbing \n"
@@ -168,7 +168,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"The secret passage is a square hole in the floor, about 4 feet by 4 feet. The ladder goes down about 10 feet, to some \n"
 		"underground room. You wonder what could possibly necessitate having a secret passageway like this.");
 	auto barSecretPassagePtr = make_shared<Door>(barSecretPassage);
-	Object tallBookshelf("Tall Bookshelf",
+	Object tallBookshelf("Tall Bookshelf", {"tall bookshelf", "bookshelf"},
 		"The bookshelf stretches up to the ceiling, just about. Its shelves are all filled to the brim with books many of which \n"
 		"look quite thick. After observing the books a bit more closely, you realize that this collection is more or less an \n"
 		"assortment of classics. You recognize many of the titles, although you have probably only read a couple out of the \n"
