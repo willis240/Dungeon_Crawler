@@ -588,6 +588,14 @@ void checkItems(Inventory& inventory, string& argument)
 	{
 		if (argument == inventory.items[i].getName())
 			cout << endl << inventory.items[i].getName() << " -- " << inventory.items[i].description << endl << endl;
+		else
+		{
+			for (int ii = 0; ii < inventory.items[i].aliases.size(); ii++)
+			{
+				if (argument == inventory.items[i].aliases[ii])
+					cout << endl << inventory.items[i].getName() << " -- " << inventory.items[i].description << endl << endl;
+			}
+		}
 	}
 }
 
@@ -606,44 +614,61 @@ void useItems(vector<Player>& players, vector<Item>& items, string& argument)
 	{
 		if (argument == items[i].getName())
 		{
-			if (items[i].purposeKnown)
+			useItemOnPlayer(players, items, i);
+		}
+		else
+		{
+			for (int ii = 0; ii < items[i].aliases.size(); ii++)
 			{
-				cout << "Use " << items[i].getName() << " on who?";
-				dblEndl();
-				cout << "Just say \"back\" if you change your mind and want to return to exploration.";
-				dblEndl();
-
-				string input;
-				getline(cin, input);
-
-				if (input == "back")
-					return;
-
-				for (int ii = 0; ii < players.size(); ii++)
+				if (argument == items[i].aliases[ii])
 				{
-					if (input == players[ii].getName())
-					{
-						int beforeHP = players[ii].currentHP;
-						int beforeSP = players[ii].currentSP;
-						players[ii].restoreHP(items[i].restoredHP);
-						players[ii].restoreSP(items[i].restoredSP);
-						cout << endl;
-						cout << players[ii].getName() << " used " << items[i].getName() << "!" << endl;
-						cout << players[ii].getName() << " restored " << (players[ii].currentHP - beforeHP) << " HP and ";
-						cout << (players[ii].currentSP - beforeSP) << " SP!" << endl;
-						items.erase(items.begin() + i);
+					if (useItemOnPlayer(players, items, i))
 						return;
-					}
 				}
-			}
-			else
-			{
-				cout << "You do not know how to use this item, so you figure it would be best not" << endl;
-				cout << "to try or else you may waste it." << endl;
 			}
 		}
 	}
 	cout << endl;
+}
+
+bool useItemOnPlayer(vector<Player>& players, vector<Item>& items, int & i)
+{
+	if (items[i].purposeKnown)
+	{
+		cout << "Use " << items[i].getName() << " on who?";
+		dblEndl();
+		cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+		dblEndl();
+
+		string input;
+		getline(cin, input);
+
+		if (input == "back")
+			return false;
+
+		for (int ii = 0; ii < players.size(); ii++)
+		{
+			if (input == players[ii].getName())
+			{
+				int beforeHP = players[ii].currentHP;
+				int beforeSP = players[ii].currentSP;
+				players[ii].restoreHP(items[i].restoredHP);
+				players[ii].restoreSP(items[i].restoredSP);
+				cout << endl;
+				cout << players[ii].getName() << " used " << items[i].getName() << "!" << endl;
+				cout << players[ii].getName() << " restored " << (players[ii].currentHP - beforeHP) << " HP and ";
+				cout << (players[ii].currentSP - beforeSP) << " SP!" << endl << endl;
+				items.erase(items.begin() + i);
+				return true;
+			}
+		}
+	}
+	else
+	{
+		cout << "You do not know how to use this item, so you figure it would be best not" << endl;
+		cout << "to try or else you may waste it." << endl << endl;
+		return false;
+	}
 }
 
 bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& argument)
@@ -987,36 +1012,53 @@ void showItems(vector<Player>& players, vector<Item>& items, string& argument)
 	{
 		if (argument == items[i].getName())
 		{
-			cout << "Show " << items[i].getName() << " to who?";
-			dblEndl();
-			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
-			dblEndl();
-
-			string input;
-			getline(cin, input);
-			cout << endl;
-
-			if (input == "back")
-				return;
-
-			for (int ii = 0; ii < players.size(); ii++)
+			showItemToPlayer(players, items, i);
+			return;
+		}
+		else
+		{
+			for (int ii = 0; ii < items[i].aliases.size(); ii++)
 			{
-				if (input == players[ii].getName())
+				if (argument == items[i].aliases[ii])
 				{
-					if (players[ii].getName() == items[i].personWithExpertise)
-					{
-						cout << items[i].expertiseDescription;
-						dblEndl();
-						items[i].purposeKnown = true;
-						return;
-					}
-					else
-					{
-						cout << players[ii].getName() << " turns to you and says, \"I don't know what you want me to do with this.\"";
-						dblEndl();
-						return;
-					}
+					showItemToPlayer(players, items, i);
+					return;
 				}
+			}
+		}
+	}
+}
+
+void showItemToPlayer(vector<Player>& players, vector<Item>& items, int& i)
+{
+	cout << "Show " << items[i].getName() << " to who?";
+	dblEndl();
+	cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+	dblEndl();
+
+	string input;
+	getline(cin, input);
+	cout << endl;
+
+	if (input == "back")
+		return;
+
+	for (int ii = 0; ii < players.size(); ii++)
+	{
+		if (input == players[ii].getName())
+		{
+			if (players[ii].getName() == items[i].personWithExpertise)
+			{
+				cout << items[i].expertiseDescription;
+				dblEndl();
+				items[i].purposeKnown = true;
+				return;
+			}
+			else
+			{
+				cout << players[ii].getName() << " turns to you and says, \"I don't know what you want me to do with this.\"";
+				dblEndl();
+				return;
 			}
 		}
 	}

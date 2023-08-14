@@ -8,6 +8,7 @@ class Item
 private:
 	std::string name;
 public:
+	std::vector<std::string> aliases;
 	int restoredHP;
 	int restoredSP;
 	std::string description;
@@ -17,17 +18,17 @@ public:
 	std::string personWithExpertise = "";
 	std::string expertiseDescription;
 
-	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription) :
-		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(0),
-		purposeKnown(true) {};
+	Item(std::string inputName, std::vector<std::string> inputAliases, int inputRestoredHP, int inputRestoredSP,
+		std::string inputDescription) : name(inputName), aliases(inputAliases), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP),
+		description(inputDescription), num(0), purposeKnown(true) {};
 
-	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription, short int inputNum) :
-		name(inputName), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum),
-		purposeKnown(true) {};
+	Item(std::string inputName, std::vector<std::string> inputAliases, int inputRestoredHP, int inputRestoredSP,
+		std::string inputDescription, short int inputNum) : name(inputName), aliases(inputAliases), restoredHP(inputRestoredHP),
+		restoredSP(inputRestoredSP), description(inputDescription), num(inputNum), purposeKnown(true) {};
 
-	Item(std::string inputName, int inputRestoredHP, int inputRestoredSP, std::string inputDescription, short int inputNum,
-		bool inputPurposeKnown, std::string inputPersonWithExpertise, std::string inputExpertiseDescription) : name(inputName),
-		restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum),
+	Item(std::string inputName, std::vector<std::string> inputAliases, int inputRestoredHP, int inputRestoredSP, std::string inputDescription,
+		short int inputNum, bool inputPurposeKnown, std::string inputPersonWithExpertise, std::string inputExpertiseDescription) : name(inputName),
+		aliases(inputAliases), restoredHP(inputRestoredHP), restoredSP(inputRestoredSP), description(inputDescription), num(inputNum),
 		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
 };
 
@@ -184,11 +185,13 @@ void showInvHelp(std::vector<Player>& players, Inventory& inventory);
 void checkItems(Inventory& inventory, std::string& argument);
 void checkKeys(Inventory& inventory, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
+bool useItemOnPlayer(std::vector<Player>& players, std::vector<Item>& items, int& i);
 bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
 bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii);
 bool unlockObject(Inventory& inventory, Room& room, int& i, int& ii);
 void showStatus(std::vector<Player>& players);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
+void showItemToPlayer(std::vector<Player>& players, std::vector<Item>& items, int& i);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);
 void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
 	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);

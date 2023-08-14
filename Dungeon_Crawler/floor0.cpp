@@ -13,7 +13,7 @@ using std::make_shared;
 void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& seeOpening, bool& encounteredRat)
 {
 	//Room 0: The Starting Room
-	Item nibbledCheese("Nibbled Cheese", 5, 0,
+	Item nibbledCheese("Nibbled Cheese", {"nibbled cheese", "cheese"}, 5, 0,
 		"Cheese that has already been nibbled by a rat. Hey, at least there's still a good chunk of cheese left. \n"
 		"Eating it would probably restore around 10HP, if you had to guess.");
 	Door plainDoor(std::make_pair(0, 1), "Plain Door", {"plain door", "plain"}, false,
@@ -63,7 +63,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 
 	//Room 2: The Kitchen
 	bool grabbedNugget = false;
-	Item chickenNugget("Chicken Nugget", 5, 0,
+	Item chickenNugget("Chicken Nugget", {"chicken nugget", "chicken", "nugget"}, 5, 0,
 		"One singular chicken nugget. While it may not be much, it is like a drop from heaven and men have certainly \n"
 		"killed for less.", 1);
 	Object refrigerator("Refrigerator", {"refrigerator", "fridge"},
@@ -73,7 +73,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Key rawApplePie(3, "Raw Apple Pie",
 		"All of the ingredients for a good apple pie. Has yet to be cooked, though. Eating it raw would be \n"
 		"a waste.");
-	Item applePie("Apple Pie", 12, 12,
+	Item applePie("Apple Pie", {"apple pie", "pie"}, 12, 12,
 		"A beautiful baked apple pie... with a hole in the center where the White Key (and your hand) used to be. \n"
 		"Hey, no one is perfect.", 2);
 	Key whiteKey(2, "White Key",
