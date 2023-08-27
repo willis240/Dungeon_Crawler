@@ -605,6 +605,14 @@ void checkKeys(Inventory& inventory, string& argument)
 	{
 		if (argument == inventory.keys[i].name)
 			cout << endl << inventory.keys[i].name << " -- " << inventory.keys[i].description << endl << endl;
+		else
+		{
+			for (int ii = 0; ii < inventory.keys[i].aliases.size(); ii++)
+			{
+				if (argument == inventory.keys[i].aliases[ii])
+					cout << endl << inventory.keys[i].name << " -- " << inventory.keys[i].description << endl << endl;
+			}
+		}
 	}
 }
 
@@ -677,52 +685,61 @@ bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 	{
 		if (argument == inventory.keys[i].name)
 		{
-			cout << "Use " << inventory.keys[i].name << " on what?";
-			dblEndl();
-			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
-			dblEndl();
-
-			string input;
-			getline(cin, input);
-
-			if (input == "back")
-				return true;
-
-			for (int ii = 0; ii < room.doors.size(); ii++)
-			{
-				if (input == room.doors[ii]->name)
-				{
-					return unlockDoor(inventory, room, i, ii);
-				}
-				for (int aliasIter = 0; aliasIter < room.doors[ii]->aliases.size(); aliasIter++)
-				{
-					if (input == room.doors[ii]->aliases[aliasIter])
-					{
-						return unlockDoor(inventory, room, i, ii);
-					}
-				}
-			}
-			for (int ii = 0; ii < room.objects.size(); ii++)
-			{
-				if (input == room.objects[ii].getName())
-				{
-					bool exit = unlockObject(inventory, room, i, ii);
-					if (exit)
-						return exit;
-				}
-				for (int aliasIter = 0; aliasIter < room.objects[ii].aliases.size(); aliasIter++)
-				{
-					if (input == room.objects[ii].aliases[aliasIter])
-					{
-						bool exit = unlockObject(inventory, room, i, ii);
-						if (exit)
-							return exit;
-					}
-				}
-			}
+			return useKeyOnThing(players, inventory, room, i);
+		}
+		for (int ii = 0; ii < inventory.keys[i].aliases.size(); ii++)
+		{
+			return useKeyOnThing(players, inventory, room, i);
 		}
 	}
 	return false;
+}
+
+bool useKeyOnThing(vector<Player>& players, Inventory& inventory, Room& room, int& i)
+{
+	cout << "Use " << inventory.keys[i].name << " on what?";
+	dblEndl();
+	cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+	dblEndl();
+
+	string input;
+	getline(cin, input);
+
+	if (input == "back")
+		return true;
+
+	for (int ii = 0; ii < room.doors.size(); ii++)
+	{
+		if (input == room.doors[ii]->name)
+		{
+			return unlockDoor(inventory, room, i, ii);
+		}
+		for (int aliasIter = 0; aliasIter < room.doors[ii]->aliases.size(); aliasIter++)
+		{
+			if (input == room.doors[ii]->aliases[aliasIter])
+			{
+				return unlockDoor(inventory, room, i, ii);
+			}
+		}
+	}
+	for (int ii = 0; ii < room.objects.size(); ii++)
+	{
+		if (input == room.objects[ii].getName())
+		{
+			bool exit = unlockObject(inventory, room, i, ii);
+			if (exit)
+				return exit;
+		}
+		for (int aliasIter = 0; aliasIter < room.objects[ii].aliases.size(); aliasIter++)
+		{
+			if (input == room.objects[ii].aliases[aliasIter])
+			{
+				bool exit = unlockObject(inventory, room, i, ii);
+				if (exit)
+					return exit;
+			}
+		}
+	}
 }
 
 bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii)
@@ -1070,59 +1087,74 @@ void showKeys(vector<Player>& players, Inventory& inventory, string& argument)
 	{
 		if (argument == inventory.keys[i].name)
 		{
-			cout << "Show " << inventory.keys[i].name << " to who?";
-			dblEndl();
-			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
-			dblEndl();
+			showKeyToPlayer(players, inventory, i);
+			return;
+		}
 
-			string input;
-			getline(cin, input);
-			cout << endl;
-
-			if (input == "back")
-				return;
-
-			for (int ii = 0; ii < players.size(); ii++)
+		for (int aliasIter = 0; aliasIter < inventory.keys[i].aliases.size(); aliasIter++)
+		{
+			if (argument == inventory.keys[i].aliases[aliasIter])
 			{
-				if (input == players[ii].getName())
+				showKeyToPlayer(players, inventory, i);
+				return;
+			}
+		}
+	}
+}
+
+void showKeyToPlayer(vector<Player>& players, Inventory& inventory, int& i)
+{
+	cout << "Show " << inventory.keys[i].name << " to who?";
+	dblEndl();
+	cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+	dblEndl();
+
+	string input;
+	getline(cin, input);
+	cout << endl;
+
+	if (input == "back")
+		return;
+
+	for (int ii = 0; ii < players.size(); ii++)
+	{
+		if (input == players[ii].getName())
+		{
+			if (players[ii].getName() == inventory.keys[i].personWithExpertise)
+			{
+				cout << inventory.keys[i].expertiseDescription;
+				dblEndl();
+				inventory.keys[i].purposeKnown = true;
+				if (inventory.keys[i].actuallyGear == weapon)
 				{
-					if (players[ii].getName() == inventory.keys[i].personWithExpertise)
+					for (int iii = 0; iii < inventory.weapons.size(); iii++)
 					{
-						cout << inventory.keys[i].expertiseDescription;
-						dblEndl();
-						inventory.keys[i].purposeKnown = true;
-						if (inventory.keys[i].actuallyGear == weapon)
+						if (inventory.weapons[iii]->keyNum == inventory.keys[i].getKeyNum())
 						{
-							for (int iii = 0; iii < inventory.weapons.size(); iii++)
-							{
-								if (inventory.weapons[iii]->keyNum == inventory.keys[i].getKeyNum())
-								{
-									inventory.weapons[iii]->beenDiscovered = true;
-									inventory.keys.erase(inventory.keys.begin() + i);
-									return;
-								}
-							}
+							inventory.weapons[iii]->beenDiscovered = true;
+							inventory.keys.erase(inventory.keys.begin() + i);
+							return;
 						}
-						if (inventory.keys[i].actuallyGear == accessory)
-						{
-							for (int iii = 0; iii < inventory.accessories.size(); iii++)
-							{
-								if (inventory.accessories[iii]->keyNum == inventory.keys[i].getKeyNum())
-								{
-									inventory.accessories[iii]->beenDiscovered = true;
-									inventory.keys.erase(inventory.keys.begin() + i);
-									return;
-								}
-							}
-						}
-					}
-					else
-					{
-						cout << players[ii].getName() << " turns to you and says, \"I don't know what you want me to do with this.\"";
-						dblEndl();
-						return;
 					}
 				}
+				if (inventory.keys[i].actuallyGear == accessory)
+				{
+					for (int iii = 0; iii < inventory.accessories.size(); iii++)
+					{
+						if (inventory.accessories[iii]->keyNum == inventory.keys[i].getKeyNum())
+						{
+							inventory.accessories[iii]->beenDiscovered = true;
+							inventory.keys.erase(inventory.keys.begin() + i);
+							return;
+						}
+					}
+				}
+			}
+			else
+			{
+				cout << players[ii].getName() << " turns to you and says, \"I don't know what you want me to do with this.\"";
+				dblEndl();
+				return;
 			}
 		}
 	}

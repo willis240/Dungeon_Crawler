@@ -62,7 +62,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"grin finds its way onto her face. \n \n"
 		"\"\"Ahhhhh...\"\", you both sigh in relief. A delightful respite.",
 		true, false, 0, 0);
-	Key greenKey(1, "Green Key", "A standard door key, albeit with a green coloring scheme.");
+	Key greenKey(1, "Green Key", {"green key"}, "A standard door key, albeit with a green coloring scheme.");
 	Object nightstand("Nightstand", {"nightstand"},
 		"It appears to be a simple, yet elegant nightstand. The edges are all black, but the rest of the surfaces\n"
 		"have a brown marble aesthetic. There is a drawer in the nightstand. While everything else you've done to\n"
@@ -79,7 +79,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"if they were going to leave outdoor space between them and make a window. You found this simultaneously bewildering \n"
 		"and disappointing. Selena then describes the situation succinctly: \"This window sucks.\"",
 		true, false, 0, 0);
-	Key diary(7, "Diary",
+	Key diary(7, "Diary", {"diary"},
 		"A diary detailing many events in a young girl's life. It seems she would write in it once a week, every week, \n"
 		"and did so for years. The beginning is quite dull, so you decide to skim the book for anything that could be \n"
 		"interesting. \n \n"
@@ -124,13 +124,13 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	auto fingerlessGlovesPtr = make_shared<Accessory>(fingerlessGloves);
 	Accessory redArmband("Red Armband", "An armband with a scarlet hue. Some might call it fashionable.", 2, 2, 0);
 	auto redArmbandPtr = make_shared<Accessory>(redArmband);
-	Key tomato(2, "Tomato", "A plump, red tomato. Good on sandwiches.");
+	Key tomato(2, "Tomato", {"tomato"}, "A plump, red tomato. Good on sandwiches.");
 	Object tallPlant("Tall Plant", {"tall plant", "plant"},
 		"The Tall Plant stands straight and green. Notably, it would likely not stand so straight were it not being supported \n"
 		"by what looks to be a wireframe. After feeling around the plant's leaves you begin to hypothesize that this is a \n"
 		"tomato plant. Your hypothesis is backed up by the several soft red fruit growing on the plant. Might as well take one.",
 		true, false, 0, 2);
-	Key pomegranate(3, "Pomegranate", "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
+	Key pomegranate(3, "Pomegranate", {"pomegranate"}, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	Object greenTree("Green Tree", {"green tree"},
 		"The tree, though small by tree standards, has a strong trunk with the kind of standard brown bark one would commonly \n"
 		"associate with trees. The top of the tree has many green leaves covering it, enough to obscure a significant part of \n"
@@ -139,13 +139,13 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"I used to have these with my lunch all the time when I was a kid.\" She then proceeds to reach for a pomegranate from \n"
 		"the tree as well and takes a big chomp out of it. \"Mmm. Still good.\"",
 		true, false, 0, 3);
-	Key apple(4, "Apple", "An iconic red fruit, said to keep those with PhDs away.");
+	Key apple(4, "Apple", {"apple"}, "An iconic red fruit, said to keep those with PhDs away.");
 	Object appleTree("Apple Tree", {"apple tree"},
 		"Now this was a tree you could easily recognize at a glance. You would recognize that crisp, red fruit anywhere. You \n"
 		"reach up and pluck an Apple from one of the lower branches. It was at this moment that you realized the ceiling of \n"
 		"of this room is quite high. All the better for growing the trees and taller plants, you suppose.",
 		true, false, 0, 4);
-	Key coconut(5, "Coconut", "A big, brown, durable fruit. Not entirely unlike a bowling ball.");
+	Key coconut(5, "Coconut", {"coconut"}, "A big, brown, durable fruit. Not entirely unlike a bowling ball.");
 	Object palmTree("Palm Tree", {"palm tree"},
 		"Amongst all of the different plants in the room, this one stands out quite a bit. Its large leaves lend it a visual \n"
 		"flavor that is distinct. The fruit it carries likewise have a distinct look to them. They are brown, and similar \n"
@@ -155,7 +155,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"struck leg and grabs the back of her calf, but the other pin still stands. Before you have time to think of securing \n"
 		"a spare, she shoots a deadly glare in your direction. Next time.",
 		true, false, 0, 5);
-	Key carrot(6, "Carrot", "An orange vegetable. Rumored to improve eyesight.");
+	Key carrot(6, "Carrot", {"carrot"}, "An orange vegetable. Rumored to improve eyesight.");
 	Object buriedVeggies("Buried Veggies", {"buried veggies", "veggies"},
 		"While you recognize that the green leaves sticking out of the dirt indicate that there are vegetables hiding below, \n"
 		"you are not exactly a botanist. Pinpointing which vegetable it is exactly will have to fall to the tried-and-true \n"

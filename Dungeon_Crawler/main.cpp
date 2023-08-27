@@ -26,7 +26,7 @@ int main()
 	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
 	players[1].skills.push_back(oblivionSlash);
 
-	Key pomegranate(3, "Pomegranate", "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
+	Key pomegranate(3, "Pomegranate", {"pom"}, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);
 	
 	Weapon fireIron("Fire Iron",

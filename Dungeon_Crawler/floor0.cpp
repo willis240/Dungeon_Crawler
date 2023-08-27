@@ -27,7 +27,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Room startRoom(0, "Starting Room", { nightLight }, { plainDoorPtr }, {}, {});
 
 	//Room 1: The Living Room
-	Key brittleKey(1, "Brittle Key",
+	Key brittleKey(1, "Brittle Key", {"brittle key", "brittle"},
 		"A key which feels like it has been used a million times. It has a crack stretching vertically down the middle. \n"
 		"...Hopefully it'll still unlock what it needs to.");
 	Object vase("Vase", {"vase"},
@@ -70,15 +70,15 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Upon throwing open the refrigerator door, you find that there is no food left inside. Just crumbs. Great. \n"
 		"Oh, wait! There's a single chicken nugget in the very back of the second shelf down. Score!",
 		true, false, 1, 0);
-	Key rawApplePie(3, "Raw Apple Pie",
+	Key rawApplePie(3, "Raw Apple Pie", {"raw apple pie"},
 		"All of the ingredients for a good apple pie. Has yet to be cooked, though. Eating it raw would be \n"
 		"a waste.");
 	Item applePie("Apple Pie", {"apple pie", "pie"}, 12, 12,
 		"A beautiful baked apple pie... with a hole in the center where the White Key (and your hand) used to be. \n"
 		"Hey, no one is perfect.", 2);
-	Key whiteKey(2, "White Key",
+	Key whiteKey(2, "White Key", {"white key", "white"},
 		"Once you look past all of the pie residue, it appears to be a rather beautiful white key.");
-	Key smallRing(4, "Small Ring",
+	Key smallRing(4, "Small Ring", {"small ring"},
 		"It is a small ring made of iron. Perhaps someone else would be better at ascertaining its worth.",
 		false, "Selena",
 		"You put the ring between your fingertips and hold it out to Selena. \n \n"
@@ -132,10 +132,10 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Dang. \n \n"
 		"On the bright side, thanks to your thorough inspection, you find a Small Key hiding underneath the recliner.",
 		true, false, 0, 6);
-	Key smallKey(6, "Small Key",
+	Key smallKey(6, "Small Key", {"small key"},
 		"It is a small key, likely made of iron. It is a little odd that is here, though, as there does not appear to be any doors \n"
 		"in this room other than the White Door which you have already unlocked.");
-	Key firePoker(5, "Fire Poker",
+	Key firePoker(5, "Fire Poker", {"fire poker", "poker"},
 		"An iron rod which is sharpened at the end and used to stoke fires.",
 		false, "Selena",
 		"\"Oh hey, this Fire Iron would work great as a weapon!\" \n \n"

@@ -40,6 +40,7 @@ private:
 	int keyNum;
 public:
 	std::string name;
+	std::vector<std::string> aliases;
 	std::string description;
 	int getKeyNum() { return keyNum; };
 	bool purposeKnown = true;
@@ -47,17 +48,18 @@ public:
 	std::string expertiseDescription = "";
 	GearType actuallyGear = notGear;
 	
-	Key(int inputKeyNum, std::string inputName, std::string inputDescription) :
-		keyNum(inputKeyNum), name(inputName), description(inputDescription) {};
+	Key(int inputKeyNum, std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription) :
+		keyNum(inputKeyNum), name(inputName), aliases(inputAliases), description(inputDescription) {};
 
-	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, std::string inputPersonWithExpertise,
-		std::string inputExpertiseDescription) : keyNum(inputKeyNum), name(inputName), description(inputDescription), purposeKnown(inputPurposeKnown),
-		personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription) {};
+	Key(int inputKeyNum, std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputPurposeKnown,
+		std::string inputPersonWithExpertise, std::string inputExpertiseDescription) : keyNum(inputKeyNum), name(inputName), aliases(inputAliases),
+		description(inputDescription), purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise),
+		expertiseDescription(inputExpertiseDescription) {};
 
-	Key(int inputKeyNum, std::string inputName, std::string inputDescription, bool inputPurposeKnown, std::string inputPersonWithExpertise,
-		std::string inputExpertiseDescription, GearType inputActuallyGear) : keyNum(inputKeyNum), name(inputName), description(inputDescription),
-		purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise), expertiseDescription(inputExpertiseDescription),
-		actuallyGear(inputActuallyGear) {};
+	Key(int inputKeyNum, std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputPurposeKnown,
+		std::string inputPersonWithExpertise, std::string inputExpertiseDescription, GearType inputActuallyGear) : keyNum(inputKeyNum), name(inputName),
+		aliases(inputAliases), description(inputDescription), purposeKnown(inputPurposeKnown), personWithExpertise(inputPersonWithExpertise),
+		expertiseDescription(inputExpertiseDescription), actuallyGear(inputActuallyGear) {};
 };
 
 class Inventory
@@ -187,12 +189,14 @@ void checkKeys(Inventory& inventory, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 bool useItemOnPlayer(std::vector<Player>& players, std::vector<Item>& items, int& i);
 bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
+bool useKeyOnThing(std::vector<Player>& players, Inventory& inventory, Room& room, int& i);
 bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii);
 bool unlockObject(Inventory& inventory, Room& room, int& i, int& ii);
 void showStatus(std::vector<Player>& players);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showItemToPlayer(std::vector<Player>& players, std::vector<Item>& items, int& i);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);
+void showKeyToPlayer(std::vector<Player>& players, Inventory& inventory, int& i);
 void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
 	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
 void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
