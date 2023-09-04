@@ -199,6 +199,9 @@ void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& a
 void showKeyToPlayer(std::vector<Player>& players, Inventory& inventory, int& i);
 void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
 	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
+void equipWeapon(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, int& i);
+void equipArmor(std::vector<Player>& players, std::vector<std::shared_ptr<Armor>>& armors, int& i);
+void equipAccessory(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, int& i);
 void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
 	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
 void teamUp(int& i, Inventory& inventory, Room& room);

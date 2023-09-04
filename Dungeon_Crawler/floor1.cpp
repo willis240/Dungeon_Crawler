@@ -27,7 +27,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"to both of the other doors in the room, except for a green rim around the doorknob. Since you stuck the Green \n"
 		"Key in it, it is now unlocked.");
 	auto leftDoorPtr = make_shared<Door>(leftDoor);
-	Weapon fireIron("Fire Iron",
+	Weapon fireIron("Fire Iron", {"fire iron"},
 		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
 		"Also used to stoke fires.",
 		0, 0, 2, 5, false);
@@ -119,10 +119,12 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window, desk }, { rightDoorPtr }, {}, { greenKey, diary });
 
 	//Room 2: Greenhouse Room
-	Accessory fingerlessGloves("Fingerless Gloves", "A pair of gloves with holes where your fingers go. Not useful for dealing with firewood.",
+	Accessory fingerlessGloves("Fingerless Gloves", {"fingerless gloves", "gloves"},
+		"A pair of gloves with holes where your fingers go. Not useful for dealing with firewood.",
 		0, 0, 2);
 	auto fingerlessGlovesPtr = make_shared<Accessory>(fingerlessGloves);
-	Accessory redArmband("Red Armband", "An armband with a scarlet hue. Some might call it fashionable.", 2, 2, 0);
+	Accessory redArmband("Red Armband", {"red armband", "armband"},
+		"An armband with a scarlet hue. Some might call it fashionable.", 2, 2, 0);
 	auto redArmbandPtr = make_shared<Accessory>(redArmband);
 	Key tomato(2, "Tomato", {"tomato"}, "A plump, red tomato. Good on sandwiches.");
 	Object tallPlant("Tall Plant", {"tall plant", "plant"},

@@ -89,7 +89,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"She holds out her hands as she defends herself against your psychological attack. \"No, seriously! I noticed \n"
 		"my jailer put on this bandana and afterward, he just seemed stronger. I'M NOT CRAZY, THAT'S HOW IT WORKS!!\"",
 		accessory);
-	Accessory ironRing("Iron Ring",
+	Accessory ironRing("Iron Ring", {"iron ring"},
 		"It is a small ring made of iron, and in hindsight, it looks quite equippable. Grants STR +2.",
 		0, 0, 1, 4, false);
 	auto ironRingPtr = make_shared<Accessory>(ironRing);
@@ -142,7 +142,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"\"...You mean this Fire Poker?\" \n \n"
 		"\"Fire Iron sounds cooler.\" \n \n"
 		"You realize that you agree, but you're not gonna tell her that.", weapon);
-	Weapon fireIron("Fire Iron",
+	Weapon fireIron("Fire Iron", {"fire iron"},
 		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
 		"Also used to stoke fires.",
 		0, 0, 2, 5, false);

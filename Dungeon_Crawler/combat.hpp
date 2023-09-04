@@ -46,6 +46,7 @@ private:
 public:
 	std::string description;
 	std::string getName() { return name; };
+	std::vector<std::string> aliases;
 	int HP;
 	int SP;
 	int str;
@@ -53,13 +54,13 @@ public:
 	int equippedNum = -1;
 	bool beenDiscovered = true;
 
-	Equipment() : name("Nothing"), description("Just nothing"), HP(0), SP(0), str(0) {};
+	Equipment() : name("Nothing"), aliases(), description("Just nothing"), HP(0), SP(0), str(0) {};
 
-	Equipment(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
-		name(inputName), description(inputDescription), HP(inputHP), SP(inputSP), str(inputStr) {};
+	Equipment(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, int inputHP, int inputSP, int inputStr) :
+		name(inputName), aliases(inputAliases), description(inputDescription), HP(inputHP), SP(inputSP), str(inputStr) {};
 
-	Equipment(std::string inputName, std::string inputDescription, int inputHP, int inputSP, int inputStr,
-		int inputKeyNum, bool inputBeenDiscovered) : name(inputName), description(inputDescription), HP(inputHP),
+	Equipment(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, int inputHP, int inputSP, int inputStr,
+		int inputKeyNum, bool inputBeenDiscovered) : name(inputName), aliases(inputAliases), description(inputDescription), HP(inputHP),
 		SP(inputSP), str(inputStr), keyNum(inputKeyNum), beenDiscovered(inputBeenDiscovered) {};
 };
 
