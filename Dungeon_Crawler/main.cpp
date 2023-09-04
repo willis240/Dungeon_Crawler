@@ -41,7 +41,7 @@ int main()
 	auto brassKnucksPtr = std::make_shared<Weapon>(brassKnucks);
 	players[0].equipWeapon(brassKnucksPtr);
 
-	Accessory pocketWatch("Pocket Watch", {}, "Tick, tock, tick, tock", 4, 0, 1);
+	Accessory pocketWatch("Pocket Watch", {"pocket watch"}, "Tick, tock, tick, tock", 4, 0, 1);
 	auto pocketWatchPtr = std::make_shared<Accessory>(pocketWatch);
 	inventory.accessories.push_back(pocketWatchPtr);
 	players[1].equipAccessory(pocketWatchPtr);

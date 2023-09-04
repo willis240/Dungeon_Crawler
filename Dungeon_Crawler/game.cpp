@@ -1399,28 +1399,22 @@ void equipAccessory(vector<Player>& players, vector<shared_ptr<Accessory>>& acce
 }
 
 void unequipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>& armors,
-	vector<shared_ptr<Accessory>>& accessories,  string& argument)
+	vector<shared_ptr<Accessory>>& accessories, string& argument)
 {
 	for (int i = 0; i < weapons.size(); i++)
 	{
 		if (argument == weapons[i]->getName())
 		{
-			if (weapons[i]->beenDiscovered)
+			unequipWeapon(players, weapons, i);
+			return;
+		}
+
+		for (int ii = 0; ii < weapons[i]->aliases.size(); ii++)
+		{
+			if (argument == weapons[i]->aliases[ii])
 			{
-				if (weapons[i]->equippedNum != -1)
-				{
-					for (int ii = 0; ii < players.size(); ii++)
-					{
-						if (players[ii].getPlayerNum() == weapons[i]->equippedNum)
-						{
-							players[ii].unequipWeapon();
-							weapons[i]->equippedNum = -1;
-							cout << players[ii].getName() << " unequipped the " << weapons[i]->getName() << ".";
-							dblEndl();
-							return;
-						}
-					}
-				}
+				unequipWeapon(players, weapons, i);
+				return;
 			}
 		}
 	}
@@ -1429,22 +1423,15 @@ void unequipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, v
 	{
 		if (argument == armors[i]->getName())
 		{
-			if (armors[i]->beenDiscovered)
+			unequipArmor(players, armors, i);
+			return;
+		}
+		for (int ii = 0; ii < armors[i]->aliases.size(); ii++)
+		{
+			if (argument == armors[i]->aliases[ii])
 			{
-				if (armors[i]->equippedNum != -1)
-				{
-					for (int ii = 0; ii < players.size(); ii++)
-					{
-						if (players[ii].getPlayerNum() == armors[i]->equippedNum)
-						{
-							players[ii].unequipArmor();
-							armors[i]->equippedNum = -1;
-							cout << players[ii].getName() << " unequipped the " << armors[i]->getName() << ".";
-							dblEndl();
-							return;
-						}
-					}
-				}
+				unequipArmor(players, armors, i);
+				return;
 			}
 		}
 	}
@@ -1453,21 +1440,77 @@ void unequipGear(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, v
 	{
 		if (argument == accessories[i]->getName())
 		{
-			if (accessories[i]->beenDiscovered)
+			unequipAccessory(players, accessories, i);
+			return;
+		}
+		for (int ii = 0; ii < accessories[i]->aliases.size(); ii++)
+		{
+			if (argument == accessories[i]->aliases[ii])
 			{
-				if (accessories[i]->equippedNum != -1)
+				unequipAccessory(players, accessories, i);
+				return;
+			}
+		}
+	}
+}
+
+void unequipWeapon(vector<Player>& players, vector<shared_ptr<Weapon>>& weapons, int& i)
+{
+	if (weapons[i]->beenDiscovered)
+	{
+		if (weapons[i]->equippedNum != -1)
+		{
+			for (int ii = 0; ii < players.size(); ii++)
+			{
+				if (players[ii].getPlayerNum() == weapons[i]->equippedNum)
 				{
-					for (int ii = 0; ii < players.size(); ii++)
-					{
-						if (players[ii].getPlayerNum() == accessories[i]->equippedNum)
-						{
-							players[ii].unequipAccessory();
-							accessories[i]->equippedNum = -1;
-							cout << players[ii].getName() << " unequipped the " << accessories[i]->getName() << ".";
-							dblEndl();
-							return;
-						}
-					}
+					players[ii].unequipWeapon();
+					weapons[i]->equippedNum = -1;
+					cout << players[ii].getName() << " unequipped the " << weapons[i]->getName() << ".";
+					dblEndl();
+					return;
+				}
+			}
+		}
+	}
+}
+
+void unequipArmor(vector<Player>& players, vector<shared_ptr<Armor>>& armors, int& i)
+{
+	if (armors[i]->beenDiscovered)
+	{
+		if (armors[i]->equippedNum != -1)
+		{
+			for (int ii = 0; ii < players.size(); ii++)
+			{
+				if (players[ii].getPlayerNum() == armors[i]->equippedNum)
+				{
+					players[ii].unequipArmor();
+					armors[i]->equippedNum = -1;
+					cout << players[ii].getName() << " unequipped the " << armors[i]->getName() << ".";
+					dblEndl();
+					return;
+				}
+			}
+		}
+	}
+}
+
+void unequipAccessory(vector<Player>& players, vector<shared_ptr<Accessory>>& accessories, int& i)
+{
+	if (accessories[i]->beenDiscovered)
+	{
+		if (accessories[i]->equippedNum != -1)
+		{
+			for (int ii = 0; ii < players.size(); ii++)
+			{
+				if (players[ii].getPlayerNum() == accessories[i]->equippedNum)
+				{
+					players[ii].unequipAccessory();
+					accessories[i]->equippedNum = -1;
+					cout << players[ii].getName() << " unequipped the " << accessories[i]->getName() << ".";
+					dblEndl();
+					return;
 				}
 			}
 		}

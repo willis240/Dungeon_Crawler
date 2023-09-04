@@ -176,6 +176,7 @@ void checkInput(int& roomNum, int& floorNum, std::vector<Player>& players, Inven
 void showHelp(Player& player);
 void checkArgument(int& i, const bool& isDoor, Room& room, Inventory& inventory);
 void enterDoor(Door& door, int& roomNum, int& floorNum);
+
 void checkInventory(std::vector<Player>& players, Inventory& inventory, Room& room);
 void displayInventoryHeader(std::vector<Player>& players);
 void displayItems(std::vector<Item>& items);
@@ -184,6 +185,7 @@ void displayGear(std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std:
 void displayWeapons(std::vector<std::shared_ptr<Weapon>>& weapons);
 void displayAccessories(std::vector<std::shared_ptr<Accessory>>& accessories);
 void showInvHelp(std::vector<Player>& players, Inventory& inventory);
+
 void checkItems(Inventory& inventory, std::string& argument);
 void checkKeys(Inventory& inventory, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
@@ -192,19 +194,27 @@ bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std
 bool useKeyOnThing(std::vector<Player>& players, Inventory& inventory, Room& room, int& i);
 bool unlockDoor(Inventory& inventory, Room& room, int& i, int& ii);
 bool unlockObject(Inventory& inventory, Room& room, int& i, int& ii);
+
 void showStatus(std::vector<Player>& players);
 void showItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 void showItemToPlayer(std::vector<Player>& players, std::vector<Item>& items, int& i);
 void showKeys(std::vector<Player>& players, Inventory& inventory, std::string& argument);
 void showKeyToPlayer(std::vector<Player>& players, Inventory& inventory, int& i);
+
 void equipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
 	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
 void equipWeapon(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, int& i);
 void equipArmor(std::vector<Player>& players, std::vector<std::shared_ptr<Armor>>& armors, int& i);
 void equipAccessory(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, int& i);
+
 void unequipGear(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, std::vector<std::shared_ptr<Armor>>& armors,
 	std::vector<std::shared_ptr<Accessory>>& accessories, std::string& argument);
+void unequipWeapon(std::vector<Player>& players, std::vector<std::shared_ptr<Weapon>>& weapons, int& i);
+void unequipArmor(std::vector<Player>& players, std::vector<std::shared_ptr<Armor>>& armors, int& i);
+void unequipAccessory(std::vector<Player>& players, std::vector<std::shared_ptr<Accessory>>& accessories, int& i);
+
 void teamUp(int& i, Inventory& inventory, Room& room);
+
 void explore(std::vector<Player>& players, int& floor, int& roomNum, Inventory& inventory);
 void floor0(std::vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& seeOpening, bool& encounteredRat);
 void floor1(std::vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria,
