@@ -455,6 +455,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "You think back to how barren the kitchen was. Her story so far seems to add up. But- \"If you were hiding in here, \n";
 					cout << "then why did you leave the door unlocked?\"";
 					dblEndl();
+					system("pause");
+					system("CLS");
+
 					cout << "Aria sighs. \"The lock on my door is broken so I've been barricading the door with my desk. But, you see, I'm starving. \n";
 					cout << "I was going to go to the indoor greenhouse and see if some of the fruits and veggies were ready to eat. So, I pulled \n";
 					cout << "my desk away from the door, but then I heard some TALKING outside my door, and I ran for the closet.\"";
@@ -462,10 +465,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "You put two and two together. \"Ah, so what you probably heard was Selena and I encountering those weirdos in the \n";
 					cout << "hallway.\"";
 					dblEndl();
-					system("pause");
-					system("CLS");
-
-					cout << "Aria's turns her head toward the ceiling, takes a deep breath, and then turns back to facing you and Selena, a \n";
+					cout << "Aria turns her head toward the ceiling, takes a deep breath, and then turns back to facing you and Selena, a \n";
 					cout << "fiery determination in her eyes. \"So, obviously you guys are not working with the other people here. I really \n";
 					cout << "don't want to starve, and I can't get past those guys at the door by myself. I'm sure you can tell where I'm";
 					cout << "going with this.\"";
@@ -476,7 +476,116 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "getting out of here and staying out of here. What do you say?\"";
 					dblEndl();
 					cout << "You and Selena share a glance and you then hold a finger up to Aria, signifying \"just a moment\". You both \n";
-					cout << "turn away from her and whisper next to the door. ";
+					cout << "turn away from her and whisper next to the door.";
+					dblEndl();
+					cout << "\"You know, I really empathize with her\", Selena started. \"She's in essentially the same position I was in. ";
+					dblEndl();
+					cout << "(1) \"Her story seems to add up, but I still think we should exercise caution here.\"" << endl;
+					cout << "(2) \"Yeah, having a guide could be real useful. Plus, it'd feel wrong to just leave her here.\"" << endl;
+					cout << "(3) \"I don't know about letting her join. What if she's like you?\"" << endl;
+
+					int input = getDecision(1, 3);
+					system("CLS");
+
+					if (input == 1)
+					{
+						cout << "Selena thinks for a moment. \"Yeah, you're right. We can't necessarily trust her. Still, I don't think \n";
+						cout << "we should just leave her here. \"";
+						dblEndl();
+						cout << "\"She could lead us into a trap if we follow her blindly.\"";
+						dblEndl();
+						cout << "Selena's face contorts into a frown. It doesn't appear to be directed toward you, but more toward the \n";
+						cout << "situation itself. This must be her thinking face. \n";
+						dblEndl();
+						cout << "You decide to offer a solution. \"I'll tell you what: We can have her join us, but we keep a close eye \n";
+						cout << "on her for a while until we feel we can really trust her.\"";
+						dblEndl();
+						cout << "Selena nods in agreement. \"Yeah, I can get behind that idea.\"";
+						dblEndl();
+					}
+					else if (input == 2)
+					{
+						cout << "\"Yeah, she could be a huge help. Plus, since this is her house, I would imagine she would have the \n";
+						cout << "keys for unlocking some of the doors here.\"";
+						dblEndl();
+						cout << "\"You position your fingers on your chin, striking a ruminating pose. \"It does seem like she could \n";
+						cout << "be a huge help. I think we should let her join.\"";
+						dblEndl();
+						cout << "Selena mimics your pose playfully. \"Mm, yes, I believe we should.\"";
+					}
+					else
+					{
+						cout << "\"Then we would be incredibly lucky\", Selena retorted with a big grin on her face.";
+						dblEndl();
+						cout << "\"Well, I suppose I could use more \'pins\' for my bowling practice\", you say with \n";
+						cout << "a self-satisfied smirk upon your face.";
+						dblEndl();
+						cout << "Selena's grin evaporates, leaving a frown in its stead. \"Really? THAT's why you \n";
+						cout << "would have her join us? So you can have better bowling practice the next time we \n";
+						cout << "find a coconut?\"";
+						dblEndl();
+						cout << "\"I still have the first one.\"";
+						dblEndl();
+						cout << "Selena pauses for a moment to process. She turns her head and mumbles something under \n";
+						cout << "her breath. You couldn't hear her clearly, but you could swear you heard something like, \n";
+						cout << "\"Maybe having her could take some of the aggro off of me...\n";
+					}
+					dblEndl();
+					cout << "You both turn toward Aria.";
+					dblEndl();
+					cout << "(1) \"We'd be happy to have you.\"" << endl;
+					cout << "(2) \"Don't slow us down.\"" << endl;
+					cout << "(3) \"We only accept Gargoyle Wars 8 haters in this group.\"" << endl;
+
+					input = getDecision(1, 3);
+					system("CLS");
+
+					if (input == 1)
+					{
+						cout << "A smile grows upon Aria's face. \"Thank you! Trust me, it won't be long before you'll \n";
+						cout << "be wondering how you ever got anywhere without me!\" She finishes this statement while \n";
+						cout << "confidently pointing at you and Selena.";
+						dblEndl();
+						cout << "\"We'll hold you to that\", you respond as you return both the smile and the pointing \n";
+						cout << "gesture. Considering that she lives here, you figure she's probably right.";
+						//ADD 3 POINTS TO ARIA'S FRIENDSHIP STAT
+					}
+					else if (input == 2)
+					{
+						cout << "\"You don't have to worry on that front. Like I said, I know this place. If anything \n";
+						cout << "I'll help you guys get out of here a lot quicker.";
+						dblEndl();
+						cout << "You maintain a straight face. \"Alright then. Welcome aboard.\"";
+						//ADD 1 POINT TO ARIA'S FRIENDSHIP STAT
+					}
+					else
+					{
+						cout << "\"Oh, I DESPISE Gargoyle Wars 8. It's just an unneccessary sequel rushed out to make \n";
+						cout << "a quick buck. A disgusting black stain on the franchise.\"";
+						dblEndl();
+						cout << "You can't help but laugh. \"Oh, we couldn't agree more. It's not even just that the \n";
+						cout << "previous film had an superbly satisfying conclusion for the franchise, but the fact \n";
+						cout << "that they go out of their way to undermine that just so they can repeat Gray's same \n";
+						cout << "exact character arc.\"";
+						dblEndl();
+						cout << "\"RIGHT?! And don't even get me started on how they ruined my girl Helena.\"";
+						dblEndl();
+						cout << "After a couple minutes of roasting Gargoyle Wars 8, you feel a tap on your shoulder. \n";
+						cout << "\"Umm... what's Gargoyle Wars?\" Selena's sincere question forces your brain to pause \n";
+						cout << "and register the fact that you now know someone who has never heard of the most popular \n";
+						cout << "sci-fi franchise in history. Wow.";
+						//ADD 5 POINTS TO ARIA'S FRIENDSHIP STAT
+					}
+
+					cout << "\"Oh! Right! I nearly forgot!\" Aria exckaims as she begins digging in her back pocket.\n";
+					cout << "\"This is the key to the middle door in the hallway. That's where we'll need to go if \n";
+					cout << "we wanna try getting out of here.\"";
+
+					//ADD ARIA TO THE PARTY, AND MIDDLE KEY TO INVENTORY
+
+					system("pause");
+					system("CLS");
+					
 				}
 			}
 			system("pause");
