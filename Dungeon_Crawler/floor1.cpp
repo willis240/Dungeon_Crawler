@@ -103,6 +103,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"flavors like tomato and carrot. I'm not a fan of any of those fruit, but I still consider myself to be a gal with \n"
 		"simple taste. I went with chocolate. It was SO GOOD!! Ah, I love the spring.\" \n \n"
 		"\"This girl gets it. Gargoyle Wars 8 freaking sucks.\"");
+	Key middleKey(8, "Middle Key", { "middle key" }, "A standard key. Unlocks the Middle Door.");
 	Object desk("Desk", {"desk"},
 		"You find that it is a simple wooden desk. It does not have any particular decorations to make it stand out \n"
 		"or feel fancy. It has a single drawer under its mid-section, inside of which is a book. One look at the cover \n"
@@ -116,7 +117,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Selena chuckled. \"I'll hold you to that.\" After a short pause, she added, \"I just know I wouldn't want \n"
 		"some random person to read all of my diary.\"",
 		true, false, 0, 7);
-	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window, desk }, { rightDoorPtr }, {}, { greenKey, diary });
+	Skill quickSlap("Quick Slap", 2, false, false, 2, "Aria delivers a swift backhand!");
+	Player Aria("Aria", 2, 9, 11, {quickSlap});
+	Room bedroom(1, "Bedroom", { closet, queenBed, nightstand, window, desk }, { rightDoorPtr }, {}, { greenKey, diary});
 
 	//Room 2: Greenhouse Room
 	Accessory fingerlessGloves("Fingerless Gloves", {"fingerless gloves", "gloves"},
@@ -528,7 +531,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						cout << "Selena pauses for a moment to process. She turns her head and mumbles something under \n";
 						cout << "her breath. You couldn't hear her clearly, but you could swear you heard something like, \n";
-						cout << "\"Maybe having her could take some of the aggro off of me...\n";
+						cout << "\"Maybe having her could take some of the aggro off of me...";
 					}
 					dblEndl();
 					cout << "You both turn toward Aria.";
@@ -548,7 +551,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						cout << "\"We'll hold you to that\", you respond as you return both the smile and the pointing \n";
 						cout << "gesture. Considering that she lives here, you figure she's probably right.";
-						//ADD 3 POINTS TO ARIA'S FRIENDSHIP STAT
+						Aria.friendship += 3;
 					}
 					else if (input == 2)
 					{
@@ -556,7 +559,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "I'll help you guys get out of here a lot quicker.";
 						dblEndl();
 						cout << "You maintain a straight face. \"Alright then. Welcome aboard.\"";
-						//ADD 1 POINT TO ARIA'S FRIENDSHIP STAT
+						Aria.friendship += 1;
 					}
 					else
 					{
@@ -574,18 +577,19 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "\"Umm... what's Gargoyle Wars?\" Selena's sincere question forces your brain to pause \n";
 						cout << "and register the fact that you now know someone who has never heard of the most popular \n";
 						cout << "sci-fi franchise in history. Wow.";
-						//ADD 5 POINTS TO ARIA'S FRIENDSHIP STAT
+						Aria.friendship += 5;
 					}
 
+					dblEndl();
 					cout << "\"Oh! Right! I nearly forgot!\" Aria exckaims as she begins digging in her back pocket.\n";
 					cout << "\"This is the key to the middle door in the hallway. That's where we'll need to go if \n";
 					cout << "we wanna try getting out of here.\"";
 
-					//ADD ARIA TO THE PARTY, AND MIDDLE KEY TO INVENTORY
-
-					system("pause");
-					system("CLS");
-					
+					dblEndl();
+					cout << "You obtained the Middle Key!";
+					players.push_back(Aria);
+					inventory.keys.push_back(middleKey);
+					dblEndl();
 				}
 			}
 			system("pause");
