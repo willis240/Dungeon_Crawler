@@ -17,7 +17,7 @@ int main()
 	Inventory inventory;
 
 	int floorNum = 1;
-	int roomNum = 1;
+	int roomNum = 3;
 
 	Key pomegranate(3, "Pomegranate", { "pomegranate" }, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);

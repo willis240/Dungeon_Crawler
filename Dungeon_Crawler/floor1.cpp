@@ -27,12 +27,18 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"to both of the other doors in the room, except for a green rim around the doorknob. Since you stuck the Green \n"
 		"Key in it, it is now unlocked.");
 	auto leftDoorPtr = make_shared<Door>(leftDoor);
+	Door middleDoor(make_pair(0, 3), "Middle Door", { "middle door", "middle" }, true, true, 8,
+		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is near \n"
+		"identical to both of the other doors in the room. Upon trying the handle, you find that it is locked. \n",
+		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is near \n"
+		"identical to both of the other doors in the room. Since you stuck the Middle Key in it, it is now unlocked.");
+	auto middleDoorPtr = make_shared<Door>(middleDoor);
 	Weapon fireIron("Fire Iron", {"fire iron"},
 		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
 		"Also used to stoke fires.",
 		0, 0, 2, 5, false);
 	auto fireIronPtr = make_shared<Weapon>(fireIron);
-	Room hallway(0, "Hallway", {}, {rightDoorPtr, leftDoorPtr}, {}, {});
+	Room hallway(0, "Hallway", {}, {rightDoorPtr, leftDoorPtr, middleDoorPtr}, {}, {});
 
 	//Room 1: Bedroom
 	Object closet("Closet", {"closet"},
@@ -168,6 +174,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		true, false, 0, 6);
 	Room greenhouseRoom(2, "Greenhouse Room", {tallPlant, greenTree, appleTree, palmTree, buriedVeggies}, {leftDoorPtr},
 		{}, {tomato, pomegranate, apple, coconut, carrot});
+
+	//Room 3: Family Room
+	Room familyRoom(3, "Family Room", {}, {}, {}, {});
 
 	while (true)
 	{
@@ -594,6 +603,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			}
 			system("pause");
 		}
+
 		if (roomNum == 2)
 		{
 			system("CLS");
@@ -794,6 +804,17 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
 				system("pause");
 			}
+		}
+
+		if (roomNum == 3)
+		{
+			system("CLS");
+			cout << "From the Middle Door, there is a small entryway which leads into a large, open room. The room has \n";
+			cout << "many amenities which make it appear to be a family room. On the north end of the room is a flat-screen \n";
+			cout << "Television atop an Entertainment Center. Naturally, about six feet away from it is a Couch. Along the \n";
+			cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it.";
+			dblEndl();
+			checkInput(roomNum, floorNum, players, inventory, familyRoom);
 		}
 	}
 }
