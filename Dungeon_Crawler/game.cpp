@@ -194,7 +194,13 @@ void checkArgument(int & i, const bool & isDoor, Room & room, Inventory& invento
 	{
 		if (room.objects[i].isVisible)
 		{
-			cout << endl << room.objects[i].description << endl << endl;
+			if (room.objects[i].isLocked)
+			{
+				cout << endl << room.objects[i].lockedText << endl << endl;
+				return;
+			}
+			else
+				cout << endl << room.objects[i].description << endl << endl;
 			if (!room.objects[i].hasSecret)
 			{
 				if (room.objects[i].itemNum != 0)
@@ -215,6 +221,22 @@ void checkArgument(int & i, const bool & isDoor, Room & room, Inventory& invento
 					{
 						if (room.keys[ii].getKeyNum() == room.objects[i].keyNum)
 						{
+							if (room.keys[ii].reclaimable)
+							{
+								cout << "Do you take the " << room.keys[ii].name << "?" << endl;
+								cout << "(1) Yes" << endl;
+								cout << "(2) No" << endl;
+								int input = getDecision(1, 2);
+
+								if (input == 1)
+								{
+									cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
+									inventory.keys.push_back(room.keys[ii]);
+									room.objects[i].isLocked = true;
+									room.keys.erase(room.keys.begin() + ii);
+								}
+								return;
+							}
 							cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
 							inventory.keys.push_back(room.keys[ii]);
 							if (room.keys[ii].actuallyGear == weapon)
@@ -689,7 +711,8 @@ bool useKeys(vector<Player>& players, Inventory& inventory, Room& room, string& 
 		}
 		for (int ii = 0; ii < inventory.keys[i].aliases.size(); ii++)
 		{
-			return useKeyOnThing(players, inventory, room, i);
+			if (argument == inventory.keys[i].aliases[ii])
+				return useKeyOnThing(players, inventory, room, i);
 		}
 	}
 	return false;
@@ -810,6 +833,23 @@ bool unlockObject(Inventory& inventory, Room& room, int& i, int& ii)
 				}
 			}
 			return true;
+		}
+	}
+
+	if (room.objects[ii].isLocked)
+	{
+		if (inventory.keys[i].getKeyNum() == room.objects[ii].answerNum)
+		{
+			room.objects[ii].isLocked = false;
+			system("CLS");
+			cout << room.objects[ii].description;
+			dblEndl();
+			if (inventory.keys[i].reclaimable)
+			{
+				room.objects[ii].keyNum = inventory.keys[i].getKeyNum();
+				room.keys.push_back(inventory.keys[i]);
+			}
+			inventory.keys.erase(inventory.keys.begin() + i);
 		}
 	}
 	return false;

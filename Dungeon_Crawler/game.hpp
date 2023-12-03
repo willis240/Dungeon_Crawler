@@ -43,6 +43,7 @@ public:
 	std::vector<std::string> aliases;
 	std::string description;
 	int getKeyNum() { return keyNum; };
+	bool reclaimable = false;
 	bool purposeKnown = true;
 	std::string personWithExpertise = "";
 	std::string expertiseDescription = "";
@@ -50,6 +51,9 @@ public:
 	
 	Key(int inputKeyNum, std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription) :
 		keyNum(inputKeyNum), name(inputName), aliases(inputAliases), description(inputDescription) {};
+
+	Key(int inputKeyNum, std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputReclaimable) :
+		keyNum(inputKeyNum), name(inputName), aliases(inputAliases), description(inputDescription), reclaimable(inputReclaimable) {};
 
 	Key(int inputKeyNum, std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputPurposeKnown,
 		std::string inputPersonWithExpertise, std::string inputExpertiseDescription) : keyNum(inputKeyNum), name(inputName), aliases(inputAliases),
@@ -81,24 +85,34 @@ private:
 public:
 	std::vector<std::string> aliases;
 	std::string description;
-	bool isVisible;
-	bool hasSecret;
+	bool isVisible = true;
+	bool hasSecret = false;
+	bool isLocked = false;
 	short int itemNum;
 	short int keyNum;
 	short int answerNum = 0;
 	short int revealsDoor = 0;
 	std::string secretText;
+	std::string lockedText;
 
 	std::string getName() { return name; };
 
+	//Basic Object
 	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsVisible, bool inputHasSecret, 
 		short int inputItemNum, short int inputKeyNum) : name(inputName), aliases(inputAliases), description(inputDescription), isVisible(inputIsVisible), 
 		hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum) {};
 
+	//Object with a Secret
 	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsVisible, bool inputHasSecret,
 		short int inputItemNum, short int inputKeyNum, short int inputAnswerNum, std::string inputSecretText) : name(inputName), aliases(inputAliases),
 		description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret), itemNum(inputItemNum), keyNum(inputKeyNum),
 		answerNum(inputAnswerNum), secretText(inputSecretText) {};
+
+	//Lockable Object
+	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsLocked,
+		short int inputItemNum, short int inputKeyNum, short int inputAnswerNum, std::string inputLockedText) : name(inputName), aliases(inputAliases),
+		description(inputDescription), isLocked(inputIsLocked), itemNum(inputItemNum), keyNum(inputKeyNum),
+		answerNum(inputAnswerNum), lockedText(inputLockedText) {};
 
 	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsVisible, bool inputHasSecret,
 		short int inputItemNum, short int inputKeyNum, short int inputAnswerNum, short int inputRevealsDoor, std::string inputSecretText) :

@@ -176,7 +176,35 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{}, {tomato, pomegranate, apple, coconut, carrot});
 
 	//Room 3: Family Room
-	Room familyRoom(3, "Family Room", {}, {}, {}, {});
+	Object couch("Couch", { "couch", "sofa" },
+		"The couch is a dark blue color, and it looks well-loved.\n \n"
+		"\"This is our living room couch\" Aria says, gesturing toward it. \"Go ahead. Sit on it.\" \n \n"
+		"You shrug and decide you might as well. Upon sitting on it you realize ohhhh it's comfy. Very comfy. \n \n"
+		"\"It's nice, right?\" \n \n"
+		"You don't bother speaking. You simply let your back sink into the couch and give a thumbs-up.",
+		true, false, 0, 0);
+	Key cableHDMI(9, "HDMI Cable", { "hdmi cable", "hdmi", "cable", "Cable" },
+		"A cable for transmitting audio and video signals from a device to a monitor.", true);
+	Object television("Television", { "television", "TV", "tv" },
+		"Upon turning the TV on, the login screen for a game console appears. You recognize it as the first thing you see \n"
+		"after booting up a Vcube 220. You look to the right and, sure enough, just a few inches to the right of the TV\n"
+		"is a Vcube 220, powered up and ready to be used.",
+		false, 0, 9, 9,
+		"Upon turning the TV on, you see a bright blue screen along with text in the top left stating \"HDMI 3\".\n"
+		"It would appear that nothing is hooked up to the TV's HDMI 3 port."
+		);
+	Object computer("Computer", { "computer", "PC", "pc" },
+		"Upon turning on the computer you find yourself at the login screen for an account named \"Supercool\". You \n"
+		"slowly turn your head toward Aria. \n \n"
+		"\"What?\" She says as her cheeks begin to flush. \"I mean, I wasn't going to use my name. Using this name \n"
+		"basically provides me with an extra layer of security.\" \n \n"
+		"Sure.",
+		true, 0, 0, 9,
+		"Upon turning the computer and the monitor on, you hear fans start up and see a blue screen appear. The screen \n"
+		"boldly proclaims \"NO SIGNAL\". Upon feeling around the back of the monitor you realize that it is not connected \n"
+		"to the Computer at all."
+		);
+	Room familyRoom(3, "Family Room", {couch, television, computer}, {}, {}, {cableHDMI});
 
 	while (true)
 	{
@@ -815,6 +843,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, familyRoom);
+			system("pause");
 		}
 	}
 }
