@@ -233,6 +233,7 @@ void checkArgument(int & i, const bool & isDoor, Room & room, Inventory& invento
 									cout << "You grabbed the " << room.keys[ii].name << "." << endl << endl;
 									inventory.keys.push_back(room.keys[ii]);
 									room.objects[i].isLocked = true;
+									room.objects[i].keyNum = 0;
 									room.keys.erase(room.keys.begin() + ii);
 								}
 								return;
