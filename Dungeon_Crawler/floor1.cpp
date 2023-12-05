@@ -187,8 +187,15 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"A cable for transmitting audio and video signals from a device to a monitor.", true);
 	Object television("Television", { "television", "TV", "tv" },
 		"Upon turning the TV on, the login screen for a game console appears. You recognize it as the first thing you see \n"
-		"after booting up a Vcube 220. You look to the right and, sure enough, just a few inches to the right of the TV\n"
-		"is a Vcube 220, powered up and ready to be used.",
+		"after booting up a Vcube 220. You look to the right and, sure enough, just a few inches to the right of the TV \n"
+		"is a Vcube 220, connected via an HDMI Cable. Looking back at the screen, you see an account named \"Supreme297.\" \n \n"
+		"\"Yeah, that's my brother's account\", Aria states. \"I think he called it Supreme because he wanted to sound \n"
+		"cool, but it just makes me think of a nacho supreme every time.\" \n \n"
+		"Selena lets out a small chuckle. \"Honestly, I cringed a bit when I first saw the name.\" \n \n"
+		"\"Yeah... I think he was in middle school when he made the account.\" \n \n"
+		"\"You know\", you begin, \"suddenly I feel like naming my account GamerLord20X wasn't a bad idea.\" \n \n"
+		"Selena laughs. \"That sounds way cringier than just supreme.\" \n \n"
+		"\"Hey\", you point at her as you declare: \"Go big or go home.\"",
 		false, 0, 9, 9,
 		"Upon turning the TV on, you see a bright blue screen along with text in the top left stating \"HDMI 3\".\n"
 		"It would appear that nothing is hooked up to the TV's HDMI 3 port."
@@ -198,7 +205,17 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"slowly turn your head toward Aria. \n \n"
 		"\"What?\" She says as her cheeks begin to flush. \"I mean, I wasn't going to use my name. Using this name \n"
 		"basically provides me with an extra layer of security.\" \n \n"
-		"Sure.",
+		"You deliver unto her a smug grin. \n \n"
+		"\"Like you have room to talk, \'GamerLord\'.\" Aria retorts as she logs into her profile. Your smug grin \n"
+		"doesn't budge an inch. \n \n"
+		"Upon logging into Aria's profile the first thing that pops up is a popular chatting app called Bliscord, \n"
+		"which is often used for communicating with others over the internet via text or voice chat. Aria immediately \n"
+		"notices that there is an unread message from one Supreme297. \"What?!\" She opens up the chat feed, only to see \n"
+		"that it was from 10 days ago. The message said: \n \n"
+		"\"Hey Aria, I'm fine, but it might be a while before you see me again. I promise I will come back as soon\n"
+		"as I can. If you find yourself stuck, \'Remember Me\'.\" \n \n"
+		"A droplet of water begins to form in Aria's right eye. She wipes it away. \"Well, I'm glad my brother was okay \n"
+		"ten days ago... I can only hope that that's still true now.\"",
 		true, 0, 0, 9,
 		"Upon turning the computer and the monitor on, you hear fans start up and see a blue screen appear. The screen \n"
 		"boldly proclaims \"NO SIGNAL\". Upon feeling around the back of the monitor you realize that it is not connected \n"
