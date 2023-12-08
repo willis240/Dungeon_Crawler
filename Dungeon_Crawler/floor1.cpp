@@ -221,7 +221,18 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"boldly proclaims \"NO SIGNAL\". Upon feeling around the back of the monitor you realize that it is not connected \n"
 		"to the Computer at all."
 		);
-	Room familyRoom(3, "Family Room", {couch, television, computer}, {}, {}, {cableHDMI});
+	Object entertainmentCenter("Entertainment Center", { "entertainment center", "entertainment", "center" },
+		"The entertainment center upon which the TV rests is a wooden one, with cabinet doors. You open the doors to \n"
+		"find a couple of older game consoles, as well as a movie player. \n \n"
+		"\"Ah, so you really are a gamer\", you declare to Aria. \n \n"
+		"\"Yeah, me and my brother played a lot of games together growing up, and it just kinda stuck.\" Aria notices \n"
+		"the blank expression upon Selena's face and decides to add her to the conversation. \"What about you, Selena? \n"
+		"Do you play any video games?\" \n \n"
+		"\"Well, I dabble. I've played some games a good chunk, but not, like, a TON, you know?\" \n \n"
+		"You decide to not say anything for now, but you fear you may have let a casual gamer into your party.",
+		true, false, 0, 0
+		);
+	Room familyRoom(3, "Family Room", {couch, television, computer, entertainmentCenter}, {}, {}, {cableHDMI});
 
 	while (true)
 	{
