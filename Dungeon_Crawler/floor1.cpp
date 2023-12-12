@@ -232,7 +232,22 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"You decide to not say anything for now, but you fear you may have let a casual gamer into your party.",
 		true, false, 0, 0
 		);
-	Room familyRoom(3, "Family Room", {couch, television, computer, entertainmentCenter}, {}, {}, {cableHDMI});
+	Item mountainDont("Mountain Don't", { "mountain don't", "Mountain", "mountain" }, 0, 8,
+		"A popular soda known for its distinct flavor and distinct lack of nutritional benefits.\n Provides energy, though.", 1);
+	Object miniFridge("Mini Fridge", { "mini fridge", "Fridge", "fridge" },
+		"The mini fridge is a smooth black variant, although its glossy exterior has left it prone to visible \n"
+		"fingerprints. Upon opening the door, you find a largely barren interior with one exception: a single \n"
+		"can of Mountain Don't. \n \n"
+		"\"Ooo, sweet!\" Selena exclaims as she yoinks the can from right under your nose. \"I haven't had one \n"
+		"of these in ages!\" \n \n"
+		"As you contemplate tearing the can from Selena's clutches, you hear Aria speak up,\"Have at it. There's \n"
+		"a reason that can's still there. I can't stand the flavor.\" \n \n"
+		"You can't let that one slide completely. \"You dislike Mountain Don't? Is that still legal?\" \n \n"
+		"Aria chuckles. \"Heh, yes, thankfully. You can thank my brother for that can being here at all.\" \n \n"
+		"Selena raises the can above her head with both of her hands. \"Thank you, Person I Have Never Met, \n"
+		"for your wonderful taste in soda!\"",
+		true, false, 1, 0);
+	Room familyRoom(3, "Family Room", {couch, television, computer, entertainmentCenter, miniFridge}, {middleDoorPtr}, {mountainDont}, {cableHDMI});
 
 	while (true)
 	{
@@ -868,7 +883,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			cout << "From the Middle Door, there is a small entryway which leads into a large, open room. The room has \n";
 			cout << "many amenities which make it appear to be a family room. On the north end of the room is a flat-screen \n";
 			cout << "Television atop an Entertainment Center. Naturally, about six feet away from it is a Couch. Along the \n";
-			cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it.";
+			cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it. In the southwest corner of the room \n";
+			cout << "is a Table with some chairs at each side.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, familyRoom);
 			system("pause");
