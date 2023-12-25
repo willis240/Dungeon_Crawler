@@ -160,7 +160,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"aesthetic quite well. There are many bottles of beverages on some shelves lined up against the wall, most of which appear \n"
 		"to be alcoholic. Upon going behind the counter, you see that there are even more bottles beneath the counter. After grabbing \n"
 		"a couple of bottles to check them out, you find a small keyhole behind one of the bottles.",
-		true, true, 0, 0, 6, 7,
+		true, true, 0, 0, 6, 7, 0,
 		"Upon inserting the Small Key into the keyhole behind the counter and turning, you hear a clicking sound from your left. You \n"
 		"turn toward the left side of the area behind the counter and watch as a section of the floor slides under the adjacent floor \n"
 		"panel, revealing a ladder leading down. You debate whether it would be a good idea to enter the Bar's Secret Passage.");
@@ -176,7 +176,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"As you step away from the bookshelf you realize that there is an indentation in the carpet that makes it look like \n"
 		"this bookshelf has been moved. You step to the side of the bookshelf and start pushing. \"Holy crap\", you mutter \n"
 		"as you realize that this bookshelf will be harder to move than you realized.",
-		true, false, 0, 0, -1, 8,
+		true, false, 0, 0, -1, 8, 0,
 		"You stand shoulder-to-shoulder with Selena, and start counting to 3. On 3, you both put all of your weight into \n"
 		"pushing the bookshelf and manage to get it to budge! From that point on, it's smooth sailing. Together, the two \n"
 		"of you push the bookshelf several feet away from its starting position, revealing a secret staircase leading \n"

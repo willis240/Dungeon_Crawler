@@ -92,6 +92,7 @@ public:
 	short int keyNum;
 	short int answerNum = 0;
 	short int revealsDoor = 0;
+	short int checkSecret = 0;
 	std::string secretText;
 	std::string lockedText;
 
@@ -115,9 +116,9 @@ public:
 		answerNum(inputAnswerNum), lockedText(inputLockedText) {};
 
 	Object(std::string inputName, std::vector<std::string> inputAliases, std::string inputDescription, bool inputIsVisible, bool inputHasSecret,
-		short int inputItemNum, short int inputKeyNum, short int inputAnswerNum, short int inputRevealsDoor, std::string inputSecretText) :
-		name(inputName), aliases(inputAliases), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret),
-		itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), revealsDoor(inputRevealsDoor), secretText(inputSecretText) {};
+		short int inputItemNum, short int inputKeyNum, short int inputAnswerNum, short int inputRevealsDoor, short int inputCheckSecret,
+		std::string inputSecretText) : name(inputName), aliases(inputAliases), description(inputDescription), isVisible(inputIsVisible), hasSecret(inputHasSecret),
+		itemNum(inputItemNum), keyNum(inputKeyNum), answerNum(inputAnswerNum), revealsDoor(inputRevealsDoor), checkSecret(inputCheckSecret), secretText(inputSecretText) {};
 };
 
 class Door

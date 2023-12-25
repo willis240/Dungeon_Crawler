@@ -247,7 +247,27 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Selena raises the can above her head with both of her hands. \"Thank you, Person I Have Never Met, \n"
 		"for your wonderful taste in soda!\"",
 		true, false, 1, 0);
-	Room familyRoom(3, "Family Room", {couch, television, computer, entertainmentCenter, miniFridge}, {middleDoorPtr}, {mountainDont}, {cableHDMI});
+	Object table("Table", { "table" },
+		"The table is of the wooden variety. Nothing too fancy, but it is a fairly nice table. It is certainly more \n"
+		"pleasant to the eye than a plastic one. It seems to be large enough to seat six people comfortably. \n \n"
+		"\"I like this table\", says Aria, unprovoked. \"You wanna see the coolest part?\" \n \n"
+		"You and Selena both shrug. \"\"Sure\"\". \n \n"
+		"Aria reaches around the lip of the table and flicks a switch underneath the table top. She then crawls under \n"
+		"the table and pulls open a hidden hatch in one of the table's legs. Inside is a small black box. \n \n"
+		"In hindsight, the table's legs are rather large. Probably should have noted that sooner. \n \n"
+		"\"This,\" Aria starts, gesturing to the black box, \"is my brother's portable safe. He never told me the passcode, \n"
+		"but I just really wanted to show off the secret compartment in the table.\" \n \n"
+		"While you agree that the secret compartment is cool, you can't help but feel that her wanting to show it off \n"
+		"defeats its purpose.",
+		true, true, 0, 0, 0, 0, 6, "");
+	Object safe("Safe", { "safe" },
+		"The safe is a small black box, just large enough to hold comfortably in two hands but not in one. On its face \n"
+		"is a screen with a keypad. The screen says \"Username: Supreme297\", and under that there is a line requesting \n"
+		"a password. \n \n"
+		"\"You know, my brother never did tell me the password.\" Aria states. \"Only he knows what's hiding in there.\" \n \n"
+		"...It couldn't hurt to take a guess. What do you enter?",
+		false, false, 0, 0);
+	Room familyRoom(3, "Family Room", {couch, television, computer, entertainmentCenter, miniFridge, table, safe}, {middleDoorPtr}, {mountainDont}, {cableHDMI});
 
 	while (true)
 	{
@@ -880,12 +900,25 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 3)
 		{
 			system("CLS");
-			cout << "From the Middle Door, there is a small entryway which leads into a large, open room. The room has \n";
-			cout << "many amenities which make it appear to be a family room. On the north end of the room is a flat-screen \n";
-			cout << "Television atop an Entertainment Center. Naturally, about six feet away from it is a Couch. Along the \n";
-			cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it. In the southwest corner of the room \n";
-			cout << "is a Table with some chairs at each side.";
-			dblEndl();
+			if (!familyRoom.objects[6].isVisible)
+			{
+				cout << "From the Middle Door, there is a small entryway which leads into a large, open room. The room has \n";
+				cout << "many amenities which make it appear to be a family room. On the north end of the room is a flat-screen \n";
+				cout << "Television atop an Entertainment Center. Naturally, about six feet away from it is a Couch. Along the \n";
+				cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it. In the southwest corner of the room \n";
+				cout << "is a Table with some chairs at each side.";
+				dblEndl();
+			}
+			else
+			{
+				cout << "From the Middle Door, there is a small entryway which leads into a large, open room. The room has \n";
+				cout << "many amenities which make it appear to be a family room. On the north end of the room is a flat-screen \n";
+				cout << "Television atop an Entertainment Center. Naturally, about six feet away from it is a Couch. Along the \n";
+				cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it. In the southwest corner of the room \n";
+				cout << "is a Table with some chairs at each side. As Aria showed you, hidden within one of the legs of the Table \n";
+				cout << "is a small Safe.";
+				dblEndl();
+			}
 			checkInput(roomNum, floorNum, players, inventory, familyRoom);
 			system("pause");
 		}

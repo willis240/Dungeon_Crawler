@@ -267,6 +267,14 @@ void checkArgument(int & i, const bool & isDoor, Room & room, Inventory& invento
 					}
 				}
 			}
+			else
+			{
+				if (room.objects[i].checkSecret != 0)
+				{
+					int foundObject = room.objects[i].checkSecret;
+					room.objects[foundObject].isVisible = true;
+				}
+			}
 		}
 	}
 	else
