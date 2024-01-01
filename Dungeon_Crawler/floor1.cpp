@@ -178,6 +178,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{}, {tomato, pomegranate, apple, coconut, carrot});
 
 	//Room 3: Family Room
+	string passwordAttempt = "";
 	Object couch("Couch", { "couch", "sofa" },
 		"The couch is a dark blue color, and it looks well-loved.\n \n"
 		"\"This is our living room couch\" Aria says, gesturing toward it. \"Go ahead. Sit on it.\" \n \n"
@@ -923,6 +924,26 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			}
 
 			playerInput = checkInput(roomNum, floorNum, players, inventory, familyRoom);
+
+			if (playerInput == "check Safe")
+			{
+				cout << "Username: Supreme297" << endl;
+				cout << "Password: ";
+				getline(cin, passwordAttempt);
+				cout << endl;
+
+				if (passwordAttempt == "Supreme297")
+				{
+					cout << "You hear a clicking sound as the safe's door opens.";
+					dblEndl();
+					//ADD DESCRIPTION OF OPENING, AS WELL AS A KEY ITEM TO INVENTORY
+				}
+				else
+				{
+					cout << "Nothing happens. It must not have been the correct password.";
+					dblEndl();
+				}
+			}
 			system("pause");
 		}
 	}
