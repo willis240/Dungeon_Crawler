@@ -187,7 +187,7 @@ public:
 
 Player startGame();
 int getDecision(const int minChoice, const int maxChoice);
-void checkInput(int& roomNum, int& floorNum, std::vector<Player>& players, Inventory& inventory, Room& room);
+std::string checkInput(int& roomNum, int& floorNum, std::vector<Player>& players, Inventory& inventory, Room& room);
 void showHelp(Player& player);
 void checkArgument(int& i, const bool& isDoor, Room& room, Inventory& inventory);
 void enterDoor(Door& door, int& roomNum, int& floorNum);

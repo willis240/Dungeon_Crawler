@@ -63,7 +63,7 @@ Player startGame()
 	return player;
 }
 
-void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory& inventory, Room& room)
+string checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory& inventory, Room& room)
 {
 	while (true)
 	{
@@ -91,7 +91,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 			{
 				cout << endl;
 				showHelp(players[0]);
-				break;
+				return input;
 			}
 		}
 		if (players[0].exploreOptions.size() > 1)
@@ -103,12 +103,23 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 					if (argument == room.objects[i].getName())
 					{
 						checkArgument(i, false, room, inventory);
+						input = "";
+						input += players[0].exploreOptions[1];
+						input += " ";
+						input += room.objects[i].getName();
 					}
 
 					for (int ii = 0; ii < room.objects[i].aliases.size(); ii++)
 					{
 						if (argument == room.objects[i].aliases[ii])
+						{
 							checkArgument(i, false, room, inventory);
+							input = "";
+							input += players[0].exploreOptions[1];
+							input += " ";
+							input += room.objects[i].getName();
+						}
+							
 					}
 				}
 				for (int i = 0; i < room.doors.size(); i++)
@@ -116,14 +127,24 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 					if (argument == room.doors[i]->name)
 					{
 						checkArgument(i, true, room, inventory);
+						input = "";
+						input += players[0].exploreOptions[1];
+						input += " ";
+						input += room.doors[i]->name;
 					}
 					for (int ii = 0; ii < room.doors[i]->aliases.size(); ii++)
 					{
 						if (argument == room.doors[i]->aliases[ii])
+						{
 							checkArgument(i, true, room, inventory);
+							input = "";
+							input += players[0].exploreOptions[1];
+							input += " ";
+							input += room.doors[i]->name;
+						}
 					}
 				}
-				break;
+				return input;
 			}
 		}
 		if (players[0].exploreOptions.size() > 2)
@@ -141,7 +162,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 							enterDoor(*room.doors[i], roomNum, floorNum);
 					}
 				}
-				break;
+				return input;
 			}
 		}
 		if (players[0].exploreOptions.size() > 3)
@@ -150,7 +171,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 			{
 				cout << endl;
 				checkInventory(players, inventory, room);
-				break;
+				return input;
 			}
 		}
 		if (players[0].exploreOptions.size() > 4)
@@ -169,7 +190,7 @@ void checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventory&
 							teamUp(i, inventory, room);
 					}
 				}
-				break;
+				return input;
 			}
 		}
 	}

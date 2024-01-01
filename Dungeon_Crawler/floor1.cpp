@@ -14,6 +14,8 @@ using std::make_pair;
 void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria,
 	bool& greenhouseFirstTime)
 {
+	string playerInput = "";
+
 	//Room 0: Hall of Opportunity
 	Door rightDoor(make_pair(0, 1), "Right Door", {"right door", "right"}, false,
 		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is pretty \n"
@@ -482,7 +484,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			}
 			else
 			{
-				checkInput(roomNum, floorNum, players, inventory, hallway);
+				playerInput = checkInput(roomNum, floorNum, players, inventory, hallway);
 				system("pause");
 			}
 		}
@@ -892,7 +894,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			}
 			else
 			{
-				checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
+				playerInput = checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
 				system("pause");
 			}
 		}
@@ -919,7 +921,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "is a small Safe.";
 				dblEndl();
 			}
-			checkInput(roomNum, floorNum, players, inventory, familyRoom);
+
+			playerInput = checkInput(roomNum, floorNum, players, inventory, familyRoom);
 			system("pause");
 		}
 	}
