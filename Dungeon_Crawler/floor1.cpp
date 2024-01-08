@@ -12,7 +12,7 @@ using std::make_shared;
 using std::make_pair;
 
 void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria,
-	bool& greenhouseFirstTime)
+	bool& greenhouseFirstTime, bool& openedSafe)
 {
 	string playerInput = "";
 
@@ -270,7 +270,20 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"\"You know, my brother never did tell me the password.\" Aria states. \"Only he knows what's hiding in there.\" \n \n"
 		"...It couldn't hurt to take a guess. What do you enter?",
 		false, false, 0, 0);
-	Room familyRoom(3, "Family Room", {couch, television, computer, entertainmentCenter, miniFridge, table, safe}, {middleDoorPtr}, {mountainDont}, {cableHDMI});
+	Key entrywayKey(10, "Entryway Key", { "entryway key", "entryway", "Entryway key" },
+		"A fairly standard key, just a tad larger than most of the others.");
+	//ADD ENTRYWAY DOOR
+	Door entrywayDoor(make_pair(3, 4), "Entryway Door", { "entryway door", "Entryway door" }, true, true, 10,
+		"The door to the entryway is of good quality. Certainly not the kind which one would be able to easily bust open... \n"
+		"It's a shame it locks from the other side.",
+		"The door to the entryway is of good quality. Certainly not the kind which one would be able to easily bust open... \n"
+		"It may lock from the other side, but at least it's unlocked now... Never lose that key.");
+	auto entrywayDoorPtr = make_shared<Door>(entrywayDoor);
+	Room familyRoom(3, "Family Room", {couch, television, computer, entertainmentCenter, miniFridge, table, safe}, {middleDoorPtr, entrywayDoorPtr},
+		{mountainDont}, {cableHDMI});
+
+	//Room 4: Entryway
+	Room entryway(4, "Entryway", {}, {}, {}, {});
 
 	while (true)
 	{
@@ -909,7 +922,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "many amenities which make it appear to be a family room. On the north end of the room is a flat-screen \n";
 				cout << "Television atop an Entertainment Center. Naturally, about six feet away from it is a Couch. Along the \n";
 				cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it. In the southwest corner of the room \n";
-				cout << "is a Table with some chairs at each side.";
+				cout << "is a Table with some chairs at each side. Finally, along the west wall is a door which Aria refers to as \n";
+				cout << "the Entryway Door.";
 				dblEndl();
 			}
 			else
@@ -919,7 +933,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "Television atop an Entertainment Center. Naturally, about six feet away from it is a Couch. Along the \n";
 				cout << "east wall is a Mini Fridge as well as a desk with a Computer atop it. In the southwest corner of the room \n";
 				cout << "is a Table with some chairs at each side. As Aria showed you, hidden within one of the legs of the Table \n";
-				cout << "is a small Safe.";
+				cout << "is a small Safe. Finally, along the west wall is a door which Aria refers to as the Entryway Door.";
 				dblEndl();
 			}
 
@@ -927,6 +941,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 
 			if (playerInput == "check Safe")
 			{
+				
 				cout << "Username: Supreme297" << endl;
 				cout << "Password: ";
 				getline(cin, passwordAttempt);
@@ -934,9 +949,47 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 
 				if (passwordAttempt == "Supreme297")
 				{
-					cout << "You hear a clicking sound as the safe's door opens.";
-					dblEndl();
-					//ADD DESCRIPTION OF OPENING, AS WELL AS A KEY ITEM TO INVENTORY
+					if (!openedSafe)
+					{
+						system("CLS");
+						cout << "You hear a clicking sound as the safe's door opens. You pull the small safe door open and find a key.";
+						dblEndl();
+						cout << "\"So that's where he put it!\" Aria exclaimed. \"I was wondering where his key to the entryway went.\"";
+						dblEndl();
+						cout << "\"So this will let us get to the front of the house?\" you ask.";
+						dblEndl();
+						cout << "\"Yes, which is good, because I misplaced my key since the last time I used it.\"";
+						dblEndl();
+						cout << "\"Why does the door lock at all, let alone from the side closer to the front of the house?\"";
+						dblEndl();
+						cout << "Aria shrugs. \"It was that way when we bought the house.\"";
+						dblEndl();
+						cout << "\"But if someone breaks in they can just lock you into the rest of the house.\"";
+						dblEndl();
+						cout << "\"...The house was very affordable for its size.\"";
+						dblEndl();
+						cout << "\"While I'm questioning things here, why does the safe ask for a username? Password, I get, but a" << endl;
+						cout << "username?\"";
+						dblEndl();
+						cout << "\"Well, that's because it has a feature where a different compartment will open up depending on which" << endl;
+						cout << "username and password you enter correctly. Plus needing a username is an extra layer of security.\"" << endl;
+						cout << "You've gotta admit, that's pretty neat. But, wait a minute-";
+						dblEndl();
+						cout << "\"Why did your brother make his password the same as his username, then? That defeats the purpose of" << endl;
+						cout << "having an extra layer of security. Also, it's just a bad idea.\"";
+						dblEndl();
+						cout << "\"Look, I don't freaking know. At least it's not 1111.\"";
+						dblEndl();
+						cout << "You got the Entryway Key!";
+						dblEndl();
+						inventory.keys.push_back(entrywayKey);
+						openedSafe = true;
+					}
+					else
+					{
+						cout << "The safe is still enpty from when you looted it last. As it turns out, keys don't respawn.";
+						dblEndl();
+					}
 				}
 				else
 				{
@@ -944,6 +997,14 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					dblEndl();
 				}
 			}
+			system("pause");
+		}
+
+		if (roomNum == 4)
+		{
+			system("CLS");
+			cout << "Welcome to the Entryway, SON!";
+			dblEndl();
 			system("pause");
 		}
 	}
