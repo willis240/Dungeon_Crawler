@@ -1003,7 +1003,12 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 4)
 		{
 			system("CLS");
-			cout << "Welcome to the Entryway, SON!";
+			cout << "After walking through the Entryway Door you find yourself in a hallway leading to your right. At the end \n";
+			cout << "of the hallway the room widens considerably, with the Front Door to the house immediately in front of you. \n";
+			cout << "On both sides of the Front Door are Windows, although the curtains prevent you from seeing outside currently. \n";
+			cout << "To the right of the door are several Coat Hangers with coats on them. Further right is a simple Table with \n";
+			cout << "foldable legs. To the left of the door is a mat with several pairs of Shoes on it. Further left you see \n";
+			cout << "an upward Staircase running parallel to the hallway.";
 			dblEndl();
 			system("pause");
 		}
