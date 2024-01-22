@@ -1674,6 +1674,7 @@ void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inven
 	bool foundAria = false;
 	bool greenhouseFirstTime = true;
 	bool openedSafe = false;
+	bool entrywayFirstTime = true;
 
 	while (true)
 	{
@@ -1683,7 +1684,7 @@ void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inven
 		}
 		if (floor == 1)
 		{
-			floor1(players, roomNum, floor, inventory, floor1FirstTime, foundAria, greenhouseFirstTime, openedSafe);
+			floor1(players, roomNum, floor, inventory, floor1FirstTime, foundAria, greenhouseFirstTime, openedSafe, entrywayFirstTime);
 		}
 	}
 }

@@ -12,7 +12,7 @@ using std::make_shared;
 using std::make_pair;
 
 void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inventory, bool& floor1FirstTime, bool& foundAria,
-	bool& greenhouseFirstTime, bool& openedSafe)
+	bool& greenhouseFirstTime, bool& openedSafe, bool& entrywayFirstTime)
 {
 	string playerInput = "";
 
@@ -40,7 +40,12 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Also used to stoke fires.",
 		0, 0, 2, 5, false);
 	auto fireIronPtr = make_shared<Weapon>(fireIron);
-	Room hallway(0, "Hallway", {}, {rightDoorPtr, leftDoorPtr, middleDoorPtr}, {}, {});
+	Door bookshelfPassage(std::make_pair(3, 0), std::make_pair(0, 1), "Bookshelf Passage", { "bookshelf passage", "staircase" }, false, true, 0, "",
+		"It is a secret passage which was hidden behind the bookshelf. Or at least, that's how it appeared downstairs. \n"
+		"From here it seems just as conspicuous as any staircase. Should you desire to go back to the ground floor, \n"
+		"this would be the way to do it.");
+	auto bookshelfPassagePtr = make_shared<Door>(bookshelfPassage);
+	Room hallway(0, "Hallway", {}, {rightDoorPtr, leftDoorPtr, middleDoorPtr, bookshelfPassagePtr}, {}, {});
 
 	//Room 1: Bedroom
 	Object closet("Closet", {"closet"},
@@ -294,7 +299,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			system("CLS");
 			cout << "Upon reaching the top of the stairs, you find yourself in a hallway. There are some pictures of abstract" << endl;
 			cout << "art on the wall, spaced evenly apart throughout the hallway. Between the pictures there are three doors:" << endl;
-			cout << "a Left Door, a Middle Door, and a Right Door.";
+			cout << "a Left Door, a Middle Door, and a Right Door. Of course, there is also the Bookshelf Passage through" << endl;
+			cout << "which you first entered this hallway.";
 			dblEndl();
 			
 			if (floor1FirstTime)
@@ -1003,13 +1009,23 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 4)
 		{
 			system("CLS");
-			cout << "After walking through the Entryway Door you find yourself in a hallway leading to your right. At the end \n";
-			cout << "of the hallway the room widens considerably, with the Front Door to the house immediately in front of you. \n";
-			cout << "On both sides of the Front Door are Windows, although the curtains prevent you from seeing outside currently. \n";
-			cout << "To the right of the door are several Coat Hangers with coats on them. Further right is a simple Table with \n";
-			cout << "foldable legs. To the left of the door is a mat with several pairs of Shoes on it. Further left you see \n";
-			cout << "an upward Staircase running parallel to the hallway.";
-			dblEndl();
+			if (entrywayFirstTime)
+			{
+				cout << "Uh oh there's a guy";
+				dblEndl();
+			}
+			else
+			{
+				cout << "After walking through the Entryway Door you find yourself in a hallway leading to your right. At the end \n";
+				cout << "of the hallway the room widens considerably, with the Front Door to the house immediately in front of you. \n";
+				cout << "On both sides of the Front Door are Windows, although the curtains prevent you from seeing outside currently. \n";
+				cout << "To the right of the door are several Coat Hangers with coats on them. Further right is a simple Table with \n";
+				cout << "foldable legs. To the left of the door is a mat with several pairs of Shoes on it. Further left you see \n";
+				cout << "an upward Staircase running parallel to the hallway.";
+				dblEndl();
+
+				playerInput = checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
+			}
 			system("pause");
 		}
 	}

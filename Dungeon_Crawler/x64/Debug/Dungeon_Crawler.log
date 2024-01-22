@@ -1,3 +1,24 @@
-﻿  floor1.cpp
-C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\floor1.cpp(824,74): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+﻿  floor0.cpp
+  floor1.cpp
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\floor1.cpp(830,74): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
+  game.cpp
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(436,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(514,30): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(516,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(526,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(529,46): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(542,49): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(545,45): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(557,54): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(560,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(905,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(935,43): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(1033,56): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(1055,55): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(1077,53): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  Generating Code...
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(826): warning C4715: 'unlockDoor': not all control paths return a value
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(732): warning C4715: 'useItemOnPlayer': not all control paths return a value
+C:\Users\Wilhelm\source\repos\Dungeon_Crawler\Dungeon_Crawler\game.cpp(796): warning C4715: 'useKeyOnThing': not all control paths return a value
   Dungeon_Crawler.vcxproj -> C:\Users\Wilhelm\source\repos\Dungeon_Crawler\x64\Debug\Dungeon_Crawler.exe

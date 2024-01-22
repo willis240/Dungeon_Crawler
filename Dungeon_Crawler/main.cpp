@@ -17,7 +17,7 @@ int main()
 	Inventory inventory;
 
 	int floorNum = 1;
-	int roomNum = 3;
+	int roomNum = 4;
 
 	Key pomegranate(3, "Pomegranate", { "pomegranate" }, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);
@@ -28,7 +28,7 @@ int main()
 	players.push_back(Selena);
 	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
 	players[1].skills.push_back(oblivionSlash);
-
+	
 	Key pomegranate(3, "Pomegranate", {"pom"}, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);
 	
