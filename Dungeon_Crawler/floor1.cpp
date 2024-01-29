@@ -277,7 +277,6 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		false, false, 0, 0);
 	Key entrywayKey(10, "Entryway Key", { "entryway key", "entryway", "Entryway key" },
 		"A fairly standard key, just a tad larger than most of the others.");
-	//ADD ENTRYWAY DOOR
 	Door entrywayDoor(make_pair(3, 4), "Entryway Door", { "entryway door", "Entryway door" }, true, true, 10,
 		"The door to the entryway is of good quality. Certainly not the kind which one would be able to easily bust open... \n"
 		"It's a shame it locks from the other side.",
@@ -1011,8 +1010,74 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			system("CLS");
 			if (entrywayFirstTime)
 			{
-				cout << "Uh oh there's a guy";
+				cout << "After walking through the Entryway Door you find yourself in a hallway leading to your right. You walk \n";
+				cout << "quietly to the end of the hallway and find a very tall, extraordinarily muscular man leaning against the \n";
+				cout << "wall next to the Front Door of the house. You jump back, but he doesn't seem to have noticed you yet.";
 				dblEndl();
+				cout << "\"\"Holy crap!\"\" Selena and Aria both kept their exclamation quiet, but it needed to be said. The man \n";
+				cout << "wore a black t-shirt which was tight against his well-sculpted frame, although not too tight. He wore blue \n";
+				cout << "jeans and... some sort of shoes. You never really pay much attention to shoes, but they look alright.";
+				dblEndl();
+				cout << "Before you stands an intimidating foe. What do you tell your comrades?";
+				dblEndl();
+
+				cout << "(1) \"There's 3 of us and only 1 of him. We can take him.\"" << endl;
+				cout << "(2) \"We should wait for a bit and watch for an opening.\"" << endl;
+				int input = getDecision(1, 2);
+				system("CLS");
+
+				if (input == 1)
+				{
+					//Fight the ripped guard
+					cout << "Aria looks at you with a worried expression on her face. You turn to Selena and see her fists clenched \n";
+					cout << "and a smile. \"Yeah, let's do this!\" You both rush forward, with Aria behind you.";
+					dblEndl();
+				}
+				else
+				{
+					//Wait, then end up fighting a scrawny guard
+					cout << "\"Yeah, that makes sense to me.\" Aria says. You all stay crouched by the wall in the hallway, peeking \n";
+					cout << "around the corner at the ripped guard. While nothing is happening he decides to do a quick 50 push-ups, \n";
+					cout << "followed by 100 sit-ups. Yes, you counted. Perhaps the most concerning part is that afterward you only  \n";
+					cout << "see a single bead of sweat forming on his forehead.";
+					dblEndl();
+					cout << "Following his workout he stands back up and resumes leaning against the wall. A few minutes later, a small \n";
+					cout << "man comes up to the ripped guard.";
+					dblEndl();
+					cout << "The small man sighs. \"Hahhhh, alright, I'm here to replace you.\"";
+					dblEndl();
+					cout << "The ripped guard looks at his wristwatch and smiles. \"Nice! Actually got to end my shift on time for once!\"";
+					dblEndl();
+					cout << "The small man shrugs. \"Yeah, I try. More than I can say for some of the others.\"";
+					dblEndl();
+					cout << "\"I appreciate you, Little Bro. Hope your shift doesn't suck.\" The ripped guard then walks by the hallway \n";
+					cout << "you're hiding in, likely blinded by the excitement of being freshly off the job, and heads upstairs.";
+					dblEndl();
+					system("pause");
+					system("CLS");
+
+					cout << "With the ripped guard gone, you adjust your focus to the small man who replaced him. If you had to guess, \n";
+					cout << "he looks to be about 5 feet 2 inches tall. He looks relatively scrawny, with more apparent bone than muscle. \n";
+					cout << "All things considered, with the three of you against him, plus the element of surprise, he's uhh...\n";
+					cout << "He's pretty screwed.";
+					dblEndl();
+					cout << "(1) Rush him down \n";
+					cout << "(2) Talk to the guy and try to get information \n";
+					int input2 = getDecision(1, 2);
+					system("CLS");
+					
+					if (input2 == 1)
+					{
+						//RUSH THAT FRICKING FRICK DOWN AND BEAT HIM
+						cout << "You charge down the hallway at your maximum speed, backed up by the sound of footsteps behind you. \n";
+					}
+					else
+					{
+						//Talk to the scrawny guard, give him a chance to not get beat up
+						cout << "You walk up to the small guard quietly, your comrades immediately behind you.";
+					}
+
+				}
 			}
 			else
 			{
