@@ -383,6 +383,7 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					vector<int> partySPRestored = {};
 
 					cout << enemies[i].getName() << " unleashes " << enemies[i].skills[enemyActionsTaken[i]].getName() << " upon the ENTIRE party!!" << endl;
+					cout << enemies[i].skills[enemyActionsTaken[i]].description << endl;
 					for (int ii = 0; ii < players.size(); ii++)
 					{
 						playerBlock = determineGuardType(enemies[i], players[ii], enemyActionsTaken[i]);
@@ -418,10 +419,12 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					int damageDealt = calculateDamage(enemies[i], players[enemiesTargets[i]], enemyActionsTaken[i], playerBlock);
 					int healedSP = dealDamage(enemies[i], players[enemiesTargets[i]], damageDealt, playerBlock);
 
+					cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
+					cout << enemies[i].skills[enemyActionsTaken[i]].description << endl;
+
 					if (playerBlock == perfect)
 					{
 						//Perfect Block
-						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
 						cout << players[enemiesTargets[i]].getName() << " perfectly blocked " << enemies[i].getName() << "'s attack!!" << endl;
 						cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl;
 						cout << enemies[i].getName() << " is now off-balance and incredibly susceptible to attacks!" << endl << endl;
@@ -431,7 +434,6 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					else if (playerBlock == standard)
 					{
 						//Normal Block
-						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
 						cout << players[enemiesTargets[i]].getName() << " blocked " << enemies[i].getName() << "'s attack!" << endl;
 						cout << players[enemiesTargets[i]].getName() << " takes " << damageDealt << " damage and restores " << healedSP << " SP!" << endl << endl;
 						system("pause");
@@ -440,7 +442,6 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 					else
 					{
 						//No Block
-						cout << enemies[i].getName() << " uses " << enemies[i].skills[enemyActionsTaken[i]].getName() << "!" << endl;
 						cout << players[enemiesTargets[i]].getName() << " takes " << enemies[i].skills[enemyActionsTaken[i]].damage << " damage." << endl << endl;
 						system("pause");
 						cout << endl;

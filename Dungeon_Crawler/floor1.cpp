@@ -1069,7 +1069,20 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					if (input2 == 1)
 					{
 						//RUSH THAT FRICKING FRICK DOWN AND BEAT HIM
+						Skill elbowJab("Elbow Jab", 5, false, false, 0, right, "The Small Man jabs his bony elbow into his poor target!");
+						Skill rapidShinKicks("Rapid Shin Kicks", 3, false, true, 0, low, "The Small Man yells \"I JUST GOT HERE!\" before kicking "
+							"each one of you in your shins.");
+						Enemy smallMan("Small Man", 30, 26, 10, 10, 15, { "" }, {elbowJab, rapidShinKicks});
+
 						cout << "You charge down the hallway at your maximum speed, backed up by the sound of footsteps behind you. \n";
+						cout << "As the small man turns toward the sound of the footsteps, his eyes explode open. \"WH-WHAT THE-\" \n";
+						cout << "but his exclamation was cut short by the unification of your fist with his face.";
+						dblEndl();
+						system("pause");
+
+						vector<Enemy> enemies = { smallMan };
+						fight(players, enemies, inventory.items);
+
 					}
 					else
 					{

@@ -157,8 +157,14 @@ public:
 	void reduceHP(int& lostHP);
 	void reduceSP(int& lostSP);
 
-	Enemy(std::string inputName, int inputMaxHP, int inputMaxSP, int inputExpWorth, std::vector<std::string> inputStances, std::vector<Skill> inputSkills) :
-		name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), currentSP(inputMaxSP), expWorth(inputExpWorth), stances(inputStances), skills(inputSkills) {};
+	Enemy(std::string inputName, int inputMaxHP, int inputMaxSP, int inputExpWorth, std::vector<std::string> inputStances,
+		std::vector<Skill> inputSkills) : name(inputName), maxHP(inputMaxHP), currentHP(inputMaxHP), maxSP(inputMaxSP), 
+		currentSP(inputMaxSP), expWorth(inputExpWorth), stances(inputStances), skills(inputSkills) {};
+
+	//For when the enemy starts with current HP not equal to their max HP (or the same thing with SP)
+	Enemy(std::string inputName, int inputMaxHP, int inputCurrentHP, int inputMaxSP, int inputCurrentSP, int inputExpWorth,
+		std::vector<std::string> inputStances, std::vector<Skill> inputSkills) : name(inputName), maxHP(inputMaxHP), currentHP(inputCurrentHP),
+		maxSP(inputMaxSP), currentSP(inputCurrentSP), expWorth(inputExpWorth), stances(inputStances), skills(inputSkills) {};
 };
 
 GuardType determineGuardType(Enemy& enemy, Player& player, short& enemyAction);
