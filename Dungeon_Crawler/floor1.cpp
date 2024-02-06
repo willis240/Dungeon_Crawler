@@ -15,6 +15,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	bool& greenhouseFirstTime, bool& openedSafe, bool& entrywayFirstTime)
 {
 	string playerInput = "";
+	bool foughtRat2 = false;
 
 	//Room 0: Hall of Opportunity
 	Door rightDoor(make_pair(0, 1), "Right Door", {"right door", "right"}, false,
@@ -771,6 +772,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					vector<Enemy> enemies = { hungryRat };
 					fight(players, enemies, inventory.items);
 
+					foughtRat2 = true;
 					cout << "The rat sits down, its back against a flower pot on the table. It is clearly exhausted from the fight." << endl;
 					cout << "It makes a move to get up and retreat through a hole in the wall. What do you do?";
 					dblEndl();
@@ -1032,6 +1034,23 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "Aria looks at you with a worried expression on her face. You turn to Selena and see her fists clenched \n";
 					cout << "and a smile. \"Yeah, let's do this!\" You both rush forward, with Aria behind you.";
 					dblEndl();
+					cout << "As you rush toward the muscular man he turns toward the sound of the footsteps. But not in a quick, \n";
+					cout << "startled way. No, he turns slowly--methodically--as if he knew someone would come down that hallway. \n";
+					cout << "When you consider that this hallway is the primary throughway to this room it makes sense, but it doesn't \n";
+					cout << "make his actions seem less foreboding.";
+					dblEndl();
+					cout << "\"Trying to escape, huh?\" The ripped guard asks. Likely a formality given the obviousness of your goal here.";
+					dblEndl();
+					cout << "\"It won't just be \'trying\' a couple minutes from now\", Selena retorts.";
+					dblEndl();
+					cout << "\"Yeah, we're getting out of here! Even if we have to go through you!\" You follow up.";
+					dblEndl();
+					cout << "\"I don't know why you guys took over my house, but I'm going to make sure you regret that you ever did!\"";
+					dblEndl();
+					cout << "The muscular man crosses his massive arms and chuckles. \"Well, alright then. I'm sure you know it's my job \n";
+					cout << "to keep people from passing through this door. And I like getting paid. So, if you're gonna fight, then you'd \n";
+					cout << "better give me all you got.\"";
+					//ADD FIGHT AGAINST MUSCULAR MAN, NOT DONE YET!!!
 				}
 				else
 				{
@@ -1082,6 +1101,48 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 
 						vector<Enemy> enemies = { smallMan };
 						fight(players, enemies, inventory.items);
+
+						cout << "The small man lets out an \"Oof!\" before falling to the floor unconscious.";
+						dblEndl();
+						if (foughtRat2)
+						{
+							cout << "\"Well, that was easy\", Selena comments. She turns toward you. \"Honestly, I think that rat we fought \n";
+							cout << "was tougher.\"";
+							dblEndl();
+							cout << "You think for a moment. The rat might have been easier, but you might as well dunk on the guy while he's \n";
+							cout << "here just in case he can hear you while he's out. \"Oh yeah, this guy had nothing on that rat.\"";
+							dblEndl();
+							cout << "\"...You guys fought a rat?\" Aria looks understandably confused.";
+							dblEndl();
+							cout << "\"We'll tell you about it later.\" You say as you wave your hand nonchalantly.";
+						}
+						else
+						{
+							cout << "\"Well, that was easy\", Selena comments. \"Three against one was hardly fair, though, I suppose.\"";
+							dblEndl();
+							cout << "\"Don't forget we ambushed him\", you add.";
+							dblEndl();
+							cout << "\"Heh, yeah, poor guy didn't really stand a chance.\"";
+							dblEndl();
+						}
+
+						cout << "\"Well, let's see if he has anything we can use\", Aria says as she bends over to start checking the small \n";
+						cout << "man's pockets.";
+						dblEndl();
+						cout << "You hesitate for a moment. \"Doesn't it feel kind of... wrong to loot his pockets?\" Selena asks.";
+						dblEndl();
+						cout << "Aria turns around toward Selena. \"We just rushed a guy and beat him up and looting his pockets is where \n";
+						cout << "you start feeling we're doing something wrong?\"";
+						dblEndl();
+						cout << "\"Well, I guess\", Selena pauses for a moment, \"I'm used to getting in bouts with people from my time I've spent \n";
+						cout << "in fencing classes. Plus, growing up with siblings gets you used to suddenly getting into fights.\"";
+						dblEndl();
+						cout << "Aria nods knowingly. \"Yeah, siblings can be a real pain. But them you at least would feel bad about beating \n";
+						cout << "up. These people made me a prisoner in my own home. I'm not gonna waste my time feeling bad about taking their \n";
+						cout << "stuff.\"";
+						dblEndl();
+						cout << "You and Selena both nod in agreement with Aria, and wait to see what she finds in the small man's pockets.";
+						//ADD WHAT THE SMALL MAN HAS IN HIS POCKETS, NOT DONE YET!!!!!!
 
 					}
 					else
