@@ -474,7 +474,7 @@ int calculateDamage(Enemy& enemy, Player& player, short& enemyAction, GuardType&
 	int damageDealt = 0;
 	if (block == perfect)
 	{
-		damageDealt = enemy.skills[enemyAction].damage * 0.2;
+		damageDealt = enemy.skills[enemyAction].damage * 0.5;
 	}
 	else if (block == standard)
 	{

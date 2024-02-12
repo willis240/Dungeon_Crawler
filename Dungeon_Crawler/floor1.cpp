@@ -1031,6 +1031,10 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				if (input == 1)
 				{
 					//Fight the ripped guard
+					Skill backBreaker("Back Breaker", 8, false, false, 0, low, "The Muscular Man lifts his target up and slams their back into his knee!");
+					Skill friendlyFire("Friendly Fire", 5, false, true, 10, high, "The Muscular Man lifts you by your arm and swings you at your comrades!");
+					Enemy muscularMan("Muscular Man", 1, 20, 40, { "" }, {backBreaker, friendlyFire});
+
 					cout << "Aria looks at you with a worried expression on her face. You turn to Selena and see her fists clenched \n";
 					cout << "and a smile. \"Yeah, let's do this!\" You both rush forward, with Aria behind you.";
 					dblEndl();
@@ -1050,7 +1054,45 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "The muscular man crosses his massive arms and chuckles. \"Well, alright then. I'm sure you know it's my job \n";
 					cout << "to keep people from passing through this door. And I like getting paid. So, if you're gonna fight, then you'd \n";
 					cout << "better give me all you got.\"";
-					//ADD FIGHT AGAINST MUSCULAR MAN, NOT DONE YET!!!
+					dblEndl();
+					system("pause");
+
+					vector<Enemy> enemies = { muscularMan };
+					fight(players, enemies, inventory.items);
+					
+					cout << "The muscular man falls to his knee. \"Heh, not bad. I'm kinda impressed, even if there are three of you.\"";
+					dblEndl();
+					cout << "You catch your breath. \"Yeah, you shouldn't have picked a fight with us!\"";
+					dblEndl();
+					cout << "Aria turns to you. \"But weren't we-\"";
+					dblEndl();
+					cout << "\"You shouldn't have picked a fight with us.\"";
+					dblEndl();
+					cout << "With that, the muscular man let out a \"Heh\" before falling forward, unconscious.";
+					dblEndl();
+					system("pause");
+					system("CLS");
+
+					cout << "You hear footsteps. They're getting louder. As you turn toward the hallway you entered from you see a \n";
+					cout << "staircase just on the other side of its right wall. From that staircase comes a scrawny man, probably \n";
+					cout << "about 5 feet and 2 inches tall. He stops abruptly at the bottom of the stairs. His face freezes as he \n";
+					cout << "sees you, Selena, and Aria, as well as the unconscious muscular guard. A couple seconds pass.";
+					dblEndl();
+					cout << "\"That's not your brother, is it?\"";
+					dblEndl();
+					cout << "Aria shakes her head. \"Nope.\"";
+					dblEndl();
+					cout << "You take a step forward and crack your knuckles, and that proves to be enough for the small man to panic.";
+					dblEndl();
+					cout << "\"AH! HuhuhuHUHUHuhuhuhuh-\" The small man's breathing grows fast and erratic as he sprints back up the \n";
+					cout << "the stairs on all fours. You hear something metallic hit the floor, and he disappears from sight at the \n";
+					cout << "top of the staircase.";
+					dblEndl();
+					cout << "Selena walks halfway up the staircase to see what dropped. \"Huh. These should come in handy.\" She turns \n";
+					cout << "to you and holds up a keychain with a smile.";
+					dblEndl();
+					//ADD THE KEYS THAT THE SMALL GUARD HAD... PROBABLY TO DOOR AT TOP OF STAIRCASE AND A DOOR ON THE CURRENT FLOOR... NOT DONE!!!
+
 				}
 				else
 				{
@@ -1142,7 +1184,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "stuff.\"";
 						dblEndl();
 						cout << "You and Selena both nod in agreement with Aria, and wait to see what she finds in the small man's pockets.";
-						//ADD WHAT THE SMALL MAN HAS IN HIS POCKETS, NOT DONE YET!!!!!!
+						//ADD WHAT THE SMALL MAN HAS IN HIS POCKETS, PROBABLY KEYS TO UPSTAIRS DOOR AND CURRENT FLOOR DOOR... NOT DONE YET!!!!!!
 
 					}
 					else
