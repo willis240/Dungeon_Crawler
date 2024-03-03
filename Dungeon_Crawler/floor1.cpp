@@ -1190,9 +1190,46 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					else
 					{
 						//Talk to the scrawny guard, give him a chance to not get beat up
-						cout << "You walk up to the small guard quietly, your comrades immediately behind you.";
-					}
+						cout << "You walk up to the small guard quietly, your comrades immediately behind you. The guard turns and his eyes \n";
+						cout << "go wide. His mouth opens wide and you cover it with your hand.";
+						dblEndl();
+						cout << "\"No need to yell. All we want is to get out of here. You let us out, and we won't give you any trouble.\"";
+						dblEndl();
+						cout << "The small man's eyes dart between your hand and your face. After a trips back and forth, they stay on your \n";
+						cout << "face. The small man nods rapidly in understanding.";
+						dblEndl();
+						cout << "\"I wouldn't try anything if I were you\", warns Aria.";
+						dblEndl();
+						cout << "You slowly remove your hand from the man's mouth, your intense gaze never leaving his face. He opens his mouth \n";
+						cout << "slowly, inhales, and--noticing your intimidating expression--exhales silently.";
+						dblEndl();
+						cout << "\"Please don't kill me! I-I-I only ever took this gig because I thought getting paid to stand around sounded \n";
+						cout << "like a sweet deal! I never wanted to actually have to deal with people!";
+						dblEndl();
+						cout << "\"...Surely you figured you'd have to deal with someone eventually?\" Selena questioned.";
+						dblEndl();
+						cout << "\"W-Well, that was always Tomorrow Me's problem!\"";
+						dblEndl();
+						cout << "What do you say?";
+						dblEndl();
+						cout << "(1) \"Well, we're just gonna leave, but seeing as this place has had plenty of questionable decisions \n";
+						cout << "     regarding locks and keys already, are there any other keys we're gonna need to get out of here?\"";
+						dblEndl();
+						cout << "(2) \"I guess Yesterday You should've thought that through better!\" *Punch his head* \n";
+						int input3 = getDecision(1, 2);
+						system("CLS");
 
+						if (input3 == 1)
+						{
+							//Asked Small Guard about keys
+							cout << "Pacifist!" << endl;
+						}
+						else
+						{
+							//Decked Small Guard in the head
+							cout << "He is kinda like Shea, huh." << endl;
+						}
+					}
 				}
 			}
 			else
