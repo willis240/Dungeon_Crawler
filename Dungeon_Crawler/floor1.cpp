@@ -1195,7 +1195,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						cout << "\"No need to yell. All we want is to get out of here. You let us out, and we won't give you any trouble.\"";
 						dblEndl();
-						cout << "The small man's eyes dart between your hand and your face. After a trips back and forth, they stay on your \n";
+						cout << "The small man's eyes dart between your hand and your face. After a few trips back and forth, they stay on your \n";
 						cout << "face. The small man nods rapidly in understanding.";
 						dblEndl();
 						cout << "\"I wouldn't try anything if I were you\", warns Aria.";
@@ -1222,12 +1222,42 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						if (input3 == 1)
 						{
 							//Asked Small Guard about keys
-							cout << "Pacifist!" << endl;
+							cout << "\"W-well, uh, if you're just gonna leave, then you just gotta go through the front door there.\" \n";
+							cout << "The small man points to the door behind him.";
+							dblEndl();
+							cout << "It takes just one glance to see a metal bar placed across the front of the door, secured in its place \n";
+							cout << "by a padlock. You look back at the small man. \"I'm sure you have the key to it, then?\"";
+							dblEndl();
+							cout << "\"I, uh, yes, I do, but I REALLY shouldn't be giving it to you because of my job and all, and I uh...\" \n";
+							cout << "He pauses for a moment. \"Ugh, this sucks.\" He reaches into his pocket and procures a couple of keys. \n";
+							cout << "\"D-do me a favor, will you? If you run into any of my superiors for some reason, could you tell them \n";
+							cout << "I put up a fight and the three of you just beat me up?\"";
+							dblEndl();
+							cout << "As he holds out the keys, you take them. \"Well, hopefully, we shouldn't be seeing any of you guys \n";
+							cout << "ever again.\"";
+							dblEndl();
+							cout << "\"Y-yeah, fair point.\" The small man walks over to the wall and lies down in an awkward way, likely \n";
+							cout << "pretending to have been knocked unconscious. After just a moment, he has already entered the realm of \n";
+							cout << "sleep. He likely has had plenty of practice while \"working\".";
+							dblEndl();
 						}
 						else
 						{
 							//Decked Small Guard in the head
-							cout << "He is kinda like Shea, huh." << endl;
+							cout << "\"OOF!\" The small man gets knocked back and hits his head on the wall before landing on the floor \n";
+							cout << "unconscious. Selena and Aria pause, their eyes widened. They look at the small guard on the floor, and \n";
+							cout << "watch as he breathes.";
+							dblEndl();
+							cout << "\"What was that about?\" Selena asks.";
+							dblEndl();
+							cout << "\"Didn't like his work ethic.\"";
+							dblEndl();
+							cout << "\"Huh. Well, I can't say I cared much for him, given what he's doing here.\" Selena shrugs.";
+							dblEndl();
+							cout << "\"Does he have anything useful on him?\" Aria inquires.";
+							dblEndl();
+							cout << "You reach into his pockets and find a couple of keys. \"I bet these'll come in handy.\"";
+							dblEndl();
 						}
 					}
 				}
