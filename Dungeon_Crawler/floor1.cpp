@@ -288,6 +288,17 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{mountainDont}, {cableHDMI});
 
 	//Room 4: Entryway
+	Key upstairsKey(11, "Upstairs Key", { "upstairs key", "Upstairs key", "up key", "Up key" },
+		"A key with the insignia of a wing on it.");
+	Key padlockKey(12, "Padlock Key", { "padlock key", "Padlock key" },
+		"A perfectly normal-looking key, with the standard ridges, yet it feels somewhat special.");
+	Door frontDoor(make_pair(4, 5), "Front Door", { "front door", "Front door" }, true, true, 12,
+		"The front door of Aria's house is a standard, sturdy wooden door. It is the kind of door that feels welcoming to \n"
+		"guests, yet stalwart in protecting the house's inhabitants from intruders. That being said, you notice there is a \n"
+		"metal bar locked in front of the door with a padlock. Without unlocking this padlock, you're not going anywhere.",
+		"The front door of Aria's house is a standard, sturdy wooden door. It is the kind of door that feels welcoming to \n"
+		"guests, yet stalwart in protecting the house's inhabitants from intruders. The metal bar that was in front of the  \n"
+		"door now leans against the wall just left of the door, along with the padlock that once blocked your path.");
 	Room entryway(4, "Entryway", {}, {}, {}, {});
 
 	while (true)
@@ -1033,7 +1044,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					//Fight the ripped guard
 					Skill backBreaker("Back Breaker", 8, false, false, 0, low, "The Muscular Man lifts his target up and slams their back into his knee!");
 					Skill friendlyFire("Friendly Fire", 5, false, true, 10, high, "The Muscular Man lifts you by your arm and swings you at your comrades!");
-					Enemy muscularMan("Muscular Man", 1, 20, 40, { "" }, {backBreaker, friendlyFire});
+					Enemy muscularMan("Muscular Man", 50, 20, 40, { "" }, {backBreaker, friendlyFire});
 
 					cout << "Aria looks at you with a worried expression on her face. You turn to Selena and see her fists clenched \n";
 					cout << "and a smile. \"Yeah, let's do this!\" You both rush forward, with Aria behind you.";
@@ -1091,8 +1102,13 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "Selena walks halfway up the staircase to see what dropped. \"Huh. These should come in handy.\" She turns \n";
 					cout << "to you and holds up a keychain with a smile.";
 					dblEndl();
-					//ADD THE KEYS THAT THE SMALL GUARD HAD... PROBABLY TO DOOR AT TOP OF STAIRCASE AND A DOOR ON THE CURRENT FLOOR... NOT DONE!!!
-
+					
+					cout << "You obtained the Upstairs Key!";
+					dblEndl();
+					cout << "You obtained the Padlock Key!";
+					dblEndl();
+					inventory.keys.push_back(upstairsKey);
+					inventory.keys.push_back(padlockKey);
 				}
 				else
 				{
@@ -1184,8 +1200,16 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "stuff.\"";
 						dblEndl();
 						cout << "You and Selena both nod in agreement with Aria, and wait to see what she finds in the small man's pockets.";
-						//ADD WHAT THE SMALL MAN HAS IN HIS POCKETS, PROBABLY KEYS TO UPSTAIRS DOOR AND CURRENT FLOOR DOOR... NOT DONE YET!!!!!!
+						dblEndl();
+						system("pause");
+						system("CLS");
 
+						cout << "You obtained the Upstairs Key!";
+						dblEndl();
+						cout << "You obtained the Padlock Key!";
+						dblEndl();
+						inventory.keys.push_back(upstairsKey);
+						inventory.keys.push_back(padlockKey);
 					}
 					else
 					{
@@ -1240,6 +1264,13 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 							cout << "pretending to have been knocked unconscious. After just a moment, he has already entered the realm of \n";
 							cout << "sleep. He likely has had plenty of practice while \"working\".";
 							dblEndl();
+
+							cout << "You obtained the Upstairs Key!";
+							dblEndl();
+							cout << "You obtained the Padlock Key!";
+							dblEndl();
+							inventory.keys.push_back(upstairsKey);
+							inventory.keys.push_back(padlockKey);
 						}
 						else
 						{
@@ -1258,6 +1289,13 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 							dblEndl();
 							cout << "You reach into his pockets and find a couple of keys. \"I bet these'll come in handy.\"";
 							dblEndl();
+
+							cout << "You obtained the Upstairs Key!";
+							dblEndl();
+							cout << "You obtained the Padlock Key!";
+							dblEndl();
+							inventory.keys.push_back(upstairsKey);
+							inventory.keys.push_back(padlockKey);
 						}
 					}
 				}
