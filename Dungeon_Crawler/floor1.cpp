@@ -1110,6 +1110,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					dblEndl();
 					inventory.keys.push_back(upstairsKey);
 					inventory.keys.push_back(padlockKey);
+
+					system("pause");
+					system("CLS");
 				}
 				else
 				{
@@ -1211,6 +1214,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						inventory.keys.push_back(upstairsKey);
 						inventory.keys.push_back(padlockKey);
+
+						system("pause");
+						system("CLS");
 					}
 					else
 					{
@@ -1272,6 +1278,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 							dblEndl();
 							inventory.keys.push_back(upstairsKey);
 							inventory.keys.push_back(padlockKey);
+
+							system("pause");
+							system("CLS");
 						}
 						else
 						{
@@ -1325,6 +1334,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "\"Plus, if this place has one secret dungeon room they were keeping someone in already, I don't think it's \n";
 				cout << "that crazy to assume there could be another one.\"";
 				dblEndl();
+				system("pause");
+				system("CLS");
+
 				cout << "You decide to add another idea to the mix. \"Okay, so, playing Devil's Advocate, we still don't know how \n";
 				cout << "many of these guys there are. And if a bunch of them are as tough as that buff guard, we could be screwed. \n";
 				cout << "So, another option we have would be to leave now, get ahold of the police, and just bring a whole squad in \n";
@@ -1332,24 +1344,23 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				dblEndl();
 				cout << "\"Getting the police would take too long. I just want to do a quick combing of the upstairs, make sure my \n";
 				cout << "brother's not there, and then we can head out and get the police afterward. I'm not leaving until I'm sure \n";
-				cout << "my brother's not captive somewhere in this house.\n";
+				cout << "my brother's not captive somewhere in this house.";
 				dblEndl();
 				cout << "Selena looks back and forth between you and Aria. \"H-honestly, both of your guys' ideas make sense... Gosh, I \n";
-				cout << "hate making decisions like these.\" Selena puts her fingers against her forehead and then sighs in frustration. \n";
+				cout << "hate making decisions like these.\" Selena puts her fingers against her forehead and then sighs in frustration.";
 				dblEndl();
 				cout << "It seems you have a decision to make.";
 				dblEndl();
-				system("pause");
-				system("CLS");
+
+				entrywayFirstTime = false;
 			}
 			else
 			{
-				cout << "After walking through the Entryway Door you find yourself in a hallway leading to your right. At the end \n";
-				cout << "of the hallway the room widens considerably, with the Front Door to the house immediately in front of you. \n";
-				cout << "On both sides of the Front Door are Windows, although the curtains prevent you from seeing outside currently. \n";
-				cout << "To the right of the door are several Coat Hangers with coats on them. Further right is a simple Table with \n";
-				cout << "foldable legs. To the left of the door is a mat with several pairs of Shoes on it. Further left you see \n";
-				cout << "an upward Staircase running parallel to the hallway.";
+				cout << "Standing in front of the Front Door, you can see some Windows with curtains on the front face of the house. \n";
+				cout << "To the right of the Front Door are several Coat Hangers with coats on them. Further right is a simple Table \n";
+				cout << "with foldable legs. To the left of the Front Door is a mat with several pairs of Shoes on it. On the wall \n";
+				cout << "opposite the Front Door the hallway containing the Entryway Door, through which you first entered this room. \n";
+				cout << "Adjacent to the hallway is an upward staircase, with the Upstairs Door at the top of it.";
 				dblEndl();
 
 				playerInput = checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
