@@ -220,7 +220,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Upon logging into Aria's profile the first thing that pops up is a popular chatting app called Bliscord, \n"
 		"which is often used for communicating with others over the internet via text or voice chat. Aria immediately \n"
 		"notices that there is an unread message from one Supreme297. \"What?!\" She opens up the chat feed, only to see \n"
-		"that it was from 10 days ago. The message said: \n \n"
+		"that it was from ten days ago. The message said: \n \n"
 		"\"Hey Aria, I'm fine, but it might be a while before you see me again. I promise I will come back as soon\n"
 		"as I can. If you find yourself stuck, \'Remember Me\'.\" \n \n"
 		"A droplet of water begins to form in Aria's right eye. She wipes it away. \"Well, I'm glad my brother was okay \n"
@@ -299,7 +299,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"The front door of Aria's house is a standard, sturdy wooden door. It is the kind of door that feels welcoming to \n"
 		"guests, yet stalwart in protecting the house's inhabitants from intruders. The metal bar that was in front of the  \n"
 		"door now leans against the wall just left of the door, along with the padlock that once blocked your path.");
-	Room entryway(4, "Entryway", {}, {}, {}, {});
+	auto frontDoorPtr = make_shared<Door>(frontDoor);
+	Room entryway(4, "Entryway", {}, {frontDoorPtr}, {}, {});
 
 	while (true)
 	{
@@ -1296,9 +1297,50 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 							dblEndl();
 							inventory.keys.push_back(upstairsKey);
 							inventory.keys.push_back(padlockKey);
+
+							system("pause");
+							system("CLS");
 						}
 					}
 				}
+				
+				cout << "As you hold the keys in your hand, you hear Aria clear her throat. \"Hey. So I know we've been working \n";
+				cout << "toward just escaping from here up to this point, and we finally have the means to escape, but, I-I just \n";
+				cout << "can't shake the feeling that my brother might still be somewhere in the house. We haven't checked upstairs \n";
+				cout << "at all yet.\"";
+				dblEndl();
+				cout << "You look at her. \"So, you want to go upstairs and search for your brother before leaving?\"";
+				dblEndl();
+				cout << "Determination wells up within Aria, becoming visible on her face. \"Yeah.\" A silent moment of thought \n";
+				cout << "passes, then \"Now that we've got the key to the front door, and we beat up the guard, we could just run \n";
+				cout << "out here and leave as soon as we find my brother. Or, if we feel pretty sure he's not here and it seems too \n";
+				cout << "dangerous, we could just leave then, too. But I don't feel right leaving now. Not without at least checking.";
+				dblEndl();
+				cout << "\"Well, I get where you're coming from\", Selena responds. \"If I were missing someone I cared about, I \n";
+				cout << "wouldn't want to leave any stone unturned. With my luck, they'd have been in the only room I didn't check \n";
+				cout << "simply because I assumed they wouldn't be there.\"";
+				dblEndl();
+				cout << "Aria chuckles. \"Heh, yeah, that's exactly what I'm hoping to avoid.\"";
+				dblEndl();
+				cout << "\"Plus, if this place has one secret dungeon room they were keeping someone in already, I don't think it's \n";
+				cout << "that crazy to assume there could be another one.\"";
+				dblEndl();
+				cout << "You decide to add another idea to the mix. \"Okay, so, playing Devil's Advocate, we still don't know how \n";
+				cout << "many of these guys there are. And if a bunch of them are as tough as that buff guard, we could be screwed. \n";
+				cout << "So, another option we have would be to leave now, get ahold of the police, and just bring a whole squad in \n";
+				cout << "here to take care of all of them.\"";
+				dblEndl();
+				cout << "\"Getting the police would take too long. I just want to do a quick combing of the upstairs, make sure my \n";
+				cout << "brother's not there, and then we can head out and get the police afterward. I'm not leaving until I'm sure \n";
+				cout << "my brother's not captive somewhere in this house.\n";
+				dblEndl();
+				cout << "Selena looks back and forth between you and Aria. \"H-honestly, both of your guys' ideas make sense... Gosh, I \n";
+				cout << "hate making decisions like these.\" Selena puts her fingers against her forehead and then sighs in frustration. \n";
+				dblEndl();
+				cout << "It seems you have a decision to make.";
+				dblEndl();
+				system("pause");
+				system("CLS");
 			}
 			else
 			{
@@ -1311,6 +1353,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				dblEndl();
 
 				playerInput = checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
+
+				//IF PLAYER LEAVES THROUGH FRONT DOOR, TRIGGER DIALOGUE AND PATHING FOR LEAVING ARIA AND HEADING OUTSIDE
+				//IF PLAYER LEAVES THROUGH UPSTAIRS DOOR, TRIGGER DIALOGUE AND PATHING FOR LOOKING FOR ARIA'S BROTHER
 			}
 			system("pause");
 		}
