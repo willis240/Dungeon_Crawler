@@ -288,6 +288,32 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{mountainDont}, {cableHDMI});
 
 	//Room 4: Entryway
+	/*
+	cout << "Standing in front of the Front Door, you can see some Windows with curtains on the front face of the house. \n";
+	cout << "To the right of the Front Door are several Coat Hangers with coats on them. Further right is a simple Table \n";
+	cout << "with foldable legs. To the left of the Front Door is a mat with several pairs of Shoes on it. On the wall \n";
+	cout << "opposite the Front Door the hallway containing the Entryway Door, through which you first entered this room. \n";
+	cout << "Adjacent to the hallway is an upward staircase, with the Upstairs Door at the top of it.";
+	*/
+	Object windows("Windows", { "Window", "windows", "window" },
+		"Upon pulling back the curtains in front of the windows you see a paved street with houses on the other side. It \n"
+		"looks like you are currently in a suburban neighborhood. Many of the houses look similar, but most have at least \n"
+		"a couple features to help them stick out from a simple cookie-cutter design. That being said, the buildings all \n"
+		"have roughly the same square-footage and appear to be two stories each. \n \n"
+		"Above everything is a beautiful blue sky with some clouds here and there and a bright orange sun. It's a beautiful \n"
+		"You can't wait to get out of here. As you look to your left, you see Selena with her face and hands pressed up \n"
+		"against the window... She has been stuck in here a while, huh." , true, false, 0, 0);
+	Item candyBar("Candy Bar", { "candy bar", "Candy bar" }, 4, 6,
+		"A simple milk chocolate bar. Store brand. Has little nutrional value, but plenty of sugar.");
+	Object coatHangers("Coat Hangers", { "coat hangers", "hangers", "coat hanger", "hanger" },
+		"On the coat hangers are many coats, certainly more than is necessary for just two peop- \n \n"
+		"\"Ugh, those SCUMBAGS! Using OUR coat hangers for their stupid dirty coats!\" Aria throws the coats away, \n"
+		"one after another, until all of the black coats are lying on the floor, and only two coats remain on the \n"
+		"hanger. She exhales deeply as she looks down at what she has accomplished. A small, self-satisfied grin \n"
+		"finds its way onto her face. \n \n"
+		"Then, she notices something sticking out of one of the coat's pockets. She reaches down, and stands back \n"
+		"up with a chocolate bar in hand. You look at her with an inquisitive expression, to which she responds \n"
+		"with a simple shrug. \"Spoils of war.\"", true, false, 2, 0);
 	Key upstairsKey(11, "Upstairs Key", { "upstairs key", "Upstairs key", "up key", "Up key" },
 		"A key with the insignia of a wing on it.");
 	Key padlockKey(12, "Padlock Key", { "padlock key", "Padlock key" },
@@ -300,7 +326,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"guests, yet stalwart in protecting the house's inhabitants from intruders. The metal bar that was in front of the  \n"
 		"door now leans against the wall just left of the door, along with the padlock that once blocked your path.");
 	auto frontDoorPtr = make_shared<Door>(frontDoor);
-	Room entryway(4, "Entryway", {}, {frontDoorPtr}, {}, {});
+	Room entryway(4, "Entryway", {windows, coatHangers}, {frontDoorPtr}, {candyBar}, {});
 
 	while (true)
 	{
@@ -1363,7 +1389,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "Adjacent to the hallway is an upward staircase, with the Upstairs Door at the top of it.";
 				dblEndl();
 
-				playerInput = checkInput(roomNum, floorNum, players, inventory, greenhouseRoom);
+				playerInput = checkInput(roomNum, floorNum, players, inventory, entryway);
 
 				//IF PLAYER LEAVES THROUGH FRONT DOOR, TRIGGER DIALOGUE AND PATHING FOR LEAVING ARIA AND HEADING OUTSIDE
 				//IF PLAYER LEAVES THROUGH UPSTAIRS DOOR, TRIGGER DIALOGUE AND PATHING FOR LOOKING FOR ARIA'S BROTHER
