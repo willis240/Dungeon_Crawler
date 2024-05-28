@@ -776,11 +776,11 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 2)
 		{
 			system("CLS");
-			cout << "The room is bright--very bright. This is because unlike any other room up to this point, it has windows which" << endl;
-			cout << "provide a direct line-of-sight to the sun. As you look around the rest of the room, you can't help but notice" << endl;
-			cout << "the wide variety of flora present. There are a few rows of white folding tables taking up most of the space" << endl;
-			cout << "in the room, each with plants atop them. There is a Tall Plant, a Green Tree, an Apple Tree, a Palm Tree, and" << endl;
-			cout << "there are some plants which likely conceal some Buried Veggies as well.";
+			cout << "Upon entering the Left Door, you find a room that is bright--very bright. This is because unlike any other room up" << endl;
+			cout << "to this point, it has windows which provide a direct line-of-sight to the sun. As you look around the rest of the" << endl;
+			cout << "room, you can't help but notice the wide variety of flora present. There are a few rows of white folding tables" << endl;
+			cout << "taking up most of the space in the room, each with plants atop them. There is a Tall Plant, a Green Tree, an" << endl;
+			cout << "Apple Tree, a Palm Tree, and there are some plants which likely conceal some Buried Veggies as well.";
 			dblEndl();
 
 			if (greenhouseFirstTime)
