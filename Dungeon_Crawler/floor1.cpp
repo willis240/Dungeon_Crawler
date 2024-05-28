@@ -314,6 +314,24 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"Then, she notices something sticking out of one of the coat's pockets. She reaches down, and stands back \n"
 		"up with a chocolate bar in hand. You look at her with an inquisitive expression, to which she responds \n"
 		"with a simple shrug. \"Spoils of war.\"", true, false, 2, 0);
+	Object shoes("Shoes", {"shoes"},
+		"There are several pairs of shoes on the mat next to the front door. Most of them appear to be men's shoes. \n"
+		"Although, there are a couple of smaller pairs of shoes that appear to have been thrown off to the side \n"
+		"rather haphazardly. \n \n"
+		"\"Well, that's rude. Those guys just kicked your shoes off to the side when they barged in here!\" Selena exclaims. \n \n"
+		"\"...Actually, that looks like about how I usually leave them.\" \n \n"
+		"\"Oh.\"", true, false, 0, 0);
+	Key markedCards(13, "Marked Cards", { "marked cards", "Marked cards", "marked", "cards" },
+		"A deck of cards with some corners bent ever so slightly. For a trained eye, victory is practically assured.");
+	Object foldingTable("Folding Table", {"folding table"},
+		"The table is a simple folding table with a dark blue color scheme. Atop the table is a deck of cards. You grab \n"
+		"the deck of cards and start sifting through it. While the cards initially seem to be well-taken care of, you \n"
+		"can't help but notice that some of them have a corner or two that's bent and- \n \n"
+		"\"Gosh dang it, someone marked the cards.\" \n \n"
+		"\"Ugh! Guess I need a new deck of cards!\" Aria says in frustration. \n \n"
+		"\"Well, once you have another deck of cards, it could be fun to mess with someone by bringing out the marked \n"
+		"deck every now and again and see how long it takes for others to notice.\" \n \n"
+		"A small smile forms on Aria's face. \"Heh, you know what? That's not a bad idea.\"", true, false, 0, 13);
 	Key upstairsKey(11, "Upstairs Key", { "upstairs key", "Upstairs key", "up key", "Up key" },
 		"A key with the insignia of a wing on it.");
 	Key padlockKey(12, "Padlock Key", { "padlock key", "Padlock key" },
@@ -326,7 +344,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"guests, yet stalwart in protecting the house's inhabitants from intruders. The metal bar that was in front of the  \n"
 		"door now leans against the wall just left of the door, along with the padlock that once blocked your path.");
 	auto frontDoorPtr = make_shared<Door>(frontDoor);
-	Room entryway(4, "Entryway", {windows, coatHangers}, {frontDoorPtr}, {candyBar}, {});
+	Room entryway(4, "Entryway", {windows, coatHangers, shoes, foldingTable}, {frontDoorPtr}, {candyBar}, {markedCards});
 
 	while (true)
 	{
@@ -1375,7 +1393,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "Selena looks back and forth between you and Aria. \"H-honestly, both of your guys' ideas make sense... Gosh, I \n";
 				cout << "hate making decisions like these.\" Selena puts her fingers against her forehead and then sighs in frustration.";
 				dblEndl();
-				cout << "It seems you have a decision to make.";
+				cout << "It seems you have something to think about.";
 				dblEndl();
 
 				entrywayFirstTime = false;
@@ -1383,7 +1401,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 			else
 			{
 				cout << "Standing in front of the Front Door, you can see some Windows with curtains on the front face of the house. \n";
-				cout << "To the right of the Front Door are several Coat Hangers with coats on them. Further right is a simple Table \n";
+				cout << "To the right of the Front Door are several Coat Hangers with coats on them. Further right is a simple Folding Table \n";
 				cout << "with foldable legs. To the left of the Front Door is a mat with several pairs of Shoes on it. On the wall \n";
 				cout << "opposite the Front Door the hallway containing the Entryway Door, through which you first entered this room. \n";
 				cout << "Adjacent to the hallway is an upward staircase, with the Upstairs Door at the top of it.";
