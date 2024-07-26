@@ -288,13 +288,6 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{mountainDont}, {cableHDMI});
 
 	//Room 4: Entryway
-	/*
-	cout << "Standing in front of the Front Door, you can see some Windows with curtains on the front face of the house. \n";
-	cout << "To the right of the Front Door are several Coat Hangers with coats on them. Further right is a simple Table \n";
-	cout << "with foldable legs. To the left of the Front Door is a mat with several pairs of Shoes on it. On the wall \n";
-	cout << "opposite the Front Door the hallway containing the Entryway Door, through which you first entered this room. \n";
-	cout << "Adjacent to the hallway is an upward staircase, with the Upstairs Door at the top of it.";
-	*/
 	Object windows("Windows", { "Window", "windows", "window" },
 		"Upon pulling back the curtains in front of the windows you see a paved street with houses on the other side. It \n"
 		"looks like you are currently in a suburban neighborhood. Many of the houses look similar, but most have at least \n"
@@ -304,7 +297,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"You can't wait to get out of here. As you look to your left, you see Selena with her face and hands pressed up \n"
 		"against the window... She has been stuck in here a while, huh." , true, false, 0, 0);
 	Item candyBar("Candy Bar", { "candy bar", "Candy bar" }, 4, 6,
-		"A simple milk chocolate bar. Store brand. Has little nutrional value, but plenty of sugar.");
+		"A simple milk chocolate bar. Store brand. Has little nutritional value, but plenty of sugar.", 2);
 	Object coatHangers("Coat Hangers", { "coat hangers", "hangers", "coat hanger", "hanger" },
 		"On the coat hangers are many coats, certainly more than is necessary for just two peop- \n \n"
 		"\"Ugh, those SCUMBAGS! Using OUR coat hangers for their stupid dirty coats!\" Aria throws the coats away, \n"
@@ -1403,14 +1396,25 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "Standing in front of the Front Door, you can see some Windows with curtains on the front face of the house. \n";
 				cout << "To the right of the Front Door are several Coat Hangers with coats on them. Further right is a simple Folding Table \n";
 				cout << "with foldable legs. To the left of the Front Door is a mat with several pairs of Shoes on it. On the wall \n";
-				cout << "opposite the Front Door the hallway containing the Entryway Door, through which you first entered this room. \n";
+				cout << "opposite the Front Door is the hallway containing the Entryway Door, through which you first entered this room. \n";
 				cout << "Adjacent to the hallway is an upward staircase, with the Upstairs Door at the top of it.";
 				dblEndl();
 
 				playerInput = checkInput(roomNum, floorNum, players, inventory, entryway);
 
 				//IF PLAYER LEAVES THROUGH FRONT DOOR, TRIGGER DIALOGUE AND PATHING FOR LEAVING ARIA AND HEADING OUTSIDE
+				if (playerInput == "enter Front Door")
+				{
+					cout << "You and Selena leave Aria and her house full of suspicious people. You are free now.";
+					dblEndl();
+				}
 				//IF PLAYER LEAVES THROUGH UPSTAIRS DOOR, TRIGGER DIALOGUE AND PATHING FOR LOOKING FOR ARIA'S BROTHER
+				if (playerInput == "enter Upstairs Door")
+				{
+					cout << "You, Selena, and Aria head up the stairs to search for Aria's brother. Here's hoping you find him.";
+					dblEndl();
+				}
+				//STILL NEED TO ADD UPSTAIRS DOOR!!!!!!!!
 			}
 			system("pause");
 		}

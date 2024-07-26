@@ -154,12 +154,25 @@ string checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventor
 				for (int i = 0; i < room.doors.size(); i++)
 				{
 					if (argument == room.doors[i]->name)
+					{
 						enterDoor(*room.doors[i], roomNum, floorNum);
+						input = "";
+						input += players[0].exploreOptions[2];
+						input += " ";
+						input += room.doors[i]->name;
+					}
+						
 
 					for (int ii = 0; ii < room.doors[i]->aliases.size(); ii++)
 					{
 						if (argument == room.doors[i]->aliases[ii])
+						{
 							enterDoor(*room.doors[i], roomNum, floorNum);
+							input = "";
+							input += players[0].exploreOptions[2];
+							input += " ";
+							input += room.doors[i]->name;
+						}
 					}
 				}
 				return input;
