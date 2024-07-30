@@ -337,7 +337,14 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"guests, yet stalwart in protecting the house's inhabitants from intruders. The metal bar that was in front of the  \n"
 		"door now leans against the wall just left of the door, along with the padlock that once blocked your path.");
 	auto frontDoorPtr = make_shared<Door>(frontDoor);
-	Room entryway(4, "Entryway", {windows, coatHangers, shoes, foldingTable}, {frontDoorPtr}, {candyBar}, {markedCards});
+	Door staircaseDoor(make_pair(4, 0), make_pair(1, 2), "Staircase Door", { "staircase door", "staircase" }, true, true, 11,
+		"The door sits at the top of the staircase leading to the second floor. It stands guard to any intruder who \n"
+		"would manage to make it past the front door... or at least you assume that's the reason it is locked. Of \n"
+		"course, unlocking it should be incredibly easy, all things considered.",
+		"The Staircase Door, now unlocked, acts as a simple passage between the front entryway and the second floor of \n"
+		"Aria's house.");
+	auto staircaseDoorPtr = make_shared<Door>(staircaseDoor);
+	Room entryway(4, "Entryway", {windows, coatHangers, shoes, foldingTable}, {frontDoorPtr, staircaseDoorPtr}, {candyBar}, {markedCards});
 
 	while (true)
 	{
@@ -1397,7 +1404,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "To the right of the Front Door are several Coat Hangers with coats on them. Further right is a simple Folding Table \n";
 				cout << "with foldable legs. To the left of the Front Door is a mat with several pairs of Shoes on it. On the wall \n";
 				cout << "opposite the Front Door is the hallway containing the Entryway Door, through which you first entered this room. \n";
-				cout << "Adjacent to the hallway is an upward staircase, with the Upstairs Door at the top of it.";
+				cout << "Adjacent to the hallway is an upward staircase, with the Staircase Door at the top of it.";
 				dblEndl();
 
 				playerInput = checkInput(roomNum, floorNum, players, inventory, entryway);
@@ -1408,13 +1415,12 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "You and Selena leave Aria and her house full of suspicious people. You are free now.";
 					dblEndl();
 				}
-				//IF PLAYER LEAVES THROUGH UPSTAIRS DOOR, TRIGGER DIALOGUE AND PATHING FOR LOOKING FOR ARIA'S BROTHER
-				if (playerInput == "enter Upstairs Door")
+				//IF PLAYER LEAVES THROUGH STAIRCASE DOOR, TRIGGER DIALOGUE AND PATHING FOR LOOKING FOR ARIA'S BROTHER
+				if (playerInput == "enter Staircase Door")
 				{
 					cout << "You, Selena, and Aria head up the stairs to search for Aria's brother. Here's hoping you find him.";
 					dblEndl();
 				}
-				//STILL NEED TO ADD UPSTAIRS DOOR!!!!!!!!
 			}
 			system("pause");
 		}
