@@ -151,6 +151,7 @@ public:
 	bool offBalance = false;
 	std::vector<std::string> stances;
 	std::vector<Skill> skills;
+	std::vector<short> aggro{0, 0, 0, 0};
 
 	std::string getName() { return name; };
 	void alterName(std::string& nameEdit) { name += nameEdit; };

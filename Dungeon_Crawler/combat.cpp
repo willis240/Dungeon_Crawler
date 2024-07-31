@@ -133,8 +133,14 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 		for (int i = 0; i < players.size(); i++)
 		{
 			if (players[i].currentHP == 0)
+			{
+				for (int ii = 0; ii < enemies.size(); ii++)
+				{
+					enemies[ii].aggro[i] = 0;
+				}
 				playersKO++;
-
+			}
+				
 			if (playersKO == players.size())
 				gameOver();
 		}
@@ -148,18 +154,14 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 			std::uniform_int_distribution<int> gen(0, enemies[i].skills.size() - 1);
 			enemyActionsTaken.push_back(gen(rng));
 
-			std::mt19937 targetRng(time(NULL));
-			std::uniform_int_distribution<int> targetGen(0, players.size() - 1);
-			short target = targetGen(targetRng);
-			if (players[target].currentHP == 0)
+			short target = 0;
+			short mostAggro = 0;
+			for (int ii = 0; ii < enemies[i].aggro.size(); ii++)
 			{
-				for (int i = 0; i < players.size(); i++)
+				if (enemies[i].aggro[ii] > mostAggro)
 				{
-					if (players[i].currentHP > 0)
-					{
-						target = i;
-						break;
-					}
+					mostAggro = enemies[i].aggro[ii];
+					target = ii;
 				}
 			}
 			enemiesTargets.push_back(target);
@@ -203,11 +205,12 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 							}
 							else
 							{
-								cout << players[playerNum].getName() << " wasted a perfectly good turn on attacking " << enemies[target].getName() << "'s corpse." << endl;
+								cout << players[playerNum].getName() << " wasted a perfectly good turn on attacking " << enemies[target].getName() << "'s unconscious body." << endl;
 								cout << "Alright. That sure was a turn, I guess." << endl << endl;
 							}
 
 							enemies[target].reduceHP(damageDealt);
+							enemies[target].aggro[playerNum] += damageDealt;
 								
 							system("pause");
 							cout << endl;
@@ -247,7 +250,11 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 											}
 											cout << enemies[i].getName() << " receives " << damageDealt << " points of damage!";
 											dblEndl();
+
 											enemies[i].reduceHP(damageDealt);
+											enemies[i].aggro[playerNum] += damageDealt;
+											cout << "aggro: " << enemies[i].aggro[playerNum] << endl;
+
 											system("pause");
 											cout << endl;
 										}
@@ -282,6 +289,8 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 											cout << "Huh. Well, I guess it is your turn. Who am I to tell you what to do?" << endl << endl;
 										}
 										enemies[target].reduceHP(damageDealt);
+										enemies[target].aggro[playerNum] += damageDealt;
+										cout << "aggro: " << enemies[target].aggro[playerNum] << endl;
 
 										system("pause");
 										cout << endl;
@@ -543,8 +552,8 @@ void displayEnemiesTargets(vector<Player>& players, vector<Enemy>& enemies, vect
 		if (enemies[i].currentHP > 0)
 		{
 			cout << enemies[i].getName() << " eyes " << players[enemiesTargets[targetIter]].getName() << " suspiciously." << endl;
-			targetIter++;
 		}
+		targetIter++;
 	}
 	cout << endl;
 }
