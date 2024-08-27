@@ -30,6 +30,9 @@
     <ClCompile Include="floor1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="floor2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="combat.hpp">

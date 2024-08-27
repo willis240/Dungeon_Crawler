@@ -1415,10 +1415,21 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "You and Selena leave Aria and her house full of suspicious people. You are free now.";
 					dblEndl();
 				}
+
 				//IF PLAYER LEAVES THROUGH STAIRCASE DOOR, TRIGGER DIALOGUE AND PATHING FOR LOOKING FOR ARIA'S BROTHER
 				if (playerInput == "enter Staircase Door")
 				{
-					cout << "You, Selena, and Aria head up the stairs to search for Aria's brother. Here's hoping you find him.";
+					cout << "As you proceed through the Staircase Door, Aria turns to you and Selena. \"So... you're \n";
+					cout << "gonna help me find my brother?\"";
+					dblEndl();
+					cout << "\"Of course\", you respond nonchalantly. \"If I were in your position, I know I'd really \n";
+					cout << "want some help finding my sibling, too. It just feels like the right thing to do.\"";
+					dblEndl();
+					cout << "\"Yeah, I feel the same way\", affirmed Selena. \"That being said, if either of us finds \n";
+					cout << "out we have a long-lost sibling in need of finding, we're gonna have to expect the same in return.\" \n";
+					cout << "Selena lets out a smirk as she shrugs.";
+					dblEndl();
+					cout << "Aria emits a small chuckle as she rolls her eyes. \"...Thanks, guys.\"";
 					dblEndl();
 				}
 			}

@@ -1699,5 +1699,9 @@ void explore(vector<Player>& players, int& floor, int& roomNum, Inventory& inven
 		{
 			floor1(players, roomNum, floor, inventory, floor1FirstTime, foundAria, greenhouseFirstTime, openedSafe, entrywayFirstTime);
 		}
+		if (floor == 2)
+		{
+			floor2(players, roomNum, floor, inventory);
+		}
 	}
 }
