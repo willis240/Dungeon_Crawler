@@ -253,7 +253,8 @@ void fight(vector<Player> & players, vector<Enemy> & enemies, vector<Item> & ite
 
 											enemies[i].reduceHP(damageDealt);
 											enemies[i].aggro[playerNum] += damageDealt;
-											cout << "aggro: " << enemies[i].aggro[playerNum] << endl;
+											//Display Enemy Aggro 
+											//cout << "aggro: " << enemies[i].aggro[playerNum] << endl;
 
 											system("pause");
 											cout << endl;

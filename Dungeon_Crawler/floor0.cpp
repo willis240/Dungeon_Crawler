@@ -64,8 +64,8 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	//Room 2: The Kitchen
 	bool grabbedNugget = false;
 	Item chickenNugget("Chicken Nugget", {"chicken nugget", "chicken", "nugget"}, 5, 0,
-		"One singular chicken nugget. While it may not be much, it is like a drop from heaven and men have certainly \n"
-		"killed for less.", 1);
+		"One singular chicken nugget. While it may not be much, to a hungry man it is like a drop from \n"
+		"heaven and men have certainly killed for less.", 1);
 	Object refrigerator("Refrigerator", {"refrigerator", "fridge"},
 		"Upon throwing open the refrigerator door, you find that there is no food left inside. Just crumbs. Great. \n"
 		"Oh, wait! There's a single chicken nugget in the very back of the second shelf down. Score!",
@@ -157,13 +157,14 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		true, false, 0, 5);
 	Object bar("Bar", {"bar"},
 		"The bar counter, like much of the room, is a pristine white. The bar stools are black, and act to complement the bar's \n"
-		"aesthetic quite well. There are many bottles of beverages on some shelves lined up against the wall, most of which appear \n"
-		"to be alcoholic. Upon going behind the counter, you see that there are even more bottles beneath the counter. After grabbing \n"
-		"a couple of bottles to check them out, you find a small keyhole behind one of the bottles.",
+		"aesthetic quite well. There are many bottles of beverages on some shelves lined up against the wall, most of which  \n"
+		"appear to be alcoholic. Upon going behind the counter, you see that there are even more bottles beneath the counter. \n"
+		"After grabbing a couple of bottles to check them out, you find a small keyhole behind one of the bottles.",
 		true, true, 0, 0, 6, 7, 0,
-		"Upon inserting the Small Key into the keyhole behind the counter and turning, you hear a clicking sound from your left. You \n"
-		"turn toward the left side of the area behind the counter and watch as a section of the floor slides under the adjacent floor \n"
-		"panel, revealing a ladder leading down. You debate whether it would be a good idea to enter the Bar's Secret Passage.");
+		"Upon inserting the Small Key into the keyhole behind the counter and turning, you hear a clicking sound from your left. \n"
+		"You turn toward the left side of the area behind the counter and watch as a section of the floor slides under the \n"
+		"adjacent floor panel, revealing a ladder leading down. You debate whether it would be a good idea to enter the Bar's \n"
+		"Secret Passage.");
 	Door barSecretPassage(std::make_pair(3, 4), "Bar's Secret Passage", { "bar's secret passage", "bar passage", "secret passage" }, false, false, 7,
 		"The secret passage is a square hole in the floor, about 4 feet by 4 feet. The ladder goes down about 10 feet, to some \n"
 		"underground room. You wonder what could possibly necessitate having a secret passageway like this.");
@@ -718,7 +719,7 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						cout << "then I'm going to need to know their name.\"";
 						dblEndl();
 						cout << "The woman glares at you briefly, before forming a smile on her face. \"My name is Selena. I look forward to" << endl;
-						cout << "to getting out of here.\" She extends her hand, and you shake it.";
+						cout << "getting out of here.\" She extends her hand, and you shake it.";
 						dblEndl();
 						cout << "\"" << players[0].getName() << ". Let's get out of here.\"";
 						dblEndl();

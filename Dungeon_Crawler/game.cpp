@@ -391,6 +391,7 @@ void checkInventory(vector<Player>& players, Inventory& inventory, Room & room)
 		{
 			checkItems(inventory, argument);
 			checkKeys(inventory, argument);
+			checkGear(inventory, argument);
 			system("pause");
 		}
 		
@@ -634,11 +635,12 @@ void showInvHelp(vector<Player>& players, Inventory& inventory)
 	cout << "use (item/key)   -- use an item to heal or key item to progress" << endl;
 	if (players.size() > 1)
 		cout << "show (item/key)  -- show the item or key to a party member so they may identify it" << endl;
-	if (inventory.accessories.size() > 0)
+	if (inventory.accessories.size() > 0 || inventory.weapons.size())
 	{
-		if (inventory.accessories[0]->beenDiscovered)
+		if (inventory.accessories[0]->beenDiscovered || inventory.weapons[0]->beenDiscovered)
 		{
 			cout << "status           -- check your stats and equipment" << endl;
+			cout << "check (gear)     -- check the stat bonuses of equipment" << endl;
 			cout << "equip (gear)     -- equip gear to a party member to affect their stats" << endl;
 			cout << "unequip (gear)   -- unequip gear to remove its affects from that party member" << endl;
 		}
@@ -708,16 +710,23 @@ bool useItemOnPlayer(vector<Player>& players, vector<Item>& items, int & i)
 {
 	if (items[i].purposeKnown)
 	{
-		cout << "Use " << items[i].getName() << " on who?";
-		dblEndl();
-		cout << "Just say \"back\" if you change your mind and want to return to exploration.";
-		dblEndl();
-
 		string input;
-		getline(cin, input);
+		if (players.size() > 1)
+		{
+			cout << "Use " << items[i].getName() << " on who?";
+			dblEndl();
+			cout << "Just say \"back\" if you change your mind and want to return to exploration.";
+			dblEndl();
 
-		if (input == "back")
-			return false;
+			getline(cin, input);
+
+			if (input == "back")
+				return false;
+		}
+		else
+		{
+			input = players[0].getName();
+		}
 
 		for (int ii = 0; ii < players.size(); ii++)
 		{

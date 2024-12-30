@@ -16,24 +16,24 @@ int main()
 	vector<Player> players = { player };
 	Inventory inventory;
 
-	int floorNum = 1;
-	int roomNum = 4;
+	int floorNum = 0;
+	int roomNum = 0;
 
 	Key pomegranate(3, "Pomegranate", { "pomegranate" }, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);
 
 	//A SECOND PLAYER CHARACTER, FOR TESTING
-	
+	/*
 	Skill oblivionSlash("Oblivion Slash", 3, false, true, 5, noDirection, "Selena cuts through all of her foes in the blink of an eye!");
 	Player Selena("Selena", 1, 7, 13, {oblivionSlash});
 	players.push_back(Selena);
-
+	
 	//A THIRD PLAYER CHARACTER, FOR TESTING
 
 	Skill quickSlap("Quick Slap", 2, false, false, 2, "Aria delivers a swift backhand!");
 	Player Aria("Aria", 2, 9, 11, {quickSlap});
 	players.push_back(Aria);
-
+	*/
 	/*
 	Key pomegranate(3, "Pomegranate", {"pom"}, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
 	inventory.keys.push_back(pomegranate);
