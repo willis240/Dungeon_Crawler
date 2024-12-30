@@ -19,8 +19,8 @@ int main()
 	int floorNum = 0;
 	int roomNum = 0;
 
-	Key pomegranate(3, "Pomegranate", { "pomegranate" }, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
-	inventory.keys.push_back(pomegranate);
+	//Key pomegranate(3, "Pomegranate", { "pomegranate" }, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
+	//inventory.keys.push_back(pomegranate);
 
 	//A SECOND PLAYER CHARACTER, FOR TESTING
 	/*
@@ -35,19 +35,17 @@ int main()
 	players.push_back(Aria);
 	*/
 	/*
-	Key pomegranate(3, "Pomegranate", {"pom"}, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
-	inventory.keys.push_back(pomegranate);
-	
 	Weapon fireIron("Fire Iron", {"fire iron"},
 		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
 		"Also used to stoke fires.",
-		0, 0, 2, 5, true);
+		0, 0, 2, 5, false);
 	auto fireIronPtr = std::make_shared<Weapon>(fireIron);
 	inventory.weapons.push_back(fireIronPtr);
 	players[1].equipWeapon(fireIronPtr);
 	
 	Weapon brassKnucks("Brass Knuckles", {}, "Put 'em on ya hands", 2, 1, 4);
 	auto brassKnucksPtr = std::make_shared<Weapon>(brassKnucks);
+	inventory.weapons.push_back(brassKnucksPtr);
 	players[0].equipWeapon(brassKnucksPtr);
 
 	Accessory pocketWatch("Pocket Watch", {"pocket watch"}, "Tick, tock, tick, tock", 4, 0, 1);

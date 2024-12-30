@@ -502,6 +502,12 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 	int spacing = 0;
 	int spaceMax = 25;
 	int iterLimit;
+	int weaponOffset = 0;
+	int weaponIter = 0;
+	int armorOffset = 0;
+	int armorIter = 0;
+	int accessoryOffset = 0;
+	int accessoryIter = 0;
 	bool showGear = false;
 
 	if (accessories.size() > 0)
@@ -528,56 +534,99 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 			iterLimit = weapons.size();
 		else
 			iterLimit = accessories.size();
+		if (iterLimit < armors.size())
+			iterLimit = armors.size();
 
 		for (int i = 0; i < iterLimit; i++)
-		{
+		{	
 			cout << "    ";
-			if (weapons.size() > i)
+
+			weaponIter = i + weaponOffset;
+			if (weapons.size() > weaponIter)
 			{
-				if (weapons[i]->equippedNum != -1)
+				if (!weapons[weaponIter]->beenDiscovered)
+				{
+					for (int ii = weaponIter; ii < weapons.size(); ii++)
+					{
+						if (!weapons[ii]->beenDiscovered)
+							weaponOffset++;
+						else
+							break;
+					}
+					weaponIter = i + weaponOffset;
+				}
+				if (weapons[weaponIter]->equippedNum != -1)
 				{
 					cout << "[E] ";
-					spacing = weapons[i]->getName().length() + 4;
+					spacing = weapons[weaponIter]->getName().length() + 4;
 				}
 				else
-					spacing = weapons[i]->getName().length();
-				if (weapons[i]->beenDiscovered)
-					cout << weapons[i]->getName();
+					spacing = weapons[weaponIter]->getName().length();
+				cout << weapons[weaponIter]->getName();
 			}
 			else
 				spacing = 0;
 			displaySpacing(spacing, spaceMax);
 
-			if (armors.size() > i)
+			armorIter = i + armorOffset;
+			if (armors.size() > armorIter)
 			{
-				if (armors[i]->equippedNum != -1)
+				if (!armors[armorIter]->beenDiscovered)
+				{
+					for (int ii = armorIter; ii < armors.size(); ii++)
+					{
+						if (!armors[ii]->beenDiscovered)
+							armorOffset++;
+						else
+							break;
+					}
+					armorIter = i + armorOffset;
+				}
+				if (armors[armorIter]->equippedNum != -1)
 				{
 					cout << "[E] ";
-					spacing = armors[i]->getName().length() + 4;
+					spacing = armors[armorIter]->getName().length() + 4;
 				}
 				else
-					spacing = armors[i]->getName().length();
-				cout << armors[i]->getName();
+					spacing = armors[armorIter]->getName().length();
+				cout << armors[armorIter]->getName();
 			}
 			else
 				spacing = 0;
 			displaySpacing(spacing, spaceMax);
 				
-			if (accessories.size() > i)
+			accessoryIter = i + accessoryOffset;
+			if (accessories.size() > accessoryIter)
 			{
-				if (accessories[i]->equippedNum != -1)
+				if (!accessories[accessoryIter]->beenDiscovered)
+				{
+					for (int ii = accessoryIter; ii < accessories.size(); ii++)
+					{
+						if (!accessories[ii]->beenDiscovered)
+							accessoryOffset++;
+						else
+							break;
+					}
+					accessoryIter = i + accessoryOffset;
+				}
+				if (accessories[accessoryIter]->equippedNum != -1)
 				{
 					cout << "[E] ";
-					spacing = accessories[i]->getName().length() + 4;
+					spacing = accessories[accessoryIter]->getName().length() + 4;
 				}
 				else
-					spacing = accessories[i]->getName().length();
-				if(accessories[i]->beenDiscovered)
-					cout << accessories[i]->getName();
+					spacing = accessories[accessoryIter]->getName().length();
+				cout << accessories[accessoryIter]->getName();
 			}
 			else
 				spacing = 0;
 			displaySpacing(spacing, spaceMax);
+
+			if (weaponIter >= weapons.size() && armorIter >= armors.size() && accessoryIter >= accessories.size())
+				break;
+
+			//FIGURE OUT WHY THERE ARE STILL NEWLINES TO MATCH LARGEST VECTOR SIZE EVEN THOUGH NON-DISCOVERED GEAR SHOULD BE SKIPPED
+
 			cout << endl;
 		}
 		cout << endl;
@@ -681,6 +730,19 @@ void checkKeys(Inventory& inventory, string& argument)
 			}
 		}
 	}
+}
+
+void checkGear(Inventory& inventory, string& argument)
+{
+	for (int i = 0; i < inventory.weapons.size(); i++)
+	{
+		if (argument == inventory.weapons[i]->getName())
+		{
+			cout << endl << inventory.weapons[i]->getName() << ":   HP " << inventory.weapons[i]->HP << "   SP " << inventory.weapons[i]->SP << "   STR " << inventory.weapons[i]->str;
+			dblEndl();
+		}
+	}
+	// Same for Armor and Accessories once this looks nice
 }
 
 void useItems(vector<Player>& players, vector<Item>& items, string& argument)

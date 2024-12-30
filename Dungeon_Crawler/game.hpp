@@ -203,6 +203,7 @@ void showInvHelp(std::vector<Player>& players, Inventory& inventory);
 
 void checkItems(Inventory& inventory, std::string& argument);
 void checkKeys(Inventory& inventory, std::string& argument);
+void checkGear(Inventory& inventory, std::string& argument);
 void useItems(std::vector<Player>& players, std::vector<Item>& items, std::string& argument);
 bool useItemOnPlayer(std::vector<Player>& players, std::vector<Item>& items, int& i);
 bool useKeys(std::vector<Player>& players, Inventory& inventory, Room& room, std::string& argument);
