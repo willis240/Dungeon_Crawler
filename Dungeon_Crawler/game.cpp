@@ -189,7 +189,7 @@ string checkInput(int& roomNum, int& floorNum, vector<Player>& players, Inventor
 		}
 		if (players[0].exploreOptions.size() > 4)
 		{
-			if (command == players[0].exploreOptions[4] || command == "t") //teamwork
+			if (command == players[0].exploreOptions[4] || command == "t") //teamup
 			{
 				cout << endl;
 				for (int i = 0; i < room.objects.size(); i++)
@@ -218,7 +218,7 @@ void showHelp(Player & player)
 	if (player.exploreOptions.size() > 3)
 		cout << "inv              -- view your inventory and use items" << endl;
 	if (player.exploreOptions.size() > 4)
-		cout << "teamwork (object) -- team up with your party members to find secrets" << endl;
+		cout << "teamup (object) -- team up with your party members to find secrets" << endl;
 	cout << endl;
 }
 
@@ -555,14 +555,19 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 					}
 					weaponIter = i + weaponOffset;
 				}
-				if (weapons[weaponIter]->equippedNum != -1)
+				if (weapons.size() > weaponIter)
 				{
-					cout << "[E] ";
-					spacing = weapons[weaponIter]->getName().length() + 4;
+					if (weapons[weaponIter]->equippedNum != -1)
+					{
+						cout << "[E] ";
+						spacing = weapons[weaponIter]->getName().length() + 4;
+					}
+					else
+						spacing = weapons[weaponIter]->getName().length();
+					cout << weapons[weaponIter]->getName();
 				}
 				else
-					spacing = weapons[weaponIter]->getName().length();
-				cout << weapons[weaponIter]->getName();
+					spacing = 0;
 			}
 			else
 				spacing = 0;
@@ -582,14 +587,19 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 					}
 					armorIter = i + armorOffset;
 				}
-				if (armors[armorIter]->equippedNum != -1)
+				if (armors.size() > armorIter)
 				{
-					cout << "[E] ";
-					spacing = armors[armorIter]->getName().length() + 4;
+					if (armors[armorIter]->equippedNum != -1)
+					{
+						cout << "[E] ";
+						spacing = armors[armorIter]->getName().length() + 4;
+					}
+					else
+						spacing = armors[armorIter]->getName().length();
+					cout << armors[armorIter]->getName();
 				}
 				else
-					spacing = armors[armorIter]->getName().length();
-				cout << armors[armorIter]->getName();
+					spacing = 0;
 			}
 			else
 				spacing = 0;
@@ -609,14 +619,19 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 					}
 					accessoryIter = i + accessoryOffset;
 				}
-				if (accessories[accessoryIter]->equippedNum != -1)
+				if (accessories.size() > accessoryIter)
 				{
-					cout << "[E] ";
-					spacing = accessories[accessoryIter]->getName().length() + 4;
+					if (accessories[accessoryIter]->equippedNum != -1)
+					{
+						cout << "[E] ";
+						spacing = accessories[accessoryIter]->getName().length() + 4;
+					}
+					else
+						spacing = accessories[accessoryIter]->getName().length();
+					cout << accessories[accessoryIter]->getName();
 				}
 				else
-					spacing = accessories[accessoryIter]->getName().length();
-				cout << accessories[accessoryIter]->getName();
+					spacing = 0;
 			}
 			else
 				spacing = 0;
@@ -624,8 +639,6 @@ void displayGear(vector<shared_ptr<Weapon>>& weapons, vector<shared_ptr<Armor>>&
 
 			if (weaponIter >= weapons.size() && armorIter >= armors.size() && accessoryIter >= accessories.size())
 				break;
-
-			//FIGURE OUT WHY THERE ARE STILL NEWLINES TO MATCH LARGEST VECTOR SIZE EVEN THOUGH NON-DISCOVERED GEAR SHOULD BE SKIPPED
 
 			cout << endl;
 		}
@@ -740,9 +753,29 @@ void checkGear(Inventory& inventory, string& argument)
 		{
 			cout << endl << inventory.weapons[i]->getName() << ":   HP " << inventory.weapons[i]->HP << "   SP " << inventory.weapons[i]->SP << "   STR " << inventory.weapons[i]->str;
 			dblEndl();
+			return;
 		}
 	}
-	// Same for Armor and Accessories once this looks nice
+
+	for (int i = 0; i < inventory.armors.size(); i++)
+	{
+		if (argument == inventory.armors[i]->getName())
+		{
+			cout << endl << inventory.armors[i]->getName() << ":   HP " << inventory.armors[i]->HP << "   SP " << inventory.armors[i]->SP << "   STR " << inventory.armors[i]->str;
+			dblEndl();
+			return;
+		}
+	}
+
+	for (int i = 0; i < inventory.accessories.size(); i++)
+	{
+		if (argument == inventory.accessories[i]->getName())
+		{
+			cout << endl << inventory.accessories[i]->getName() << ":   HP " << inventory.accessories[i]->HP << "   SP " << inventory.accessories[i]->SP << "   STR " << inventory.accessories[i]->str;
+			dblEndl();
+			return;
+		}
+	}
 }
 
 void useItems(vector<Player>& players, vector<Item>& items, string& argument)

@@ -33,12 +33,12 @@ int main()
 	Skill quickSlap("Quick Slap", 2, false, false, 2, "Aria delivers a swift backhand!");
 	Player Aria("Aria", 2, 9, 11, {quickSlap});
 	players.push_back(Aria);
-	*/
-	/*
+	
+	
 	Weapon fireIron("Fire Iron", {"fire iron"},
 		"An iron rod which is sharpened at the end, which in hindsight makes it a pretty decent weapon. \n"
 		"Also used to stoke fires.",
-		0, 0, 2, 5, false);
+		0, 0, 2, 5, true);
 	auto fireIronPtr = std::make_shared<Weapon>(fireIron);
 	inventory.weapons.push_back(fireIronPtr);
 	players[1].equipWeapon(fireIronPtr);
@@ -47,7 +47,7 @@ int main()
 	auto brassKnucksPtr = std::make_shared<Weapon>(brassKnucks);
 	inventory.weapons.push_back(brassKnucksPtr);
 	players[0].equipWeapon(brassKnucksPtr);
-
+	
 	Accessory pocketWatch("Pocket Watch", {"pocket watch"}, "Tick, tock, tick, tock", 4, 0, 1);
 	auto pocketWatchPtr = std::make_shared<Accessory>(pocketWatch);
 	inventory.accessories.push_back(pocketWatchPtr);
@@ -61,6 +61,7 @@ int main()
 	vector<Enemy> enemies = { manOnTheLeft, manOnTheLeft };
 	fight(players, enemies, inventory.items);
 	*/
+
 	explore(players, floorNum, roomNum, inventory);
 
 }
