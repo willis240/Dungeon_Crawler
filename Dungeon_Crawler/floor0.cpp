@@ -439,9 +439,9 @@ void floor0(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					cout << "Selena puts her hands on her hips. \"Oh, come on, I'm working on it. It's hard to stay in shape when you're stuck" << endl;
 					cout << "in a cell for who knows how long.\"";
 					dblEndl();
-					cout << "You can now use the \"teamwork\" exploration ability!";
+					cout << "You can now use the \"teamup\" exploration ability!";
 					dblEndl();
-					players[0].exploreOptions.push_back("teamwork");
+					players[0].exploreOptions.push_back("teamup");
 				}
 			}
 

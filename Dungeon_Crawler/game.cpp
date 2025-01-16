@@ -1207,7 +1207,7 @@ void showStatus(vector<Player>& players)
 		spacing += findDigits(players[i].accEquipped->str);
 		displaySpacing(spacing, spaceMax);
 	}
-	cout << endl;
+	dblEndl();
 }
 
 void showItems(vector<Player>& players, vector<Item>& items, string& argument)
