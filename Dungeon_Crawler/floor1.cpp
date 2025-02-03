@@ -32,7 +32,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	auto leftDoorPtr = make_shared<Door>(leftDoor);
 	Door middleDoor(make_pair(0, 3), "Middle Door", { "middle door", "middle" }, true, true, 8,
 		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is near \n"
-		"identical to both of the other doors in the room. Upon trying the handle, you find that it is locked. \n",
+		"identical to both of the other doors in the room. Upon trying the handle, you find that it is locked.",
 		"The door is a white door with some rectangular indentations in it, presumably for style's sake. It is near \n"
 		"identical to both of the other doors in the room. Since you stuck the Middle Key in it, it is now unlocked.");
 	auto middleDoorPtr = make_shared<Door>(middleDoor);
@@ -72,7 +72,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"it is well-insulated and comforting to the touch. You simply can't resist. You throw yourself upon the bed,\n"
 		"back first. A dumb grin widens across your face as the bed soothes your back. Selena raises an eyebrow, acting\n"
 		"as the resident comfortability skeptic, you suppose. However, in order to be a fair judge, she reaches a hand \n"
-		"out to the bed and clutches the blanket... Needless to say, she then jumps onto the bed alongside you as a stupid \n"
+		"out to the bed and clutches the blanket... Needless to say, she then jumps onto the bed next to you as a stupid \n"
 		"grin finds its way onto her face. \n \n"
 		"\"\"Ahhhhh...\"\", you both sigh in relief. A delightful respite.",
 		true, false, 0, 0);
@@ -154,9 +154,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"The tree, though small by tree standards, has a strong trunk with the kind of standard brown bark one would commonly \n"
 		"associate with trees. The top of the tree has many green leaves covering it, enough to obscure a significant part of \n"
 		"the window behind it from view. You look around its leaves and find something resembling a fruit hiding there. You \n"
-		"grab the object, and before you have time to comment on it, you hear Selena from over your shoulder: \"Ooo, a pomegranate! \n"
-		"I used to have these with my lunch all the time when I was a kid.\" She then proceeds to reach for a pomegranate from \n"
-		"the tree as well and takes a big chomp out of it. \"Mmm. Still good.\"",
+		"grab the object, and before you have time to comment on it, you hear Selena from over your shoulder: \"Ooo, a \n"
+		"pomegranate! I used to have these with my lunch all the time when I was a kid.\" She then proceeds to reach for a \n"
+		"pomegranate from the tree as well and takes a big chomp out of it. \"Mmm. Still good.\"",
 		true, false, 0, 3);
 	Key apple(4, "Apple", {"apple"}, "An iconic red fruit, said to keep those with PhDs away.");
 	Object appleTree("Apple Tree", {"apple tree"},
@@ -237,7 +237,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"\"Yeah, me and my brother played a lot of games together growing up, and it just kinda stuck.\" Aria notices \n"
 		"the blank expression upon Selena's face and decides to add her to the conversation. \"What about you, Selena? \n"
 		"Do you play any video games?\" \n \n"
-		"\"Well, I dabble. I've played some games a good chunk, but not, like, a TON, you know?\" \n \n"
+		"\"Well, I dabble. I've played some games a bit, but not, like, a TON, you know?\" \n \n"
 		"You decide to not say anything for now, but you fear you may have let a casual gamer into your party.",
 		true, false, 0, 0
 		);
@@ -249,12 +249,12 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"can of Mountain Don't. \n \n"
 		"\"Ooo, sweet!\" Selena exclaims as she yoinks the can from right under your nose. \"I haven't had one \n"
 		"of these in ages!\" \n \n"
-		"As you contemplate tearing the can from Selena's clutches, you hear Aria speak up,\"Have at it. There's \n"
+		"As you contemplate tearing the can from Selena's clutches, you hear Aria speak up, \"Have at it. There's \n"
 		"a reason that can's still there. I can't stand the flavor.\" \n \n"
 		"You can't let that one slide completely. \"You dislike Mountain Don't? Is that still legal?\" \n \n"
 		"Aria chuckles. \"Heh, yes, thankfully. You can thank my brother for that can being here at all.\" \n \n"
-		"Selena raises the can above her head with both of her hands. \"Thank you, Person I Have Never Met, \n"
-		"for your wonderful taste in soda!\"",
+		"Selena raises the can above her head with both of her hands. \"Thank you, Aria's Brother, for \n"
+		"your wonderful taste in soda!\"",
 		true, false, 1, 0);
 	Object table("Table", { "table" },
 		"The table is of the wooden variety. Nothing too fancy, but it is a fairly nice table. It is certainly more \n"
@@ -315,7 +315,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"\"...Actually, that looks like about how I usually leave them.\" \n \n"
 		"\"Oh.\"", true, false, 0, 0);
 	Key markedCards(13, "Marked Cards", { "marked cards", "Marked cards", "marked", "cards" },
-		"A deck of cards with some corners bent ever so slightly. For a trained eye, victory is practically assured.");
+		"A deck of cards with some corners bent ever so slightly. For a trained eye, victory is practically \nassured.");
 	Object foldingTable("Folding Table", {"folding table"},
 		"The table is a simple folding table with a dark blue color scheme. Atop the table is a deck of cards. You grab \n"
 		"the deck of cards and start sifting through it. While the cards initially seem to be well-taken care of, you \n"
@@ -498,7 +498,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "The man leaps back. \"Aggh!\", he exclaims as he rubs his elbow. He glares at you, his eyes" << endl;
 				cout << "aflame with anger.";
 				dblEndl();
-				cout << "Meanwhile, the gentleman and Selena cross their cane and Fire Iron as if they were both" << endl;
+				cout << "Meanwhile, the gentleman and Selena cross their cane and fire iron as if they were both" << endl;
 				cout << "swords. They both repeatedly strike at the other, only for a skillful deflect to follow each" << endl;
 				cout << "attack. They appear to be at a standstill, but then Selena gets a glint in her eye.";
 				dblEndl();
@@ -532,7 +532,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "reached the next floor, they both looked down through their respective holes. \"Ah, I almost forgot to" << endl;
 				cout << "introduce myself! I must apologize for that. My name is Jarvis\", the gentleman proclaimed.";
 				dblEndl();
-				cout << "\"And my name is Jack\", the other man added. \"And like he said, you won't be so lucky next time.\"";
+				cout << "\"I'm Jack\", the other man added. \"And like he said, you won't be so lucky next time.\"";
 				dblEndl();
 				cout << "\"Oh yeah? Well good luck with that! We're going to climb up those ropes of yours and finish-\" but Jack" << endl;
 				cout << "cut the ropes in a flash before Selena could finish. \"...Oh.\"";
@@ -648,7 +648,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					dblEndl();
 					cout << "Aria turns her head toward the ceiling, takes a deep breath, and then turns back to facing you and Selena, a \n";
 					cout << "fiery determination in her eyes. \"So, obviously you guys are not working with the other people here. I really \n";
-					cout << "don't want to starve, and I can't get past those guys at the door by myself. I'm sure you can tell where I'm";
+					cout << "don't want to starve, and I can't get past those guys at the door by myself. I'm sure you can tell where I'm \n";
 					cout << "going with this.\"";
 					dblEndl();
 					cout << "You sure can.";
@@ -759,7 +759,7 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 					}
 
 					dblEndl();
-					cout << "\"Oh! Right! I nearly forgot!\" Aria exckaims as she begins digging in her back pocket.\n";
+					cout << "\"Oh! Right! I nearly forgot!\" Aria exclaims as she begins digging in her back pocket.\n";
 					cout << "\"This is the key to the middle door in the hallway. That's where we'll need to go if \n";
 					cout << "we wanna try getting out of here.\"";
 
@@ -1031,8 +1031,8 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 						dblEndl();
 						cout << "\"...The house was very affordable for its size.\"";
 						dblEndl();
-						cout << "\"While I'm questioning things here, why does the safe ask for a username? Password, I get, but a" << endl;
-						cout << "username?\"";
+						cout << "You decide to change topics. \"While I'm questioning things here, why does the safe ask for a" << endl;
+						cout << "username? Password, I get, but a username?\"";
 						dblEndl();
 						cout << "\"Well, that's because it has a feature where a different compartment will open up depending on which" << endl;
 						cout << "username and password you enter correctly. Plus needing a username is an extra layer of security.\"" << endl;
@@ -1365,9 +1365,9 @@ void floor1(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 				cout << "You look at her. \"So, you want to go upstairs and search for your brother before leaving?\"";
 				dblEndl();
 				cout << "Determination wells up within Aria, becoming visible on her face. \"Yeah.\" A silent moment of thought \n";
-				cout << "passes, then \"Now that we've got the key to the front door, and we beat up the guard, we could just run \n";
+				cout << "passes, then, \"Now that we've got the key to the front door, and we beat up the guard, we could just run \n";
 				cout << "out here and leave as soon as we find my brother. Or, if we feel pretty sure he's not here and it seems too \n";
-				cout << "dangerous, we could just leave then, too. But I don't feel right leaving now. Not without at least checking.";
+				cout << "dangerous, we could just leave then, too. But I don't feel right leaving now. Not without at least checking.\"";
 				dblEndl();
 				cout << "\"Well, I get where you're coming from\", Selena responds. \"If I were missing someone I cared about, I \n";
 				cout << "wouldn't want to leave any stone unturned. With my luck, they'd have been in the only room I didn't check \n";
