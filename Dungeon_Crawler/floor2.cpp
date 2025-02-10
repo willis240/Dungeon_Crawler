@@ -16,7 +16,14 @@ void floor2(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	string playerInput = "";
 
 	//Room 0: Hall of Resolve
-	//Probably gonna make like 3 doors along the left and right sides, with 2 at the back
+	Object picture("Picture", { "picture" },
+		"The picture appears to be of Aria and a young man, smiling. The young man is about a head taller than her,\n"
+		"with short black hair and a toned physique. \n\n"
+		"\"Is that your brother?\" You ask Aria as you point at the young man in the picture. \n\n"
+		"Aria forms a half-hearted smile. \"Yeah. It is.\"\n\n"
+		"\"Hey.\" Selena puts her hand on Aria's shoulder. \"We'll find him.\"\n\n"
+		"\"...Thanks, guys.\"",
+		true, false, 0, 0);
 	Door staircaseDoor(make_pair(4, 0), make_pair(1, 2), "Staircase Door", { "staircase door", "staircase" }, false, true, 11,
 		"The door sits at the top of the staircase leading to the second floor. It stands guard to any intruder who \n"
 		"would manage to make it past the front door... or at least you assume that's the reason it is locked. Of \n"
@@ -33,7 +40,11 @@ void floor2(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"...Yeah, that's not coming out. \n \n"
 		"\"These jerks come into my house and take over, and they can't even treat it with RESPECT!\" Aria clenches \n"
 		"her fist. \"Ohhh, I'm going to kill whoever did this.\"");
-	Room hallOfResolve(0, "Hall of Resolve", {}, { staircaseDoorPtr }, {}, {});
+	auto dentedDoorPtr = make_shared<Door>(dentedDoor);
+	Room hallOfResolve(0, "Hall of Resolve", { picture }, { staircaseDoorPtr, yellowDoorPtr, dentedDoorPtr }, {}, {});
+
+	//Room 1: Dan's Bedroom (Bedroom of the Brother)
+	Room danBedroom(1, "Dan's Bedroom", {}, { yellowDoorPtr }, {}, {});
 
 	while (true)
 	{
@@ -42,12 +53,24 @@ void floor2(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		if (roomNum == 0)
 		{
 			system("CLS");
-			cout << "The hallway on the second floor has a few doors. There is the Staircase Door which \n";
-			cout << "leads back to the first floor, a Yellow Door, and a Dented Door. The hall itself is perpendicular \n";
-			cout << "to the top of the stairs, with the Yellow Door on the left side of the hall, and the Dented \n";
-			cout << "Door on the right.";
+			cout << "You find yourself in a hallway perpendicular to the staircase. The hallway has a few doors. There \n";
+			cout << "is the Staircase Door leading downstairs, a Yellow Door on the left side of the hall, and a Dented \n";
+			cout << "Door on the right side of the hall. The hallway is mostly plain, with the only things of note being \n";
+			cout << "a Picture between the Yellow Door and Dented Door and the white paint on the walls.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, hallOfResolve);
+			system("pause");
 		}
+
+		if (roomNum == 1)
+		{
+			system("CLS");
+			cout << "You find yourself in a bedroom. The Red Bed immediately to your right makes that \n";
+			cout << "abundantly clear. ";
+			dblEndl();
+			checkInput(roomNum, floorNum, players, inventory, danBedroom);
+			system("pause");
+		}
+
 	}
 }

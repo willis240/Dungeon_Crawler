@@ -16,7 +16,7 @@ int main()
 	vector<Player> players = { player };
 	Inventory inventory;
 
-	int floorNum = 0;
+	int floorNum = 2;
 	int roomNum = 0;
 
 	//Key pomegranate(3, "Pomegranate", { "pomegranate" }, "An red fruit which is at first tart, but then sweet. An old favorite of Selena's.");
