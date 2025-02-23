@@ -44,7 +44,15 @@ void floor2(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 	Room hallOfResolve(0, "Hall of Resolve", { picture }, { staircaseDoorPtr, yellowDoorPtr, dentedDoorPtr }, {}, {});
 
 	//Room 1: Dan's Bedroom (Bedroom of the Brother)
-	Room danBedroom(1, "Dan's Bedroom", {}, { yellowDoorPtr }, {}, {});
+	Object redBed("Red Bed", { "red bed" },
+		"The bed has a red wooden frame, as well as a red blanket messily thrown about on top of it. \n\n"
+		"\"Wait, was your brother taken by those men while he was sleeping?\" Selena posits, pointing toward the bed.\" \n\n"
+		"\"I don't think so. He's a bit of a light sleeper, and it doesn't look like anything else in the room has \n"
+		"been tossed around. As for the blanket, he never makes his bed in the morning.\" \n\n"
+		"\"Wait, seriously?\" \n\n"
+		"\"I guess it just doesn't bother him. I can't do it, though. If I left my bed looking like that it would \n"
+		"just haunt me from the back of my head all day long.\"", true, false, 0, 0);
+	Room danBedroom(1, "Dan's Bedroom", {redBed}, { yellowDoorPtr }, {}, {});
 
 	while (true)
 	{
