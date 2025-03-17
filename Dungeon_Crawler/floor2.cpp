@@ -52,7 +52,15 @@ void floor2(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		"\"Wait, seriously?\" \n\n"
 		"\"I guess it just doesn't bother him. I can't do it, though. If I left my bed looking like that it would \n"
 		"just haunt me from the back of my head all day long.\"", true, false, 0, 0);
-	Room danBedroom(1, "Dan's Bedroom", {redBed}, { yellowDoorPtr }, {}, {});
+	Object poster("Poster", { "poster" },
+		"The poster appears to be a promotion for-- \n \n"
+		"\"Wait, your brother has a poster for Gargoyle Wars 8 in his room? Don't tell me he actually-\"\n\n"
+		"\"No, he isn't a big fan of it, thankfully. I won this poster as a consolation prize in a drawing. I was \n"
+		"gonna just throw it away but he said, \'What? But you won this. That'd be a waste.\' I told him the movie \n"
+		"was a waste of everyone's time on this planet. He told me that if I wasn't going to use it, then he'd take \n"
+		"it. I think he put it up here strategically just so that every time I forget the stupid thing is in my house \n"
+		"I see it again.\"", true, false, 0, 0);
+	Room danBedroom(1, "Dan's Bedroom", {redBed, poster}, { yellowDoorPtr }, {}, {});
 
 	while (true)
 	{
@@ -74,7 +82,7 @@ void floor2(vector<Player>& players, int& roomNum, int& floorNum, Inventory& inv
 		{
 			system("CLS");
 			cout << "You find yourself in a bedroom. The Red Bed immediately to your right makes that \n";
-			cout << "abundantly clear. ";
+			cout << "abundantly clear. There is also a Poster on the wall to the left of the bed.";
 			dblEndl();
 			checkInput(roomNum, floorNum, players, inventory, danBedroom);
 			system("pause");
